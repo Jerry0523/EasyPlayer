@@ -11,6 +11,15 @@
 		849060F01BCCE3F8008B2125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EF1BCCE3F8008B2125 /* main.m */; };
 		849060F21BCCE3F8008B2125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849060F11BCCE3F8008B2125 /* Assets.xcassets */; };
 		849060F51BCCE3F8008B2125 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060F31BCCE3F8008B2125 /* MainMenu.xib */; };
+		849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060FD1BCCE425008B2125 /* PlaylistViewController.m */; settings = {ASSET_TAGS = (); }; };
+		849061001BCCE425008B2125 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060FE1BCCE425008B2125 /* PlaylistViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061051BCCEA85008B2125 /* PlayerViewController.m */; settings = {ASSET_TAGS = (); }; };
+		849061081BCCEA85008B2125 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849061061BCCEA85008B2125 /* PlayerViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		849061151BCE099B008B2125 /* MusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061141BCE099B008B2125 /* MusicProgressView.m */; settings = {ASSET_TAGS = (); }; };
+		849061181BCE2247008B2125 /* LrcHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061171BCE2247008B2125 /* LrcHelper.m */; settings = {ASSET_TAGS = (); }; };
+		8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8490611B1BCE34BF008B2125 /* LrcModal.m */; settings = {ASSET_TAGS = (); }; };
+		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; settings = {ASSET_TAGS = (); }; };
+		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +30,22 @@
 		849060F11BCCE3F8008B2125 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		849060F41BCCE3F8008B2125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		849060F61BCCE3F8008B2125 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		849060FC1BCCE425008B2125 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
+		849060FD1BCCE425008B2125 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
+		849060FE1BCCE425008B2125 /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistViewController.xib; sourceTree = "<group>"; };
+		849061021BCCE454008B2125 /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = ../../../../../../Library/Frameworks/iTunesLibrary.framework; sourceTree = "<group>"; };
+		849061041BCCEA85008B2125 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		849061051BCCEA85008B2125 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
+		849061061BCCEA85008B2125 /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
+		849061131BCE099B008B2125 /* MusicProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicProgressView.h; sourceTree = "<group>"; };
+		849061141BCE099B008B2125 /* MusicProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicProgressView.m; sourceTree = "<group>"; };
+		849061161BCE2247008B2125 /* LrcHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LrcHelper.h; path = EasyPlayer/LrcHelper.h; sourceTree = "<group>"; };
+		849061171BCE2247008B2125 /* LrcHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LrcHelper.m; path = EasyPlayer/LrcHelper.m; sourceTree = "<group>"; };
+		8490611A1BCE34BF008B2125 /* LrcModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LrcModal.h; path = EasyPlayer/LrcModal.h; sourceTree = "<group>"; };
+		8490611B1BCE34BF008B2125 /* LrcModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LrcModal.m; path = EasyPlayer/LrcModal.m; sourceTree = "<group>"; };
+		8499435C1BCE4BA200823A6B /* MusicInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicInfoViewController.h; sourceTree = "<group>"; };
+		8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicInfoViewController.m; sourceTree = "<group>"; };
+		8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicInfoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +63,8 @@
 			isa = PBXGroup;
 			children = (
 				849060EA1BCCE3F8008B2125 /* EasyPlayer */,
+				849061191BCE349F008B2125 /* LrcHelper */,
+				849061011BCCE435008B2125 /* Frameworks */,
 				849060E91BCCE3F8008B2125 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,6 +85,17 @@
 				849060F11BCCE3F8008B2125 /* Assets.xcassets */,
 				849060F31BCCE3F8008B2125 /* MainMenu.xib */,
 				849060F61BCCE3F8008B2125 /* Info.plist */,
+				849061041BCCEA85008B2125 /* PlayerViewController.h */,
+				849061051BCCEA85008B2125 /* PlayerViewController.m */,
+				849061061BCCEA85008B2125 /* PlayerViewController.xib */,
+				849060FC1BCCE425008B2125 /* PlaylistViewController.h */,
+				849060FD1BCCE425008B2125 /* PlaylistViewController.m */,
+				849060FE1BCCE425008B2125 /* PlaylistViewController.xib */,
+				8499435C1BCE4BA200823A6B /* MusicInfoViewController.h */,
+				8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */,
+				8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */,
+				849061131BCE099B008B2125 /* MusicProgressView.h */,
+				849061141BCE099B008B2125 /* MusicProgressView.m */,
 				849060EE1BCCE3F8008B2125 /* Supporting Files */,
 			);
 			path = EasyPlayer;
@@ -69,6 +107,26 @@
 				849060EF1BCCE3F8008B2125 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		849061011BCCE435008B2125 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				849061021BCCE454008B2125 /* iTunesLibrary.framework */,
+			);
+			name = Frameworks;
+			path = EasyPlayer;
+			sourceTree = "<group>";
+		};
+		849061191BCE349F008B2125 /* LrcHelper */ = {
+			isa = PBXGroup;
+			children = (
+				8490611A1BCE34BF008B2125 /* LrcModal.h */,
+				8490611B1BCE34BF008B2125 /* LrcModal.m */,
+				849061161BCE2247008B2125 /* LrcHelper.h */,
+				849061171BCE2247008B2125 /* LrcHelper.m */,
+			);
+			name = LrcHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +160,7 @@
 				TargetAttributes = {
 					849060E71BCCE3F8008B2125 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = F93845W87F;
 					};
 				};
 			};
@@ -128,6 +187,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */,
+				849061001BCCE425008B2125 /* PlaylistViewController.xib in Resources */,
+				849061081BCCEA85008B2125 /* PlayerViewController.xib in Resources */,
 				849060F21BCCE3F8008B2125 /* Assets.xcassets in Resources */,
 				849060F51BCCE3F8008B2125 /* MainMenu.xib in Resources */,
 			);
@@ -140,8 +202,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
+				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
+				8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */,
+				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
+				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,
+				849061181BCE2247008B2125 /* LrcHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,9 +310,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -254,9 +328,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -281,6 +361,7 @@
 				849060FB1BCCE3F8008B2125 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

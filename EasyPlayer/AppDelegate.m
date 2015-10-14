@@ -7,16 +7,20 @@
 //
 
 #import "AppDelegate.h"
+#import "PlayerViewController.h"
 
 @interface AppDelegate ()
 
-@property (weak) IBOutlet NSWindow *window;
+@property (nonatomic, strong) PlayerViewController *playerController;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+    
+    self.playerController = [[PlayerViewController alloc] initWithWindowNibName:@"PlayerViewController"];
+    [self.playerController showWindow:nil];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

@@ -57,9 +57,11 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
         }
     }
     
+    NSRect rect = ((NSView*)self.window.contentView).bounds;
+    
     musicInfoController = [[MusicInfoViewController alloc] init];
     [self.window.contentView addSubview:musicInfoController.view];
-    musicInfoController.view.bounds = self.window.contentView.bounds;
+    musicInfoController.view.bounds = rect;
     musicInfoController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     
     
@@ -67,11 +69,11 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     playlistController.items = self.items;
     playlistController.playListDelegate = self;
     [self.window.contentView addSubview:playlistController.view];
-    playlistController.view.bounds = self.window.contentView.bounds;
+    playlistController.view.bounds = rect;
     playlistController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     
     
-    progressView = [[MusicProgressView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(self.window.contentView.bounds) - 2, CGRectGetWidth(self.window.contentView.bounds), 2)];
+    progressView = [[MusicProgressView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(rect) - 2, CGRectGetWidth(rect), 2)];
     progressView.autoresizingMask = NSViewWidthSizable | NSViewMinYMargin;
     [self.window.contentView addSubview:progressView];
 }

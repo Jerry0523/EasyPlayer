@@ -6,6 +6,8 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PlayerViewController">
             <connections>
+                <outlet property="panelSwitchControl" destination="4Cz-en-fuE" id="hZO-Wm-ih4"/>
+                <outlet property="playToolbarItem" destination="5uz-a3-7jH" id="DSs-gk-fiZ"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -94,28 +96,58 @@
                     <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="wGg-jl-L47"/>
                     <toolbarItem implicitItemIdentifier="1859737E-5DB5-4700-A282-8B90EDE2A48D" label="" paletteLabel="Switch" id="38l-NA-bQB">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="104" height="24"/>
-                        <size key="maxSize" width="104" height="24"/>
+                        <size key="minSize" width="81" height="24"/>
+                        <size key="maxSize" width="107" height="25"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="4Cz-en-fuE">
-                            <rect key="frame" x="0.0" y="14" width="104" height="24"/>
+                            <rect key="frame" x="0.0" y="14" width="107" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <animations/>
-                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="kMP-NU-uzc">
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="kMP-NU-uzc">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment label="列表" width="32"/>
-                                    <segment label="歌曲" width="32" selected="YES" tag="1"/>
+                                    <segment toolTip="列表" image="list" width="50" selected="YES">
+                                        <nil key="label"/>
+                                    </segment>
+                                    <segment toolTip="详情" image="music" width="50" tag="1">
+                                        <nil key="label"/>
+                                    </segment>
+                                </segments>
+                            </segmentedCell>
+                        </segmentedControl>
+                        <connections>
+                            <action selector="panelSwitched:" target="-2" id="O2T-nR-ZPx"/>
+                        </connections>
+                    </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="1730B5E9-0C1F-43AF-B905-0E1748DCDFF1" label="" paletteLabel="mode" id="KEv-a6-c4h">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="81" height="24"/>
+                        <size key="maxSize" width="107" height="25"/>
+                        <segmentedControl key="view" verticalHuggingPriority="750" id="Xwl-Ig-yEZ">
+                            <rect key="frame" x="0.0" y="14" width="107" height="25"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <animations/>
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="rCN-zA-Lk8">
+                                <font key="font" metaFont="system"/>
+                                <segments>
+                                    <segment toolTip="随机播放" image="random" width="50" selected="YES">
+                                        <nil key="label"/>
+                                    </segment>
+                                    <segment toolTip="单曲" image="single" width="50" tag="1">
+                                        <nil key="label"/>
+                                    </segment>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
                     </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
+                    <toolbarItem reference="38l-NA-bQB"/>
                     <toolbarItem reference="O1y-kw-FGK"/>
                     <toolbarItem reference="e7T-yy-vFY"/>
                     <toolbarItem reference="5uz-a3-7jH"/>
                     <toolbarItem reference="ypg-qn-JeO"/>
                     <toolbarItem reference="O1y-kw-FGK"/>
+                    <toolbarItem reference="KEv-a6-c4h"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>
@@ -125,8 +157,12 @@
         </window>
     </objects>
     <resources>
+        <image name="list" width="40" height="40"/>
+        <image name="music" width="40" height="40"/>
         <image name="next" width="100" height="100"/>
         <image name="play" width="100" height="100"/>
         <image name="pre" width="100" height="100"/>
+        <image name="random" width="40" height="40"/>
+        <image name="single" width="40" height="40"/>
     </resources>
 </document>

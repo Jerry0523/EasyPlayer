@@ -18,7 +18,6 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
     self.playerController = [[PlayerViewController alloc] initWithWindowNibName:@"PlayerViewController"];
     [self.playerController showWindow:nil];
 }

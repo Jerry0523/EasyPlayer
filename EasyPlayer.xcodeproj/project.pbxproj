@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843CBFFD1BD0F21900B4CCB8 /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843CBFFC1BD0F21900B4CCB8 /* NSString+Comparator.m */; settings = {ASSET_TAGS = (); }; };
 		849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EC1BCCE3F8008B2125 /* AppDelegate.m */; };
 		849060F01BCCE3F8008B2125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EF1BCCE3F8008B2125 /* main.m */; };
 		849060F21BCCE3F8008B2125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849060F11BCCE3F8008B2125 /* Assets.xcassets */; };
@@ -20,9 +21,13 @@
 		8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8490611B1BCE34BF008B2125 /* LrcModal.m */; settings = {ASSET_TAGS = (); }; };
 		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; settings = {ASSET_TAGS = (); }; };
 		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		849943641BCF6BAD00823A6B /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943631BCF6BAD00823A6B /* NSImage+Utils.m */; settings = {ASSET_TAGS = (); }; };
+		849943671BCF800500823A6B /* LrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943661BCF800500823A6B /* LrcParser.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		843CBFFB1BD0F21900B4CCB8 /* NSString+Comparator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Comparator.h"; path = "EasyPlayer/NSString+Comparator.h"; sourceTree = "<group>"; };
+		843CBFFC1BD0F21900B4CCB8 /* NSString+Comparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Comparator.m"; path = "EasyPlayer/NSString+Comparator.m"; sourceTree = "<group>"; };
 		849060E81BCCE3F8008B2125 /* EasyPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849060EB1BCCE3F8008B2125 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		849060EC1BCCE3F8008B2125 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -46,6 +51,10 @@
 		8499435C1BCE4BA200823A6B /* MusicInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicInfoViewController.h; sourceTree = "<group>"; };
 		8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicInfoViewController.m; sourceTree = "<group>"; };
 		8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicInfoViewController.xib; sourceTree = "<group>"; };
+		849943621BCF6BAD00823A6B /* NSImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+Utils.h"; path = "EasyPlayer/NSImage+Utils.h"; sourceTree = "<group>"; };
+		849943631BCF6BAD00823A6B /* NSImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+Utils.m"; path = "EasyPlayer/NSImage+Utils.m"; sourceTree = "<group>"; };
+		849943651BCF800500823A6B /* LrcParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LrcParser.h; path = EasyPlayer/LrcParser.h; sourceTree = "<group>"; };
+		849943661BCF800500823A6B /* LrcParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LrcParser.m; path = EasyPlayer/LrcParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				849060EA1BCCE3F8008B2125 /* EasyPlayer */,
-				849061191BCE349F008B2125 /* LrcHelper */,
+				849943611BCF6B5800823A6B /* Extentions */,
 				849061011BCCE435008B2125 /* Frameworks */,
 				849060E91BCCE3F8008B2125 /* Products */,
 			);
@@ -125,8 +134,22 @@
 				8490611B1BCE34BF008B2125 /* LrcModal.m */,
 				849061161BCE2247008B2125 /* LrcHelper.h */,
 				849061171BCE2247008B2125 /* LrcHelper.m */,
+				849943651BCF800500823A6B /* LrcParser.h */,
+				849943661BCF800500823A6B /* LrcParser.m */,
 			);
 			name = LrcHelper;
+			sourceTree = "<group>";
+		};
+		849943611BCF6B5800823A6B /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				849061191BCE349F008B2125 /* LrcHelper */,
+				849943621BCF6BAD00823A6B /* NSImage+Utils.h */,
+				849943631BCF6BAD00823A6B /* NSImage+Utils.m */,
+				843CBFFB1BD0F21900B4CCB8 /* NSString+Comparator.h */,
+				843CBFFC1BD0F21900B4CCB8 /* NSString+Comparator.m */,
+			);
+			name = Extentions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,10 +225,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843CBFFD1BD0F21900B4CCB8 /* NSString+Comparator.m in Sources */,
 				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
+				849943671BCF800500823A6B /* LrcParser.m in Sources */,
+				849943641BCF6BAD00823A6B /* NSImage+Utils.m in Sources */,
 				8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */,
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
 				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,

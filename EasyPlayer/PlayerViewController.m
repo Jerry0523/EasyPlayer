@@ -10,6 +10,7 @@
 #import "PlaylistViewController.h"
 #import "MusicProgressView.h"
 #import "MusicInfoViewController.h"
+#import "NSString+Comparator.h"
 #import <AVFoundation/AVFoundation.h>
 
 static inline CGFloat skRand(NSInteger low, NSInteger high) {
@@ -22,6 +23,12 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 @property (strong, nonatomic) AVAudioPlayer* player;
 @property (strong, nonatomic) NSDictionary *currentTrack;
 
+@property (weak) IBOutlet NSToolbarItem *playToolbarItem;
+
+@property (strong, nonatomic) NSMutableArray *playedList;
+
+@property (weak) IBOutlet NSSegmentedControl *panelSwitchControl;
+
 @end
 
 @implementation PlayerViewController {
@@ -33,6 +40,8 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    
+    self.playedList = [NSMutableArray array];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
     if(paths.count > 0) {
@@ -53,6 +62,9 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
                     }
                 }
             }
+            [mutable sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
+                return [obj1[@"Name"] compares:obj2[@"Name"]];
+            }];
             self.items = mutable;
         }
     }
@@ -78,6 +90,16 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     [self.window.contentView addSubview:progressView];
 }
 
+- (void)switchToPlayListPanel {
+    playlistController.view.hidden = NO;
+    self.panelSwitchControl.selectedSegment = 0;
+}
+
+- (void)switchToMuscicInfoPanel {
+    playlistController.view.hidden = YES;
+    self.panelSwitchControl.selectedSegment = 1;
+}
+
 - (void)playRandomSong {
     NSInteger idx = skRand(0, self.items.count - 1);
     [self playSongByTrack:self.items[idx]];
@@ -88,6 +110,11 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     if (self.currentTrack == track) {
         return;
     }
+    
+    [self.playedList removeObject:track];
+    [self.playedList addObject:track];
+    
+    self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
     
     playlistController.view.hidden = YES;
     
@@ -110,6 +137,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
         NSLog(@"%@", [error localizedDescription]);
     }
     progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshProgressByTimer) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:progressTimer forMode:NSRunLoopCommonModes];
     [progressTimer fire];
     
     musicInfoController.trackInfo = track;
@@ -122,6 +150,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     if (totalTime > 0) {
         progressView.progress = currentTime / totalTime;
     }
+    musicInfoController.currentTimerInteval = currentTime;
 }
 
 #pragma mark - IBActions
@@ -131,19 +160,18 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
         if (self.player.isPlaying) {
             [self.player pause];
             sender.image = [NSImage imageNamed:@"play"];
-            playlistController.view.hidden = NO;
+            [self switchToPlayListPanel];
             if (progressTimer) {
                 [progressTimer setFireDate:[NSDate distantFuture]];
             }
         } else {
-            playlistController.view.hidden = YES;
+            [self switchToMuscicInfoPanel];
             [self.player play];
             sender.image = [NSImage imageNamed:@"pause"];
             [progressTimer setFireDate:[NSDate date]];
         }
     } else {
-        playlistController.view.hidden = YES;
-        sender.image = [NSImage imageNamed:@"pause"];
+        [self switchToMuscicInfoPanel];
         [self playRandomSong];
     }
 }
@@ -153,7 +181,30 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 }
 
 - (IBAction)preClicked:(id)sender {
-    
+    if ([self.playedList count] > 0) {
+        [self.playedList removeObject:[self.playedList lastObject]];
+    }
+    if ([self.playedList count] > 0) {
+        id lastTrack = [self.playedList lastObject];
+        [self playSongByTrack:lastTrack];
+        [playlistController setSelectedIndex:[self.items indexOfObject:lastTrack]];
+    } else {
+        [self.player stop];
+        self.playToolbarItem.image = [NSImage imageNamed:@"play"];
+        playlistController.view.hidden = NO;
+        if (progressTimer) {
+            [progressTimer invalidate];
+            progressTimer = nil;
+        }
+    }
+}
+
+- (IBAction)panelSwitched:(NSSegmentedControl*)sender {
+    if (sender.selectedSegment == 0) {
+        [self switchToPlayListPanel];
+    } else {
+        [self switchToMuscicInfoPanel];
+    }
 }
 
 #pragma mark - PlaylistViewDelegate

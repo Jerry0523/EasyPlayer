@@ -18,4 +18,6 @@
 
 @property (strong, nonatomic) NSDictionary *trackInfo;
 
+@property (assign, nonatomic) NSTimeInterval currentTimerInteval;
+
 @end

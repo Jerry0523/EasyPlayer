@@ -11,15 +11,15 @@
 		849060F01BCCE3F8008B2125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EF1BCCE3F8008B2125 /* main.m */; };
 		849060F21BCCE3F8008B2125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849060F11BCCE3F8008B2125 /* Assets.xcassets */; };
 		849060F51BCCE3F8008B2125 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060F31BCCE3F8008B2125 /* MainMenu.xib */; };
-		849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060FD1BCCE425008B2125 /* PlaylistViewController.m */; settings = {ASSET_TAGS = (); }; };
-		849061001BCCE425008B2125 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060FE1BCCE425008B2125 /* PlaylistViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061051BCCEA85008B2125 /* PlayerViewController.m */; settings = {ASSET_TAGS = (); }; };
-		849061081BCCEA85008B2125 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849061061BCCEA85008B2125 /* PlayerViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		849061151BCE099B008B2125 /* MusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061141BCE099B008B2125 /* MusicProgressView.m */; settings = {ASSET_TAGS = (); }; };
-		849061181BCE2247008B2125 /* LrcHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061171BCE2247008B2125 /* LrcHelper.m */; settings = {ASSET_TAGS = (); }; };
-		8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8490611B1BCE34BF008B2125 /* LrcModal.m */; settings = {ASSET_TAGS = (); }; };
-		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; settings = {ASSET_TAGS = (); }; };
-		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060FD1BCCE425008B2125 /* PlaylistViewController.m */; };
+		849061001BCCE425008B2125 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060FE1BCCE425008B2125 /* PlaylistViewController.xib */; };
+		849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061051BCCEA85008B2125 /* PlayerViewController.m */; };
+		849061081BCCEA85008B2125 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849061061BCCEA85008B2125 /* PlayerViewController.xib */; };
+		849061151BCE099B008B2125 /* MusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061141BCE099B008B2125 /* MusicProgressView.m */; };
+		849061181BCE2247008B2125 /* LrcHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061171BCE2247008B2125 /* LrcHelper.m */; };
+		8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8490611B1BCE34BF008B2125 /* LrcModal.m */; };
+		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; };
+		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -160,7 +160,7 @@
 				TargetAttributes = {
 					849060E71BCCE3F8008B2125 = {
 						CreatedOnToolsVersion = 7.0.1;
-						DevelopmentTeam = F93845W87F;
+						DevelopmentTeam = U7RP278R6Z;
 					};
 				};
 			};

@@ -16,10 +16,11 @@
 
 @end
 
-@interface PlaylistViewController : NSViewController
+@interface PlaylistViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
 
 @property (nonatomic, weak) id<PlaylistViewDelegate> playListDelegate;
 @property (nonatomic, strong) NSArray *items;
+@property (weak) IBOutlet NSTableView *tableView;
 
 - (void)setSelectedIndex:(NSUInteger)idx;
 

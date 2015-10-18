@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PlayerViewController">
             <connections>
                 <outlet property="panelSwitchControl" destination="4Cz-en-fuE" id="hZO-Wm-ih4"/>
                 <outlet property="playToolbarItem" destination="5uz-a3-7jH" id="DSs-gk-fiZ"/>
+                <outlet property="searchField" destination="gXz-Or-zvM" id="p3z-6w-Try"/>
                 <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -16,8 +17,8 @@
         <window title="EasyPlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="716" y="332" width="600" height="420"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1057"/>
+            <rect key="contentRect" x="394" y="162" width="600" height="420"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <value key="minSize" type="size" width="600" height="420"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="600" height="420"/>
@@ -27,10 +28,10 @@
             <toolbar key="toolbar" implicitIdentifier="0404F281-E576-41B6-8CC7-91CBF172740D" autosavesConfiguration="NO" allowsUserCustomization="NO" displayMode="iconAndLabel" sizeMode="regular" id="hwI-a6-eVF">
                 <allowedToolbarItems>
                     <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="O1y-kw-FGK"/>
-                    <toolbarItem implicitItemIdentifier="A1CC3032-9416-4405-B7B5-D28A79F68684" label="" paletteLabel="Search" id="PhF-93-tYY">
+                    <toolbarItem implicitItemIdentifier="A1CC3032-9416-4405-B7B5-D28A79F68684" explicitItemIdentifier="search" label="" paletteLabel="Search" id="PhF-93-tYY">
                         <nil key="toolTip"/>
                         <size key="minSize" width="150" height="22"/>
-                        <size key="maxSize" width="150" height="25"/>
+                        <size key="maxSize" width="150" height="30"/>
                         <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" id="gXz-Or-zvM">
                             <rect key="frame" x="0.0" y="14" width="150" height="22"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -40,9 +41,12 @@
                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </searchFieldCell>
+                            <connections>
+                                <action selector="searchFieldValueChanged:" target="-2" id="NKE-sk-8QS"/>
+                            </connections>
                         </searchField>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="9C3AFD97-B2AD-4F68-B48F-25EEF140B370" label="" paletteLabel="Play" image="play" id="5uz-a3-7jH">
+                    <toolbarItem implicitItemIdentifier="9C3AFD97-B2AD-4F68-B48F-25EEF140B370" explicitItemIdentifier="play" label="" paletteLabel="Play" image="play" id="5uz-a3-7jH">
                         <nil key="toolTip"/>
                         <size key="minSize" width="50" height="50"/>
                         <size key="maxSize" width="50" height="50"/>
@@ -59,7 +63,7 @@
                             <action selector="playClicked:" target="-2" id="Mu7-8q-LrT"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="EBDA2E6B-A8BF-4126-AFB7-25A5505D4A4A" label="" paletteLabel="next" image="next" id="ypg-qn-JeO">
+                    <toolbarItem implicitItemIdentifier="EBDA2E6B-A8BF-4126-AFB7-25A5505D4A4A" explicitItemIdentifier="next" label="" paletteLabel="next" image="next" id="ypg-qn-JeO">
                         <nil key="toolTip"/>
                         <size key="minSize" width="50" height="50"/>
                         <size key="maxSize" width="50" height="50"/>
@@ -76,7 +80,7 @@
                             <action selector="nextClicked:" target="-2" id="MMF-xC-Bmr"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="DFB1EC17-42D7-4140-A310-F4BF151D4795" label="" paletteLabel="pre" image="pre" id="e7T-yy-vFY">
+                    <toolbarItem implicitItemIdentifier="DFB1EC17-42D7-4140-A310-F4BF151D4795" explicitItemIdentifier="pre" label="" paletteLabel="pre" image="pre" id="e7T-yy-vFY">
                         <nil key="toolTip"/>
                         <size key="minSize" width="50" height="50"/>
                         <size key="maxSize" width="50" height="50"/>
@@ -93,22 +97,21 @@
                             <action selector="preClicked:" target="-2" id="ct5-zu-kuR"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="wGg-jl-L47"/>
-                    <toolbarItem implicitItemIdentifier="1859737E-5DB5-4700-A282-8B90EDE2A48D" label="" paletteLabel="Switch" id="38l-NA-bQB">
+                    <toolbarItem implicitItemIdentifier="1859737E-5DB5-4700-A282-8B90EDE2A48D" explicitItemIdentifier="switch" label="" paletteLabel="Switch" id="38l-NA-bQB">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="81" height="24"/>
-                        <size key="maxSize" width="107" height="25"/>
+                        <size key="minSize" width="81" height="25"/>
+                        <size key="maxSize" width="114" height="30"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="4Cz-en-fuE">
-                            <rect key="frame" x="0.0" y="14" width="107" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="113" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <animations/>
-                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="kMP-NU-uzc">
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="kMP-NU-uzc">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="列表" image="list" width="50" selected="YES">
+                                    <segment toolTip="列表" image="list" width="55" selected="YES">
                                         <nil key="label"/>
                                     </segment>
-                                    <segment toolTip="详情" image="music" width="50" tag="1">
+                                    <segment toolTip="详情" image="music" width="55" tag="1">
                                         <nil key="label"/>
                                     </segment>
                                 </segments>
@@ -118,36 +121,47 @@
                             <action selector="panelSwitched:" target="-2" id="O2T-nR-ZPx"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="1730B5E9-0C1F-43AF-B905-0E1748DCDFF1" label="" paletteLabel="mode" id="KEv-a6-c4h">
+                    <toolbarItem implicitItemIdentifier="1730B5E9-0C1F-43AF-B905-0E1748DCDFF1" explicitItemIdentifier="mode" label="" paletteLabel="mode" id="KEv-a6-c4h">
                         <nil key="toolTip"/>
                         <size key="minSize" width="81" height="24"/>
-                        <size key="maxSize" width="107" height="25"/>
+                        <size key="maxSize" width="115" height="25"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="Xwl-Ig-yEZ">
-                            <rect key="frame" x="0.0" y="14" width="107" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="113" height="25"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <animations/>
-                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedRounded" trackingMode="selectOne" id="rCN-zA-Lk8">
+                            <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="rCN-zA-Lk8">
                                 <font key="font" metaFont="system"/>
                                 <segments>
-                                    <segment toolTip="随机播放" image="random" width="50" selected="YES">
+                                    <segment toolTip="随机播放" image="random" width="55" selected="YES">
                                         <nil key="label"/>
                                     </segment>
-                                    <segment toolTip="单曲" image="single" width="50" tag="1">
+                                    <segment toolTip="单曲" image="single" width="55" tag="1">
                                         <nil key="label"/>
                                     </segment>
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
                     </toolbarItem>
+                    <toolbarItem implicitItemIdentifier="9FEE54E2-F8C3-4FA9-A646-4AF404638E9C" explicitItemIdentifier="add" label="" paletteLabel="Add" id="oca-mX-LoK">
+                        <nil key="toolTip"/>
+                        <size key="minSize" width="30" height="23"/>
+                        <size key="maxSize" width="30" height="30"/>
+                        <button key="view" verticalHuggingPriority="750" id="27I-bX-8ug">
+                            <rect key="frame" x="0.0" y="15" width="30" height="23"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <animations/>
+                            <buttonCell key="cell" type="roundTextured" title="+" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" inset="2" id="G3j-E5-H8U">
+                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                <font key="font" metaFont="system"/>
+                            </buttonCell>
+                        </button>
+                    </toolbarItem>
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="38l-NA-bQB"/>
                     <toolbarItem reference="O1y-kw-FGK"/>
-                    <toolbarItem reference="e7T-yy-vFY"/>
-                    <toolbarItem reference="5uz-a3-7jH"/>
-                    <toolbarItem reference="ypg-qn-JeO"/>
-                    <toolbarItem reference="O1y-kw-FGK"/>
-                    <toolbarItem reference="KEv-a6-c4h"/>
+                    <toolbarItem reference="oca-mX-LoK"/>
+                    <toolbarItem reference="PhF-93-tYY"/>
                 </defaultToolbarItems>
             </toolbar>
             <connections>

@@ -7,22 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		843CBFFD1BD0F21900B4CCB8 /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843CBFFC1BD0F21900B4CCB8 /* NSString+Comparator.m */; settings = {ASSET_TAGS = (); }; };
+		843CBFFD1BD0F21900B4CCB8 /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 843CBFFC1BD0F21900B4CCB8 /* NSString+Comparator.m */; };
 		849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EC1BCCE3F8008B2125 /* AppDelegate.m */; };
 		849060F01BCCE3F8008B2125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EF1BCCE3F8008B2125 /* main.m */; };
 		849060F21BCCE3F8008B2125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849060F11BCCE3F8008B2125 /* Assets.xcassets */; };
 		849060F51BCCE3F8008B2125 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060F31BCCE3F8008B2125 /* MainMenu.xib */; };
-		849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060FD1BCCE425008B2125 /* PlaylistViewController.m */; settings = {ASSET_TAGS = (); }; };
-		849061001BCCE425008B2125 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060FE1BCCE425008B2125 /* PlaylistViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061051BCCEA85008B2125 /* PlayerViewController.m */; settings = {ASSET_TAGS = (); }; };
-		849061081BCCEA85008B2125 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849061061BCCEA85008B2125 /* PlayerViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		849061151BCE099B008B2125 /* MusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061141BCE099B008B2125 /* MusicProgressView.m */; settings = {ASSET_TAGS = (); }; };
-		849061181BCE2247008B2125 /* LrcHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061171BCE2247008B2125 /* LrcHelper.m */; settings = {ASSET_TAGS = (); }; };
-		8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8490611B1BCE34BF008B2125 /* LrcModal.m */; settings = {ASSET_TAGS = (); }; };
-		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; settings = {ASSET_TAGS = (); }; };
-		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		849943641BCF6BAD00823A6B /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943631BCF6BAD00823A6B /* NSImage+Utils.m */; settings = {ASSET_TAGS = (); }; };
-		849943671BCF800500823A6B /* LrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943661BCF800500823A6B /* LrcParser.m */; settings = {ASSET_TAGS = (); }; };
+		849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060FD1BCCE425008B2125 /* PlaylistViewController.m */; };
+		849061001BCCE425008B2125 /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849060FE1BCCE425008B2125 /* PlaylistViewController.xib */; };
+		849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061051BCCEA85008B2125 /* PlayerViewController.m */; };
+		849061081BCCEA85008B2125 /* PlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 849061061BCCEA85008B2125 /* PlayerViewController.xib */; };
+		849061151BCE099B008B2125 /* MusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061141BCE099B008B2125 /* MusicProgressView.m */; };
+		849061181BCE2247008B2125 /* LrcHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061171BCE2247008B2125 /* LrcHelper.m */; };
+		8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 8490611B1BCE34BF008B2125 /* LrcModal.m */; };
+		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; };
+		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; };
+		849943641BCF6BAD00823A6B /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943631BCF6BAD00823A6B /* NSImage+Utils.m */; };
+		849943671BCF800500823A6B /* LrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943661BCF800500823A6B /* LrcParser.m */; };
+		C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C11BD11636005C6BBC /* AudioToolbox.framework */; };
+		C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C31BD116A0005C6BBC /* AVFoundation.framework */; };
+		C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C51BD116A8005C6BBC /* Cocoa.framework */; };
+		C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C71BD116AE005C6BBC /* QuartzCore.framework */; };
+		C48864531BD146F300C1C5D2 /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864521BD146F300C1C5D2 /* NSColor+Components.m */; };
+		C488647C1BD381FC00C1C5D2 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864581BD381FC00C1C5D2 /* ORGMAudioUnit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C488647D1BD381FC00C1C5D2 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = C488645B1BD381FC00C1C5D2 /* ORGMConverter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C488647E1BD381FC00C1C5D2 /* ORGMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = C488645D1BD381FC00C1C5D2 /* ORGMEngine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C488647F1BD381FC00C1C5D2 /* ORGMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = C488645F1BD381FC00C1C5D2 /* ORGMInputUnit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864801BD381FC00C1C5D2 /* ORGMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864611BD381FC00C1C5D2 /* ORGMOutputUnit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864811BD381FC00C1C5D2 /* ORGMPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864631BD381FC00C1C5D2 /* ORGMPluginManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864821BD381FC00C1C5D2 /* ORGMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864651BD381FC00C1C5D2 /* ORGMQueues.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864831BD381FC00C1C5D2 /* CoreAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864691BD381FC00C1C5D2 /* CoreAudioDecoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864841BD381FC00C1C5D2 /* CueSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = C488646B1BD381FC00C1C5D2 /* CueSheet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864851BD381FC00C1C5D2 /* CueSheetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C488646D1BD381FC00C1C5D2 /* CueSheetContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864861BD381FC00C1C5D2 /* CueSheetDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C488646F1BD381FC00C1C5D2 /* CueSheetDecoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864871BD381FC00C1C5D2 /* CueSheetTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864711BD381FC00C1C5D2 /* CueSheetTrack.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864881BD381FC00C1C5D2 /* FileSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864731BD381FC00C1C5D2 /* FileSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864891BD381FC00C1C5D2 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864751BD381FC00C1C5D2 /* FlacDecoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C488648A1BD381FC00C1C5D2 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864771BD381FC00C1C5D2 /* HTTPSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C488648B1BD381FC00C1C5D2 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864791BD381FC00C1C5D2 /* M3uContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		C48864A41BD383AC00C1C5D2 /* libFLAC.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C488649F1BD383AC00C1C5D2 /* libFLAC.8.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +60,6 @@
 		849060FC1BCCE425008B2125 /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistViewController.h; sourceTree = "<group>"; };
 		849060FD1BCCE425008B2125 /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistViewController.m; sourceTree = "<group>"; };
 		849060FE1BCCE425008B2125 /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistViewController.xib; sourceTree = "<group>"; };
-		849061021BCCE454008B2125 /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = ../../../../../../Library/Frameworks/iTunesLibrary.framework; sourceTree = "<group>"; };
 		849061041BCCEA85008B2125 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
 		849061051BCCEA85008B2125 /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		849061061BCCEA85008B2125 /* PlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerViewController.xib; sourceTree = "<group>"; };
@@ -55,6 +76,56 @@
 		849943631BCF6BAD00823A6B /* NSImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+Utils.m"; path = "EasyPlayer/NSImage+Utils.m"; sourceTree = "<group>"; };
 		849943651BCF800500823A6B /* LrcParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LrcParser.h; path = EasyPlayer/LrcParser.h; sourceTree = "<group>"; };
 		849943661BCF800500823A6B /* LrcParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LrcParser.m; path = EasyPlayer/LrcParser.m; sourceTree = "<group>"; };
+		C43279C11BD11636005C6BBC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		C43279C31BD116A0005C6BBC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C43279C51BD116A8005C6BBC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		C43279C71BD116AE005C6BBC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C48864511BD146F300C1C5D2 /* NSColor+Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+Components.h"; path = "EasyPlayer/NSColor+Components.h"; sourceTree = "<group>"; };
+		C48864521BD146F300C1C5D2 /* NSColor+Components.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+Components.m"; path = "EasyPlayer/NSColor+Components.m"; sourceTree = "<group>"; };
+		C48864571BD381FC00C1C5D2 /* ORGMAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMAudioUnit.h; sourceTree = "<group>"; };
+		C48864581BD381FC00C1C5D2 /* ORGMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMAudioUnit.m; sourceTree = "<group>"; };
+		C48864591BD381FC00C1C5D2 /* ORGMCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMCommonProtocols.h; sourceTree = "<group>"; };
+		C488645A1BD381FC00C1C5D2 /* ORGMConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMConverter.h; sourceTree = "<group>"; };
+		C488645B1BD381FC00C1C5D2 /* ORGMConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMConverter.m; sourceTree = "<group>"; };
+		C488645C1BD381FC00C1C5D2 /* ORGMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMEngine.h; sourceTree = "<group>"; };
+		C488645D1BD381FC00C1C5D2 /* ORGMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMEngine.m; sourceTree = "<group>"; };
+		C488645E1BD381FC00C1C5D2 /* ORGMInputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMInputUnit.h; sourceTree = "<group>"; };
+		C488645F1BD381FC00C1C5D2 /* ORGMInputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMInputUnit.m; sourceTree = "<group>"; };
+		C48864601BD381FC00C1C5D2 /* ORGMOutputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMOutputUnit.h; sourceTree = "<group>"; };
+		C48864611BD381FC00C1C5D2 /* ORGMOutputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMOutputUnit.m; sourceTree = "<group>"; };
+		C48864621BD381FC00C1C5D2 /* ORGMPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMPluginManager.h; sourceTree = "<group>"; };
+		C48864631BD381FC00C1C5D2 /* ORGMPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMPluginManager.m; sourceTree = "<group>"; };
+		C48864641BD381FC00C1C5D2 /* ORGMQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMQueues.h; sourceTree = "<group>"; };
+		C48864651BD381FC00C1C5D2 /* ORGMQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMQueues.m; sourceTree = "<group>"; };
+		C48864661BD381FC00C1C5D2 /* OrigamiEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OrigamiEngine-Prefix.pch"; sourceTree = "<group>"; };
+		C48864681BD381FC00C1C5D2 /* CoreAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAudioDecoder.h; sourceTree = "<group>"; };
+		C48864691BD381FC00C1C5D2 /* CoreAudioDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreAudioDecoder.m; sourceTree = "<group>"; };
+		C488646A1BD381FC00C1C5D2 /* CueSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheet.h; sourceTree = "<group>"; };
+		C488646B1BD381FC00C1C5D2 /* CueSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheet.m; sourceTree = "<group>"; };
+		C488646C1BD381FC00C1C5D2 /* CueSheetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetContainer.h; sourceTree = "<group>"; };
+		C488646D1BD381FC00C1C5D2 /* CueSheetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetContainer.m; sourceTree = "<group>"; };
+		C488646E1BD381FC00C1C5D2 /* CueSheetDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetDecoder.h; sourceTree = "<group>"; };
+		C488646F1BD381FC00C1C5D2 /* CueSheetDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetDecoder.m; sourceTree = "<group>"; };
+		C48864701BD381FC00C1C5D2 /* CueSheetTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetTrack.h; sourceTree = "<group>"; };
+		C48864711BD381FC00C1C5D2 /* CueSheetTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetTrack.m; sourceTree = "<group>"; };
+		C48864721BD381FC00C1C5D2 /* FileSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSource.h; sourceTree = "<group>"; };
+		C48864731BD381FC00C1C5D2 /* FileSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSource.m; sourceTree = "<group>"; };
+		C48864741BD381FC00C1C5D2 /* FlacDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlacDecoder.h; sourceTree = "<group>"; };
+		C48864751BD381FC00C1C5D2 /* FlacDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlacDecoder.m; sourceTree = "<group>"; };
+		C48864761BD381FC00C1C5D2 /* HTTPSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPSource.h; sourceTree = "<group>"; };
+		C48864771BD381FC00C1C5D2 /* HTTPSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSource.m; sourceTree = "<group>"; };
+		C48864781BD381FC00C1C5D2 /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
+		C48864791BD381FC00C1C5D2 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
+		C488649A1BD383AC00C1C5D2 /* all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = all.h; sourceTree = "<group>"; };
+		C488649B1BD383AC00C1C5D2 /* assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
+		C488649C1BD383AC00C1C5D2 /* callback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callback.h; sourceTree = "<group>"; };
+		C488649D1BD383AC00C1C5D2 /* export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = export.h; sourceTree = "<group>"; };
+		C488649E1BD383AC00C1C5D2 /* format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = format.h; sourceTree = "<group>"; };
+		C488649F1BD383AC00C1C5D2 /* libFLAC.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libFLAC.8.dylib; sourceTree = "<group>"; };
+		C48864A01BD383AC00C1C5D2 /* metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metadata.h; sourceTree = "<group>"; };
+		C48864A11BD383AC00C1C5D2 /* ordinals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ordinals.h; sourceTree = "<group>"; };
+		C48864A21BD383AC00C1C5D2 /* stream_decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream_decoder.h; sourceTree = "<group>"; };
+		C48864A31BD383AC00C1C5D2 /* stream_encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream_encoder.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +133,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */,
+				C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */,
+				C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */,
+				C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */,
+				C48864A41BD383AC00C1C5D2 /* libFLAC.8.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +197,10 @@
 		849061011BCCE435008B2125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				849061021BCCE454008B2125 /* iTunesLibrary.framework */,
+				C43279C71BD116AE005C6BBC /* QuartzCore.framework */,
+				C43279C51BD116A8005C6BBC /* Cocoa.framework */,
+				C43279C31BD116A0005C6BBC /* AVFoundation.framework */,
+				C43279C11BD11636005C6BBC /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			path = EasyPlayer;
@@ -143,13 +222,84 @@
 		849943611BCF6B5800823A6B /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				C48864561BD381FC00C1C5D2 /* OrigamiEngine */,
 				849061191BCE349F008B2125 /* LrcHelper */,
 				849943621BCF6BAD00823A6B /* NSImage+Utils.h */,
 				849943631BCF6BAD00823A6B /* NSImage+Utils.m */,
 				843CBFFB1BD0F21900B4CCB8 /* NSString+Comparator.h */,
 				843CBFFC1BD0F21900B4CCB8 /* NSString+Comparator.m */,
+				C48864511BD146F300C1C5D2 /* NSColor+Components.h */,
+				C48864521BD146F300C1C5D2 /* NSColor+Components.m */,
 			);
 			name = Extentions;
+			sourceTree = "<group>";
+		};
+		C48864561BD381FC00C1C5D2 /* OrigamiEngine */ = {
+			isa = PBXGroup;
+			children = (
+				C48864671BD381FC00C1C5D2 /* Plugins */,
+				C48864991BD383AC00C1C5D2 /* FLAC */,
+				C48864571BD381FC00C1C5D2 /* ORGMAudioUnit.h */,
+				C48864581BD381FC00C1C5D2 /* ORGMAudioUnit.m */,
+				C48864591BD381FC00C1C5D2 /* ORGMCommonProtocols.h */,
+				C488645A1BD381FC00C1C5D2 /* ORGMConverter.h */,
+				C488645B1BD381FC00C1C5D2 /* ORGMConverter.m */,
+				C488645C1BD381FC00C1C5D2 /* ORGMEngine.h */,
+				C488645D1BD381FC00C1C5D2 /* ORGMEngine.m */,
+				C488645E1BD381FC00C1C5D2 /* ORGMInputUnit.h */,
+				C488645F1BD381FC00C1C5D2 /* ORGMInputUnit.m */,
+				C48864601BD381FC00C1C5D2 /* ORGMOutputUnit.h */,
+				C48864611BD381FC00C1C5D2 /* ORGMOutputUnit.m */,
+				C48864621BD381FC00C1C5D2 /* ORGMPluginManager.h */,
+				C48864631BD381FC00C1C5D2 /* ORGMPluginManager.m */,
+				C48864641BD381FC00C1C5D2 /* ORGMQueues.h */,
+				C48864651BD381FC00C1C5D2 /* ORGMQueues.m */,
+				C48864661BD381FC00C1C5D2 /* OrigamiEngine-Prefix.pch */,
+			);
+			name = OrigamiEngine;
+			path = EasyPlayer/OrigamiEngine;
+			sourceTree = "<group>";
+		};
+		C48864671BD381FC00C1C5D2 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+				C48864681BD381FC00C1C5D2 /* CoreAudioDecoder.h */,
+				C48864691BD381FC00C1C5D2 /* CoreAudioDecoder.m */,
+				C488646A1BD381FC00C1C5D2 /* CueSheet.h */,
+				C488646B1BD381FC00C1C5D2 /* CueSheet.m */,
+				C488646C1BD381FC00C1C5D2 /* CueSheetContainer.h */,
+				C488646D1BD381FC00C1C5D2 /* CueSheetContainer.m */,
+				C488646E1BD381FC00C1C5D2 /* CueSheetDecoder.h */,
+				C488646F1BD381FC00C1C5D2 /* CueSheetDecoder.m */,
+				C48864701BD381FC00C1C5D2 /* CueSheetTrack.h */,
+				C48864711BD381FC00C1C5D2 /* CueSheetTrack.m */,
+				C48864721BD381FC00C1C5D2 /* FileSource.h */,
+				C48864731BD381FC00C1C5D2 /* FileSource.m */,
+				C48864741BD381FC00C1C5D2 /* FlacDecoder.h */,
+				C48864751BD381FC00C1C5D2 /* FlacDecoder.m */,
+				C48864761BD381FC00C1C5D2 /* HTTPSource.h */,
+				C48864771BD381FC00C1C5D2 /* HTTPSource.m */,
+				C48864781BD381FC00C1C5D2 /* M3uContainer.h */,
+				C48864791BD381FC00C1C5D2 /* M3uContainer.m */,
+			);
+			path = Plugins;
+			sourceTree = "<group>";
+		};
+		C48864991BD383AC00C1C5D2 /* FLAC */ = {
+			isa = PBXGroup;
+			children = (
+				C488649A1BD383AC00C1C5D2 /* all.h */,
+				C488649B1BD383AC00C1C5D2 /* assert.h */,
+				C488649C1BD383AC00C1C5D2 /* callback.h */,
+				C488649D1BD383AC00C1C5D2 /* export.h */,
+				C488649E1BD383AC00C1C5D2 /* format.h */,
+				C488649F1BD383AC00C1C5D2 /* libFLAC.8.dylib */,
+				C48864A01BD383AC00C1C5D2 /* metadata.h */,
+				C48864A11BD383AC00C1C5D2 /* ordinals.h */,
+				C48864A21BD383AC00C1C5D2 /* stream_decoder.h */,
+				C48864A31BD383AC00C1C5D2 /* stream_encoder.h */,
+			);
+			path = FLAC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,16 +376,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				843CBFFD1BD0F21900B4CCB8 /* NSString+Comparator.m in Sources */,
+				C48864851BD381FC00C1C5D2 /* CueSheetContainer.m in Sources */,
+				C488648A1BD381FC00C1C5D2 /* HTTPSource.m in Sources */,
 				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
+				C488647C1BD381FC00C1C5D2 /* ORGMAudioUnit.m in Sources */,
+				C48864891BD381FC00C1C5D2 /* FlacDecoder.m in Sources */,
+				C48864811BD381FC00C1C5D2 /* ORGMPluginManager.m in Sources */,
+				C488648B1BD381FC00C1C5D2 /* M3uContainer.m in Sources */,
+				C488647D1BD381FC00C1C5D2 /* ORGMConverter.m in Sources */,
+				C48864531BD146F300C1C5D2 /* NSColor+Components.m in Sources */,
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
 				849943671BCF800500823A6B /* LrcParser.m in Sources */,
+				C48864881BD381FC00C1C5D2 /* FileSource.m in Sources */,
+				C48864821BD381FC00C1C5D2 /* ORGMQueues.m in Sources */,
+				C48864801BD381FC00C1C5D2 /* ORGMOutputUnit.m in Sources */,
 				849943641BCF6BAD00823A6B /* NSImage+Utils.m in Sources */,
+				C48864841BD381FC00C1C5D2 /* CueSheet.m in Sources */,
 				8490611C1BCE34BF008B2125 /* LrcModal.m in Sources */,
+				C48864831BD381FC00C1C5D2 /* CoreAudioDecoder.m in Sources */,
+				C48864861BD381FC00C1C5D2 /* CueSheetDecoder.m in Sources */,
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
 				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,
 				849061181BCE2247008B2125 /* LrcHelper.m in Sources */,
+				C48864871BD381FC00C1C5D2 /* CueSheetTrack.m in Sources */,
+				C488647E1BD381FC00C1C5D2 /* ORGMEngine.m in Sources */,
+				C488647F1BD381FC00C1C5D2 /* ORGMInputUnit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +511,11 @@
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyPlayer/FLAC",
+					"$(PROJECT_DIR)/EasyPlayer/OrigamiEngine/FLAC",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -362,6 +534,11 @@
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyPlayer/FLAC",
+					"$(PROJECT_DIR)/EasyPlayer/OrigamiEngine/FLAC",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

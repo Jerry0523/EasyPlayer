@@ -20,6 +20,8 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 @interface PlayerViewController ()<AVAudioPlayerDelegate, PlaylistViewDelegate>
 
 @property (strong, nonatomic) NSArray *items;
+@property (strong, nonatomic) NSArray *filteredItems;
+
 @property (strong, nonatomic) AVAudioPlayer* player;
 @property (strong, nonatomic) NSDictionary *currentTrack;
 
@@ -28,6 +30,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 @property (strong, nonatomic) NSMutableArray *playedList;
 
 @property (weak) IBOutlet NSSegmentedControl *panelSwitchControl;
+@property (weak) IBOutlet NSSearchField *searchField;
 
 @end
 
@@ -57,7 +60,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
                 if ([track[@"Total Time"] longValue] > 30000) {
                     
                     NSString *location = track[@"Location"];
-                    if (location && ![location hasSuffix:@".m4p"]) {
+                    if (location && ![location hasSuffix:@".m4p"] && ![location hasSuffix:@".mp4"]) {
                         [mutable addObject:tracks[key]];
                     }
                 }
@@ -66,6 +69,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
                 return [obj1[@"Name"] compares:obj2[@"Name"]];
             }];
             self.items = mutable;
+            self.filteredItems = self.items;
         }
     }
     
@@ -78,7 +82,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     
     
     playlistController = [[PlaylistViewController alloc] init];
-    playlistController.items = self.items;
+    playlistController.items = self.filteredItems;
     playlistController.playListDelegate = self;
     [self.window.contentView addSubview:playlistController.view];
     playlistController.view.bounds = rect;
@@ -91,11 +95,46 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 }
 
 - (void)switchToPlayListPanel {
+    if(playlistController.view.hidden == NO) {
+        return;
+    }
+    
+    [self.window.toolbar removeItemAtIndex:6];
+    [self.window.toolbar removeItemAtIndex:5];
+    [self.window.toolbar removeItemAtIndex:4];
+    [self.window.toolbar removeItemAtIndex:3];
+    [self.window.toolbar removeItemAtIndex:2];
+    
+    [self.window.toolbar insertItemWithItemIdentifier:@"add" atIndex:2];
+    [self.window.toolbar insertItemWithItemIdentifier:@"search" atIndex:3];
+    
+    
     playlistController.view.hidden = NO;
+    [playlistController.tableView reloadData];
+    if (self.currentTrack) {
+        NSInteger selectedRow = [self.items indexOfObject:self.currentTrack];
+        [playlistController.tableView scrollRowToVisible:selectedRow];
+        [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+    }
+    
     self.panelSwitchControl.selectedSegment = 0;
 }
 
 - (void)switchToMuscicInfoPanel {
+    if(playlistController.view.hidden == YES) {
+        return;
+    }
+    
+    [self.window.toolbar removeItemAtIndex:3];
+    [self.window.toolbar removeItemAtIndex:2];
+    
+    [self.window.toolbar insertItemWithItemIdentifier:@"pre" atIndex:2];
+    [self.window.toolbar insertItemWithItemIdentifier:@"play" atIndex:3];
+    [self.window.toolbar insertItemWithItemIdentifier:@"next" atIndex:4];
+    
+    [self.window.toolbar insertItemWithItemIdentifier:@"NSToolbarFlexibleSpaceItem" atIndex:5];
+    [self.window.toolbar insertItemWithItemIdentifier:@"mode" atIndex:6];
+    
     playlistController.view.hidden = YES;
     self.panelSwitchControl.selectedSegment = 1;
 }
@@ -116,7 +155,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     
     self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
     
-    playlistController.view.hidden = YES;
+    [self switchToMuscicInfoPanel];
     
     if (progressTimer) {
         [progressTimer invalidate];
@@ -154,6 +193,22 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 }
 
 #pragma mark - IBActions
+- (IBAction)searchFieldValueChanged:(NSSearchField *)sender {
+    if ([sender.stringValue length] == 0) {
+        self.filteredItems = self.items;
+    } else {
+        NSString *searchString = [sender.stringValue lowercaseString];
+        NSMutableArray *array = [NSMutableArray array];
+        for (NSDictionary *track in self.items) {
+            if ([[track[@"Name"] lowercaseString] rangeOfString:searchString].location != NSNotFound ||
+                [[track[@"Album"] lowercaseString] rangeOfString:searchString].location != NSNotFound ||
+                [[track[@"Artist"] lowercaseString] rangeOfString:searchString].location != NSNotFound) {
+                [array addObject:track];
+            }
+        }
+        self.filteredItems = array;
+    }
+}
 
 - (IBAction)playClicked:(NSToolbarItem*)sender {
     if (self.player) {
@@ -191,7 +246,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     } else {
         [self.player stop];
         self.playToolbarItem.image = [NSImage imageNamed:@"play"];
-        playlistController.view.hidden = NO;
+        [self switchToPlayListPanel];
         if (progressTimer) {
             [progressTimer invalidate];
             progressTimer = nil;
@@ -204,6 +259,20 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
         [self switchToPlayListPanel];
     } else {
         [self switchToMuscicInfoPanel];
+    }
+}
+
+- (void)setFilteredItems:(NSArray *)filteredItems {
+    if (_filteredItems != filteredItems) {
+        _filteredItems = filteredItems;
+        playlistController.items = filteredItems;
+        [playlistController.tableView reloadData];
+        
+        if (self.currentTrack) {
+            NSInteger selectedRow = [self.items indexOfObject:self.currentTrack];
+            [playlistController.tableView scrollRowToVisible:selectedRow];
+            [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+        }
     }
 }
 

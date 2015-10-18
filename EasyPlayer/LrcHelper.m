@@ -7,8 +7,10 @@
 //
 
 #import "LrcHelper.h"
+#import "NSImage+Utils.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface LrcHelper()
 
@@ -27,17 +29,7 @@
     return _helper;
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.completionQueue = [NSOperationQueue new];
-        [self.completionQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
-    }
-    return self;
-}
-
-- (NSString *)URLEncodedString:(NSString*)rawString {
++ (NSString *)URLEncodedString:(NSString*)rawString {
     NSString *encodedString = (NSString *)
     CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
                                                               (CFStringRef)rawString,
@@ -47,7 +39,7 @@
     return encodedString;
 }
 
-- (NSString*)keyForName:(NSString*)name artist:(NSString*)artist {
++ (NSString*)keyForName:(NSString*)name artist:(NSString*)artist {
     NSMutableString *mutable = [NSMutableString stringWithString:name];
     [mutable appendString:artist ? artist : @"NULL"];
     
@@ -63,27 +55,7 @@
             ];
 }
 
-- (void)sendAsynchronousRequestForURL:(NSString*)url onComplete:(void (^)(id data, NSError *error, NSData *rawData))block {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[self URLEncodedString:url]]];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-    request.HTTPMethod = @"GET";
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:self.completionQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError * connectionError) {
-        id json;
-        if (!connectionError) {
-            json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-        }
-        
-        if (block) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                block(json, connectionError, data);
-            });
-        }
-    }];
-}
-
-- (NSString*)getAppRootPath {
++ (NSString*)getAppRootPath {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
     if(paths.count > 0) {
         NSString *musicRootPath = [paths firstObject];
@@ -97,8 +69,8 @@
     return nil;
 }
 
-- (NSString*)getLrcPath {
-    NSString *rootPath = [self getAppRootPath];
++ (NSString*)getLrcPath {
+    NSString *rootPath = [LrcHelper getAppRootPath];
     if (rootPath) {
         NSString *lrcPath = [rootPath stringByAppendingPathComponent:@"lrc"];
         NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -110,10 +82,10 @@
     return nil;
 }
 
-- (NSString*)getAlbumPath {
-    NSString *rootPath = [self getAppRootPath];
++ (NSString*)getCoverPath {
+    NSString *rootPath = [LrcHelper getAppRootPath];
     if (rootPath) {
-        NSString *albumPath = [rootPath stringByAppendingPathComponent:@"album"];
+        NSString *albumPath = [rootPath stringByAppendingPathComponent:@"cover"];
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if (![fileManager fileExistsAtPath:albumPath isDirectory:nil]) {
             [fileManager createDirectoryAtPath:albumPath withIntermediateDirectories:NO attributes:nil error:nil];
@@ -123,9 +95,42 @@
     return nil;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.completionQueue = [NSOperationQueue new];
+        [self.completionQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+    }
+    return self;
+}
+
+- (void)sendAsynchronousRequestForURL:(NSString*)url onComplete:(void (^)(id data, NSError *error, NSData *rawData))block {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[LrcHelper URLEncodedString:url]]];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
+    request.HTTPMethod = @"GET";
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:self.completionQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        id json;
+        if ([response isKindOfClass:[NSHTTPURLResponse class]] && ((NSHTTPURLResponse*)response).statusCode == 404 && !connectionError) {
+            connectionError = [NSError errorWithDomain:@"" code:404 userInfo:@{}];
+        }
+        if (!connectionError) {
+            json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        }
+        
+        if (block) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block(json, connectionError, data);
+            });
+        }
+    }];
+}
+
 - (void)getLrcForName:(NSString*)name artist:(NSString*)artist onComplete:(void (^)(NSString*, NSString *key, NSError *))block {
-    NSString *key = [self keyForName:name artist:artist];
-    NSString *lrcPath = [self getLrcPath];
+    NSString *key = [LrcHelper keyForName:name artist:artist];
+    NSString *lrcPath = [LrcHelper getLrcPath];
     if (lrcPath) {
         NSString *destination = [lrcPath stringByAppendingPathComponent:key];
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
@@ -152,9 +157,53 @@
     }
 }
 
-- (void)getAlbumImageForName:(NSString*)name artist:(NSString*)artist onComplete:(void (^)(NSImage*, NSString *key,NSError *))block {
-    NSString *key = [self keyForName:name artist:artist];
-    NSString *albumPath = [self getAlbumPath];
+- (NSImage*)getInnerAlbumImageForURL:(NSString*)url {
+    NSURL *fileURL = [NSURL URLWithString:url];
+    AudioFileID audioFile;
+    OSStatus theErr = noErr;
+    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
+                              kAudioFileReadPermission,
+                              kAudioFileMP3Type,
+                              &audioFile);
+    
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+
+    
+    CFDataRef albumPic = nil;
+    UInt32 picDataSize;
+    theErr = AudioFileGetProperty(audioFile, kAudioFilePropertyAlbumArtwork, &picDataSize, &albumPic);
+    if(theErr != noErr ){
+        return nil;
+    }
+    NSData *imagedata = (__bridge NSData*)albumPic;
+    CFRelease(albumPic);
+    return [[NSImage alloc] initWithData:imagedata];
+    
+    
+//    UInt32 dictionarySize = 0;
+//    theErr = AudioFileGetPropertyInfo (audioFile,
+//                                       kAudioFilePropertyInfoDictionary,
+//                                       &dictionarySize,
+//                                       0);
+//    assert (theErr == noErr);
+//    CFDictionaryRef dictionary;
+//    theErr = AudioFileGetProperty (audioFile,
+//                                   kAudioFilePropertyInfoDictionary,
+//                                   &dictionarySize,
+//                                   &dictionary);
+//    assert (theErr == noErr);
+//    resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
+//    CFRelease (dictionary);
+//    theErr = AudioFileClose (audioFile);
+//    assert (theErr == noErr);
+}
+
+- (void)getAlbumImageForName:(NSString*)name artist:(NSString*)artist url:(NSString*)location onComplete:(void (^)(NSImage*, NSString *key,NSError *))block {
+    NSString *key = [LrcHelper keyForName:name artist:artist];
+    NSString *albumPath = [LrcHelper getCoverPath];
     if (albumPath) {
         NSString *destination = [albumPath stringByAppendingPathComponent:key];
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
@@ -163,19 +212,32 @@
                 block(image, key, nil);
             }
         } else {
-            [self getSongInfoWithName:name artist:artist onComplete:^(LrcInfo *info, NSError *error) {
-                if (info) {
-                    [self downloadAlbumCover:info key:key onComplete:^(NSImage *image, NSError *error) {
-                        if (block) {
-                            block(image, key, error);
-                        }
-                    }];
-                } else {
-                    if (block) {
-                        block(nil, key, error);
-                    }
+            NSImage *albumImg = [self getInnerAlbumImageForURL:location];
+            if (albumImg) {
+                if (block) {
+                    block(albumImg, key, nil);
                 }
-            }];
+                NSString *albumPath = [LrcHelper getCoverPath];
+                if (albumPath) {
+                    NSString *destination = [albumPath stringByAppendingPathComponent:key];
+                    [albumImg saveAsJPGFileForPath:destination];
+                }
+                
+            } else {
+                [self getSongInfoWithName:name artist:artist onComplete:^(LrcInfo *info, NSError *error) {
+                    if (info) {
+                        [self downloadAlbumCover:info key:key onComplete:^(NSImage *image, NSError *error) {
+                            if (block) {
+                                block(image, key, error);
+                            }
+                        }];
+                    } else {
+                        if (block) {
+                            block(nil, key, error);
+                        }
+                    }
+                }];
+            }
         }
         
     }
@@ -207,7 +269,7 @@
             NSString *aString;
             if (!error && rawData) {
                 aString = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
-                NSString *lrcPath = [self getLrcPath];
+                NSString *lrcPath = [LrcHelper getLrcPath];
                 if (lrcPath) {
                     NSString *destination = [lrcPath stringByAppendingPathComponent:key];
                     [aString writeToFile:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
@@ -233,19 +295,11 @@
                             block(image, nil);
                         });
                     }
-                    
-                    CGImageRef cgRef = [image CGImageForProposedRect:NULL
-                                                             context:nil
-                                                               hints:nil];
-                    NSBitmapImageRep *newRep = [[NSBitmapImageRep alloc] initWithCGImage:cgRef];
-                    [newRep setSize:[image size]];   // if you want the same resolution
-                    NSData *jpgData = [newRep representationUsingType:NSJPEGFileType properties:nil];
-                    NSString *albumPath = [self getAlbumPath];
+                    NSString *albumPath = [LrcHelper getCoverPath];
                     if (albumPath) {
                         NSString *destination = [albumPath stringByAppendingPathComponent:key];
-                        [jpgData writeToFile:destination atomically:YES];
+                        [image saveAsJPGFileForPath:destination];
                     }
-                    
                 });
             } else {
                 if (block) {

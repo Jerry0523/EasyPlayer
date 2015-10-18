@@ -7,12 +7,7 @@
 //
 
 #import "PlaylistViewController.h"
-
-@interface PlaylistViewController ()<NSTableViewDelegate, NSTableViewDataSource>
-
-@property (weak) IBOutlet NSTableView *tableView;
-
-@end
+#import "LrcHelper.h"
 
 @implementation PlaylistViewController
 
@@ -36,6 +31,24 @@
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
     NSDictionary *item = self.items[row];
     cellView.textField.stringValue = item[@"Name"];
+    
+    cellView.imageView.layer.masksToBounds = YES;
+    cellView.imageView.layer.cornerRadius = CGRectGetWidth(cellView.imageView.bounds) * .5;
+    
+    NSString *key = [LrcHelper keyForName:item[@"Name"] artist:item[@"Artist"]];
+    NSString *albumPath = [LrcHelper getCoverPath];
+    if (albumPath) {
+        NSString *destination = [albumPath stringByAppendingPathComponent:key];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
+            NSImage *image = [[NSImage alloc] initWithContentsOfFile:destination];
+            cellView.imageView.image = image;
+        } else {
+            cellView.imageView.image = [NSImage imageNamed:@"sMusic"];
+        }
+    } else {
+        cellView.imageView.image = [NSImage imageNamed:@"sMusic"];
+    }
+    
     return cellView;
 }
 

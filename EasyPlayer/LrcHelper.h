@@ -13,14 +13,15 @@
 @interface LrcHelper : NSObject
 
 + (instancetype)helper;
++ (NSString*)keyForName:(NSString*)name artist:(NSString*)artist;
 
-- (NSString*)getAppRootPath;
-- (NSString*)getLrcPath;
-- (NSString*)getAlbumPath;
++ (NSString*)getAppRootPath;
++ (NSString*)getLrcPath;
++ (NSString*)getCoverPath;
 
-- (NSString*)keyForName:(NSString*)name artist:(NSString*)artist;
+
 
 - (void)getLrcForName:(NSString*)name artist:(NSString*)artist onComplete:(void (^)(NSString*, NSString *key,NSError *))block;
-- (void)getAlbumImageForName:(NSString*)name artist:(NSString*)artist onComplete:(void (^)(NSImage*, NSString *key, NSError *))block;
+- (void)getAlbumImageForName:(NSString*)name artist:(NSString*)artist url:(NSString*)location onComplete:(void (^)(NSImage*, NSString *key, NSError *))block;
 
 @end

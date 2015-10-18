@@ -11,8 +11,7 @@
 @interface NSImage (Utils)
 
 - (NSColor*) mainColor;
-
-- (CGImageRef) createCGImageRef;
-- (CGImageRef) createScaleImageByWidth:(CGFloat)width height:(CGFloat)height;
+- (void) saveAsJPGFileForPath:(NSString*)path;
+- (NSImage*)scaledImageForSize:(CGSize)size;
 
 @end

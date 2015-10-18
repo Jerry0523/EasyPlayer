@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MusicInfoViewController">
@@ -22,13 +22,13 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="DVl-0O-e5C">
-                    <rect key="frame" x="0.0" y="83" width="600" height="254"/>
+                    <rect key="frame" x="0.0" y="33" width="600" height="354"/>
                     <subviews>
                         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MgU-XV-rhX">
-                            <rect key="frame" x="250" y="134" width="100" height="100"/>
+                            <rect key="frame" x="200" y="134" width="200" height="200"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="100" id="QMb-NW-4f2"/>
-                                <constraint firstAttribute="width" constant="100" id="s3P-aD-Qny"/>
+                                <constraint firstAttribute="height" constant="200" id="QMb-NW-4f2"/>
+                                <constraint firstAttribute="width" constant="200" id="s3P-aD-Qny"/>
                             </constraints>
                             <animations/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="album" id="y62-ma-hmR"/>
@@ -69,7 +69,9 @@
                         <constraint firstItem="avg-yH-C3O" firstAttribute="top" secondItem="Wc6-El-4Zn" secondAttribute="bottom" constant="18" id="SlH-Bx-dwO"/>
                         <constraint firstItem="Wc6-El-4Zn" firstAttribute="top" secondItem="MgU-XV-rhX" secondAttribute="bottom" constant="20" id="WAL-B6-JBl"/>
                         <constraint firstItem="MgU-XV-rhX" firstAttribute="centerX" secondItem="DVl-0O-e5C" secondAttribute="centerX" id="WGF-wq-XAg"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MgU-XV-rhX" secondAttribute="trailing" constant="20" id="ZGh-o9-DE2"/>
                         <constraint firstItem="x7F-KU-tNf" firstAttribute="leading" secondItem="DVl-0O-e5C" secondAttribute="leading" constant="10" id="cKj-NV-8tO"/>
+                        <constraint firstItem="MgU-XV-rhX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVl-0O-e5C" secondAttribute="leading" constant="20" id="jxG-oK-J6x"/>
                         <constraint firstAttribute="trailing" secondItem="x7F-KU-tNf" secondAttribute="trailing" constant="10" id="mPm-JH-KWo"/>
                         <constraint firstAttribute="trailing" secondItem="Wc6-El-4Zn" secondAttribute="trailing" id="pQP-Yz-uFa"/>
                         <constraint firstItem="MgU-XV-rhX" firstAttribute="top" secondItem="DVl-0O-e5C" secondAttribute="top" constant="20" id="qdx-2i-YpV"/>
@@ -144,12 +146,12 @@
                         <constraint firstAttribute="width" id="xug-f4-pFO"/>
                     </constraints>
                     <animations/>
-                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1Wi-pN-hn4">
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="1Wi-pN-hn4">
                         <rect key="frame" x="0.0" y="405" width="0.0" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </scroller>
-                    <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Pdk-7k-t7H">
+                    <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Pdk-7k-t7H">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
@@ -169,6 +171,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="album" width="200" height="200"/>
+        <image name="album" width="400" height="400"/>
     </resources>
 </document>

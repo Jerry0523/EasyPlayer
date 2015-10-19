@@ -6,16 +6,9 @@
 //  Copyright © 2015年 Jerry Wong. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "CommonModal.h"
 
-@interface LrcModal : NSObject<NSCoding>
-
-+ (NSArray *)arrayFromJSON:(NSArray*)array;
-- (instancetype)initFromDictionary:(NSDictionary*)json;
-
-@end
-
-@interface LrcInfo : LrcModal
+@interface LrcInfo : CommonModal
 
 @property (assign, nonatomic) long aid;
 @property (assign, nonatomic) long artist_id;

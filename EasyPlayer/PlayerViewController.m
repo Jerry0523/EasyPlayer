@@ -10,7 +10,7 @@
 #import "PlaylistViewController.h"
 #import "MusicProgressView.h"
 #import "MusicInfoViewController.h"
-#import "NSString+Comparator.h"
+#import "MusicTrackModal.h"
 #import <AVFoundation/AVFoundation.h>
 
 static inline CGFloat skRand(NSInteger low, NSInteger high) {
@@ -23,7 +23,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 @property (strong, nonatomic) NSArray *filteredItems;
 
 @property (strong, nonatomic) AVAudioPlayer* player;
-@property (strong, nonatomic) NSDictionary *currentTrack;
+@property (strong, nonatomic) MusicTrackModal *currentTrack;
 
 @property (weak) IBOutlet NSToolbarItem *playToolbarItem;
 
@@ -56,17 +56,16 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
             
             NSMutableArray *mutable = [NSMutableArray array];
             for (id key in keys) {
-                NSDictionary *track = tracks[key];
-                if ([track[@"Total Time"] longValue] > 30000) {
-                    
-                    NSString *location = track[@"Location"];
-                    if (location && ![location hasSuffix:@".m4p"] && ![location hasSuffix:@".mp4"]) {
-                        [mutable addObject:tracks[key]];
+                MusicTrackModal *track = [[MusicTrackModal alloc] initFromDictionary:tracks[key]];
+                if (track.TotalTime > 30000) {
+                    NSString *pathExtention = [track pathExtention];
+                    if (track.Location && ![pathExtention isEqualToString:@"m4p"] && ![pathExtention isEqualToString:@"mp4"]) {
+                        [mutable addObject:track];
                     }
                 }
             }
-            [mutable sortUsingComparator:^NSComparisonResult(NSDictionary *obj1, NSDictionary *obj2) {
-                return [obj1[@"Name"] compares:obj2[@"Name"]];
+            [mutable sortUsingComparator:^NSComparisonResult(MusicTrackModal *obj0, MusicTrackModal *obj1) {
+                return [obj0 compares:obj1];
             }];
             self.items = mutable;
             self.filteredItems = self.items;
@@ -145,7 +144,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     [playlistController setSelectedIndex:idx];
 }
 
-- (void)playSongByTrack:(NSDictionary*)track {
+- (void)playSongByTrack:(MusicTrackModal*)track {
     if (self.currentTrack == track) {
         return;
     }
@@ -163,9 +162,9 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     }
     
     self.currentTrack = track;
-    self.window.title = track[@"Name"];
+    self.window.title = track.Name;
 
-    NSData *musicData = [NSData dataWithContentsOfURL:[NSURL URLWithString:track[@"Location"]]];
+    NSData *musicData = [track musicData];
     NSError *error;
     self.player = [[AVAudioPlayer alloc] initWithData:musicData error:&error];
     self.player.delegate = self;
@@ -184,7 +183,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 
 - (void)refreshProgressByTimer {
     NSTimeInterval currentTime = self.player.currentTime;
-    NSTimeInterval totalTime = [self.currentTrack[@"Total Time"] longValue] / 1000.0;
+    NSTimeInterval totalTime = self.currentTrack.TotalTime / 1000.0;
     
     if (totalTime > 0) {
         progressView.progress = currentTime / totalTime;
@@ -199,10 +198,8 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     } else {
         NSString *searchString = [sender.stringValue lowercaseString];
         NSMutableArray *array = [NSMutableArray array];
-        for (NSDictionary *track in self.items) {
-            if ([[track[@"Name"] lowercaseString] rangeOfString:searchString].location != NSNotFound ||
-                [[track[@"Album"] lowercaseString] rangeOfString:searchString].location != NSNotFound ||
-                [[track[@"Artist"] lowercaseString] rangeOfString:searchString].location != NSNotFound) {
+        for (MusicTrackModal *track in self.items) {
+            if ([track respondToSearch:searchString]) {
                 [array addObject:track];
             }
         }
@@ -277,7 +274,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 }
 
 #pragma mark - PlaylistViewDelegate
-- (void)playlistViewController:(PlaylistViewController *)controller didSelectTrack:(NSDictionary *)track {
+- (void)playlistViewController:(PlaylistViewController *)controller didSelectTrack:(MusicTrackModal *)track {
     [self playSongByTrack:track];
 }
 

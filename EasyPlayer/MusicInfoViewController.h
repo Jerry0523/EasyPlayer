@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MusicTrackModal.h"
 
 @interface MusicInfoViewController : NSViewController
 
@@ -16,7 +17,7 @@
 @property (weak) IBOutlet NSTextField *albumLabel;
 @property (weak) IBOutlet NSTextField *nameLabel;
 
-@property (strong, nonatomic) NSDictionary *trackInfo;
+@property (strong, nonatomic) MusicTrackModal *trackInfo;
 
 @property (assign, nonatomic) NSTimeInterval currentTimerInteval;
 

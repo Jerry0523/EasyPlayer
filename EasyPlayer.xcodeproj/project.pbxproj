@@ -45,6 +45,8 @@
 		C488648A1BD381FC00C1C5D2 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864771BD381FC00C1C5D2 /* HTTPSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C488648B1BD381FC00C1C5D2 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864791BD381FC00C1C5D2 /* M3uContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C48864A41BD383AC00C1C5D2 /* libFLAC.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C488649F1BD383AC00C1C5D2 /* libFLAC.8.dylib */; };
+		C48864A71BD39A6A00C1C5D2 /* CommonModal.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864A61BD39A6A00C1C5D2 /* CommonModal.m */; };
+		C48864AA1BD39B2C00C1C5D2 /* MusicTrackModal.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864A91BD39B2C00C1C5D2 /* MusicTrackModal.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +128,10 @@
 		C48864A11BD383AC00C1C5D2 /* ordinals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ordinals.h; sourceTree = "<group>"; };
 		C48864A21BD383AC00C1C5D2 /* stream_decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream_decoder.h; sourceTree = "<group>"; };
 		C48864A31BD383AC00C1C5D2 /* stream_encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream_encoder.h; sourceTree = "<group>"; };
+		C48864A51BD39A6A00C1C5D2 /* CommonModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonModal.h; path = EasyPlayer/CommonModal.h; sourceTree = "<group>"; };
+		C48864A61BD39A6A00C1C5D2 /* CommonModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommonModal.m; path = EasyPlayer/CommonModal.m; sourceTree = "<group>"; };
+		C48864A81BD39B2C00C1C5D2 /* MusicTrackModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MusicTrackModal.h; path = EasyPlayer/MusicTrackModal.h; sourceTree = "<group>"; };
+		C48864A91BD39B2C00C1C5D2 /* MusicTrackModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MusicTrackModal.m; path = EasyPlayer/MusicTrackModal.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,9 +212,13 @@
 			path = EasyPlayer;
 			sourceTree = "<group>";
 		};
-		849061191BCE349F008B2125 /* LrcHelper */ = {
+		849061191BCE349F008B2125 /* MusicTools */ = {
 			isa = PBXGroup;
 			children = (
+				C48864A51BD39A6A00C1C5D2 /* CommonModal.h */,
+				C48864A61BD39A6A00C1C5D2 /* CommonModal.m */,
+				C48864A81BD39B2C00C1C5D2 /* MusicTrackModal.h */,
+				C48864A91BD39B2C00C1C5D2 /* MusicTrackModal.m */,
 				8490611A1BCE34BF008B2125 /* LrcModal.h */,
 				8490611B1BCE34BF008B2125 /* LrcModal.m */,
 				849061161BCE2247008B2125 /* LrcHelper.h */,
@@ -216,14 +226,14 @@
 				849943651BCF800500823A6B /* LrcParser.h */,
 				849943661BCF800500823A6B /* LrcParser.m */,
 			);
-			name = LrcHelper;
+			name = MusicTools;
 			sourceTree = "<group>";
 		};
 		849943611BCF6B5800823A6B /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
 				C48864561BD381FC00C1C5D2 /* OrigamiEngine */,
-				849061191BCE349F008B2125 /* LrcHelper */,
+				849061191BCE349F008B2125 /* MusicTools */,
 				849943621BCF6BAD00823A6B /* NSImage+Utils.h */,
 				849943631BCF6BAD00823A6B /* NSImage+Utils.m */,
 				843CBFFB1BD0F21900B4CCB8 /* NSString+Comparator.h */,
@@ -376,11 +386,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				843CBFFD1BD0F21900B4CCB8 /* NSString+Comparator.m in Sources */,
+				C48864AA1BD39B2C00C1C5D2 /* MusicTrackModal.m in Sources */,
 				C48864851BD381FC00C1C5D2 /* CueSheetContainer.m in Sources */,
 				C488648A1BD381FC00C1C5D2 /* HTTPSource.m in Sources */,
 				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
+				C48864A71BD39A6A00C1C5D2 /* CommonModal.m in Sources */,
 				C488647C1BD381FC00C1C5D2 /* ORGMAudioUnit.m in Sources */,
 				C48864891BD381FC00C1C5D2 /* FlacDecoder.m in Sources */,
 				C48864811BD381FC00C1C5D2 /* ORGMPluginManager.m in Sources */,

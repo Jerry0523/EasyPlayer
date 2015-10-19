@@ -34,7 +34,7 @@
     _albumLabel.textColor = backgroundDark ? [NSColor colorWithWhite:1.0 alpha:.9] : [NSColor colorWithWhite:70.0 / 255.0 alpha:.9];
 }
 
-- (void)setTrackInfo:(NSDictionary *)trackInfo {
+- (void)setTrackInfo:(MusicTrackModal *)trackInfo {
     if (_trackInfo != trackInfo) {
         _trackInfo = trackInfo;
         LrcHelper *helper = [LrcHelper helper];
@@ -44,15 +44,15 @@
         [self.lrcTableView reloadData];
         [self.view setNeedsLayout:YES];
         
-        self.nameLabel.stringValue = trackInfo[@"Name"];
-        self.artistLabel.stringValue = trackInfo[@"Artist"];
-        self.albumLabel.stringValue = trackInfo[@"Album"];
+        self.nameLabel.stringValue = trackInfo.Name;
+        self.artistLabel.stringValue = trackInfo.Artist;
+        self.albumLabel.stringValue = trackInfo.Album;
         self.coverImageView.image = [NSImage imageNamed:@"album"];
         [self.view.layer removeAllAnimations];
         self.view.layer.backgroundColor = [NSColor colorWithWhite:236.0 alpha:1.0].CGColor;
         [self refreshLabelsColorByTheme:NO];
         
-        [helper getAlbumImageForName:trackInfo[@"Name"] artist:trackInfo[@"Artist"] url:trackInfo[@"Location"] onComplete:^(NSImage *image, NSString *key, NSError *error) {
+        [helper getAlbumImageForName:trackInfo.Name artist:trackInfo.Artist url:trackInfo.Location onComplete:^(NSImage *image, NSString *key, NSError *error) {
             if (image) {
                 NSString *aKey = [LrcHelper keyForName:self.nameLabel.stringValue artist:self.artistLabel.stringValue];
                 if ([aKey isEqualToString:key]) {
@@ -84,7 +84,7 @@
             }
         }];
         
-        [helper getLrcForName:trackInfo[@"Name"] artist:trackInfo[@"Artist"] onComplete:^(NSString *lrc, NSString *key, NSError *error) {
+        [helper getLrcForName:trackInfo.Name artist:trackInfo.Artist onComplete:^(NSString *lrc, NSString *key, NSError *error) {
             if (lrc && !error) {
                 LrcParser *parser = [[LrcParser alloc] initWithLRCString:lrc];
                 self.lrcLines = [parser parse];

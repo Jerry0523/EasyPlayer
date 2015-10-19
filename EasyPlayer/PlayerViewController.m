@@ -10,7 +10,7 @@
 #import "PlaylistViewController.h"
 #import "MusicProgressView.h"
 #import "MusicInfoViewController.h"
-#import "MusicTrackModal.h"
+#import "JWTrack.h"
 #import <AVFoundation/AVFoundation.h>
 
 static inline CGFloat skRand(NSInteger low, NSInteger high) {
@@ -23,7 +23,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 @property (strong, nonatomic) NSArray *filteredItems;
 
 @property (strong, nonatomic) AVAudioPlayer* player;
-@property (strong, nonatomic) MusicTrackModal *currentTrack;
+@property (strong, nonatomic) JWTrack *currentTrack;
 
 @property (weak) IBOutlet NSToolbarItem *playToolbarItem;
 
@@ -56,7 +56,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
             
             NSMutableArray *mutable = [NSMutableArray array];
             for (id key in keys) {
-                MusicTrackModal *track = [[MusicTrackModal alloc] initFromDictionary:tracks[key]];
+                JWTrack *track = [[JWTrack alloc] initFromDictionary:tracks[key]];
                 if (track.TotalTime > 30000) {
                     NSString *pathExtention = [track pathExtention];
                     if (track.Location && ![pathExtention isEqualToString:@"m4p"] && ![pathExtention isEqualToString:@"mp4"]) {
@@ -64,7 +64,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
                     }
                 }
             }
-            [mutable sortUsingComparator:^NSComparisonResult(MusicTrackModal *obj0, MusicTrackModal *obj1) {
+            [mutable sortUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
                 return [obj0 compares:obj1];
             }];
             self.items = mutable;
@@ -111,7 +111,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     playlistController.view.hidden = NO;
     [playlistController.tableView reloadData];
     if (self.currentTrack) {
-        NSInteger selectedRow = [self.items indexOfObject:self.currentTrack];
+        NSInteger selectedRow = [self.filteredItems indexOfObject:self.currentTrack];
         [playlistController.tableView scrollRowToVisible:selectedRow];
         [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
     }
@@ -144,7 +144,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     [playlistController setSelectedIndex:idx];
 }
 
-- (void)playSongByTrack:(MusicTrackModal*)track {
+- (void)playSongByTrack:(JWTrack*)track {
     if (self.currentTrack == track) {
         return;
     }
@@ -191,18 +191,36 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     musicInfoController.currentTimerInteval = currentTime;
 }
 
+- (void)setFilteredItems:(NSArray *)filteredItems {
+    if (_filteredItems != filteredItems) {
+        _filteredItems = filteredItems;
+        playlistController.items = filteredItems;
+        [playlistController.tableView reloadData];
+        
+        if (self.currentTrack) {
+            NSInteger selectedRow = [self.items indexOfObject:self.currentTrack];
+            [playlistController.tableView scrollRowToVisible:selectedRow];
+            [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+        }
+    }
+}
+
 #pragma mark - IBActions
+
 - (IBAction)searchFieldValueChanged:(NSSearchField *)sender {
     if ([sender.stringValue length] == 0) {
         self.filteredItems = self.items;
     } else {
         NSString *searchString = [sender.stringValue lowercaseString];
         NSMutableArray *array = [NSMutableArray array];
-        for (MusicTrackModal *track in self.items) {
+        for (JWTrack *track in self.items) {
             if ([track respondToSearch:searchString]) {
                 [array addObject:track];
             }
         }
+        [array sortUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
+            return [obj0 compares:obj1];
+        }];
         self.filteredItems = array;
     }
 }
@@ -259,22 +277,46 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     }
 }
 
-- (void)setFilteredItems:(NSArray *)filteredItems {
-    if (_filteredItems != filteredItems) {
-        _filteredItems = filteredItems;
-        playlistController.items = filteredItems;
-        [playlistController.tableView reloadData];
-        
-        if (self.currentTrack) {
-            NSInteger selectedRow = [self.items indexOfObject:self.currentTrack];
-            [playlistController.tableView scrollRowToVisible:selectedRow];
-            [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
-        }
+- (IBAction)addButtonClicked:(NSButton *)sender {
+    sender.state = 1;
+    NSOpenPanel* openDlg = [NSOpenPanel openPanel];
+    [openDlg setCanChooseFiles:YES];
+    [openDlg setCanChooseDirectories:YES];
+    [openDlg setAllowsMultipleSelection:YES];
+    
+    NSArray *urlArray;
+    
+    if ( [openDlg runModal] == NSModalResponseOK) {
+        urlArray = [openDlg URLs];
+    }
+    
+    //分析
+    for (NSURL *url in urlArray) {
+        NSLog(@"here");
+        NSDictionary *id3Dic = [JWTrack innerTagInfoForURL:url];
+        NSLog(@"here");
+//        NSDictionary *ID3Dic = [MusicTools readMusicInfoForFile:url];
+//        
+//        
+//        NSString *filename;
+//        //URL编码的文件名
+//        filename = [[[url absoluteString] lastPathComponent] stringByDeletingPathExtension];
+//        //URL解码
+//        filename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//        
+//        NSString *name = filename;
+//        NSString *time = ID3Dic[@"approximate duration in seconds"];
+//        
+//        NSDictionary *dic = @{@"name":name,@"time":time,@"url":[url absoluteString]};
+//        
+//        NSLog(@"%@",dic);
+//        
+//        [self.musicArray addObject:dic];
     }
 }
 
 #pragma mark - PlaylistViewDelegate
-- (void)playlistViewController:(PlaylistViewController *)controller didSelectTrack:(MusicTrackModal *)track {
+- (void)playlistViewController:(PlaylistViewController *)controller didSelectTrack:(JWTrack *)track {
     [self playSongByTrack:track];
 }
 

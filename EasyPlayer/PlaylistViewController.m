@@ -7,7 +7,8 @@
 //
 
 #import "PlaylistViewController.h"
-#import "LrcHelper.h"
+#import "JWFileManager.h"
+#import "JWTagHelper.h"
 
 @implementation PlaylistViewController
 
@@ -29,14 +30,14 @@
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    MusicTrackModal *item = self.items[row];
+    JWTrack *item = self.items[row];
     cellView.textField.stringValue = item.Name;
     
     cellView.imageView.layer.masksToBounds = YES;
     cellView.imageView.layer.cornerRadius = CGRectGetWidth(cellView.imageView.bounds) * .5;
     
-    NSString *key = [LrcHelper keyForName:item.Name artist:item.Artist];
-    NSString *albumPath = [LrcHelper getCoverPath];
+    NSString *key = [item cacheKey];
+    NSString *albumPath = [JWFileManager getCoverPath];
     if (albumPath) {
         NSString *destination = [albumPath stringByAppendingPathComponent:key];
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {

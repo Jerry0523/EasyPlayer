@@ -10,8 +10,35 @@
 #import "NSString+Comparator.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import <AudioToolbox/AudioToolbox.h>
 
 @implementation JWTrack
+
+- (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL{
+    if (self = [super init]) {
+        NSString *album = info[@"album"];
+        NSString *artist = info[@"artist"];
+        NSString *title = info[@"title"];
+        NSString *file = [fileURL absoluteString];
+        
+        
+        
+        self.Album = album ? album : @"";
+        self.Artist = artist ? artist : @"";
+        self.Location = file;
+        
+        if (!title) {
+            NSString *filename = [[file lastPathComponent] stringByDeletingPathExtension];
+            filename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            self.Name = filename;
+        } else {
+            self.Name = title;
+        }
+        
+        self.TotalTime = [info[@"approximate duration in seconds"] doubleValue] * 1000;
+    }
+    return self;
+}
 
 - (instancetype)initFromDictionary:(NSDictionary *)json {
     if (self = [super initFromDictionary:json]) {
@@ -65,6 +92,76 @@
             result[12], result[13], result[14], result[15]
             ];
 
+}
+
+- (NSImage*)innerCoverImage {
+    NSURL *fileURL = [NSURL URLWithString:self.Location];
+    AudioFileID audioFile;
+    OSStatus theErr = noErr;
+    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
+                              kAudioFileReadPermission,
+                              kAudioFileMP3Type,
+                              &audioFile);
+    
+    if (theErr != noErr) {
+        return nil;
+    }
+    UInt32 picDataSize = 0;
+    theErr = AudioFileGetPropertyInfo (audioFile,
+                                       kAudioFilePropertyInfoDictionary,
+                                       &picDataSize,
+                                       0);
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    CFDataRef albumPic;
+    theErr = AudioFileGetProperty(audioFile, kAudioFilePropertyAlbumArtwork, &picDataSize, &albumPic);
+    if(theErr != noErr ){
+        return nil;
+    }
+    NSData *imagedata = (__bridge NSData*)albumPic;
+    CFRelease(albumPic);
+    theErr = AudioFileClose (audioFile);
+    
+    return [[NSImage alloc] initWithData:imagedata];
+}
+
++ (NSDictionary *)innerTagInfoForURL:(NSURL*)fileURL{
+    AudioFileID audioFile;
+    OSStatus theErr = noErr;
+    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
+                              kAudioFileReadPermission,
+                              kAudioFileMP3Type,
+                              &audioFile);
+    
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    UInt32 dictionarySize = 0;
+    theErr = AudioFileGetPropertyInfo (audioFile,
+                                       kAudioFilePropertyInfoDictionary,
+                                       &dictionarySize,
+                                       0);
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    CFDictionaryRef dictionary;
+    theErr = AudioFileGetProperty (audioFile,
+                                   kAudioFilePropertyInfoDictionary,
+                                   &dictionarySize,
+                                   &dictionary);
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    NSDictionary *resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
+    CFRelease (dictionary);
+    theErr = AudioFileClose (audioFile);
+    
+    return resultDic;
 }
 
 @end

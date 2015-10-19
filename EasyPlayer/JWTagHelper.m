@@ -101,50 +101,6 @@
     }
 }
 
-- (NSImage*)getInnerAlbumImageForURL:(NSString*)url {
-    NSURL *fileURL = [NSURL URLWithString:url];
-    AudioFileID audioFile;
-    OSStatus theErr = noErr;
-    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
-                              kAudioFileReadPermission,
-                              kAudioFileMP3Type,
-                              &audioFile);
-    
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-
-    
-    CFDataRef albumPic = nil;
-    UInt32 picDataSize;
-    theErr = AudioFileGetProperty(audioFile, kAudioFilePropertyAlbumArtwork, &picDataSize, &albumPic);
-    if(theErr != noErr ){
-        return nil;
-    }
-    NSData *imagedata = (__bridge NSData*)albumPic;
-    CFRelease(albumPic);
-    return [[NSImage alloc] initWithData:imagedata];
-    
-    
-//    UInt32 dictionarySize = 0;
-//    theErr = AudioFileGetPropertyInfo (audioFile,
-//                                       kAudioFilePropertyInfoDictionary,
-//                                       &dictionarySize,
-//                                       0);
-//    assert (theErr == noErr);
-//    CFDictionaryRef dictionary;
-//    theErr = AudioFileGetProperty (audioFile,
-//                                   kAudioFilePropertyInfoDictionary,
-//                                   &dictionarySize,
-//                                   &dictionary);
-//    assert (theErr == noErr);
-//    resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
-//    CFRelease (dictionary);
-//    theErr = AudioFileClose (audioFile);
-//    assert (theErr == noErr);
-}
-
 - (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(NSImage*, JWTrack *track, NSError *))block {
     NSString *cachedKey = [track cacheKey];
     NSString *albumPath = [JWFileManager getCoverPath];
@@ -156,7 +112,7 @@
                 block(image, track, nil);
             }
         } else {
-            NSImage *albumImg = [self getInnerAlbumImageForURL:track.Location];
+            NSImage *albumImg = [track innerCoverImage];
             if (albumImg) {
                 if (block) {
                     block(albumImg, track, nil);

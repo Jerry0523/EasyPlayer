@@ -13,5 +13,6 @@
 + (NSString*)getAppRootPath;
 + (NSString*)getLrcPath;
 + (NSString*)getCoverPath;
++ (NSString*)getMusicPath;
 
 @end

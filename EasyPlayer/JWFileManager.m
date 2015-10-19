@@ -50,5 +50,18 @@
     return nil;
 }
 
++ (NSString*)getMusicPath {
+    NSString *rootPath = [JWFileManager getAppRootPath];
+    if (rootPath) {
+        NSString *musicPath = [rootPath stringByAppendingPathComponent:@"music"];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if (![fileManager fileExistsAtPath:musicPath isDirectory:nil]) {
+            [fileManager createDirectoryAtPath:musicPath withIntermediateDirectories:NO attributes:nil error:nil];
+        }
+        return musicPath;
+    }
+    return nil;
+}
+
 
 @end

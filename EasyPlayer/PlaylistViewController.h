@@ -7,13 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "MusicTrackModal.h"
+#import "JWTrack.h"
 
 @class PlaylistViewController;
 
 @protocol PlaylistViewDelegate <NSObject>
 
-- (void)playlistViewController:(PlaylistViewController*)controller didSelectTrack:(MusicTrackModal*)track;
+- (void)playlistViewController:(PlaylistViewController*)controller didSelectTrack:(JWTrack*)track;
 
 @end
 

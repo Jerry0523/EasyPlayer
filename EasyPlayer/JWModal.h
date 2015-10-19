@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CommonModal : NSObject<NSCoding>
+@interface JWModal : NSObject<NSCoding>
 
 + (NSArray *)arrayFromJSON:(NSArray*)array;
 - (instancetype)initFromDictionary:(NSDictionary*)json;

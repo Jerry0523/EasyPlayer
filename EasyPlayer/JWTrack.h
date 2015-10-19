@@ -6,9 +6,9 @@
 //
 //
 
-#import "CommonModal.h"
+#import "JWModal.h"
 
-@interface MusicTrackModal : CommonModal
+@interface JWTrack : JWModal
 
 @property (nonatomic, strong) NSString *Name;
 @property (nonatomic, strong) NSString *Artist;
@@ -17,10 +17,11 @@
 @property (nonatomic, assign) double TotalTime;
 
 - (NSString*)pathExtention;
-- (NSInteger)compares:(MusicTrackModal*)track;
+- (NSInteger)compares:(JWTrack*)track;
 
 - (BOOL)respondToSearch:(NSString*)search;
 
 - (NSData*)musicData;
+- (NSString*)cacheKey;
 
 @end

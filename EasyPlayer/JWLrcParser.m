@@ -6,13 +6,13 @@
 //  Copyright © 2015年 Jerry Wong. All rights reserved.
 //
 
-#import "LrcParser.h"
+#import "JWLrcParser.h"
 
-@implementation LrcObject
+@implementation JWLrcObject
 
 @end
 
-@implementation LrcParser {
+@implementation JWLrcParser {
     NSString *rawString;
 }
 
@@ -57,19 +57,19 @@
                 continue;
             }
             if ([tmpArray count] == 0) {
-                LrcObject *obj = [[LrcObject alloc] init];
+                JWLrcObject *obj = [[JWLrcObject alloc] init];
                 obj.timeInteval = -1;
                 [tmpArray addObject:obj];
             }
             
-            for (LrcObject *lrcObj in tmpArray) {
+            for (JWLrcObject *lrcObj in tmpArray) {
                 lrcObj.content = content;
             }
             [result addObjectsFromArray:tmpArray];
         }
     }
     
-    NSArray *sortedArray = [result sortedArrayUsingComparator:^NSComparisonResult(LrcObject *obj1, LrcObject *obj2) {
+    NSArray *sortedArray = [result sortedArrayUsingComparator:^NSComparisonResult(JWLrcObject *obj1, JWLrcObject *obj2) {
         if(obj1.timeInteval > obj2.timeInteval){
             return NSOrderedDescending;
         } else if(obj1.timeInteval < obj2.timeInteval) {
@@ -92,7 +92,7 @@
         NSString *minute = [content substringWithRange:NSMakeRange(0, 2)];
         NSString *second = [content substringWithRange:NSMakeRange(3, 2)];
         //                NSString *mm = [content substringWithRange:NSMakeRange(6, 2)];
-        LrcObject *obj = [[LrcObject alloc] init];
+        JWLrcObject *obj = [[JWLrcObject alloc] init];
         obj.timeInteval = [minute integerValue] * 60 + [second integerValue] - offset;
         [array addObject:obj];
         NSString *content = [source substringFromIndex:10];

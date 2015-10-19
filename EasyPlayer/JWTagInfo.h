@@ -6,9 +6,9 @@
 //  Copyright © 2015年 Jerry Wong. All rights reserved.
 //
 
-#import "CommonModal.h"
+#import "JWModal.h"
 
-@interface LrcInfo : CommonModal
+@interface JWTagInfo : JWModal
 
 @property (assign, nonatomic) long aid;
 @property (assign, nonatomic) long artist_id;

@@ -6,10 +6,10 @@
 //
 //
 
-#import "CommonModal.h"
+#import "JWModal.h"
 #import <objc/runtime.h>
 
-@implementation CommonModal
+@implementation JWModal
 
 + (NSArray *)arrayFromJSON:(NSArray*)array {
     if (![array isKindOfClass:[NSArray class]]) {
@@ -17,7 +17,7 @@
     }
     NSMutableArray *objects = [NSMutableArray array];
     for (NSDictionary *meta in array) {
-        CommonModal *oneObject = [[[self class] alloc] initFromDictionary:meta];
+        JWModal *oneObject = [[[self class] alloc] initFromDictionary:meta];
         if (oneObject) {
             [objects addObject:oneObject];
         }
@@ -48,7 +48,7 @@
                 if ([propertyList containsObject:[NSString stringWithFormat:@"_%@", targetKey]]) {
                     [self setValue:obj forKey:targetKey];
                 } else {
-                    NSLog(@"Class %@ does't have key %@", NSStringFromClass([self class]), targetKey);
+//                    NSLog(@"Class %@ does't have key %@", NSStringFromClass([self class]), targetKey);
                 }
             }
         }];

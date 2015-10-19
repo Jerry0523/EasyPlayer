@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LrcObject : NSObject
+@interface JWLrcObject : NSObject
 
 @property (nonatomic, assign) NSTimeInterval timeInteval;
 @property (nonatomic, strong) NSString *content;
@@ -16,7 +16,7 @@
 
 @end
 
-@interface LrcParser : NSObject
+@interface JWLrcParser : NSObject
 
 - (instancetype)initWithLRCString:(NSString*)rawString;
 

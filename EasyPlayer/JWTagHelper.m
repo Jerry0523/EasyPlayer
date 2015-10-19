@@ -6,25 +6,25 @@
 //  Copyright © 2015年 Jerry Wong. All rights reserved.
 //
 
-#import "LrcHelper.h"
+#import "JWTagHelper.h"
 #import "NSImage+Utils.h"
-#import <CommonCrypto/CommonDigest.h>
-#import <CommonCrypto/CommonCryptor.h>
+#import "JWFileManager.h"
+
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface LrcHelper()
+@interface JWTagHelper()
 
 @property (nonatomic, strong) NSOperationQueue *completionQueue;
 
 @end
 
-@implementation LrcHelper
+@implementation JWTagHelper
 
 + (instancetype)helper {
-    static LrcHelper *_helper = nil;
+    static JWTagHelper *_helper = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _helper = [LrcHelper new];
+        _helper = [JWTagHelper new];
     });
     return _helper;
 }
@@ -39,62 +39,6 @@
     return encodedString;
 }
 
-+ (NSString*)keyForName:(NSString*)name artist:(NSString*)artist {
-    NSMutableString *mutable = [NSMutableString stringWithString:name];
-    [mutable appendString:artist ? artist : @"NULL"];
-    
-    const char *cStr = [mutable UTF8String];
-    unsigned char result[16];
-    CC_MD5(cStr, (CC_LONG)strlen(cStr), result); // This is the md5 call
-    return [NSString stringWithFormat:
-            @"%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x",
-            result[0], result[1], result[2], result[3],
-            result[4], result[5], result[6], result[7],
-            result[8], result[9], result[10], result[11],
-            result[12], result[13], result[14], result[15]
-            ];
-}
-
-+ (NSString*)getAppRootPath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
-    if(paths.count > 0) {
-        NSString *musicRootPath = [paths firstObject];
-        NSString *appRootPath = [musicRootPath stringByAppendingPathComponent:@"EasyPlayer"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:appRootPath isDirectory:nil]) {
-            [fileManager createDirectoryAtPath:appRootPath withIntermediateDirectories:NO attributes:nil error:nil];
-        }
-        return appRootPath;
-    }
-    return nil;
-}
-
-+ (NSString*)getLrcPath {
-    NSString *rootPath = [LrcHelper getAppRootPath];
-    if (rootPath) {
-        NSString *lrcPath = [rootPath stringByAppendingPathComponent:@"lrc"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:lrcPath isDirectory:nil]) {
-            [fileManager createDirectoryAtPath:lrcPath withIntermediateDirectories:NO attributes:nil error:nil];
-        }
-        return lrcPath;
-    }
-    return nil;
-}
-
-+ (NSString*)getCoverPath {
-    NSString *rootPath = [LrcHelper getAppRootPath];
-    if (rootPath) {
-        NSString *albumPath = [rootPath stringByAppendingPathComponent:@"cover"];
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:albumPath isDirectory:nil]) {
-            [fileManager createDirectoryAtPath:albumPath withIntermediateDirectories:NO attributes:nil error:nil];
-        }
-        return albumPath;
-    }
-    return nil;
-}
-
 - (instancetype)init
 {
     self = [super init];
@@ -106,7 +50,7 @@
 }
 
 - (void)sendAsynchronousRequestForURL:(NSString*)url onComplete:(void (^)(id data, NSError *error, NSData *rawData))block {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[LrcHelper URLEncodedString:url]]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[JWTagHelper URLEncodedString:url]]];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     request.HTTPMethod = @"GET";
@@ -128,27 +72,27 @@
     }];
 }
 
-- (void)getLrcForName:(NSString*)name artist:(NSString*)artist onComplete:(void (^)(NSString*, NSString *key, NSError *))block {
-    NSString *key = [LrcHelper keyForName:name artist:artist];
-    NSString *lrcPath = [LrcHelper getLrcPath];
+- (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *, NSError *))block {
+    NSString *lrcPath = [JWFileManager getLrcPath];
+    NSString *cachedKey = [track cacheKey];
     if (lrcPath) {
-        NSString *destination = [lrcPath stringByAppendingPathComponent:key];
+        NSString *destination = [lrcPath stringByAppendingPathComponent:[track cacheKey]];
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
             NSString *lrcString = [NSString stringWithContentsOfFile:destination encoding:NSUTF8StringEncoding error:nil];
             if (block) {
-                block(lrcString, key, nil);
+                block(lrcString, track, nil);
             }
         } else {
-            [self getSongInfoWithName:name artist:artist onComplete:^(LrcInfo *info, NSError *error) {
+            [self getSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
                 if (info) {
-                    [self downloadLrcInfo:info key:key onComplete:^(NSString *lrc, NSError *error) {
+                    [self downloadLrcInfo:info key:cachedKey onComplete:^(NSString *lrc, NSError *error) {
                         if (block) {
-                            block(lrc, key, error);
+                            block(lrc, track, error);
                         }
                     }];
                 } else {
                     if (block) {
-                        block(nil, key, error);
+                        block(nil, track, error);
                     }
                 }
             }];
@@ -201,39 +145,39 @@
 //    assert (theErr == noErr);
 }
 
-- (void)getAlbumImageForName:(NSString*)name artist:(NSString*)artist url:(NSString*)location onComplete:(void (^)(NSImage*, NSString *key,NSError *))block {
-    NSString *key = [LrcHelper keyForName:name artist:artist];
-    NSString *albumPath = [LrcHelper getCoverPath];
+- (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(NSImage*, JWTrack *track, NSError *))block {
+    NSString *cachedKey = [track cacheKey];
+    NSString *albumPath = [JWFileManager getCoverPath];
     if (albumPath) {
-        NSString *destination = [albumPath stringByAppendingPathComponent:key];
+        NSString *destination = [albumPath stringByAppendingPathComponent:cachedKey];
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
             NSImage *image = [[NSImage alloc] initWithContentsOfFile:destination];
             if (block) {
-                block(image, key, nil);
+                block(image, track, nil);
             }
         } else {
-            NSImage *albumImg = [self getInnerAlbumImageForURL:location];
+            NSImage *albumImg = [self getInnerAlbumImageForURL:track.Location];
             if (albumImg) {
                 if (block) {
-                    block(albumImg, key, nil);
+                    block(albumImg, track, nil);
                 }
-                NSString *albumPath = [LrcHelper getCoverPath];
+                NSString *albumPath = [JWFileManager getCoverPath];
                 if (albumPath) {
-                    NSString *destination = [albumPath stringByAppendingPathComponent:key];
+                    NSString *destination = [albumPath stringByAppendingPathComponent:cachedKey];
                     [albumImg saveAsJPGFileForPath:destination];
                 }
                 
             } else {
-                [self getSongInfoWithName:name artist:artist onComplete:^(LrcInfo *info, NSError *error) {
+                [self getSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
                     if (info) {
-                        [self downloadAlbumCover:info key:key onComplete:^(NSImage *image, NSError *error) {
+                        [self downloadAlbumCover:info key:cachedKey onComplete:^(NSImage *image, NSError *error) {
                             if (block) {
-                                block(image, key, error);
+                                block(image, track, error);
                             }
                         }];
                     } else {
                         if (block) {
-                            block(nil, key, error);
+                            block(nil, track, error);
                         }
                     }
                 }];
@@ -243,19 +187,19 @@
     }
 }
 
-- (void)getSongInfoWithName:(NSString*)name artist:(NSString*)artist onComplete:(void (^)(LrcInfo *info, NSError *error))block {
+- (void)getSongInfoForTrack:(JWTrack*)track onComplete:(void (^)(JWTagInfo *info, NSError *error))block {
     NSMutableString *url = [NSMutableString stringWithString:@"http://geci.me/api/lyric"];
-    if (name) {
-        [url appendFormat:@"/%@", name];
+    if (track.Name) {
+        [url appendFormat:@"/%@", track.Name];
     }
-    if (artist) {
-        [url appendFormat:@"/%@", artist];
+    if (track.Artist) {
+        [url appendFormat:@"/%@", track.Artist];
     }
     
     [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
-        LrcInfo *lrcInfo;
+        JWTagInfo *lrcInfo;
         if (data && [data[@"result"] count] > 0) {
-            lrcInfo = [[LrcInfo alloc] initFromDictionary:[data[@"result"] firstObject]];
+            lrcInfo = [[JWTagInfo alloc] initFromDictionary:[data[@"result"] firstObject]];
         }
         if (block) {
             block(lrcInfo, error);
@@ -263,13 +207,13 @@
     }];
 }
 
-- (void)downloadLrcInfo:(LrcInfo*)info key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
+- (void)downloadLrcInfo:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
     if (info.lrc) {
         [self sendAsynchronousRequestForURL:info.lrc onComplete:^(id data, NSError *error, NSData *rawData) {
             NSString *aString;
             if (!error && rawData) {
                 aString = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
-                NSString *lrcPath = [LrcHelper getLrcPath];
+                NSString *lrcPath = [JWFileManager getLrcPath];
                 if (lrcPath) {
                     NSString *destination = [lrcPath stringByAppendingPathComponent:key];
                     [aString writeToFile:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
@@ -282,7 +226,7 @@
     }
 }
 
-- (void)downloadAlbumCover:(LrcInfo*)info key:(NSString*)key onComplete:(void (^)(NSImage*, NSError *))block {
+- (void)downloadAlbumCover:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSImage*, NSError *))block {
     if (info.aid) {
         NSString *url = [NSString stringWithFormat:@"http://geci.me/api/cover/%ld", info.aid];
         [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
@@ -295,7 +239,7 @@
                             block(image, nil);
                         });
                     }
-                    NSString *albumPath = [LrcHelper getCoverPath];
+                    NSString *albumPath = [JWFileManager getCoverPath];
                     if (albumPath) {
                         NSString *destination = [albumPath stringByAppendingPathComponent:key];
                         [image saveAsJPGFileForPath:destination];

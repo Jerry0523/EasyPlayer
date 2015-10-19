@@ -6,9 +6,9 @@
 //  Copyright © 2015年 Jerry Wong. All rights reserved.
 //
 
-#import "LrcModal.h"
+#import "JWTagInfo.h"
 
-@implementation LrcInfo
+@implementation JWTagInfo
 
 
 @end

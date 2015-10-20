@@ -34,6 +34,7 @@
     
     if ([tableColumn.identifier isEqualToString:@"name"]) {
         cellView.textField.stringValue = item.Name;
+//        [cellView.imageView setWantsLayer:YES];
         
         cellView.imageView.layer.masksToBounds = YES;
         cellView.imageView.layer.cornerRadius = CGRectGetWidth(cellView.imageView.bounds) * .5;
@@ -58,6 +59,7 @@
     } else if([tableColumn.identifier isEqualToString:@"source"]) {
         cellView.textField.stringValue = item.sourceType == TrackSourceTypeItunes ? @"iTunes" : @"Local";
     }
+    cellView.layer.backgroundColor = [NSColor redColor].CGColor;
     
     return cellView;
 }

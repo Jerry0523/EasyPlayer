@@ -11,6 +11,7 @@
 #import "MusicProgressView.h"
 #import "MusicInfoViewController.h"
 #import "JWFileManager.h"
+#import "ORGMInputUnit.h"
 
 
 @interface PlayerViewController ()<AVAudioPlayerDelegate, PlaylistViewDelegate>
@@ -314,6 +315,15 @@
             JWTrack *track = [[JWTrack alloc] initFromID3Info:id3Dic url:url];
             track.sourceType = TrackSourceTypeLocal;
             [newTracks addObject:track];
+        } else {
+            ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
+            if ([inputUnit openWithUrl:url]) {
+                NSDictionary *meta = [inputUnit metadata];
+                if (meta) {
+                    
+                }
+                NSLog(@"here");
+            }
         }
     }
     

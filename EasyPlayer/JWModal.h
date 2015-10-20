@@ -10,7 +10,11 @@
 
 @interface JWModal : NSObject<NSCoding>
 
+
 + (NSArray *)arrayFromJSON:(NSArray*)array;
 - (instancetype)initFromDictionary:(NSDictionary*)json;
+- (instancetype)initFromArchiveData:(NSData*)archiveData;
+
+- (NSData*)archivedData;
 
 @end

@@ -63,5 +63,10 @@
     return nil;
 }
 
++ (NSString*)getMusicLibraryFilePath {
+    NSString *rootPath = [JWFileManager getAppRootPath];
+    return [rootPath stringByAppendingPathComponent:@"EasyPlayerLibrary.plist"];
+}
+
 
 @end

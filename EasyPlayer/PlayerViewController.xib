@@ -6,6 +6,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PlayerViewController">
             <connections>
+                <outlet property="modeSegmentControl" destination="Xwl-Ig-yEZ" id="1qv-c3-uNH"/>
                 <outlet property="panelSwitchControl" destination="4Cz-en-fuE" id="hZO-Wm-ih4"/>
                 <outlet property="playToolbarItem" destination="5uz-a3-7jH" id="DSs-gk-fiZ"/>
                 <outlet property="searchField" destination="gXz-Or-zvM" id="p3z-6w-Try"/>
@@ -141,6 +142,9 @@
                                 </segments>
                             </segmentedCell>
                         </segmentedControl>
+                        <connections>
+                            <action selector="playModeChanged:" target="-2" id="HN4-fy-6D5"/>
+                        </connections>
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="9FEE54E2-F8C3-4FA9-A646-4AF404638E9C" explicitItemIdentifier="add" label="" paletteLabel="Add" id="oca-mX-LoK">
                         <nil key="toolTip"/>

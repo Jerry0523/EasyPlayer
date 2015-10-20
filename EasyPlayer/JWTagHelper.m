@@ -83,9 +83,9 @@
                 block(lrcString, track, nil);
             }
         } else {
-            [self getSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
-                if (info) {
-                    [self downloadLrcInfo:info key:cachedKey onComplete:^(NSString *lrc, NSError *error) {
+            [self getBaiduInfoForTrack:track onComplete:^(NSInteger lrcId, NSError *error) {
+                if (lrcId > 0) {
+                    [self downloadBaiduLrcInfo:lrcId key:cachedKey onComplete:^(NSString *lrc, NSError *error) {
                         if (block) {
                             block(lrc, track, error);
                         }
@@ -96,6 +96,21 @@
                     }
                 }
             }];
+            
+            
+//            [self getSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
+//                if (info) {
+//                    [self downloadLrcInfo:info key:cachedKey onComplete:^(NSString *lrc, NSError *error) {
+//                        if (block) {
+//                            block(lrc, track, error);
+//                        }
+//                    }];
+//                } else {
+//                    if (block) {
+//                        block(nil, track, error);
+//                    }
+//                }
+//            }];
         }
         
     }
@@ -143,6 +158,31 @@
     }
 }
 
+- (void)getBaiduInfoForTrack:(JWTrack*)track onComplete:(void (^)(NSInteger lrcId, NSError *error))block {
+    NSMutableString *url = [NSMutableString stringWithString:@"http://box.zhangmen.baidu.com/x?op=12&count=1&title="];
+    if (track.Name) {
+        [url appendFormat:@"%@$$", track.Name];
+    }
+    if (track.Artist) {
+        [url appendFormat:@"%@$$$$", track.Artist];
+    }
+    
+    [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
+        NSInteger lrcId = 0;
+        if (!error) {
+            NSString *rawString = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
+            NSRange startRange = [rawString rangeOfString:@"<lrcid>"];
+            if (startRange.location != NSNotFound) {
+                NSRange endRange = [rawString rangeOfString:@"</lrcid>"];
+                if (endRange.location != NSNotFound) {
+                    lrcId = [[rawString substringWithRange:NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length)] integerValue];
+                }
+            }
+        }
+        block(lrcId, error);
+    }];
+}
+
 - (void)getSongInfoForTrack:(JWTrack*)track onComplete:(void (^)(JWTagInfo *info, NSError *error))block {
     NSMutableString *url = [NSMutableString stringWithString:@"http://geci.me/api/lyric"];
     if (track.Name) {
@@ -163,12 +203,13 @@
     }];
 }
 
-- (void)downloadLrcInfo:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
-    if (info.lrc) {
-        [self sendAsynchronousRequestForURL:info.lrc onComplete:^(id data, NSError *error, NSData *rawData) {
+- (void)downloadBaiduLrcInfo:(NSInteger)lrcId key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
+    if (lrcId > 0) {
+        NSString *url = [NSString stringWithFormat:@"http://box.zhangmen.baidu.com/bdlrc/%ld/%ld.lrc", lrcId / 100, (long)lrcId];
+        [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
             NSString *aString;
             if (!error && rawData) {
-                aString = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
+                aString = [[NSString alloc] initWithData:rawData encoding:CFStringConvertEncodingToNSStringEncoding (kCFStringEncodingGB_18030_2000)];
                 NSString *lrcPath = [JWFileManager getLrcPath];
                 if (lrcPath) {
                     NSString *destination = [lrcPath stringByAppendingPathComponent:key];
@@ -181,6 +222,25 @@
         }];
     }
 }
+
+//- (void)downloadLrcInfo:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
+//    if (info.lrc) {
+//        [self sendAsynchronousRequestForURL:info.lrc onComplete:^(id data, NSError *error, NSData *rawData) {
+//            NSString *aString;
+//            if (!error && rawData) {
+//                aString = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
+//                NSString *lrcPath = [JWFileManager getLrcPath];
+//                if (lrcPath) {
+//                    NSString *destination = [lrcPath stringByAppendingPathComponent:key];
+//                    [aString writeToFile:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
+//                }
+//            }
+//            if (block) {
+//                block(aString, error);
+//            }
+//        }];
+//    }
+//}
 
 - (void)downloadAlbumCover:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSImage*, NSError *))block {
     if (info.aid) {

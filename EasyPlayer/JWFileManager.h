@@ -14,5 +14,6 @@
 + (NSString*)getLrcPath;
 + (NSString*)getCoverPath;
 + (NSString*)getMusicPath;
++ (NSString*)getMusicLibraryFilePath;
 
 @end

@@ -25,6 +25,10 @@
     return objects;
 }
 
+- (NSData*)archivedData {
+   return [NSKeyedArchiver archivedDataWithRootObject:self];
+}
+
 - (instancetype)initFromDictionary:(NSDictionary *)json {
     if (!json) {
         return nil;
@@ -54,6 +58,10 @@
         }];
     }
     return self;
+}
+
+- (instancetype)initFromArchiveData:(NSData*)archiveData {
+    return [NSKeyedUnarchiver unarchiveObjectWithData:archiveData];
 }
 
 - (NSArray *)getPropertyList {

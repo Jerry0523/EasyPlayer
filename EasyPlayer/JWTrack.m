@@ -63,8 +63,18 @@
     return [components lastObject];
 }
 
-- (NSInteger)compares:(JWTrack *)track {
-    return [self.Name compares:track.Name];
+- (NSInteger)compares:(JWTrack*)track sortType:(TrackSortType)sortType {
+    NSString *key = @"Name";
+    if (sortType == TrackSortTypeArtist) {
+        key = @"Artist";
+    } else if(sortType == TrackSortTypeAlbum) {
+        key = @"Album";
+    }
+    
+    NSString *s0 = [self valueForKey:key];
+    NSString *s1 = [track valueForKey:key];
+    
+    return [s0 compares:s1];
 }
 
 - (BOOL)respondToSearch:(NSString *)search {

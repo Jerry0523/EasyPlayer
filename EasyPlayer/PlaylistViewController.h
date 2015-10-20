@@ -14,6 +14,7 @@
 @protocol PlaylistViewDelegate <NSObject>
 
 - (void)playlistViewController:(PlaylistViewController*)controller didSelectTrack:(JWTrack*)track;
+- (void)playlistViewController:(PlaylistViewController *)controller didSortByType:(TrackSortType)sortType;
 
 @end
 

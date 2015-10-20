@@ -10,27 +10,11 @@
 #import "PlaylistViewController.h"
 #import "MusicProgressView.h"
 #import "MusicInfoViewController.h"
-#import "JWTrack.h"
-#import <AVFoundation/AVFoundation.h>
+#import "JWFileManager.h"
 
-static inline CGFloat skRand(NSInteger low, NSInteger high) {
-    return arc4random() % high + low;
-}
 
 @interface PlayerViewController ()<AVAudioPlayerDelegate, PlaylistViewDelegate>
 
-@property (strong, nonatomic) NSArray *items;
-@property (strong, nonatomic) NSArray *filteredItems;
-
-@property (strong, nonatomic) AVAudioPlayer* player;
-@property (strong, nonatomic) JWTrack *currentTrack;
-
-@property (weak) IBOutlet NSToolbarItem *playToolbarItem;
-
-@property (strong, nonatomic) NSMutableArray *playedList;
-
-@property (weak) IBOutlet NSSegmentedControl *panelSwitchControl;
-@property (weak) IBOutlet NSSearchField *searchField;
 
 @end
 
@@ -45,6 +29,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     [super windowDidLoad];
     
     self.playedList = [NSMutableArray array];
+    NSMutableArray *mutable = [NSMutableArray array];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
     if(paths.count > 0) {
@@ -53,8 +38,6 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
         if (iTunesLibrary) {
             NSDictionary *tracks = iTunesLibrary[@"Tracks"];
             NSArray *keys = tracks.allKeys;
-            
-            NSMutableArray *mutable = [NSMutableArray array];
             for (id key in keys) {
                 JWTrack *track = [[JWTrack alloc] initFromDictionary:tracks[key]];
                 if (track.TotalTime > 30000) {
@@ -64,13 +47,20 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
                     }
                 }
             }
-            [mutable sortUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
-                return [obj0 compares:obj1];
-            }];
-            self.items = mutable;
-            self.filteredItems = self.items;
         }
     }
+    
+    NSString *appMusicLibPath = [JWFileManager getMusicLibraryFilePath];
+    NSArray *localLibArray = [[NSArray alloc] initWithContentsOfFile:appMusicLibPath];
+    if ([localLibArray count] > 0) {
+        for (NSData *data in localLibArray) {
+            [mutable addObject:[[JWTrack alloc] initFromArchiveData:data]];
+        }
+    }
+    
+    self.items = mutable;
+    self.filteredItems = self.items;
+    
     
     NSRect rect = ((NSView*)self.window.contentView).bounds;
     
@@ -91,6 +81,11 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     progressView = [[MusicProgressView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(rect) - 2, CGRectGetWidth(rect), 2)];
     progressView.autoresizingMask = NSViewWidthSizable | NSViewMinYMargin;
     [self.window.contentView addSubview:progressView];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    self.sortType = (TrackSortType)[[userDefaults objectForKey:@"JWSortType"] integerValue];
+    self.playMode = (TrackPlayMode)[[userDefaults objectForKey:@"JWPlayMode"] integerValue];
+    self.modeSegmentControl.selectedSegment = self.playMode;
 }
 
 - (void)switchToPlayListPanel {
@@ -205,6 +200,20 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     }
 }
 
+- (void)setSortType:(TrackSortType)sortType {
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@(sortType) forKey:@"JWSortType"];
+    [userDefaults synchronize];
+    
+    _sortType = sortType;
+    NSArray *array = [self.items sortedArrayUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
+        return [obj0 compares:obj1 sortType:sortType];
+    }];
+    self.items = array;
+    [self searchFieldValueChanged:self.searchField];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)searchFieldValueChanged:(NSSearchField *)sender {
@@ -219,7 +228,7 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
             }
         }
         [array sortUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
-            return [obj0 compares:obj1];
+            return [obj0 compares:obj1 sortType:self.sortType];
         }];
         self.filteredItems = array;
     }
@@ -277,6 +286,13 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
     }
 }
 
+- (IBAction)playModeChanged:(NSSegmentedControl*)sender {
+    self.playMode = (TrackPlayMode)sender.selectedSegment;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@(self.playMode) forKey:@"JWPlayMode"];
+    [userDefaults synchronize];
+}
+
 - (IBAction)addButtonClicked:(NSButton *)sender {
     sender.state = 1;
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
@@ -290,34 +306,67 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
         urlArray = [openDlg URLs];
     }
     
-    //分析
+    NSMutableArray *newTracks = [NSMutableArray array];
+    
     for (NSURL *url in urlArray) {
-        NSLog(@"here");
         NSDictionary *id3Dic = [JWTrack innerTagInfoForURL:url];
-        NSLog(@"here");
-//        NSDictionary *ID3Dic = [MusicTools readMusicInfoForFile:url];
-//        
-//        
-//        NSString *filename;
-//        //URL编码的文件名
-//        filename = [[[url absoluteString] lastPathComponent] stringByDeletingPathExtension];
-//        //URL解码
-//        filename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//        
-//        NSString *name = filename;
-//        NSString *time = ID3Dic[@"approximate duration in seconds"];
-//        
-//        NSDictionary *dic = @{@"name":name,@"time":time,@"url":[url absoluteString]};
-//        
-//        NSLog(@"%@",dic);
-//        
-//        [self.musicArray addObject:dic];
+        if(id3Dic) {
+            JWTrack *track = [[JWTrack alloc] initFromID3Info:id3Dic url:url];
+            track.sourceType = TrackSourceTypeLocal;
+            [newTracks addObject:track];
+        }
     }
+    
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:self.items];
+    [mutable addObjectsFromArray:newTracks];
+    self.items = mutable;
+    [self setSortType:_sortType];
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *localLibPath = [JWFileManager getMusicLibraryFilePath];
+        NSArray *oldLocalLibArray = [[NSArray alloc] initWithContentsOfFile:localLibPath];
+        NSMutableArray *newLocalLibArray = [NSMutableArray array];
+        if ([oldLocalLibArray count]) {
+            [newLocalLibArray addObjectsFromArray:oldLocalLibArray];
+        }
+        NSFileManager *manager = [NSFileManager defaultManager];
+        NSString *musicPath = [JWFileManager getMusicPath];
+        for (JWTrack *newTrack in newTracks) {
+            NSString *newTrackName = newTrack.Name;
+            NSString *newTrackArtist = newTrack.Artist;
+            NSString *pathExtension = [NSURL URLWithString:newTrack.Location].pathExtension;
+            
+            NSString *fileName = newTrackName;
+            if ([newTrackArtist length]) {
+                fileName = [fileName stringByAppendingFormat:@"-%@",newTrackArtist];
+            }
+            if ([pathExtension length]) {
+                fileName = [fileName stringByAppendingFormat:@".%@",pathExtension];
+            }
+            NSString *finalPath = [musicPath stringByAppendingPathComponent:fileName];
+            NSString *sourcePath = [newTrack.Location stringByRemovingPercentEncoding];
+            if ([sourcePath hasPrefix:@"file://"] ) {
+                sourcePath = [sourcePath substringFromIndex:7];
+            }
+            NSError *error;
+            [manager copyItemAtPath:sourcePath toPath:finalPath error:&error];
+            finalPath = [NSString stringWithFormat:@"file://%@", finalPath];
+            finalPath = [finalPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            newTrack.Location = finalPath;
+            [newLocalLibArray addObject:[newTrack archivedData]];
+        }
+        
+        [newLocalLibArray writeToFile:localLibPath atomically:YES];
+    });
 }
 
 #pragma mark - PlaylistViewDelegate
 - (void)playlistViewController:(PlaylistViewController *)controller didSelectTrack:(JWTrack *)track {
     [self playSongByTrack:track];
+}
+
+- (void)playlistViewController:(PlaylistViewController *)controller didSortByType:(TrackSortType)sortType {
+    self.sortType = sortType;
 }
 
 #pragma mark - AVAudioPlayerDelegate
@@ -327,7 +376,13 @@ static inline CGFloat skRand(NSInteger low, NSInteger high) {
 }
 
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    [self playRandomSong];
+    if (self.playMode == TrackPlayModeSingle) {
+        JWTrack *single = self.currentTrack;
+        self.currentTrack = nil;
+        [self playSongByTrack:single];
+    } else {
+        [self playRandomSong];
+    }
 }
 
 @end

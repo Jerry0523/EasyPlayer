@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "all.h"
+#import <libFLAC/all.h>
 #import "FlacDecoder.h"
 
 #define SAMPLES_PER_WRITE 512

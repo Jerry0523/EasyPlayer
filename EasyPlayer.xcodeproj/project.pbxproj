@@ -24,6 +24,8 @@
 		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; };
 		849943641BCF6BAD00823A6B /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943631BCF6BAD00823A6B /* NSImage+Utils.m */; };
 		849943671BCF800500823A6B /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 849943661BCF800500823A6B /* JWLrcParser.m */; };
+		84C36BA71BD5F93600654090 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA61BD5F93600654090 /* libFLAC.framework */; settings = {ASSET_TAGS = (); }; };
+		84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA81BD5FB0F00654090 /* libiconv.tbd */; };
 		C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C11BD11636005C6BBC /* AudioToolbox.framework */; };
 		C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C31BD116A0005C6BBC /* AVFoundation.framework */; };
 		C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C51BD116A8005C6BBC /* Cocoa.framework */; };
@@ -45,7 +47,6 @@
 		C48864891BD381FC00C1C5D2 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864751BD381FC00C1C5D2 /* FlacDecoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C488648A1BD381FC00C1C5D2 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864771BD381FC00C1C5D2 /* HTTPSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C488648B1BD381FC00C1C5D2 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864791BD381FC00C1C5D2 /* M3uContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C48864A41BD383AC00C1C5D2 /* libFLAC.8.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C488649F1BD383AC00C1C5D2 /* libFLAC.8.dylib */; };
 		C48864A71BD39A6A00C1C5D2 /* JWModal.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864A61BD39A6A00C1C5D2 /* JWModal.m */; };
 		C48864AA1BD39B2C00C1C5D2 /* JWTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = C48864A91BD39B2C00C1C5D2 /* JWTrack.m */; };
 /* End PBXBuildFile section */
@@ -81,6 +82,8 @@
 		849943631BCF6BAD00823A6B /* NSImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+Utils.m"; path = "EasyPlayer/NSImage+Utils.m"; sourceTree = "<group>"; };
 		849943651BCF800500823A6B /* JWLrcParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWLrcParser.h; path = EasyPlayer/JWLrcParser.h; sourceTree = "<group>"; };
 		849943661BCF800500823A6B /* JWLrcParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWLrcParser.m; path = EasyPlayer/JWLrcParser.m; sourceTree = "<group>"; };
+		84C36BA61BD5F93600654090 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libFLAC.framework; path = OrigamiEngine/libFLAC.framework; sourceTree = "<group>"; };
+		84C36BA81BD5FB0F00654090 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		C43279C11BD11636005C6BBC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C43279C31BD116A0005C6BBC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C43279C51BD116A8005C6BBC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -121,16 +124,6 @@
 		C48864771BD381FC00C1C5D2 /* HTTPSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSource.m; sourceTree = "<group>"; };
 		C48864781BD381FC00C1C5D2 /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
 		C48864791BD381FC00C1C5D2 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
-		C488649A1BD383AC00C1C5D2 /* all.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = all.h; sourceTree = "<group>"; };
-		C488649B1BD383AC00C1C5D2 /* assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = assert.h; sourceTree = "<group>"; };
-		C488649C1BD383AC00C1C5D2 /* callback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callback.h; sourceTree = "<group>"; };
-		C488649D1BD383AC00C1C5D2 /* export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = export.h; sourceTree = "<group>"; };
-		C488649E1BD383AC00C1C5D2 /* format.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = format.h; sourceTree = "<group>"; };
-		C488649F1BD383AC00C1C5D2 /* libFLAC.8.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libFLAC.8.dylib; sourceTree = "<group>"; };
-		C48864A01BD383AC00C1C5D2 /* metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metadata.h; sourceTree = "<group>"; };
-		C48864A11BD383AC00C1C5D2 /* ordinals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ordinals.h; sourceTree = "<group>"; };
-		C48864A21BD383AC00C1C5D2 /* stream_decoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream_decoder.h; sourceTree = "<group>"; };
-		C48864A31BD383AC00C1C5D2 /* stream_encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream_encoder.h; sourceTree = "<group>"; };
 		C48864A51BD39A6A00C1C5D2 /* JWModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWModal.h; path = EasyPlayer/JWModal.h; sourceTree = "<group>"; };
 		C48864A61BD39A6A00C1C5D2 /* JWModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWModal.m; path = EasyPlayer/JWModal.m; sourceTree = "<group>"; };
 		C48864A81BD39B2C00C1C5D2 /* JWTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWTrack.h; path = EasyPlayer/JWTrack.h; sourceTree = "<group>"; };
@@ -142,11 +135,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */,
 				C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */,
+				84C36BA71BD5F93600654090 /* libFLAC.framework in Frameworks */,
 				C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */,
 				C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */,
 				C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */,
-				C48864A41BD383AC00C1C5D2 /* libFLAC.8.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +214,8 @@
 		849061011BCCE435008B2125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84C36BA81BD5FB0F00654090 /* libiconv.tbd */,
+				84C36BA61BD5F93600654090 /* libFLAC.framework */,
 				C43279C71BD116AE005C6BBC /* QuartzCore.framework */,
 				C43279C51BD116A8005C6BBC /* Cocoa.framework */,
 				C43279C31BD116A0005C6BBC /* AVFoundation.framework */,
@@ -261,7 +257,6 @@
 			isa = PBXGroup;
 			children = (
 				C48864671BD381FC00C1C5D2 /* Plugins */,
-				C48864991BD383AC00C1C5D2 /* FLAC */,
 				C48864571BD381FC00C1C5D2 /* ORGMAudioUnit.h */,
 				C48864581BD381FC00C1C5D2 /* ORGMAudioUnit.m */,
 				C48864591BD381FC00C1C5D2 /* ORGMCommonProtocols.h */,
@@ -306,23 +301,6 @@
 				C48864791BD381FC00C1C5D2 /* M3uContainer.m */,
 			);
 			path = Plugins;
-			sourceTree = "<group>";
-		};
-		C48864991BD383AC00C1C5D2 /* FLAC */ = {
-			isa = PBXGroup;
-			children = (
-				C488649A1BD383AC00C1C5D2 /* all.h */,
-				C488649B1BD383AC00C1C5D2 /* assert.h */,
-				C488649C1BD383AC00C1C5D2 /* callback.h */,
-				C488649D1BD383AC00C1C5D2 /* export.h */,
-				C488649E1BD383AC00C1C5D2 /* format.h */,
-				C488649F1BD383AC00C1C5D2 /* libFLAC.8.dylib */,
-				C48864A01BD383AC00C1C5D2 /* metadata.h */,
-				C48864A11BD383AC00C1C5D2 /* ordinals.h */,
-				C48864A21BD383AC00C1C5D2 /* stream_decoder.h */,
-				C48864A31BD383AC00C1C5D2 /* stream_encoder.h */,
-			);
-			path = FLAC;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,15 +512,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					"\"${SRCROOT}/EasyPlayer/OrigamiEngine/FLAC\"",
+					"$(PROJECT_DIR)/EasyPlayer/OrigamiEngine",
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/EasyPlayer/FLAC",
-					"$(PROJECT_DIR)/EasyPlayer/OrigamiEngine/FLAC",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -558,15 +532,11 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					"\"${SRCROOT}/EasyPlayer/OrigamiEngine/FLAC\"",
+					"$(PROJECT_DIR)/EasyPlayer/OrigamiEngine",
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/EasyPlayer/FLAC",
-					"$(PROJECT_DIR)/EasyPlayer/OrigamiEngine/FLAC",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

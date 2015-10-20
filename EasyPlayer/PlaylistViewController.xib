@@ -27,7 +27,8 @@
                                 <autoresizingMask key="autoresizingMask"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="deviceWhite"/>
-                                <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                <tableViewGridLines key="gridStyleMask" horizontal="YES"/>
+                                <color key="gridColor" red="0.86274509803921573" green="0.86274509803921573" blue="0.86274509803921573" alpha="1" colorSpace="calibratedRGB"/>
                                 <tableColumns>
                                     <tableColumn identifier="name" width="200" minWidth="200" maxWidth="300" id="Iim-gl-ZeL">
                                         <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="名称">

@@ -1,5 +1,5 @@
 //
-//  main.m
+//  JWNetworkHelper.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,8 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-int main(int argc, const char * argv[]) {
-    return NSApplicationMain(argc, argv);
-}
+@interface JWNetworkHelper : NSObject
+
++ (instancetype)helper;
+- (void)sendAsynchronousRequestForURL:(NSString*)url onComplete:(void (^)(id data, NSError *error, NSData *rawData))block;
+
+@end

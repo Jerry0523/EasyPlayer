@@ -1,5 +1,5 @@
 //
-//  main.m
+//  LrcHelper.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,8 +21,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <Foundation/Foundation.h>
+#import "JWTagInfo.h"
+#import "JWTrack.h"
 #import <Cocoa/Cocoa.h>
 
-int main(int argc, const char * argv[]) {
-    return NSApplicationMain(argc, argv);
-}
+@interface JWMediaHelper : NSObject
+
++ (NSImage*)innerCoverImageForURL:(NSURL*)url;
++ (NSDictionary *)id3InfoForURL:(NSURL*)url;
+
++ (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *track, NSError *))block;
++ (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(NSImage*, JWTrack *track, NSError *))block;
+
+@end

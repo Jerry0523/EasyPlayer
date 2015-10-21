@@ -1,14 +1,29 @@
 //
 //  MusicInfoViewController.m
-//  EasyPlayer
 //
-//  Created by Jerry Wong's Mac Mini on 15/10/14.
-//  Copyright © 2015年 Jerry Wong. All rights reserved.
+// Copyright (c) 2015 Jerry Wong
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import <QuartzCore/QuartzCore.h>
 #import "MusicInfoViewController.h"
-#import "JWTagHelper.h"
+#import "JWMediaHelper.h"
 #import "NSImage+Utils.h"
 #import "JWLrcParser.h"
 #import "NSColor+Components.h"
@@ -37,7 +52,6 @@
 - (void)setTrackInfo:(JWTrack *)trackInfo {
     if (_trackInfo != trackInfo) {
         _trackInfo = trackInfo;
-        JWTagHelper *helper = [JWTagHelper helper];
         
         self.lrcLines = nil;
         self.lyricWidthConstraints.constant = 0;
@@ -52,7 +66,7 @@
         self.view.layer.backgroundColor = [NSColor colorWithWhite:236.0 alpha:1.0].CGColor;
         [self refreshLabelsColorByTheme:NO];
         
-        [helper getAlbumImageForTrack:trackInfo onComplete:^(NSImage *image, JWTrack *track, NSError *error) {
+        [JWMediaHelper getAlbumImageForTrack:trackInfo onComplete:^(NSImage *image, JWTrack *track, NSError *error) {
             if (image && !error) {
                 if (track == _trackInfo) {
                     self.coverImageView.image = image;
@@ -83,12 +97,12 @@
             }
         }];
         
-        [helper getLrcForTrack:trackInfo onComplete:^(NSString *lrc, JWTrack *track, NSError *error) {
+        [JWMediaHelper getLrcForTrack:trackInfo onComplete:^(NSString *lrc, JWTrack *track, NSError *error) {
             if (lrc && !error) {
                 if (track == _trackInfo) {
                     JWLrcParser *parser = [[JWLrcParser alloc] initWithLRCString:lrc];
                     self.lrcLines = [parser parse];
-                    self.lyricWidthConstraints.constant = 400;
+                    self.lyricWidthConstraints.constant = 450;
                     [self.lrcTableView reloadData];
                 }
             }

@@ -1,10 +1,25 @@
 //
 //  MusicTrackModal.m
-//  
 //
-//  Created by 王杰 on 15/10/18.
+// Copyright (c) 2015 Jerry Wong
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import "JWTrack.h"
 #import "NSString+Comparator.h"
@@ -104,74 +119,11 @@
 
 }
 
-- (NSImage*)innerCoverImage {
-    NSURL *fileURL = [NSURL URLWithString:self.Location];
-    AudioFileID audioFile;
-    OSStatus theErr = noErr;
-    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
-                              kAudioFileReadPermission,
-                              kAudioFileMP3Type,
-                              &audioFile);
-    
-    if (theErr != noErr) {
-        return nil;
+- (NSURL*)fileURL {
+    if(self.Location) {
+        return [NSURL URLWithString:self.Location];
     }
-    UInt32 picDataSize = 0;
-    theErr = AudioFileGetPropertyInfo (audioFile,
-                                       kAudioFilePropertyInfoDictionary,
-                                       &picDataSize,
-                                       0);
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    CFDataRef albumPic;
-    theErr = AudioFileGetProperty(audioFile, kAudioFilePropertyAlbumArtwork, &picDataSize, &albumPic);
-    if(theErr != noErr ){
-        return nil;
-    }
-    NSData *imagedata = (__bridge NSData*)albumPic;
-    CFRelease(albumPic);
-    theErr = AudioFileClose (audioFile);
-    
-    return [[NSImage alloc] initWithData:imagedata];
-}
-
-+ (NSDictionary *)innerTagInfoForURL:(NSURL*)fileURL{
-    AudioFileID audioFile;
-    OSStatus theErr = noErr;
-    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
-                              kAudioFileReadPermission,
-                              kAudioFileMP3Type,
-                              &audioFile);
-    
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    UInt32 dictionarySize = 0;
-    theErr = AudioFileGetPropertyInfo (audioFile,
-                                       kAudioFilePropertyInfoDictionary,
-                                       &dictionarySize,
-                                       0);
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    CFDictionaryRef dictionary;
-    theErr = AudioFileGetProperty (audioFile,
-                                   kAudioFilePropertyInfoDictionary,
-                                   &dictionarySize,
-                                   &dictionary);
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    NSDictionary *resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
-    CFRelease (dictionary);
-    theErr = AudioFileClose (audioFile);
-    
-    return resultDic;
+    return nil;
 }
 
 @end

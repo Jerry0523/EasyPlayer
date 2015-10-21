@@ -15,7 +15,7 @@
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window title="EasyPlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
+        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="394" y="162" width="600" height="420"/>
@@ -51,7 +51,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="50" height="50"/>
                         <size key="maxSize" width="50" height="50"/>
-                        <button key="view" id="du3-6G-Cjt">
+                        <button key="view" toolTip="播放" id="du3-6G-Cjt">
                             <rect key="frame" x="0.0" y="14" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <animations/>
@@ -68,7 +68,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="50" height="50"/>
                         <size key="maxSize" width="50" height="50"/>
-                        <button key="view" id="sw2-BS-B28">
+                        <button key="view" toolTip="下一首" id="sw2-BS-B28">
                             <rect key="frame" x="0.0" y="14" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <animations/>
@@ -85,7 +85,7 @@
                         <nil key="toolTip"/>
                         <size key="minSize" width="50" height="50"/>
                         <size key="maxSize" width="50" height="50"/>
-                        <button key="view" id="vZd-BS-7gk">
+                        <button key="view" toolTip="上一首" id="vZd-BS-7gk">
                             <rect key="frame" x="0.0" y="14" width="50" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <animations/>
@@ -100,7 +100,7 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="1859737E-5DB5-4700-A282-8B90EDE2A48D" explicitItemIdentifier="switch" label="" paletteLabel="Switch" id="38l-NA-bQB">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="81" height="25"/>
+                        <size key="minSize" width="63" height="25"/>
                         <size key="maxSize" width="114" height="30"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="4Cz-en-fuE">
                             <rect key="frame" x="0.0" y="14" width="113" height="25"/>
@@ -156,7 +156,7 @@
                             <animations/>
                             <buttonCell key="cell" type="roundTextured" title="+" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" inset="2" id="G3j-E5-H8U">
                                 <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                                <font key="font" metaFont="system"/>
+                                <font key="font" metaFont="system" size="16"/>
                             </buttonCell>
                             <connections>
                                 <action selector="addButtonClicked:" target="-2" id="9a6-DQ-12U"/>
@@ -166,6 +166,10 @@
                 </allowedToolbarItems>
                 <defaultToolbarItems>
                     <toolbarItem reference="38l-NA-bQB"/>
+                    <toolbarItem reference="O1y-kw-FGK"/>
+                    <toolbarItem reference="e7T-yy-vFY"/>
+                    <toolbarItem reference="5uz-a3-7jH"/>
+                    <toolbarItem reference="ypg-qn-JeO"/>
                     <toolbarItem reference="O1y-kw-FGK"/>
                     <toolbarItem reference="oca-mX-LoK"/>
                     <toolbarItem reference="PhF-93-tYY"/>

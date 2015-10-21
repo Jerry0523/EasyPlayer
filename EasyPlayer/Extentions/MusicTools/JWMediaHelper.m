@@ -1,78 +1,118 @@
 //
 //  LrcHelper.m
-//  EasyPlayer
 //
-//  Created by Jerry Wong's Mac Mini on 15/10/14.
-//  Copyright © 2015年 Jerry Wong. All rights reserved.
+// Copyright (c) 2015 Jerry Wong
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
-#import "JWTagHelper.h"
+#import "JWMediaHelper.h"
 #import "NSImage+Utils.h"
 #import "JWFileManager.h"
-
+#import "JWNetworkHelper.h"
+#import "ORGMInputUnit.h"
 #import <AudioToolbox/AudioToolbox.h>
 
-@interface JWTagHelper()
+@implementation JWMediaHelper
 
-@property (nonatomic, strong) NSOperationQueue *completionQueue;
-
-@end
-
-@implementation JWTagHelper
-
-+ (instancetype)helper {
-    static JWTagHelper *_helper = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        _helper = [JWTagHelper new];
-    });
-    return _helper;
-}
-
-+ (NSString *)URLEncodedString:(NSString*)rawString {
-    NSString *encodedString = (NSString *)
-    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                              (CFStringRef)rawString,
-                                                              (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
-                                                              NULL,
-                                                              kCFStringEncodingUTF8));
-    return encodedString;
-}
-
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.completionQueue = [NSOperationQueue new];
-        [self.completionQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
-    }
-    return self;
-}
-
-- (void)sendAsynchronousRequestForURL:(NSString*)url onComplete:(void (^)(id data, NSError *error, NSData *rawData))block {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[JWTagHelper URLEncodedString:url]]];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
-    request.HTTPMethod = @"GET";
++ (NSImage*)innerCoverImageForURL:(NSURL*)fileURL {
+    AudioFileID audioFile;
+    OSStatus theErr = noErr;
+    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
+                              kAudioFileReadPermission,
+                              kAudioFileMP3Type,
+                              &audioFile);
     
-    [NSURLConnection sendAsynchronousRequest:request queue:self.completionQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        id json;
-        if ([response isKindOfClass:[NSHTTPURLResponse class]] && ((NSHTTPURLResponse*)response).statusCode == 404 && !connectionError) {
-            connectionError = [NSError errorWithDomain:@"" code:404 userInfo:@{}];
-        }
-        if (!connectionError) {
-            json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
-        }
-        
-        if (block) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                block(json, connectionError, data);
-            });
-        }
-    }];
+    if (theErr != noErr) {
+        return nil;
+    }
+    UInt32 picDataSize = 0;
+    theErr = AudioFileGetPropertyInfo (audioFile,
+                                       kAudioFilePropertyInfoDictionary,
+                                       &picDataSize,
+                                       0);
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    CFDataRef albumPic;
+    theErr = AudioFileGetProperty(audioFile, kAudioFilePropertyAlbumArtwork, &picDataSize, &albumPic);
+    if(theErr != noErr ){
+        return nil;
+    }
+    NSData *imagedata = (__bridge NSData*)albumPic;
+    CFRelease(albumPic);
+    theErr = AudioFileClose (audioFile);
+    
+    return [[NSImage alloc] initWithData:imagedata];
 }
 
-- (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *, NSError *))block {
++ (NSDictionary *)id3InfoForURL:(NSURL*)fileURL {
+    NSString *pathExtension = [[fileURL pathExtension] lowercaseString];
+    if ([pathExtension isEqualToString:@"flac"]) {
+        ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
+        if ([inputUnit openWithUrl:fileURL]) {
+            NSDictionary *meta = [inputUnit metadata];
+            [inputUnit close];
+            return meta;
+        } else {
+            return nil;
+        }
+    }
+    
+    AudioFileID audioFile;
+    OSStatus theErr = noErr;
+    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
+                              kAudioFileReadPermission,
+                              kAudioFileMP3Type,
+                              &audioFile);
+    
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    UInt32 dictionarySize = 0;
+    theErr = AudioFileGetPropertyInfo (audioFile,
+                                       kAudioFilePropertyInfoDictionary,
+                                       &dictionarySize,
+                                       0);
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    CFDictionaryRef dictionary;
+    theErr = AudioFileGetProperty (audioFile,
+                                   kAudioFilePropertyInfoDictionary,
+                                   &dictionarySize,
+                                   &dictionary);
+    if (theErr != noErr) {
+        return nil;
+    }
+    
+    NSDictionary *resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
+    CFRelease (dictionary);
+    theErr = AudioFileClose (audioFile);
+    
+    return resultDic;
+}
+
+
++ (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *, NSError *))block {
     NSString *lrcPath = [JWFileManager getLrcPath];
     NSString *cachedKey = [track cacheKey];
     if (lrcPath) {
@@ -116,7 +156,7 @@
     }
 }
 
-- (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(NSImage*, JWTrack *track, NSError *))block {
++ (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(NSImage*, JWTrack *track, NSError *))block {
     NSString *cachedKey = [track cacheKey];
     NSString *albumPath = [JWFileManager getCoverPath];
     if (albumPath) {
@@ -127,7 +167,7 @@
                 block(image, track, nil);
             }
         } else {
-            NSImage *albumImg = [track innerCoverImage];
+            NSImage *albumImg = [self innerCoverImageForURL:[track fileURL]];
             if (albumImg) {
                 if (block) {
                     block(albumImg, track, nil);
@@ -139,9 +179,9 @@
                 }
                 
             } else {
-                [self getSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
+                [self getGeCiMiSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
                     if (info) {
-                        [self downloadAlbumCover:info key:cachedKey onComplete:^(NSImage *image, NSError *error) {
+                        [self downloadGeCiMiAlbumCover:info key:cachedKey onComplete:^(NSImage *image, NSError *error) {
                             if (block) {
                                 block(image, track, error);
                             }
@@ -158,7 +198,7 @@
     }
 }
 
-- (void)getBaiduInfoForTrack:(JWTrack*)track onComplete:(void (^)(NSInteger lrcId, NSError *error))block {
++ (void)getBaiduInfoForTrack:(JWTrack*)track onComplete:(void (^)(NSInteger lrcId, NSError *error))block {
     NSMutableString *url = [NSMutableString stringWithString:@"http://box.zhangmen.baidu.com/x?op=12&count=1&title="];
     if (track.Name) {
         [url appendFormat:@"%@$$", track.Name];
@@ -167,7 +207,7 @@
         [url appendFormat:@"%@$$$$", track.Artist];
     }
     
-    [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
+    [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
         NSInteger lrcId = 0;
         if (!error) {
             NSString *rawString = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
@@ -183,7 +223,7 @@
     }];
 }
 
-- (void)getSongInfoForTrack:(JWTrack*)track onComplete:(void (^)(JWTagInfo *info, NSError *error))block {
++ (void)getGeCiMiSongInfoForTrack:(JWTrack*)track onComplete:(void (^)(JWTagInfo *info, NSError *error))block {
     NSMutableString *url = [NSMutableString stringWithString:@"http://geci.me/api/lyric"];
     if (track.Name) {
         [url appendFormat:@"/%@", track.Name];
@@ -192,7 +232,7 @@
         [url appendFormat:@"/%@", track.Artist];
     }
     
-    [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
+    [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
         JWTagInfo *lrcInfo;
         if (data && [data[@"result"] count] > 0) {
             lrcInfo = [[JWTagInfo alloc] initFromDictionary:[data[@"result"] firstObject]];
@@ -203,10 +243,10 @@
     }];
 }
 
-- (void)downloadBaiduLrcInfo:(NSInteger)lrcId key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
++ (void)downloadBaiduLrcInfo:(NSInteger)lrcId key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
     if (lrcId > 0) {
         NSString *url = [NSString stringWithFormat:@"http://box.zhangmen.baidu.com/bdlrc/%ld/%ld.lrc", lrcId / 100, (long)lrcId];
-        [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
+        [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
             NSString *aString;
             if (!error && rawData) {
                 aString = [[NSString alloc] initWithData:rawData encoding:CFStringConvertEncodingToNSStringEncoding (kCFStringEncodingGB_18030_2000)];
@@ -242,10 +282,10 @@
 //    }
 //}
 
-- (void)downloadAlbumCover:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSImage*, NSError *))block {
++ (void)downloadGeCiMiAlbumCover:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSImage*, NSError *))block {
     if (info.aid) {
         NSString *url = [NSString stringWithFormat:@"http://geci.me/api/cover/%ld", info.aid];
-        [self sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
+        [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
             if (!error && data && data[@"result"][@"cover"]) {
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     NSURL *imgURL = [NSURL URLWithString:data[@"result"][@"cover"]];

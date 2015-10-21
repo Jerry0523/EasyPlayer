@@ -28,7 +28,7 @@
 		84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB81BD64D0600654090 /* NSString+Comparator.m */; settings = {ASSET_TAGS = (); }; };
 		84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBD1BD64D5200654090 /* JWFileManager.m */; settings = {ASSET_TAGS = (); }; };
 		84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBF1BD64D5200654090 /* JWLrcParser.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BC41BD64D5200654090 /* JWTagHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC11BD64D5200654090 /* JWTagHelper.m */; settings = {ASSET_TAGS = (); }; };
+		84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC11BD64D5200654090 /* JWMediaHelper.m */; settings = {ASSET_TAGS = (); }; };
 		84C36BEA1BD64D6D00654090 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BC61BD64D6D00654090 /* libFLAC.framework */; settings = {ASSET_TAGS = (); }; };
 		84C36BEB1BD64D6D00654090 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BEC1BD64D6D00654090 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BCB1BD64D6D00654090 /* ORGMConverter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -46,6 +46,7 @@
 		84C36BF81BD64D6D00654090 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE51BD64D6D00654090 /* FlacDecoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BF91BD64D6D00654090 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE71BD64D6D00654090 /* HTTPSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BFA1BD64D6D00654090 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE91BD64D6D00654090 /* M3uContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */; settings = {ASSET_TAGS = (); }; };
 		C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C11BD11636005C6BBC /* AudioToolbox.framework */; };
 		C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C31BD116A0005C6BBC /* AVFoundation.framework */; };
 		C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C51BD116A8005C6BBC /* Cocoa.framework */; };
@@ -89,8 +90,8 @@
 		84C36BBD1BD64D5200654090 /* JWFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWFileManager.m; path = EasyPlayer/Extentions/MusicTools/JWFileManager.m; sourceTree = "<group>"; };
 		84C36BBE1BD64D5200654090 /* JWLrcParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWLrcParser.h; path = EasyPlayer/Extentions/MusicTools/JWLrcParser.h; sourceTree = "<group>"; };
 		84C36BBF1BD64D5200654090 /* JWLrcParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWLrcParser.m; path = EasyPlayer/Extentions/MusicTools/JWLrcParser.m; sourceTree = "<group>"; };
-		84C36BC01BD64D5200654090 /* JWTagHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWTagHelper.h; path = EasyPlayer/Extentions/MusicTools/JWTagHelper.h; sourceTree = "<group>"; };
-		84C36BC11BD64D5200654090 /* JWTagHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWTagHelper.m; path = EasyPlayer/Extentions/MusicTools/JWTagHelper.m; sourceTree = "<group>"; };
+		84C36BC01BD64D5200654090 /* JWMediaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMediaHelper.h; path = EasyPlayer/Extentions/MusicTools/JWMediaHelper.h; sourceTree = "<group>"; };
+		84C36BC11BD64D5200654090 /* JWMediaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMediaHelper.m; path = EasyPlayer/Extentions/MusicTools/JWMediaHelper.m; sourceTree = "<group>"; };
 		84C36BC61BD64D6D00654090 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libFLAC.framework; sourceTree = "<group>"; };
 		84C36BC71BD64D6D00654090 /* ORGMAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMAudioUnit.h; sourceTree = "<group>"; };
 		84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMAudioUnit.m; sourceTree = "<group>"; };
@@ -107,7 +108,6 @@
 		84C36BD31BD64D6D00654090 /* ORGMPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMPluginManager.m; sourceTree = "<group>"; };
 		84C36BD41BD64D6D00654090 /* ORGMQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMQueues.h; sourceTree = "<group>"; };
 		84C36BD51BD64D6D00654090 /* ORGMQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMQueues.m; sourceTree = "<group>"; };
-		84C36BD61BD64D6D00654090 /* OrigamiEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OrigamiEngine-Prefix.pch"; sourceTree = "<group>"; };
 		84C36BD81BD64D6D00654090 /* CoreAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAudioDecoder.h; sourceTree = "<group>"; };
 		84C36BD91BD64D6D00654090 /* CoreAudioDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreAudioDecoder.m; sourceTree = "<group>"; };
 		84C36BDA1BD64D6D00654090 /* CueSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheet.h; sourceTree = "<group>"; };
@@ -126,6 +126,8 @@
 		84C36BE71BD64D6D00654090 /* HTTPSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSource.m; sourceTree = "<group>"; };
 		84C36BE81BD64D6D00654090 /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
 		84C36BE91BD64D6D00654090 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
+		84C36BFC1BD728BC00654090 /* JWNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWNetworkHelper.h; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.h; sourceTree = "<group>"; };
+		84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWNetworkHelper.m; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.m; sourceTree = "<group>"; };
 		C43279C11BD11636005C6BBC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C43279C31BD116A0005C6BBC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C43279C51BD116A8005C6BBC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -187,9 +189,7 @@
 			children = (
 				849060EB1BCCE3F8008B2125 /* AppDelegate.h */,
 				849060EC1BCCE3F8008B2125 /* AppDelegate.m */,
-				849060F11BCCE3F8008B2125 /* Assets.xcassets */,
 				849060F31BCCE3F8008B2125 /* MainMenu.xib */,
-				849060F61BCCE3F8008B2125 /* Info.plist */,
 				849061041BCCEA85008B2125 /* PlayerViewController.h */,
 				849061051BCCEA85008B2125 /* PlayerViewController.m */,
 				849061061BCCEA85008B2125 /* PlayerViewController.xib */,
@@ -209,6 +209,8 @@
 		849060EE1BCCE3F8008B2125 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				849060F11BCCE3F8008B2125 /* Assets.xcassets */,
+				849060F61BCCE3F8008B2125 /* Info.plist */,
 				849060EF1BCCE3F8008B2125 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -231,12 +233,14 @@
 		849061191BCE349F008B2125 /* MusicTools */ = {
 			isa = PBXGroup;
 			children = (
+				84C36BC01BD64D5200654090 /* JWMediaHelper.h */,
+				84C36BC11BD64D5200654090 /* JWMediaHelper.m */,
+				84C36BFC1BD728BC00654090 /* JWNetworkHelper.h */,
+				84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */,
 				84C36BBC1BD64D5200654090 /* JWFileManager.h */,
 				84C36BBD1BD64D5200654090 /* JWFileManager.m */,
 				84C36BBE1BD64D5200654090 /* JWLrcParser.h */,
 				84C36BBF1BD64D5200654090 /* JWLrcParser.m */,
-				84C36BC01BD64D5200654090 /* JWTagHelper.h */,
-				84C36BC11BD64D5200654090 /* JWTagHelper.m */,
 			);
 			name = MusicTools;
 			sourceTree = "<group>";
@@ -275,7 +279,6 @@
 				84C36BD31BD64D6D00654090 /* ORGMPluginManager.m */,
 				84C36BD41BD64D6D00654090 /* ORGMQueues.h */,
 				84C36BD51BD64D6D00654090 /* ORGMQueues.m */,
-				84C36BD61BD64D6D00654090 /* OrigamiEngine-Prefix.pch */,
 				84C36BD71BD64D6D00654090 /* Plugins */,
 			);
 			name = OrigamiEngine;
@@ -400,9 +403,10 @@
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
 				84C36BEE1BD64D6D00654090 /* ORGMInputUnit.m in Sources */,
 				84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */,
-				84C36BC41BD64D5200654090 /* JWTagHelper.m in Sources */,
+				84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */,
 				84C36BB11BD64CC600654090 /* JWTagInfo.m in Sources */,
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
+				84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */,
 				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,
 				84C36BF41BD64D6D00654090 /* CueSheetContainer.m in Sources */,
 				84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */,

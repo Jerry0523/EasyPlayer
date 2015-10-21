@@ -1,21 +1,35 @@
 //
 //  PlayerViewController.m
-//  EasyPlayer
 //
-//  Created by Jerry Wong's Mac Mini on 15/10/13.
-//  Copyright © 2015年 Jerry Wong. All rights reserved.
+// Copyright (c) 2015 Jerry Wong
 //
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 #import "PlayerViewController.h"
 #import "PlaylistViewController.h"
 #import "MusicProgressView.h"
 #import "MusicInfoViewController.h"
 #import "JWFileManager.h"
-#import "ORGMInputUnit.h"
+#import "JWMediaHelper.h"
 
 
 @interface PlayerViewController ()<AVAudioPlayerDelegate, PlaylistViewDelegate>
-
 
 @end
 
@@ -26,38 +40,16 @@
     NSTimer *progressTimer;
 }
 
+- (BOOL)isPlaying {
+    return self.player.isPlaying;
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
     
     self.playedList = [NSMutableArray array];
-    NSMutableArray *mutable = [NSMutableArray array];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
-    if(paths.count > 0) {
-        NSString *musicRootPath = paths[0];
-        NSDictionary *iTunesLibrary = [NSDictionary dictionaryWithContentsOfFile:[musicRootPath stringByAppendingPathComponent:@"iTunes/iTunes Music Library.xml"]];
-        if (iTunesLibrary) {
-            NSDictionary *tracks = iTunesLibrary[@"Tracks"];
-            NSArray *keys = tracks.allKeys;
-            for (id key in keys) {
-                JWTrack *track = [[JWTrack alloc] initFromDictionary:tracks[key]];
-                if (track.TotalTime > 30000) {
-                    NSString *pathExtention = [track pathExtention];
-                    if (track.Location && ![pathExtention isEqualToString:@"m4p"] && ![pathExtention isEqualToString:@"mp4"]) {
-                        [mutable addObject:track];
-                    }
-                }
-            }
-        }
-    }
-    
-    NSString *appMusicLibPath = [JWFileManager getMusicLibraryFilePath];
-    NSArray *localLibArray = [[NSArray alloc] initWithContentsOfFile:appMusicLibPath];
-    if ([localLibArray count] > 0) {
-        for (NSData *data in localLibArray) {
-            [mutable addObject:[[JWTrack alloc] initFromArchiveData:data]];
-        }
-    }
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:[JWFileManager getItuensMediaArray]];
+    [mutable addObjectsFromArray:[JWFileManager getLocalMediaArray]];
     
     self.items = mutable;
     self.filteredItems = self.items;
@@ -94,14 +86,12 @@
         return;
     }
     
-    [self.window.toolbar removeItemAtIndex:6];
-    [self.window.toolbar removeItemAtIndex:5];
-    [self.window.toolbar removeItemAtIndex:4];
-    [self.window.toolbar removeItemAtIndex:3];
-    [self.window.toolbar removeItemAtIndex:2];
+    self.window.title = @"";
     
-    [self.window.toolbar insertItemWithItemIdentifier:@"add" atIndex:2];
-    [self.window.toolbar insertItemWithItemIdentifier:@"search" atIndex:3];
+    [self.window.toolbar removeItemAtIndex:6];
+    
+    [self.window.toolbar insertItemWithItemIdentifier:@"add" atIndex:6];
+    [self.window.toolbar insertItemWithItemIdentifier:@"search" atIndex:7];
     
     
     playlistController.view.hidden = NO;
@@ -120,14 +110,11 @@
         return;
     }
     
-    [self.window.toolbar removeItemAtIndex:3];
-    [self.window.toolbar removeItemAtIndex:2];
+    self.window.title = self.currentTrack ? self.currentTrack.Name : @"";
     
-    [self.window.toolbar insertItemWithItemIdentifier:@"pre" atIndex:2];
-    [self.window.toolbar insertItemWithItemIdentifier:@"play" atIndex:3];
-    [self.window.toolbar insertItemWithItemIdentifier:@"next" atIndex:4];
+    [self.window.toolbar removeItemAtIndex:7];
+    [self.window.toolbar removeItemAtIndex:6];
     
-    [self.window.toolbar insertItemWithItemIdentifier:@"NSToolbarFlexibleSpaceItem" atIndex:5];
     [self.window.toolbar insertItemWithItemIdentifier:@"mode" atIndex:6];
     
     playlistController.view.hidden = YES;
@@ -239,7 +226,7 @@
     if (self.player) {
         if (self.player.isPlaying) {
             [self.player pause];
-            sender.image = [NSImage imageNamed:@"play"];
+            self.playToolbarItem.image = [NSImage imageNamed:@"play"];
             [self switchToPlayListPanel];
             if (progressTimer) {
                 [progressTimer setFireDate:[NSDate distantFuture]];
@@ -247,7 +234,7 @@
         } else {
             [self switchToMuscicInfoPanel];
             [self.player play];
-            sender.image = [NSImage imageNamed:@"pause"];
+            self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
             [progressTimer setFireDate:[NSDate date]];
         }
     } else {
@@ -310,20 +297,11 @@
     NSMutableArray *newTracks = [NSMutableArray array];
     
     for (NSURL *url in urlArray) {
-        NSDictionary *id3Dic = [JWTrack innerTagInfoForURL:url];
+        NSDictionary *id3Dic = [JWMediaHelper id3InfoForURL:url];
         if(id3Dic) {
             JWTrack *track = [[JWTrack alloc] initFromID3Info:id3Dic url:url];
             track.sourceType = TrackSourceTypeLocal;
             [newTracks addObject:track];
-        } else {
-            ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
-            if ([inputUnit openWithUrl:url]) {
-                NSDictionary *meta = [inputUnit metadata];
-                if (meta) {
-                    
-                }
-                NSLog(@"here");
-            }
         }
     }
     
@@ -339,30 +317,8 @@
         if ([oldLocalLibArray count]) {
             [newLocalLibArray addObjectsFromArray:oldLocalLibArray];
         }
-        NSFileManager *manager = [NSFileManager defaultManager];
-        NSString *musicPath = [JWFileManager getMusicPath];
         for (JWTrack *newTrack in newTracks) {
-            NSString *newTrackName = newTrack.Name;
-            NSString *newTrackArtist = newTrack.Artist;
-            NSString *pathExtension = [NSURL URLWithString:newTrack.Location].pathExtension;
-            
-            NSString *fileName = newTrackName;
-            if ([newTrackArtist length]) {
-                fileName = [fileName stringByAppendingFormat:@"-%@",newTrackArtist];
-            }
-            if ([pathExtension length]) {
-                fileName = [fileName stringByAppendingFormat:@".%@",pathExtension];
-            }
-            NSString *finalPath = [musicPath stringByAppendingPathComponent:fileName];
-            NSString *sourcePath = [newTrack.Location stringByRemovingPercentEncoding];
-            if ([sourcePath hasPrefix:@"file://"] ) {
-                sourcePath = [sourcePath substringFromIndex:7];
-            }
-            NSError *error;
-            [manager copyItemAtPath:sourcePath toPath:finalPath error:&error];
-            finalPath = [NSString stringWithFormat:@"file://%@", finalPath];
-            finalPath = [finalPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            newTrack.Location = finalPath;
+            [JWFileManager copyTrackToLocalMediaPath:newTrack];
             [newLocalLibArray addObject:[newTrack archivedData]];
         }
         

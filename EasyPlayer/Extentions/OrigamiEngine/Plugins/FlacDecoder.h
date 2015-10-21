@@ -1,7 +1,7 @@
 //
 // FlacDecoder.h
 //
-// Copyright (c) 2012 ap4y (lod@pisem.net)
+// Copyright (c) 2015 Jerry Wong
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal

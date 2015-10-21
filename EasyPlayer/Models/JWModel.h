@@ -1,5 +1,5 @@
 //
-//  LrcModal.h
+//  CommonModal.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,15 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JWModal.h"
+#import <Foundation/Foundation.h>
 
-@interface JWTagInfo : JWModal
+@interface JWModel : NSObject<NSCoding>
 
-@property (assign, nonatomic) long aid;
-@property (assign, nonatomic) long artist_id;
-@property (assign, nonatomic) long sid;
 
-@property (strong, nonatomic) NSString *lrc;
-@property (strong, nonatomic) NSString *song;
++ (NSArray *)arrayFromJSON:(NSArray*)array;
+- (instancetype)initFromDictionary:(NSDictionary*)json;
+- (instancetype)initFromArchiveData:(NSData*)archiveData;
+
+- (NSData*)archivedData;
 
 @end

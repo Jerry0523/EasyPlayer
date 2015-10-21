@@ -21,10 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JWModal.h"
+#import "JWModel.h"
 #import <objc/runtime.h>
 
-@implementation JWModal
+@implementation JWModel
 
 + (NSArray *)arrayFromJSON:(NSArray*)array {
     if (![array isKindOfClass:[NSArray class]]) {
@@ -32,7 +32,7 @@
     }
     NSMutableArray *objects = [NSMutableArray array];
     for (NSDictionary *meta in array) {
-        JWModal *oneObject = [[[self class] alloc] initFromDictionary:meta];
+        JWModel *oneObject = [[[self class] alloc] initFromDictionary:meta];
         if (oneObject) {
             [objects addObject:oneObject];
         }

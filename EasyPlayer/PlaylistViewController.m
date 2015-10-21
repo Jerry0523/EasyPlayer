@@ -33,7 +33,9 @@
 }
 
 - (void)setSelectedIndex:(NSUInteger)idx {
-    [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:idx] byExtendingSelection:NO];
+    if ([self.items count] > idx) {
+        [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:idx] byExtendingSelection:NO];
+    }
 }
 
 #pragma mark - NSTableViewDelegate & NSTableViewDataSource

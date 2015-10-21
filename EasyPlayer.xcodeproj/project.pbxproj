@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842FAF3A1BD75D05007B8CBB /* JWPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842FAF391BD75D05007B8CBB /* JWPlayer.m */; settings = {ASSET_TAGS = (); }; };
 		849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EC1BCCE3F8008B2125 /* AppDelegate.m */; };
 		849060F01BCCE3F8008B2125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EF1BCCE3F8008B2125 /* main.m */; };
 		849060F21BCCE3F8008B2125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849060F11BCCE3F8008B2125 /* Assets.xcassets */; };
@@ -54,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		842FAF381BD75D05007B8CBB /* JWPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWPlayer.h; path = EasyPlayer/Extentions/MusicTools/JWPlayer.h; sourceTree = "<group>"; };
+		842FAF391BD75D05007B8CBB /* JWPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWPlayer.m; path = EasyPlayer/Extentions/MusicTools/JWPlayer.m; sourceTree = "<group>"; };
 		849060E81BCCE3F8008B2125 /* EasyPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849060EB1BCCE3F8008B2125 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		849060EC1BCCE3F8008B2125 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 		849061191BCE349F008B2125 /* MusicTools */ = {
 			isa = PBXGroup;
 			children = (
+				842FAF381BD75D05007B8CBB /* JWPlayer.h */,
+				842FAF391BD75D05007B8CBB /* JWPlayer.m */,
 				84C36BC01BD64D5200654090 /* JWMediaHelper.h */,
 				84C36BC11BD64D5200654090 /* JWMediaHelper.m */,
 				84C36BFC1BD728BC00654090 /* JWNetworkHelper.h */,
@@ -413,6 +418,7 @@
 				84C36BF31BD64D6D00654090 /* CueSheet.m in Sources */,
 				84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */,
 				84C36BB21BD64CC600654090 /* JWTrack.m in Sources */,
+				842FAF3A1BD75D05007B8CBB /* JWPlayer.m in Sources */,
 				84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */,
 				84C36BF01BD64D6D00654090 /* ORGMPluginManager.m in Sources */,
 			);

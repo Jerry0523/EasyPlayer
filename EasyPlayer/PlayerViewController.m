@@ -27,9 +27,10 @@
 #import "MusicInfoViewController.h"
 #import "JWFileManager.h"
 #import "JWMediaHelper.h"
+#import "NSImage+Utils.h"
 
 
-@interface PlayerViewController ()<AVAudioPlayerDelegate, PlaylistViewDelegate>
+@interface PlayerViewController ()<JWPlayerDelegate, PlaylistViewDelegate>
 
 @end
 
@@ -38,6 +39,7 @@
     MusicInfoViewController *musicInfoController;
     MusicProgressView *progressView;
     NSTimer *progressTimer;
+    NSDate *lastPlayDate;
 }
 
 - (BOOL)isPlaying {
@@ -46,6 +48,9 @@
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    
+    self.player = [JWPlayer new];
+    self.player.delegate = self;
     
     self.playedList = [NSMutableArray array];
     NSMutableArray *mutable = [NSMutableArray arrayWithArray:[JWFileManager getItuensMediaArray]];
@@ -147,16 +152,12 @@
     self.currentTrack = track;
     self.window.title = track.Name;
 
-    NSData *musicData = [track musicData];
-    NSError *error;
-    self.player = [[AVAudioPlayer alloc] initWithData:musicData error:&error];
-    self.player.delegate = self;
-    if (!error) {
-        [self.player play];
-    } else {
+    BOOL success = [self.player playWithURL:[track fileURL]];
+    if (!success) {
         [self playRandomSong];
-        NSLog(@"%@", [error localizedDescription]);
+        return;
     }
+    
     progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshProgressByTimer) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:progressTimer forMode:NSRunLoopCommonModes];
     [progressTimer fire];
@@ -165,8 +166,12 @@
 }
 
 - (void)refreshProgressByTimer {
-    NSTimeInterval currentTime = self.player.currentTime;
+    NSTimeInterval currentTime = [self.player currentTime];
     NSTimeInterval totalTime = self.currentTrack.TotalTime / 1000.0;
+    
+    if (totalTime == 0) {
+        totalTime = [self.player totalTime];
+    }
     
     if (totalTime > 0) {
         progressView.progress = currentTime / totalTime;
@@ -223,31 +228,32 @@
 }
 
 - (IBAction)playClicked:(NSToolbarItem*)sender {
-    if (self.player) {
-        if (self.player.isPlaying) {
-            [self.player pause];
-            self.playToolbarItem.image = [NSImage imageNamed:@"play"];
-            [self switchToPlayListPanel];
-            if (progressTimer) {
-                [progressTimer setFireDate:[NSDate distantFuture]];
-            }
-        } else {
-            [self switchToMuscicInfoPanel];
-            [self.player play];
-            self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
-            [progressTimer setFireDate:[NSDate date]];
+    if (self.player.isPlaying) {
+        [self.player pause];
+        self.playToolbarItem.image = [NSImage imageNamed:@"play"];
+        [self switchToPlayListPanel];
+        if (progressTimer) {
+            [progressTimer setFireDate:[NSDate distantFuture]];
         }
     } else {
         [self switchToMuscicInfoPanel];
-        [self playRandomSong];
+        if (self.currentTrack) {
+            [self.player resume];
+        } else {
+            [self playRandomSong];
+        }
+        self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
+        [progressTimer setFireDate:[NSDate date]];
     }
 }
 
 - (IBAction)nextClicked:(id)sender {
+    lastPlayDate = [NSDate date];
     [self playRandomSong];
 }
 
 - (IBAction)preClicked:(id)sender {
+    lastPlayDate = [NSDate date];
     if ([self.playedList count] > 0) {
         [self.playedList removeObject:[self.playedList lastObject]];
     }
@@ -301,6 +307,17 @@
         if(id3Dic) {
             JWTrack *track = [[JWTrack alloc] initFromID3Info:id3Dic url:url];
             track.sourceType = TrackSourceTypeLocal;
+            
+            if (id3Dic[@"picture"]) {
+                NSImage *coverImg = [[NSImage alloc] initWithData:id3Dic[@"picture"]];
+                NSString *albumPath = [JWFileManager getCoverPath];
+                if (albumPath) {
+                    NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
+                    [coverImg saveAsJPGFileForPath:destination];
+                }
+
+            }
+            
             [newTracks addObject:track];
         }
     }
@@ -335,13 +352,18 @@
     self.sortType = sortType;
 }
 
-#pragma mark - AVAudioPlayerDelegate
+#pragma mark - JWPlayerDelegate
 
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+- (void)errorDidOccur:(JWPlayer*)player {
     [self playRandomSong];
 }
 
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+- (void)didFinishPlaying:(JWPlayer*)player{
+    NSDate *actionDate = [NSDate date];
+    if ([actionDate timeIntervalSinceDate:lastPlayDate] < 0.5) {
+        return;
+    }
+    
     if (self.playMode == TrackPlayModeSingle) {
         JWTrack *single = self.currentTrack;
         self.currentTrack = nil;

@@ -61,6 +61,10 @@
 
 #pragma mark - public
 
+- (BOOL)isPlaying {
+    return self.currentState == ORGMEngineStatePlaying;
+}
+
 - (void)playUrl:(NSURL *)url withOutputUnitClass:(Class)outputUnitClass {
     if (!outputUnitClass || ![outputUnitClass isSubclassOfClass:[ORGMOutputUnit class]]) {
 

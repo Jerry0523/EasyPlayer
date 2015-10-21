@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
-#import <AVFoundation/AVFoundation.h>
+#import "JWPlayer.h"
 #import "JWTrack.h"
 
 @interface PlayerViewController : NSWindowController
@@ -30,7 +30,7 @@
 @property (strong, nonatomic) NSArray *items;
 @property (strong, nonatomic) NSArray *filteredItems;
 
-@property (strong, nonatomic) AVAudioPlayer* player;
+@property (strong, nonatomic) JWPlayer* player;
 @property (strong, nonatomic) JWTrack *currentTrack;
 @property (assign, nonatomic) TrackSortType sortType;
 @property (assign, nonatomic) TrackPlayMode playMode;

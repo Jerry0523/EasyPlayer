@@ -68,6 +68,8 @@ typedef enum : NSInteger {
  */
 @property (unsafe_unretained, nonatomic) id<ORGMEngineDelegate> delegate;
 
+- (BOOL)isPlaying;
+
 /**
  Starts new playback process from corresponding source with provided output type of output unit.
 

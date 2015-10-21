@@ -291,7 +291,7 @@
     sender.state = 1;
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
     [openDlg setCanChooseFiles:YES];
-    [openDlg setCanChooseDirectories:YES];
+    [openDlg setCanChooseDirectories:NO];
     [openDlg setAllowsMultipleSelection:YES];
     
     NSArray *urlArray;
@@ -303,23 +303,7 @@
     NSMutableArray *newTracks = [NSMutableArray array];
     
     for (NSURL *url in urlArray) {
-        NSDictionary *id3Dic = [JWMediaHelper id3InfoForURL:url];
-        if(id3Dic) {
-            JWTrack *track = [[JWTrack alloc] initFromID3Info:id3Dic url:url];
-            track.sourceType = TrackSourceTypeLocal;
-            
-            if (id3Dic[@"picture"]) {
-                NSImage *coverImg = [[NSImage alloc] initWithData:id3Dic[@"picture"]];
-                NSString *albumPath = [JWFileManager getCoverPath];
-                if (albumPath) {
-                    NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
-                    [coverImg saveAsJPGFileForPath:destination];
-                }
-
-            }
-            
-            [newTracks addObject:track];
-        }
+        [JWMediaHelper scanSupportedMediaForFileURL:url into:newTracks];
     }
     
     NSMutableArray *mutable = [NSMutableArray arrayWithArray:self.items];

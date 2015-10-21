@@ -30,6 +30,25 @@
 
 @implementation JWMediaHelper
 
++ (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array {
+    NSDictionary *id3Dic = [self id3InfoForURL:fileURL];
+    if(id3Dic) {
+        JWTrack *track = [[JWTrack alloc] initFromID3Info:id3Dic url:fileURL];
+        track.sourceType = TrackSourceTypeLocal;
+        
+        if (id3Dic[@"picture"]) {
+            NSImage *coverImg = [[NSImage alloc] initWithData:id3Dic[@"picture"]];
+            NSString *albumPath = [JWFileManager getCoverPath];
+            if (albumPath) {
+                NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
+                [coverImg saveAsJPGFileForPath:destination];
+            }
+            
+        }
+        [array addObject:track];
+    }
+}
+
 + (NSImage*)innerCoverImageForURL:(NSURL*)fileURL {
     AudioFileID audioFile;
     OSStatus theErr = noErr;

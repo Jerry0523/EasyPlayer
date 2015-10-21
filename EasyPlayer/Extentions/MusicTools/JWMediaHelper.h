@@ -30,6 +30,7 @@
 
 + (NSImage*)innerCoverImageForURL:(NSURL*)url;
 + (NSDictionary *)id3InfoForURL:(NSURL*)url;
++ (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array;
 
 + (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *track, NSError *))block;
 + (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(NSImage*, JWTrack *track, NSError *))block;

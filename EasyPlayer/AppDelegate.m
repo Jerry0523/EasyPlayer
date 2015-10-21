@@ -46,9 +46,9 @@
 
 -  (NSMenu *)applicationDockMenu:(NSApplication *)sender {
     NSMenu *menu = [[NSMenu alloc] initWithTitle:@""];
-    NSMenuItem *pre = [[NSMenuItem alloc] initWithTitle:@"上一首" action:@selector(playPreSong) keyEquivalent:@""];
-    NSMenuItem *play = [[NSMenuItem alloc] initWithTitle:self.playerController.isPlaying ? @"暂停" : @"播放" action:@selector(resumePlaySong) keyEquivalent:@""];
-    NSMenuItem *next = [[NSMenuItem alloc] initWithTitle:@"下一首" action:@selector(playNextSong) keyEquivalent:@""];
+    NSMenuItem *pre = [[NSMenuItem alloc] initWithTitle:@"Previous" action:@selector(playPreSong) keyEquivalent:@""];
+    NSMenuItem *play = [[NSMenuItem alloc] initWithTitle:self.playerController.isPlaying ? @"Pause" : @"Play" action:@selector(resumePlaySong) keyEquivalent:@""];
+    NSMenuItem *next = [[NSMenuItem alloc] initWithTitle:@"Next" action:@selector(playNextSong) keyEquivalent:@""];
     [menu addItem:pre];
     [menu addItem:play];
     [menu addItem:next];

@@ -1,5 +1,5 @@
 //
-//  MusicTrackModal.h
+//  LrcModal.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,44 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JWModal.h"
-#import <Cocoa/Cocoa.h>
+#import "JWModel.h"
 
-typedef enum{
-    TrackSortTypeDefault = 0,
-    TrackSortTypeArtist,
-    TrackSortTypeAlbum
-} TrackSortType;
+@interface JWTagInfo : JWModel
 
-typedef enum{
-    TrackPlayModeRandom = 0,
-    TrackPlayModeSingle
-} TrackPlayMode;
+@property (assign, nonatomic) long aid;
+@property (assign, nonatomic) long artist_id;
+@property (assign, nonatomic) long sid;
 
-typedef enum{
-    TrackSourceTypeItunes = 0,
-    TrackSourceTypeLocal
-} TrackSourceType;
-
-@interface JWTrack : JWModal
-
-@property (nonatomic, strong) NSString *Name;
-@property (nonatomic, strong) NSString *Artist;
-@property (nonatomic, strong) NSString *Album;
-@property (nonatomic, strong) NSString *Location;
-@property (nonatomic, assign) double TotalTime;
-@property (nonatomic, assign) TrackSourceType sourceType;
-
-- (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL;
-
-- (NSString*)pathExtention;
-- (NSInteger)compares:(JWTrack*)track sortType:(TrackSortType)sortType;
-
-- (BOOL)respondToSearch:(NSString*)search;
-
-- (NSData*)musicData;
-- (NSString*)cacheKey;
-
-- (NSURL*)fileURL;
+@property (strong, nonatomic) NSString *lrc;
+@property (strong, nonatomic) NSString *song;
 
 @end

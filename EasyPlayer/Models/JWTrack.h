@@ -1,5 +1,5 @@
 //
-//  CommonModal.h
+//  MusicTrackModal.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,15 +21,44 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import "JWModel.h"
+#import <Cocoa/Cocoa.h>
 
-@interface JWModal : NSObject<NSCoding>
+typedef enum{
+    TrackSortTypeDefault = 0,
+    TrackSortTypeArtist,
+    TrackSortTypeAlbum
+} TrackSortType;
 
+typedef enum{
+    TrackPlayModeRandom = 0,
+    TrackPlayModeSingle
+} TrackPlayMode;
 
-+ (NSArray *)arrayFromJSON:(NSArray*)array;
-- (instancetype)initFromDictionary:(NSDictionary*)json;
-- (instancetype)initFromArchiveData:(NSData*)archiveData;
+typedef enum{
+    TrackSourceTypeItunes = 0,
+    TrackSourceTypeLocal
+} TrackSourceType;
 
-- (NSData*)archivedData;
+@interface JWTrack : JWModel
+
+@property (nonatomic, strong) NSString *Name;
+@property (nonatomic, strong) NSString *Artist;
+@property (nonatomic, strong) NSString *Album;
+@property (nonatomic, strong) NSString *Location;
+@property (nonatomic, assign) double TotalTime;
+@property (nonatomic, assign) TrackSourceType sourceType;
+
+- (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL;
+
+- (NSString*)pathExtention;
+- (NSInteger)compares:(JWTrack*)track sortType:(TrackSortType)sortType;
+
+- (BOOL)respondToSearch:(NSString*)search;
+
+- (NSData*)musicData;
+- (NSString*)cacheKey;
+
+- (NSURL*)fileURL;
 
 @end

@@ -22,15 +22,15 @@
 // THE SOFTWARE.
 
 #import <Cocoa/Cocoa.h>
-#import "JWPlayer.h"
 #import "JWTrack.h"
+#import "ORGMEngine.h"
 
 @interface PlayerViewController : NSWindowController
 
 @property (strong, nonatomic) NSArray *items;
 @property (strong, nonatomic) NSArray *filteredItems;
 
-@property (strong, nonatomic) JWPlayer* player;
+@property (strong, nonatomic) ORGMEngine* player;
 @property (strong, nonatomic) JWTrack *currentTrack;
 @property (assign, nonatomic) TrackSortType sortType;
 @property (assign, nonatomic) TrackPlayMode playMode;
@@ -50,7 +50,3 @@
 - (IBAction)preClicked:(id)sender;
 
 @end
-
-static inline CGFloat skRand(NSInteger low, NSInteger high) {
-    return arc4random() % high + low;
-}

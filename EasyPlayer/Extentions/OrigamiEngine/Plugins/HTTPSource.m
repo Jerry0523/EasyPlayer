@@ -126,7 +126,7 @@ const NSTimeInterval readTimeout = 1.0;
 
     while(_byteCount < _bytesRead + amount) {
         if (_connectionDidFail) return 0;
-        _bytesWaitingFromCache = _bytesRead + amount;
+        _bytesWaitingFromCache =   + amount;
         dispatch_semaphore_wait(_downloadingSemaphore, dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC));
     }
 

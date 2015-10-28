@@ -29,7 +29,7 @@
 @interface JWMediaHelper : NSObject
 
 + (NSImage*)innerCoverImageForURL:(NSURL*)url;
-+ (NSDictionary *)id3InfoForURL:(NSURL*)url;
+//+ (NSDictionary *)id3InfoForURL:(NSURL*)url;
 + (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array;
 
 + (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *track, NSError *))block;

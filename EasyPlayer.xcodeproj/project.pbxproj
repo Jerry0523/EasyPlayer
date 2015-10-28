@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		842FAF3A1BD75D05007B8CBB /* JWPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 842FAF391BD75D05007B8CBB /* JWPlayer.m */; settings = {ASSET_TAGS = (); }; };
 		849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EC1BCCE3F8008B2125 /* AppDelegate.m */; };
 		849060F01BCCE3F8008B2125 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 849060EF1BCCE3F8008B2125 /* main.m */; };
 		849060F21BCCE3F8008B2125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 849060F11BCCE3F8008B2125 /* Assets.xcassets */; };
@@ -19,18 +18,17 @@
 		849061151BCE099B008B2125 /* MusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061141BCE099B008B2125 /* MusicProgressView.m */; };
 		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; };
 		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; };
-		84C36BA71BD5F93600654090 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA61BD5F93600654090 /* libFLAC.framework */; settings = {ASSET_TAGS = (); }; };
 		84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA81BD5FB0F00654090 /* libiconv.tbd */; };
-		84C36BB01BD64CC600654090 /* JWModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAB1BD64CC600654090 /* JWModal.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BB11BD64CC600654090 /* JWTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAD1BD64CC600654090 /* JWTagInfo.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BB21BD64CC600654090 /* JWTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAF1BD64CC600654090 /* JWTrack.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB41BD64D0600654090 /* NSColor+Components.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB61BD64D0600654090 /* NSImage+Utils.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB81BD64D0600654090 /* NSString+Comparator.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBD1BD64D5200654090 /* JWFileManager.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBF1BD64D5200654090 /* JWLrcParser.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC11BD64D5200654090 /* JWMediaHelper.m */; settings = {ASSET_TAGS = (); }; };
-		84C36BEA1BD64D6D00654090 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BC61BD64D6D00654090 /* libFLAC.framework */; settings = {ASSET_TAGS = (); }; };
+		84C36BB01BD64CC600654090 /* JWModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAB1BD64CC600654090 /* JWModal.m */; };
+		84C36BB11BD64CC600654090 /* JWTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAD1BD64CC600654090 /* JWTagInfo.m */; };
+		84C36BB21BD64CC600654090 /* JWTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAF1BD64CC600654090 /* JWTrack.m */; };
+		84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB41BD64D0600654090 /* NSColor+Components.m */; };
+		84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB61BD64D0600654090 /* NSImage+Utils.m */; };
+		84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB81BD64D0600654090 /* NSString+Comparator.m */; };
+		84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBD1BD64D5200654090 /* JWFileManager.m */; };
+		84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBF1BD64D5200654090 /* JWLrcParser.m */; };
+		84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC11BD64D5200654090 /* JWMediaHelper.m */; };
+		84C36BEA1BD64D6D00654090 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BC61BD64D6D00654090 /* libFLAC.framework */; };
 		84C36BEB1BD64D6D00654090 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BEC1BD64D6D00654090 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BCB1BD64D6D00654090 /* ORGMConverter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BED1BD64D6D00654090 /* ORGMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BCD1BD64D6D00654090 /* ORGMEngine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -47,7 +45,7 @@
 		84C36BF81BD64D6D00654090 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE51BD64D6D00654090 /* FlacDecoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BF91BD64D6D00654090 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE71BD64D6D00654090 /* HTTPSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BFA1BD64D6D00654090 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE91BD64D6D00654090 /* M3uContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */; settings = {ASSET_TAGS = (); }; };
+		84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */; };
 		C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C11BD11636005C6BBC /* AudioToolbox.framework */; };
 		C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C31BD116A0005C6BBC /* AVFoundation.framework */; };
 		C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C51BD116A8005C6BBC /* Cocoa.framework */; };
@@ -55,8 +53,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		842FAF381BD75D05007B8CBB /* JWPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWPlayer.h; path = EasyPlayer/Extentions/MusicTools/JWPlayer.h; sourceTree = "<group>"; };
-		842FAF391BD75D05007B8CBB /* JWPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWPlayer.m; path = EasyPlayer/Extentions/MusicTools/JWPlayer.m; sourceTree = "<group>"; };
 		849060E81BCCE3F8008B2125 /* EasyPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		849060EB1BCCE3F8008B2125 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		849060EC1BCCE3F8008B2125 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,7 +71,6 @@
 		8499435C1BCE4BA200823A6B /* MusicInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicInfoViewController.h; sourceTree = "<group>"; };
 		8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicInfoViewController.m; sourceTree = "<group>"; };
 		8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicInfoViewController.xib; sourceTree = "<group>"; };
-		84C36BA61BD5F93600654090 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libFLAC.framework; path = OrigamiEngine/libFLAC.framework; sourceTree = "<group>"; };
 		84C36BA81BD5FB0F00654090 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		84C36BAA1BD64CC600654090 /* JWModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWModal.h; path = EasyPlayer/Modals/JWModal.h; sourceTree = "<group>"; };
 		84C36BAB1BD64CC600654090 /* JWModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWModal.m; path = EasyPlayer/Modals/JWModal.m; sourceTree = "<group>"; };
@@ -95,7 +90,7 @@
 		84C36BBF1BD64D5200654090 /* JWLrcParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWLrcParser.m; path = EasyPlayer/Extentions/MusicTools/JWLrcParser.m; sourceTree = "<group>"; };
 		84C36BC01BD64D5200654090 /* JWMediaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMediaHelper.h; path = EasyPlayer/Extentions/MusicTools/JWMediaHelper.h; sourceTree = "<group>"; };
 		84C36BC11BD64D5200654090 /* JWMediaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMediaHelper.m; path = EasyPlayer/Extentions/MusicTools/JWMediaHelper.m; sourceTree = "<group>"; };
-		84C36BC61BD64D6D00654090 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = libFLAC.framework; sourceTree = "<group>"; };
+		84C36BC61BD64D6D00654090 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libFLAC.framework; path = Extentions/OrigamiEngine/libFLAC.framework; sourceTree = "<group>"; };
 		84C36BC71BD64D6D00654090 /* ORGMAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMAudioUnit.h; sourceTree = "<group>"; };
 		84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMAudioUnit.m; sourceTree = "<group>"; };
 		84C36BC91BD64D6D00654090 /* ORGMCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMCommonProtocols.h; sourceTree = "<group>"; };
@@ -145,7 +140,6 @@
 				84C36BEA1BD64D6D00654090 /* libFLAC.framework in Frameworks */,
 				84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */,
 				C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */,
-				84C36BA71BD5F93600654090 /* libFLAC.framework in Frameworks */,
 				C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */,
 				C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */,
 				C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */,
@@ -223,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				84C36BA81BD5FB0F00654090 /* libiconv.tbd */,
-				84C36BA61BD5F93600654090 /* libFLAC.framework */,
+				84C36BC61BD64D6D00654090 /* libFLAC.framework */,
 				C43279C71BD116AE005C6BBC /* QuartzCore.framework */,
 				C43279C51BD116A8005C6BBC /* Cocoa.framework */,
 				C43279C31BD116A0005C6BBC /* AVFoundation.framework */,
@@ -236,8 +230,6 @@
 		849061191BCE349F008B2125 /* MusicTools */ = {
 			isa = PBXGroup;
 			children = (
-				842FAF381BD75D05007B8CBB /* JWPlayer.h */,
-				842FAF391BD75D05007B8CBB /* JWPlayer.m */,
 				84C36BC01BD64D5200654090 /* JWMediaHelper.h */,
 				84C36BC11BD64D5200654090 /* JWMediaHelper.m */,
 				84C36BFC1BD728BC00654090 /* JWNetworkHelper.h */,
@@ -268,7 +260,6 @@
 		84C36BC51BD64D6D00654090 /* OrigamiEngine */ = {
 			isa = PBXGroup;
 			children = (
-				84C36BC61BD64D6D00654090 /* libFLAC.framework */,
 				84C36BC71BD64D6D00654090 /* ORGMAudioUnit.h */,
 				84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */,
 				84C36BC91BD64D6D00654090 /* ORGMCommonProtocols.h */,
@@ -418,7 +409,6 @@
 				84C36BF31BD64D6D00654090 /* CueSheet.m in Sources */,
 				84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */,
 				84C36BB21BD64CC600654090 /* JWTrack.m in Sources */,
-				842FAF3A1BD75D05007B8CBB /* JWPlayer.m in Sources */,
 				84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */,
 				84C36BF01BD64D6D00654090 /* ORGMPluginManager.m in Sources */,
 			);
@@ -474,7 +464,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -511,7 +501,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};

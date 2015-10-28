@@ -32,7 +32,7 @@
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {    
     self.playerController = [[PlayerViewController alloc] initWithWindowNibName:@"PlayerViewController"];
 }
 

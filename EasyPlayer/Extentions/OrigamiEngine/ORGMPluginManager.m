@@ -74,6 +74,7 @@
         Class class;
         if ((class = NSClassFromString(@"FlacDecoder"))) [self registerDecoder:class forFileTypes:@[ @"flac" ]];
         if ((class = NSClassFromString(@"OpusFileDecoder"))) [self registerDecoder:class forFileTypes:@[ @"opus" ]];
+        if ((class = NSClassFromString(@"ApeDecoder"))) [self registerDecoder:class forFileTypes:@[ @"ape" ]];
         
         /* Containers */        
         NSMutableDictionary *containersDict = [NSMutableDictionary dictionary];

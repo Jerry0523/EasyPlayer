@@ -30,7 +30,7 @@
 #import "NSImage+Utils.h"
 
 
-@interface PlayerViewController ()<JWPlayerDelegate, PlaylistViewDelegate>
+@interface PlayerViewController ()<ORGMEngineDelegate, PlaylistViewDelegate>
 
 @end
 
@@ -39,7 +39,6 @@
     MusicInfoViewController *musicInfoController;
     MusicProgressView *progressView;
     NSTimer *progressTimer;
-    NSDate *lastPlayDate;
 }
 
 - (BOOL)isPlaying {
@@ -49,7 +48,7 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    self.player = [JWPlayer new];
+    self.player = [[ORGMEngine alloc] init];;
     self.player.delegate = self;
     
     self.playedList = [NSMutableArray array];
@@ -126,10 +125,14 @@
     self.panelSwitchControl.selectedSegment = 1;
 }
 
+- (NSUInteger)createRandomIndex {
+    return arc4random() % (self.items.count - 1) + 0;
+}
+
 - (void)playRandomSong {
-    NSInteger idx = skRand(0, self.items.count - 1);
-    [self playSongByTrack:self.items[idx]];
-    [playlistController setSelectedIndex:idx];
+    NSUInteger randomIndex = [self createRandomIndex];
+    [self playSongByTrack:self.items[randomIndex]];
+    
 }
 
 - (void)playSongByTrack:(JWTrack*)track {
@@ -140,37 +143,38 @@
     [self.playedList removeObject:track];
     [self.playedList addObject:track];
     
-    self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
-    
-    [self switchToMuscicInfoPanel];
-    
-    if (progressTimer) {
-        [progressTimer invalidate];
-        progressView.progress = 0;
-    }
-    
-    self.currentTrack = track;
     self.window.title = track.Name;
 
-    BOOL success = [self.player playWithURL:[track fileURL]];
-    if (!success) {
-        [self playRandomSong];
-        return;
-    }
-    
-    progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshProgressByTimer) userInfo:nil repeats:YES];
-    [[NSRunLoop currentRunLoop] addTimer:progressTimer forMode:NSRunLoopCommonModes];
-    [progressTimer fire];
-    
-    musicInfoController.trackInfo = track;
+    [self.player playUrl:[track fileURL]];
+    self.currentTrack = track;
+}
+
+- (void)setCurrentTrack:(JWTrack *)currentTrack {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        _currentTrack = currentTrack;
+        self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
+        [self switchToMuscicInfoPanel];
+        
+        if (progressTimer) {
+            [progressTimer invalidate];
+            progressView.progress = 0;
+        }
+        
+        progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshProgressByTimer) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:progressTimer forMode:NSRunLoopCommonModes];
+        [progressTimer fire];
+        
+        musicInfoController.trackInfo = currentTrack;
+        [playlistController setSelectedIndex:[self.filteredItems indexOfObject:currentTrack]];
+    });
 }
 
 - (void)refreshProgressByTimer {
-    NSTimeInterval currentTime = [self.player currentTime];
+    NSTimeInterval currentTime = self.player.amountPlayed;
     NSTimeInterval totalTime = self.currentTrack.TotalTime / 1000.0;
     
     if (totalTime == 0) {
-        totalTime = [self.player totalTime];
+        totalTime = self.player.trackTime;
     }
     
     if (totalTime > 0) {
@@ -248,12 +252,10 @@
 }
 
 - (IBAction)nextClicked:(id)sender {
-    lastPlayDate = [NSDate date];
     [self playRandomSong];
 }
 
 - (IBAction)preClicked:(id)sender {
-    lastPlayDate = [NSDate date];
     if ([self.playedList count] > 0) {
         [self.playedList removeObject:[self.playedList lastObject]];
     }
@@ -336,24 +338,35 @@
     self.sortType = sortType;
 }
 
-#pragma mark - JWPlayerDelegate
+#pragma mark - ORGMEngineDelegate
 
-- (void)errorDidOccur:(JWPlayer*)player {
-    [self playRandomSong];
+- (NSURL *)engineExpectsNextUrl:(ORGMEngine *)engine {
+    JWTrack *track;
+    if (self.playMode == TrackPlayModeSingle) {
+        track = self.currentTrack;
+    } else {
+        NSUInteger randomIndex = [self createRandomIndex];
+        track = self.items[randomIndex];
+    }
+    self.currentTrack = track;
+    return [track fileURL];
 }
 
-- (void)didFinishPlaying:(JWPlayer*)player{
-    NSDate *actionDate = [NSDate date];
-    if ([actionDate timeIntervalSinceDate:lastPlayDate] < 0.5) {
-        return;
-    }
-    
-    if (self.playMode == TrackPlayModeSingle) {
-        JWTrack *single = self.currentTrack;
-        self.currentTrack = nil;
-        [self playSongByTrack:single];
-    } else {
-        [self playRandomSong];
+- (void)engine:(ORGMEngine *)engine didChangeState:(ORGMEngineState)state {
+    switch (state) {
+        case ORGMEngineStateStopped: {
+            break;
+        }
+        case ORGMEngineStatePaused: {
+            break;
+        }
+        case ORGMEngineStatePlaying: {
+            break;
+        }
+        case ORGMEngineStateError: {
+            [self playRandomSong];
+            break;
+        }
     }
 }
 

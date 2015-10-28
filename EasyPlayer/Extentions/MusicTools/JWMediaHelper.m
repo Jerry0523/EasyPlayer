@@ -31,21 +31,28 @@
 @implementation JWMediaHelper
 
 + (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array {
-    NSDictionary *id3Dic = [self id3InfoForURL:fileURL];
-    if(id3Dic) {
-        JWTrack *track = [[JWTrack alloc] initFromID3Info:id3Dic url:fileURL];
-        track.sourceType = TrackSourceTypeLocal;
-        
-        if (id3Dic[@"picture"]) {
-            NSImage *coverImg = [[NSImage alloc] initWithData:id3Dic[@"picture"]];
-            NSString *albumPath = [JWFileManager getCoverPath];
-            if (albumPath) {
-                NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
-                [coverImg saveAsJPGFileForPath:destination];
+    ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
+    if ([inputUnit openWithUrl:fileURL]) {
+        NSDictionary *meta = [inputUnit metadata];
+        [inputUnit close];
+
+        if(meta) {
+            JWTrack *track = [[JWTrack alloc] initFromID3Info:meta url:fileURL];
+            track.sourceType = TrackSourceTypeLocal;
+            if (meta[@"picture"]) {
+                NSImage *coverImg = [[NSImage alloc] initWithData:meta[@"picture"]];
+                NSString *albumPath = [JWFileManager getCoverPath];
+                if (albumPath) {
+                    NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
+                    [coverImg saveAsJPGFileForPath:destination];
+                }
+                
             }
-            
+            [array addObject:track];
         }
-        [array addObject:track];
+        
+    } else {
+        return;
     }
 }
 
@@ -81,54 +88,54 @@
     return [[NSImage alloc] initWithData:imagedata];
 }
 
-+ (NSDictionary *)id3InfoForURL:(NSURL*)fileURL {
-    NSString *pathExtension = [[fileURL pathExtension] lowercaseString];
-    if ([pathExtension isEqualToString:@"flac"]) {
-        ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
-        if ([inputUnit openWithUrl:fileURL]) {
-            NSDictionary *meta = [inputUnit metadata];
-            [inputUnit close];
-            return meta;
-        } else {
-            return nil;
-        }
-    }
-    
-    AudioFileID audioFile;
-    OSStatus theErr = noErr;
-    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
-                              kAudioFileReadPermission,
-                              kAudioFileMP3Type,
-                              &audioFile);
-    
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    UInt32 dictionarySize = 0;
-    theErr = AudioFileGetPropertyInfo (audioFile,
-                                       kAudioFilePropertyInfoDictionary,
-                                       &dictionarySize,
-                                       0);
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    CFDictionaryRef dictionary;
-    theErr = AudioFileGetProperty (audioFile,
-                                   kAudioFilePropertyInfoDictionary,
-                                   &dictionarySize,
-                                   &dictionary);
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    NSDictionary *resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
-    CFRelease (dictionary);
-    theErr = AudioFileClose (audioFile);
-    
-    return resultDic;
-}
+//+ (NSDictionary *)id3InfoForURL:(NSURL*)fileURL {
+//    NSString *pathExtension = [[fileURL pathExtension] lowercaseString];
+//    if ([pathExtension isEqualToString:@"flac"]) {
+//        ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
+//        if ([inputUnit openWithUrl:fileURL]) {
+//            NSDictionary *meta = [inputUnit metadata];
+//            [inputUnit close];
+//            return meta;
+//        } else {
+//            return nil;
+//        }
+//    }
+//    
+//    AudioFileID audioFile;
+//    OSStatus theErr = noErr;
+//    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
+//                              kAudioFileReadPermission,
+//                              kAudioFileMP3Type,
+//                              &audioFile);
+//    
+//    if (theErr != noErr) {
+//        return nil;
+//    }
+//    
+//    UInt32 dictionarySize = 0;
+//    theErr = AudioFileGetPropertyInfo (audioFile,
+//                                       kAudioFilePropertyInfoDictionary,
+//                                       &dictionarySize,
+//                                       0);
+//    if (theErr != noErr) {
+//        return nil;
+//    }
+//    
+//    CFDictionaryRef dictionary;
+//    theErr = AudioFileGetProperty (audioFile,
+//                                   kAudioFilePropertyInfoDictionary,
+//                                   &dictionarySize,
+//                                   &dictionary);
+//    if (theErr != noErr) {
+//        return nil;
+//    }
+//    
+//    NSDictionary *resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
+//    CFRelease (dictionary);
+//    theErr = AudioFileClose (audioFile);
+//    
+//    return resultDic;
+//}
 
 
 + (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *, NSError *))block {

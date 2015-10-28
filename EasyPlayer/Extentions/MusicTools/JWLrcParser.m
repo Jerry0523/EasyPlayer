@@ -103,10 +103,11 @@
         return source;
     }
     NSString *content = [source substringWithRange:NSMakeRange(startrange.location + 1, stoprange.location - startrange.location - 1)];
-    if ([content length] == 8) {
+    NSRange range = [content rangeOfString:@"([0-9][0-9]:[0-9][0-9]:[0-9][0-9])|([0-9][0-9]:[0-9][0-9])" options:NSRegularExpressionSearch];
+    
+    if (range.location != NSNotFound) {
         NSString *minute = [content substringWithRange:NSMakeRange(0, 2)];
         NSString *second = [content substringWithRange:NSMakeRange(3, 2)];
-        //                NSString *mm = [content substringWithRange:NSMakeRange(6, 2)];
         JWLrcObject *obj = [[JWLrcObject alloc] init];
         obj.timeInteval = [minute integerValue] * 60 + [second integerValue] - offset;
         [array addObject:obj];

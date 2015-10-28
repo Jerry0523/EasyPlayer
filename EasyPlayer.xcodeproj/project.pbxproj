@@ -19,9 +19,6 @@
 		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; };
 		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; };
 		84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA81BD5FB0F00654090 /* libiconv.tbd */; };
-		84C36BB01BD64CC600654090 /* JWModal.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAB1BD64CC600654090 /* JWModal.m */; };
-		84C36BB11BD64CC600654090 /* JWTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAD1BD64CC600654090 /* JWTagInfo.m */; };
-		84C36BB21BD64CC600654090 /* JWTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BAF1BD64CC600654090 /* JWTrack.m */; };
 		84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB41BD64D0600654090 /* NSColor+Components.m */; };
 		84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB61BD64D0600654090 /* NSImage+Utils.m */; };
 		84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB81BD64D0600654090 /* NSString+Comparator.m */; };
@@ -46,6 +43,9 @@
 		84C36BF91BD64D6D00654090 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE71BD64D6D00654090 /* HTTPSource.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BFA1BD64D6D00654090 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE91BD64D6D00654090 /* M3uContainer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */; };
+		84FF4E581BE06B84007B9D56 /* JWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E531BE06B84007B9D56 /* JWModel.m */; };
+		84FF4E591BE06B84007B9D56 /* JWTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E551BE06B84007B9D56 /* JWTagInfo.m */; };
+		84FF4E5A1BE06B84007B9D56 /* JWTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E571BE06B84007B9D56 /* JWTrack.m */; };
 		C43279C21BD11636005C6BBC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C11BD11636005C6BBC /* AudioToolbox.framework */; };
 		C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C31BD116A0005C6BBC /* AVFoundation.framework */; };
 		C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C51BD116A8005C6BBC /* Cocoa.framework */; };
@@ -72,12 +72,6 @@
 		8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicInfoViewController.m; sourceTree = "<group>"; };
 		8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicInfoViewController.xib; sourceTree = "<group>"; };
 		84C36BA81BD5FB0F00654090 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
-		84C36BAA1BD64CC600654090 /* JWModal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWModal.h; path = EasyPlayer/Modals/JWModal.h; sourceTree = "<group>"; };
-		84C36BAB1BD64CC600654090 /* JWModal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWModal.m; path = EasyPlayer/Modals/JWModal.m; sourceTree = "<group>"; };
-		84C36BAC1BD64CC600654090 /* JWTagInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWTagInfo.h; path = EasyPlayer/Modals/JWTagInfo.h; sourceTree = "<group>"; };
-		84C36BAD1BD64CC600654090 /* JWTagInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWTagInfo.m; path = EasyPlayer/Modals/JWTagInfo.m; sourceTree = "<group>"; };
-		84C36BAE1BD64CC600654090 /* JWTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWTrack.h; path = EasyPlayer/Modals/JWTrack.h; sourceTree = "<group>"; };
-		84C36BAF1BD64CC600654090 /* JWTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWTrack.m; path = EasyPlayer/Modals/JWTrack.m; sourceTree = "<group>"; };
 		84C36BB31BD64D0600654090 /* NSColor+Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+Components.h"; path = "EasyPlayer/Extentions/NSColor+Components.h"; sourceTree = "<group>"; };
 		84C36BB41BD64D0600654090 /* NSColor+Components.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+Components.m"; path = "EasyPlayer/Extentions/NSColor+Components.m"; sourceTree = "<group>"; };
 		84C36BB51BD64D0600654090 /* NSImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+Utils.h"; path = "EasyPlayer/Extentions/NSImage+Utils.h"; sourceTree = "<group>"; };
@@ -126,6 +120,12 @@
 		84C36BE91BD64D6D00654090 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
 		84C36BFC1BD728BC00654090 /* JWNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWNetworkHelper.h; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.h; sourceTree = "<group>"; };
 		84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWNetworkHelper.m; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.m; sourceTree = "<group>"; };
+		84FF4E521BE06B84007B9D56 /* JWModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWModel.h; path = EasyPlayer/Models/JWModel.h; sourceTree = "<group>"; };
+		84FF4E531BE06B84007B9D56 /* JWModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWModel.m; path = EasyPlayer/Models/JWModel.m; sourceTree = "<group>"; };
+		84FF4E541BE06B84007B9D56 /* JWTagInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWTagInfo.h; path = EasyPlayer/Models/JWTagInfo.h; sourceTree = "<group>"; };
+		84FF4E551BE06B84007B9D56 /* JWTagInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWTagInfo.m; path = EasyPlayer/Models/JWTagInfo.m; sourceTree = "<group>"; };
+		84FF4E561BE06B84007B9D56 /* JWTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWTrack.h; path = EasyPlayer/Models/JWTrack.h; sourceTree = "<group>"; };
+		84FF4E571BE06B84007B9D56 /* JWTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWTrack.m; path = EasyPlayer/Models/JWTrack.m; sourceTree = "<group>"; };
 		C43279C11BD11636005C6BBC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C43279C31BD116A0005C6BBC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C43279C51BD116A8005C6BBC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -152,12 +152,12 @@
 		843CC22C1BD4E07400B4CCB8 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
-				84C36BAA1BD64CC600654090 /* JWModal.h */,
-				84C36BAB1BD64CC600654090 /* JWModal.m */,
-				84C36BAC1BD64CC600654090 /* JWTagInfo.h */,
-				84C36BAD1BD64CC600654090 /* JWTagInfo.m */,
-				84C36BAE1BD64CC600654090 /* JWTrack.h */,
-				84C36BAF1BD64CC600654090 /* JWTrack.m */,
+				84FF4E521BE06B84007B9D56 /* JWModel.h */,
+				84FF4E531BE06B84007B9D56 /* JWModel.m */,
+				84FF4E541BE06B84007B9D56 /* JWTagInfo.h */,
+				84FF4E551BE06B84007B9D56 /* JWTagInfo.m */,
+				84FF4E561BE06B84007B9D56 /* JWTrack.h */,
+				84FF4E571BE06B84007B9D56 /* JWTrack.m */,
 			);
 			name = Modals;
 			sourceTree = "<group>";
@@ -381,6 +381,7 @@
 			files = (
 				84C36BF71BD64D6D00654090 /* FileSource.m in Sources */,
 				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
+				84FF4E581BE06B84007B9D56 /* JWModel.m in Sources */,
 				84C36BF21BD64D6D00654090 /* CoreAudioDecoder.m in Sources */,
 				84C36BF51BD64D6D00654090 /* CueSheetDecoder.m in Sources */,
 				84C36BF61BD64D6D00654090 /* CueSheetTrack.m in Sources */,
@@ -389,26 +390,25 @@
 				84C36BF81BD64D6D00654090 /* FlacDecoder.m in Sources */,
 				84C36BED1BD64D6D00654090 /* ORGMEngine.m in Sources */,
 				84C36BF91BD64D6D00654090 /* HTTPSource.m in Sources */,
+				84FF4E591BE06B84007B9D56 /* JWTagInfo.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
 				84C36BEF1BD64D6D00654090 /* ORGMOutputUnit.m in Sources */,
 				84C36BF11BD64D6D00654090 /* ORGMQueues.m in Sources */,
 				84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */,
 				84C36BEC1BD64D6D00654090 /* ORGMConverter.m in Sources */,
-				84C36BB01BD64CC600654090 /* JWModal.m in Sources */,
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
 				84C36BEE1BD64D6D00654090 /* ORGMInputUnit.m in Sources */,
 				84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */,
 				84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */,
-				84C36BB11BD64CC600654090 /* JWTagInfo.m in Sources */,
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
 				84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */,
 				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,
 				84C36BF41BD64D6D00654090 /* CueSheetContainer.m in Sources */,
+				84FF4E5A1BE06B84007B9D56 /* JWTrack.m in Sources */,
 				84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */,
 				84C36BF31BD64D6D00654090 /* CueSheet.m in Sources */,
 				84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */,
-				84C36BB21BD64CC600654090 /* JWTrack.m in Sources */,
 				84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */,
 				84C36BF01BD64D6D00654090 /* ORGMPluginManager.m in Sources */,
 			);

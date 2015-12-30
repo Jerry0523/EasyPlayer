@@ -33,9 +33,9 @@
     long seekFrame;
 }
 
-@property (retain, nonatomic) NSMutableData *data;
-@property (retain, nonatomic) id<ORGMSource> source;
-@property (retain, nonatomic) id<ORGMDecoder> decoder;
+@property (strong, nonatomic) NSMutableData *data;
+@property (strong, nonatomic) id<ORGMSource> source;
+@property (strong, nonatomic) id<ORGMDecoder> decoder;
 @property (assign, nonatomic) BOOL endOfInput;
 @end
 
@@ -54,10 +54,6 @@
 - (void)dealloc {
     [self close];
     free(inputBuffer);
-    [_decoder release];
-    [_source release];
-    [_data release];
-    [super dealloc];
 }
 
 #pragma mark - public

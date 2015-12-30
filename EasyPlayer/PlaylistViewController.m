@@ -29,7 +29,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.layer.backgroundColor = [NSColor colorWithWhite:1.0 alpha:.5].CGColor;
 }
 
 - (void)setSelectedIndex:(NSUInteger)idx {

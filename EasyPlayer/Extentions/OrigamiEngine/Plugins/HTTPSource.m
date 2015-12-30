@@ -31,9 +31,9 @@
 
     BOOL _connectionDidFail;
 }
-@property (retain, nonatomic) NSURLConnection *urlConnection;
-@property (retain, nonatomic) NSMutableURLRequest *request;
-@property (retain, nonatomic) NSFileHandle *fileHandle;
+@property (strong, nonatomic) NSURLConnection *urlConnection;
+@property (strong, nonatomic) NSMutableURLRequest *request;
+@property (strong, nonatomic) NSFileHandle *fileHandle;
 @end
 
 @implementation HTTPSource
@@ -43,11 +43,6 @@ const NSTimeInterval readTimeout = 1.0;
 - (void)dealloc {
     [self close];
     [_fileHandle closeFile];
-    [_fileHandle release];
-    [_urlConnection release];
-    [_request release];
-
-    [super dealloc];
 }
 
 #pragma mark - ORGMSource
@@ -68,11 +63,9 @@ const NSTimeInterval readTimeout = 1.0;
     self.request = [NSMutableURLRequest requestWithURL:url];
     [self.request addValue:@"identity" forHTTPHeaderField:@"Accept-Encoding"];
 
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:_request
+    self.urlConnection = [[NSURLConnection alloc] initWithRequest:_request
                                                                   delegate:self
                                                           startImmediately:NO];
-    self.urlConnection = connection;
-    [connection release];
 
     if ([NSThread isMainThread]) {
         [_urlConnection start];

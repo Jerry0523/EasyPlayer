@@ -46,8 +46,6 @@
         NSURL *formattedUrl = [NSURL URLWithString:newFileName relativeToURL:parentDirectory];
         [tracks addObject:formattedUrl];
     }];
-
-	[cuesheet release];
 	return tracks;
 }
 

@@ -42,11 +42,6 @@
 	return self;
 }
 
-- (void)dealloc {
-	[_tracks release];
-	[super dealloc];
-}
-
 #pragma mark - private
 - (void)parseFileWithUrl:(NSURL *)url {
 	NSStringEncoding encoding;
@@ -159,17 +154,17 @@
             if (![scanner scanUpToString:@"\"" intoString:&artist])
                 continue;
         } else if ([command isEqualToString:@"TITLE"]) {
-            NSString **titleDest;
+            NSString *titleDest;
             if (!path) {
-                titleDest = &album;
+                titleDest = album;
             } else {
-                titleDest = &title;
+                titleDest = title;
             }
             
             if (![scanner scanString:@"\"" intoString:nil])
                 continue;
             
-            if (![scanner scanUpToString:@"\"" intoString:titleDest])
+            if (![scanner scanUpToString:@"\"" intoString:&titleDest])
                 continue;
         } else if ([command isEqualToString:@"REM"]) {
             NSString *type;

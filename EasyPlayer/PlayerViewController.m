@@ -45,8 +45,22 @@
     return self.player.isPlaying;
 }
 
+- (void)rightMouseUp:(NSEvent *)theEvent {
+
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
+    
+    NSMenu *menu = [[NSMenu alloc] initWithTitle:@""];
+    NSMenuItem *list = [[NSMenuItem alloc] initWithTitle:@"List" action:@selector(rightMouseUp:) keyEquivalent:@""];
+    list.state = 1;
+    
+    NSMenuItem *card = [[NSMenuItem alloc] initWithTitle:@"Card" action:@selector(rightMouseUp:) keyEquivalent:@""];
+    [menu addItem:list];
+    [menu addItem:card];
+    
+    [self.panelSwitchControl setMenu:menu forSegment:0];
     
     self.player = [[ORGMEngine alloc] init];;
     self.player.delegate = self;

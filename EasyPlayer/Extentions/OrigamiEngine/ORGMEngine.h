@@ -61,7 +61,7 @@ typedef enum : NSInteger {
 
  @discussion Value will be provided only for the `ORGMEngineStateError`, with other states this propertie will return `nil`.
  */
-@property (retain, nonatomic, readonly) NSError *currentError;
+@property (strong, nonatomic, readonly) NSError *currentError;
 
 /**
  The object that conforms ORGMEngineDelegate protocol and acts as the delegate.

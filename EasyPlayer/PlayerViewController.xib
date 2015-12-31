@@ -141,8 +141,8 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="9FEE54E2-F8C3-4FA9-A646-4AF404638E9C" explicitItemIdentifier="add" label="" paletteLabel="Add" id="oca-mX-LoK">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="30" height="23"/>
-                        <size key="maxSize" width="30" height="30"/>
+                        <size key="minSize" width="29" height="23"/>
+                        <size key="maxSize" width="34" height="30"/>
                         <button key="view" verticalHuggingPriority="750" id="27I-bX-8ug">
                             <rect key="frame" x="0.0" y="14" width="30" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>

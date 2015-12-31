@@ -25,6 +25,8 @@
 
 #import "JWMInputUnit.h"
 #import "JWMOutputUnit.h"
+#import "NVBandpassFilter.h"
+#import "NVClippingDetection.h"
 
 @interface JWMConverter () {
     AudioStreamBasicDescription _inputFormat;
@@ -33,6 +35,10 @@
 
     void *callbackBuffer;
     void *writeBuf;
+    float *dspBuf;
+    
+    NVBandpassFilter *BPF;
+    NVClippingDetection *CDT;
 }
 
 @property (strong, nonatomic) JWMInputUnit *inputUnit;
@@ -51,6 +57,13 @@
         _inputFormat = inputUnit.format;
 
         writeBuf = malloc(CHUNK_SIZE);
+        dspBuf = malloc(CHUNK_SIZE * sizeof(float));
+        
+        BPF = [[NVBandpassFilter alloc] initWithSamplingRate:_inputFormat.mSampleRate];
+        BPF.centerFrequency = 2000.0f;
+        BPF.Q = 0.9f;
+        
+        CDT = [[NVClippingDetection alloc] initWithSamplingRate:_inputFormat.mSampleRate];
     }
     return self;
 }
@@ -58,6 +71,7 @@
 - (void)dealloc {
     free(callbackBuffer);
     free(writeBuf);
+    free(dspBuf);
 }
 
 #pragma mark - public
@@ -98,6 +112,22 @@
             break;
         }
         amountConverted = [self convert:writeBuf amount:CHUNK_SIZE];
+        
+        
+        if (amountConverted > 0) {
+            NSUInteger numFrames = amountConverted / _inputFormat.mBytesPerFrame;
+            
+            for (int i = 0; i < numFrames; i++) {
+                dspBuf[i] = (float)((SInt32*)writeBuf)[i];
+            }
+            
+            [BPF filterData:dspBuf numFrames:(UInt32)numFrames numChannels:_inputFormat.mChannelsPerFrame];
+            [CDT filterData:dspBuf numFrames:(UInt32)numFrames numChannels:_inputFormat.mChannelsPerFrame];
+            for (int i = 0; i < numFrames; i++) {
+                ((SInt32*)writeBuf)[i] = (SInt32)dspBuf[i];
+            }
+        }
+        
         dispatch_sync([JWMQueues lock_queue], ^{
             [_convertedData appendBytes:writeBuf length:amountConverted];
         });

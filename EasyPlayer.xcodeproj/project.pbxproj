@@ -35,6 +35,18 @@
 		84AD819E1C34D53B0037E162 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81931C34D53B0037E162 /* FlacDecoder.m */; };
 		84AD819F1C34D53B0037E162 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81951C34D53B0037E162 /* HTTPSource.m */; };
 		84AD81A01C34D53B0037E162 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81971C34D53B0037E162 /* M3uContainer.m */; };
+		84B64BC11C350A2F0094191B /* NVAllpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BA91C350A2F0094191B /* NVAllpassFilter.m */; };
+		84B64BC21C350A2F0094191B /* NVBandpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BAB1C350A2F0094191B /* NVBandpassFilter.m */; };
+		84B64BC31C350A2F0094191B /* NVBandpassQPeakGainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BAD1C350A2F0094191B /* NVBandpassQPeakGainFilter.m */; };
+		84B64BC41C350A2F0094191B /* NVHighpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BAF1C350A2F0094191B /* NVHighpassFilter.m */; };
+		84B64BC51C350A2F0094191B /* NVHighShelvingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB11C350A2F0094191B /* NVHighShelvingFilter.m */; };
+		84B64BC61C350A2F0094191B /* NVLowpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB31C350A2F0094191B /* NVLowpassFilter.m */; };
+		84B64BC71C350A2F0094191B /* NVLowShelvingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB51C350A2F0094191B /* NVLowShelvingFilter.m */; };
+		84B64BC81C350A2F0094191B /* NVNotchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB71C350A2F0094191B /* NVNotchFilter.m */; };
+		84B64BC91C350A2F0094191B /* NVPeakingEQFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB91C350A2F0094191B /* NVPeakingEQFilter.m */; };
+		84B64BCA1C350A2F0094191B /* NVDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BBB1C350A2F0094191B /* NVDSP.mm */; };
+		84B64BCB1C350A2F0094191B /* NVClippingDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BBE1C350A2F0094191B /* NVClippingDetection.m */; };
+		84B64BCC1C350A2F0094191B /* NVSoundLevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BC01C350A2F0094191B /* NVSoundLevelMeter.m */; };
 		84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA81BD5FB0F00654090 /* libiconv.tbd */; };
 		84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB41BD64D0600654090 /* NSColor+Components.m */; };
 		84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB61BD64D0600654090 /* NSImage+Utils.m */; };
@@ -105,6 +117,30 @@
 		84AD81951C34D53B0037E162 /* HTTPSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSource.m; sourceTree = "<group>"; };
 		84AD81961C34D53B0037E162 /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
 		84AD81971C34D53B0037E162 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
+		84B64BA81C350A2F0094191B /* NVAllpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVAllpassFilter.h; sourceTree = "<group>"; };
+		84B64BA91C350A2F0094191B /* NVAllpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVAllpassFilter.m; sourceTree = "<group>"; };
+		84B64BAA1C350A2F0094191B /* NVBandpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBandpassFilter.h; sourceTree = "<group>"; };
+		84B64BAB1C350A2F0094191B /* NVBandpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBandpassFilter.m; sourceTree = "<group>"; };
+		84B64BAC1C350A2F0094191B /* NVBandpassQPeakGainFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBandpassQPeakGainFilter.h; sourceTree = "<group>"; };
+		84B64BAD1C350A2F0094191B /* NVBandpassQPeakGainFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBandpassQPeakGainFilter.m; sourceTree = "<group>"; };
+		84B64BAE1C350A2F0094191B /* NVHighpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVHighpassFilter.h; sourceTree = "<group>"; };
+		84B64BAF1C350A2F0094191B /* NVHighpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVHighpassFilter.m; sourceTree = "<group>"; };
+		84B64BB01C350A2F0094191B /* NVHighShelvingFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVHighShelvingFilter.h; sourceTree = "<group>"; };
+		84B64BB11C350A2F0094191B /* NVHighShelvingFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVHighShelvingFilter.m; sourceTree = "<group>"; };
+		84B64BB21C350A2F0094191B /* NVLowpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVLowpassFilter.h; sourceTree = "<group>"; };
+		84B64BB31C350A2F0094191B /* NVLowpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVLowpassFilter.m; sourceTree = "<group>"; };
+		84B64BB41C350A2F0094191B /* NVLowShelvingFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVLowShelvingFilter.h; sourceTree = "<group>"; };
+		84B64BB51C350A2F0094191B /* NVLowShelvingFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVLowShelvingFilter.m; sourceTree = "<group>"; };
+		84B64BB61C350A2F0094191B /* NVNotchFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNotchFilter.h; sourceTree = "<group>"; };
+		84B64BB71C350A2F0094191B /* NVNotchFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVNotchFilter.m; sourceTree = "<group>"; };
+		84B64BB81C350A2F0094191B /* NVPeakingEQFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVPeakingEQFilter.h; sourceTree = "<group>"; };
+		84B64BB91C350A2F0094191B /* NVPeakingEQFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVPeakingEQFilter.m; sourceTree = "<group>"; };
+		84B64BBA1C350A2F0094191B /* NVDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDSP.h; sourceTree = "<group>"; };
+		84B64BBB1C350A2F0094191B /* NVDSP.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVDSP.mm; sourceTree = "<group>"; };
+		84B64BBD1C350A2F0094191B /* NVClippingDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVClippingDetection.h; sourceTree = "<group>"; };
+		84B64BBE1C350A2F0094191B /* NVClippingDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVClippingDetection.m; sourceTree = "<group>"; };
+		84B64BBF1C350A2F0094191B /* NVSoundLevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVSoundLevelMeter.h; sourceTree = "<group>"; };
+		84B64BC01C350A2F0094191B /* NVSoundLevelMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVSoundLevelMeter.m; sourceTree = "<group>"; };
 		84C36BA81BD5FB0F00654090 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		84C36BB31BD64D0600654090 /* NSColor+Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+Components.h"; path = "EasyPlayer/Extentions/NSColor+Components.h"; sourceTree = "<group>"; };
 		84C36BB41BD64D0600654090 /* NSColor+Components.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+Components.m"; path = "EasyPlayer/Extentions/NSColor+Components.m"; sourceTree = "<group>"; };
@@ -260,6 +296,7 @@
 				84AD817B1C34D5310037E162 /* JWMPluginManager.m */,
 				84AD817C1C34D5310037E162 /* JWMQueues.h */,
 				84AD817D1C34D5310037E162 /* JWMQueues.m */,
+				84B64BA61C350A2F0094191B /* NVDSP */,
 				84AD81851C34D53B0037E162 /* Plugins */,
 				849061191BCE349F008B2125 /* MusicTools */,
 				84C36BB31BD64D0600654090 /* NSColor+Components.h */,
@@ -296,6 +333,54 @@
 			);
 			name = Plugins;
 			path = EasyPlayer/Extentions/Plugins;
+			sourceTree = "<group>";
+		};
+		84B64BA61C350A2F0094191B /* NVDSP */ = {
+			isa = PBXGroup;
+			children = (
+				84B64BA71C350A2F0094191B /* Filters */,
+				84B64BBA1C350A2F0094191B /* NVDSP.h */,
+				84B64BBB1C350A2F0094191B /* NVDSP.mm */,
+				84B64BBC1C350A2F0094191B /* Utilities */,
+			);
+			name = NVDSP;
+			path = EasyPlayer/Extentions/NVDSP;
+			sourceTree = "<group>";
+		};
+		84B64BA71C350A2F0094191B /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				84B64BA81C350A2F0094191B /* NVAllpassFilter.h */,
+				84B64BA91C350A2F0094191B /* NVAllpassFilter.m */,
+				84B64BAA1C350A2F0094191B /* NVBandpassFilter.h */,
+				84B64BAB1C350A2F0094191B /* NVBandpassFilter.m */,
+				84B64BAC1C350A2F0094191B /* NVBandpassQPeakGainFilter.h */,
+				84B64BAD1C350A2F0094191B /* NVBandpassQPeakGainFilter.m */,
+				84B64BAE1C350A2F0094191B /* NVHighpassFilter.h */,
+				84B64BAF1C350A2F0094191B /* NVHighpassFilter.m */,
+				84B64BB01C350A2F0094191B /* NVHighShelvingFilter.h */,
+				84B64BB11C350A2F0094191B /* NVHighShelvingFilter.m */,
+				84B64BB21C350A2F0094191B /* NVLowpassFilter.h */,
+				84B64BB31C350A2F0094191B /* NVLowpassFilter.m */,
+				84B64BB41C350A2F0094191B /* NVLowShelvingFilter.h */,
+				84B64BB51C350A2F0094191B /* NVLowShelvingFilter.m */,
+				84B64BB61C350A2F0094191B /* NVNotchFilter.h */,
+				84B64BB71C350A2F0094191B /* NVNotchFilter.m */,
+				84B64BB81C350A2F0094191B /* NVPeakingEQFilter.h */,
+				84B64BB91C350A2F0094191B /* NVPeakingEQFilter.m */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
+		84B64BBC1C350A2F0094191B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				84B64BBD1C350A2F0094191B /* NVClippingDetection.h */,
+				84B64BBE1C350A2F0094191B /* NVClippingDetection.m */,
+				84B64BBF1C350A2F0094191B /* NVSoundLevelMeter.h */,
+				84B64BC01C350A2F0094191B /* NVSoundLevelMeter.m */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -371,32 +456,44 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84B64BC81C350A2F0094191B /* NVNotchFilter.m in Sources */,
 				84AD819E1C34D53B0037E162 /* FlacDecoder.m in Sources */,
+				84B64BC71C350A2F0094191B /* NVLowShelvingFilter.m in Sources */,
 				84AD81A01C34D53B0037E162 /* M3uContainer.m in Sources */,
 				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
+				84B64BC21C350A2F0094191B /* NVBandpassFilter.m in Sources */,
 				84FF4E581BE06B84007B9D56 /* JWModel.m in Sources */,
+				84B64BC31C350A2F0094191B /* NVBandpassQPeakGainFilter.m in Sources */,
 				84FF4E591BE06B84007B9D56 /* JWTagInfo.m in Sources */,
 				84AD81811C34D5310037E162 /* JWMInputUnit.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
+				84B64BC11C350A2F0094191B /* NVAllpassFilter.m in Sources */,
+				84B64BC41C350A2F0094191B /* NVHighpassFilter.m in Sources */,
 				84AD81831C34D5310037E162 /* JWMPluginManager.m in Sources */,
 				84AD81801C34D5310037E162 /* JWMEngine.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
 				84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */,
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
 				84AD81841C34D5310037E162 /* JWMQueues.m in Sources */,
+				84B64BC51C350A2F0094191B /* NVHighShelvingFilter.m in Sources */,
 				84AD819F1C34D53B0037E162 /* HTTPSource.m in Sources */,
+				84B64BC91C350A2F0094191B /* NVPeakingEQFilter.m in Sources */,
 				84AD817F1C34D5310037E162 /* JWMConverter.m in Sources */,
 				84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */,
 				84AD81821C34D5310037E162 /* JWMOutputUnit.m in Sources */,
 				84AD81981C34D53B0037E162 /* CoreAudioDecoder.m in Sources */,
 				84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */,
 				84AD819D1C34D53B0037E162 /* FileSource.m in Sources */,
+				84B64BC61C350A2F0094191B /* NVLowpassFilter.m in Sources */,
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
 				84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */,
 				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,
 				84AD819A1C34D53B0037E162 /* CueSheetContainer.m in Sources */,
+				84B64BCA1C350A2F0094191B /* NVDSP.mm in Sources */,
 				84FF4E5A1BE06B84007B9D56 /* JWTrack.m in Sources */,
 				84AD819C1C34D53B0037E162 /* CueSheetTrack.m in Sources */,
+				84B64BCC1C350A2F0094191B /* NVSoundLevelMeter.m in Sources */,
+				84B64BCB1C350A2F0094191B /* NVClippingDetection.m in Sources */,
 				84AD81991C34D53B0037E162 /* CueSheet.m in Sources */,
 				84AD819B1C34D53B0037E162 /* CueSheetDecoder.m in Sources */,
 				84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */,

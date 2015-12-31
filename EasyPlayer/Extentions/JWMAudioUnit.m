@@ -28,6 +28,7 @@
 @end
 
 @implementation JWMAudioUnit
+
 - (void)process {
     NSString *error = [NSString stringWithFormat:
                        NSLocalizedString(@"You must override %@ in a subclass", nil),

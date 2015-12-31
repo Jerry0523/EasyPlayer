@@ -21,13 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JWAudioUnit.h"
+#import "JWMAudioUnit.h"
 
 /**
  `JWMConverter` is a subclass of JWMAudioUnit for converting decoded `PCM` data to `PCM` format compatable with output unit. This class is a wrapper for `AudioConverterRef`, it determines `PCM` format from specified output and input units.
  */
 @class JWMOutputUnit, JWMInputUnit;
-@interface JWMConverter : JWAudioUnit
+@interface JWMConverter : JWMAudioUnit
 
 /**
  Returns initialized `JWMConverter` object and specifies input `PCM` format from input unit.

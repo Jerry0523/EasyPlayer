@@ -21,14 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JWAudioUnit.h"
+#import "JWMAudioUnit.h"
 
 #import "JWMConverter.h"
 
 /**
  `JWMOutputUnit` is a subclass of JWMAudioUnit for playing converted `PCM` data through the output device. This class gets data from the converter buffer.
  */
-@interface JWMOutputUnit : JWAudioUnit
+@interface JWMOutputUnit : JWMAudioUnit
 
 /**
  A flag that determines if instance is currently active.

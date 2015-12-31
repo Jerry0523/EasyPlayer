@@ -42,7 +42,7 @@ typedef enum : NSUInteger {
 /**
  Abstract class for playback lifecycle classes.
  */
-@interface JWAudioUnit : NSObject
+@interface JWMAudioUnit : NSObject
 
 /**
  Invokes one processing iteration.

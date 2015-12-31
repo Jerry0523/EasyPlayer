@@ -22,7 +22,7 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "JWAudioUnit.h"
+#import "JWMAudioUnit.h"
 
 @protocol JWMEngineDelegate;
 

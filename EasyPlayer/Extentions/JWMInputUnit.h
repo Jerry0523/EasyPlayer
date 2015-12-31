@@ -21,12 +21,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JWAudioUnit.h"
+#import "JWMAudioUnit.h"
 
 /**
  `JWMInputUnit` is a subclass of JWMAudioUnit for reading and decoding data from the source.
  */
-@interface JWMInputUnit : JWAudioUnit
+@interface JWMInputUnit : JWMAudioUnit
 
 /**
  A flag that determines if instance is currently decoding data.

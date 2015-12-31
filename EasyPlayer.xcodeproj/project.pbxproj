@@ -19,7 +19,7 @@
 		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; };
 		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; };
 		84AD816E1C34D50C0037E162 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AD816D1C34D50C0037E162 /* libFLAC.framework */; };
-		84AD817E1C34D5310037E162 /* JWAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81701C34D5310037E162 /* JWAudioUnit.m */; };
+		84AD817E1C34D5310037E162 /* JWMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81701C34D5310037E162 /* JWMAudioUnit.m */; };
 		84AD817F1C34D5310037E162 /* JWMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81731C34D5310037E162 /* JWMConverter.m */; };
 		84AD81801C34D5310037E162 /* JWMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81751C34D5310037E162 /* JWMEngine.m */; };
 		84AD81811C34D5310037E162 /* JWMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81771C34D5310037E162 /* JWMInputUnit.m */; };
@@ -72,8 +72,8 @@
 		8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicInfoViewController.m; sourceTree = "<group>"; };
 		8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicInfoViewController.xib; sourceTree = "<group>"; };
 		84AD816D1C34D50C0037E162 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libFLAC.framework; path = Extentions/libFLAC.framework; sourceTree = "<group>"; };
-		84AD816F1C34D5310037E162 /* JWAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWAudioUnit.h; path = EasyPlayer/Extentions/JWAudioUnit.h; sourceTree = "<group>"; };
-		84AD81701C34D5310037E162 /* JWAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWAudioUnit.m; path = EasyPlayer/Extentions/JWAudioUnit.m; sourceTree = "<group>"; };
+		84AD816F1C34D5310037E162 /* JWMAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMAudioUnit.h; path = EasyPlayer/Extentions/JWMAudioUnit.h; sourceTree = "<group>"; };
+		84AD81701C34D5310037E162 /* JWMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMAudioUnit.m; path = EasyPlayer/Extentions/JWMAudioUnit.m; sourceTree = "<group>"; };
 		84AD81711C34D5310037E162 /* JWMCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMCommonProtocols.h; path = EasyPlayer/Extentions/JWMCommonProtocols.h; sourceTree = "<group>"; };
 		84AD81721C34D5310037E162 /* JWMConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMConverter.h; path = EasyPlayer/Extentions/JWMConverter.h; sourceTree = "<group>"; };
 		84AD81731C34D5310037E162 /* JWMConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMConverter.m; path = EasyPlayer/Extentions/JWMConverter.m; sourceTree = "<group>"; };
@@ -245,8 +245,8 @@
 		849943611BCF6B5800823A6B /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
-				84AD816F1C34D5310037E162 /* JWAudioUnit.h */,
-				84AD81701C34D5310037E162 /* JWAudioUnit.m */,
+				84AD816F1C34D5310037E162 /* JWMAudioUnit.h */,
+				84AD81701C34D5310037E162 /* JWMAudioUnit.m */,
 				84AD81711C34D5310037E162 /* JWMCommonProtocols.h */,
 				84AD81721C34D5310037E162 /* JWMConverter.h */,
 				84AD81731C34D5310037E162 /* JWMConverter.m */,
@@ -400,7 +400,7 @@
 				84AD81991C34D53B0037E162 /* CueSheet.m in Sources */,
 				84AD819B1C34D53B0037E162 /* CueSheetDecoder.m in Sources */,
 				84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */,
-				84AD817E1C34D5310037E162 /* JWAudioUnit.m in Sources */,
+				84AD817E1C34D5310037E162 /* JWMAudioUnit.m in Sources */,
 				84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */,
 				84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */,
 			);

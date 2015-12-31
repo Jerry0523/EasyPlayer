@@ -21,13 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import "JWAudioUnit.h"
+#import "JWMAudioUnit.h"
 
-@interface JWAudioUnit ()
+@interface JWMAudioUnit ()
 @property (nonatomic) BOOL isProcessing;
 @end
 
-@implementation JWAudioUnit
+@implementation JWMAudioUnit
 - (void)process {
     NSString *error = [NSString stringWithFormat:
                        NSLocalizedString(@"You must override %@ in a subclass", nil),

@@ -30,7 +30,7 @@
 #import "NSImage+Utils.h"
 
 
-@interface PlayerViewController ()<ORGMEngineDelegate, PlaylistViewDelegate>
+@interface PlayerViewController ()<JWMEngineDelegate, PlaylistViewDelegate>
 
 @end
 
@@ -62,7 +62,7 @@
     
     [self.panelSwitchControl setMenu:menu forSegment:0];
     
-    self.player = [[ORGMEngine alloc] init];;
+    self.player = [[JWMEngine alloc] init];;
     self.player.delegate = self;
     
     self.playedList = [NSMutableArray array];
@@ -205,8 +205,10 @@
         
         if (self.currentTrack) {
             NSInteger selectedRow = [self.items indexOfObject:self.currentTrack];
+            playlistController.playListDelegate = nil;
             [playlistController.tableView scrollRowToVisible:selectedRow];
             [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+            playlistController.playListDelegate = self;
         }
     }
 }
@@ -352,9 +354,9 @@
     self.sortType = sortType;
 }
 
-#pragma mark - ORGMEngineDelegate
+#pragma mark - JWMEngineDelegate
 
-- (NSURL *)engineExpectsNextUrl:(ORGMEngine *)engine {
+- (NSURL *)engineExpectsNextUrl:(JWMEngine *)engine {
     JWTrack *track;
     if (self.playMode == TrackPlayModeSingle) {
         track = self.currentTrack;
@@ -366,18 +368,18 @@
     return [track fileURL];
 }
 
-- (void)engine:(ORGMEngine *)engine didChangeState:(ORGMEngineState)state {
+- (void)engine:(JWMEngine *)engine didChangeState:(JWMEngineState)state {
     switch (state) {
-        case ORGMEngineStateStopped: {
+        case JWMEngineStateStopped: {
             break;
         }
-        case ORGMEngineStatePaused: {
+        case JWMEngineStatePaused: {
             break;
         }
-        case ORGMEngineStatePlaying: {
+        case JWMEngineStatePlaying: {
             break;
         }
-        case ORGMEngineStateError: {
+        case JWMEngineStateError: {
             [self playRandomSong];
             break;
         }

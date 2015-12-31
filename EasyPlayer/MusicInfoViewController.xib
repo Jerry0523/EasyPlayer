@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="8191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MusicInfoViewController">
@@ -30,12 +30,10 @@
                                 <constraint firstAttribute="height" constant="200" id="QMb-NW-4f2"/>
                                 <constraint firstAttribute="width" constant="200" id="s3P-aD-Qny"/>
                             </constraints>
-                            <animations/>
                             <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="album" id="y62-ma-hmR"/>
                         </imageView>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wc6-El-4Zn">
                             <rect key="frame" x="-2" y="95" width="604" height="19"/>
-                            <animations/>
                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="tGI-Od-SHo">
                                 <font key="font" metaFont="system" size="16"/>
                                 <color key="textColor" red="0.3921568627" green="0.3921568627" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,7 +42,6 @@
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="avg-yH-C3O">
                             <rect key="frame" x="8" y="58" width="584" height="19"/>
-                            <animations/>
                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="F4e-tB-6m6">
                                 <font key="font" metaFont="system" size="16"/>
                                 <color key="textColor" red="0.39215686274509803" green="0.39215686274509803" blue="0.39215686274509803" alpha="1" colorSpace="calibratedRGB"/>
@@ -53,7 +50,6 @@
                         </textField>
                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x7F-KU-tNf">
                             <rect key="frame" x="8" y="20" width="584" height="22"/>
-                            <animations/>
                             <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" id="N7p-5n-utX">
                                 <font key="font" metaFont="system" size="18"/>
                                 <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
@@ -77,7 +73,6 @@
                         <constraint firstItem="MgU-XV-rhX" firstAttribute="top" secondItem="DVl-0O-e5C" secondAttribute="top" constant="20" id="qdx-2i-YpV"/>
                         <constraint firstItem="avg-yH-C3O" firstAttribute="leading" secondItem="DVl-0O-e5C" secondAttribute="leading" constant="10" id="uwO-RA-097"/>
                     </constraints>
-                    <animations/>
                 </customView>
                 <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="30" horizontalPageScroll="10" verticalLineScroll="30" verticalPageScroll="10" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="998-v7-n0Y">
                     <rect key="frame" x="600" y="0.0" width="0.0" height="420"/>
@@ -88,7 +83,6 @@
                             <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="none" columnReordering="NO" columnSelection="YES" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="30" viewBased="YES" id="47y-Se-6Wr">
                                 <rect key="frame" x="0.0" y="0.0" width="40" height="0.0"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <animations/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                 <tableColumns>
@@ -111,7 +105,6 @@
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="DIt-bY-Vny">
                                                         <rect key="frame" x="-2" y="0.0" width="44" height="17"/>
-                                                        <animations/>
                                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="center" title="Table View Cell" id="D3k-bc-BSe">
                                                             <font key="font" metaFont="system"/>
                                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -125,7 +118,6 @@
                                                     <constraint firstAttribute="trailing" secondItem="DIt-bY-Vny" secondAttribute="trailing" id="fsN-Mu-hQO"/>
                                                     <constraint firstAttribute="bottom" secondItem="DIt-bY-Vny" secondAttribute="bottom" id="kqX-H5-CzR"/>
                                                 </constraints>
-                                                <animations/>
                                                 <connections>
                                                     <outlet property="textField" destination="DIt-bY-Vny" id="3dQ-tT-2j7"/>
                                                 </connections>
@@ -139,22 +131,18 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </clipView>
                     <constraints>
                         <constraint firstAttribute="width" id="xug-f4-pFO"/>
                     </constraints>
-                    <animations/>
                     <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="1Wi-pN-hn4">
                         <rect key="frame" x="0.0" y="405" width="0.0" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Pdk-7k-t7H">
                         <rect key="frame" x="224" y="17" width="15" height="102"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
                     </scroller>
                 </scrollView>
             </subviews>
@@ -166,7 +154,6 @@
                 <constraint firstAttribute="bottom" secondItem="998-v7-n0Y" secondAttribute="bottom" id="Xcb-SK-YXV"/>
                 <constraint firstItem="998-v7-n0Y" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="r0e-GL-Dge"/>
             </constraints>
-            <animations/>
             <point key="canvasLocation" x="423" y="326"/>
         </customView>
     </objects>

@@ -1,5 +1,5 @@
 //
-//  PlayerViewController.h
+// JWMAudioUnit.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,32 +21,47 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
-#import "JWTrack.h"
-#import "JWMEngine.h"
+#import <Foundation/Foundation.h>
 
-@interface PlayerViewController : NSWindowController
+#import <AudioToolbox/AudioToolbox.h>
+#import "JWMQueues.h"
 
-@property (strong, nonatomic) NSArray *items;
-@property (strong, nonatomic) NSArray *filteredItems;
+// default reading chunk size
+#define CHUNK_SIZE 16 * 1024
+// deault buffer size
+#define BUFFER_SIZE 256 * 1024
 
-@property (strong, nonatomic) JWMEngine* player;
-@property (strong, nonatomic) JWTrack *currentTrack;
-@property (assign, nonatomic) TrackSortType sortType;
-@property (assign, nonatomic) TrackPlayMode playMode;
+/**
+ Specifies format of the PCM output
+ */
+typedef enum : NSUInteger {
+    JWMOutputFormatDefault,
+    JWMOutputFormat24bit
+} JWMEngineOutputFormat;
 
-@property (weak) IBOutlet NSToolbarItem *playToolbarItem;
+/**
+ Abstract class for playback lifecycle classes.
+ */
+@interface JWAudioUnit : NSObject
 
-@property (strong, nonatomic) NSMutableArray *playedList;
+/**
+ Invokes one processing iteration.
+ 
+ @discussion You should implement this method in subclass of `JWMAudioUnit`.
+ */
+- (void)process;
 
-@property (weak) IBOutlet NSSegmentedControl *panelSwitchControl;
-@property (weak) IBOutlet NSSegmentedControl *modeSegmentControl;
-@property (weak) IBOutlet NSSearchField *searchField;
-
-- (BOOL)isPlaying;
-
-- (IBAction)playClicked:(NSToolbarItem*)sender;
-- (IBAction)nextClicked:(id)sender;
-- (IBAction)preClicked:(id)sender;
-
+/**
+ Converts audio properties from `NSDictionary` to `ASBD` format.
+ 
+ @param properties A dictionary object. Supported keys:
+    - double `sampleRate`
+    - int `bitsPerSample`
+    - int `channels`
+    - NSString `endian`
+    - BOOL `unsigned`
+ 
+ @return A new ASBD struct.
+ */
+AudioStreamBasicDescription propertiesToASBD(NSDictionary *properties);
 @end

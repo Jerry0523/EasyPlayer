@@ -25,13 +25,13 @@
 #import "NSImage+Utils.h"
 #import "JWFileManager.h"
 #import "JWNetworkHelper.h"
-#import "ORGMInputUnit.h"
+#import "JWMInputUnit.h"
 #import <AudioToolbox/AudioToolbox.h>
 
 @implementation JWMediaHelper
 
 + (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array {
-    ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
+    JWMInputUnit *inputUnit = [[JWMInputUnit alloc] init];
     if ([inputUnit openWithUrl:fileURL]) {
         NSDictionary *meta = [inputUnit metadata];
         [inputUnit close];
@@ -91,7 +91,7 @@
 //+ (NSDictionary *)id3InfoForURL:(NSURL*)fileURL {
 //    NSString *pathExtension = [[fileURL pathExtension] lowercaseString];
 //    if ([pathExtension isEqualToString:@"flac"]) {
-//        ORGMInputUnit *inputUnit = [[ORGMInputUnit alloc] init];
+//        JWMInputUnit *inputUnit = [[JWMInputUnit alloc] init];
 //        if ([inputUnit openWithUrl:fileURL]) {
 //            NSDictionary *meta = [inputUnit metadata];
 //            [inputUnit close];

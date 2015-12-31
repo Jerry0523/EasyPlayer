@@ -1,5 +1,5 @@
 //
-//  PlayerViewController.h
+// FileSource.m
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,32 +21,66 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
-#import "JWTrack.h"
-#import "JWMEngine.h"
+#import "FileSource.h"
 
-@interface PlayerViewController : NSWindowController
+@interface FileSource () {
+    FILE *_fd;
+}
+@property (strong, nonatomic) NSURL *url;
+@end
 
-@property (strong, nonatomic) NSArray *items;
-@property (strong, nonatomic) NSArray *filteredItems;
+@implementation FileSource
 
-@property (strong, nonatomic) JWMEngine* player;
-@property (strong, nonatomic) JWTrack *currentTrack;
-@property (assign, nonatomic) TrackSortType sortType;
-@property (assign, nonatomic) TrackPlayMode playMode;
+- (void)dealloc {
+	[self close];
+}
 
-@property (weak) IBOutlet NSToolbarItem *playToolbarItem;
+#pragma mark - JWMSource
++ (NSString *)scheme {
+    return @"file";
+}
 
-@property (strong, nonatomic) NSMutableArray *playedList;
+- (NSURL *)url {
+	return _url;
+}
 
-@property (weak) IBOutlet NSSegmentedControl *panelSwitchControl;
-@property (weak) IBOutlet NSSegmentedControl *modeSegmentControl;
-@property (weak) IBOutlet NSSearchField *searchField;
+- (long)size {
+    long curpos = ftell(_fd);
+    fseek (_fd, 0, SEEK_END);
+    long size = ftell(_fd);
+    fseek(_fd, curpos, SEEK_SET);
+	return size;
+}
 
-- (BOOL)isPlaying;
+- (BOOL)open:(NSURL *)url {
+	[self setUrl:url];
+	_fd = fopen([[url path] UTF8String], "r");
+	return (_fd != NULL);
+}
 
-- (IBAction)playClicked:(NSToolbarItem*)sender;
-- (IBAction)nextClicked:(id)sender;
-- (IBAction)preClicked:(id)sender;
+- (BOOL)seekable {
+	return YES;
+}
+
+- (BOOL)seek:(long)position whence:(int)whence {
+	return (fseek(_fd, position, whence) == 0);
+}
+
+- (long)tell {
+    return ftell(_fd);
+}
+
+- (NSUInteger)read:(void *)buffer amount:(NSUInteger)amount {
+	return fread(buffer, 1, amount, _fd);
+}
+
+- (void)close {
+	if (_fd) {
+		fclose(_fd);
+		_fd = NULL;
+	}
+}
+
+#pragma mark - private
 
 @end

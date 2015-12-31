@@ -18,6 +18,23 @@
 		849061151BCE099B008B2125 /* MusicProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 849061141BCE099B008B2125 /* MusicProgressView.m */; };
 		8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */; };
 		849943601BCE4BA200823A6B /* MusicInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */; };
+		84AD816E1C34D50C0037E162 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AD816D1C34D50C0037E162 /* libFLAC.framework */; };
+		84AD817E1C34D5310037E162 /* JWAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81701C34D5310037E162 /* JWAudioUnit.m */; };
+		84AD817F1C34D5310037E162 /* JWMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81731C34D5310037E162 /* JWMConverter.m */; };
+		84AD81801C34D5310037E162 /* JWMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81751C34D5310037E162 /* JWMEngine.m */; };
+		84AD81811C34D5310037E162 /* JWMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81771C34D5310037E162 /* JWMInputUnit.m */; };
+		84AD81821C34D5310037E162 /* JWMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81791C34D5310037E162 /* JWMOutputUnit.m */; };
+		84AD81831C34D5310037E162 /* JWMPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD817B1C34D5310037E162 /* JWMPluginManager.m */; };
+		84AD81841C34D5310037E162 /* JWMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD817D1C34D5310037E162 /* JWMQueues.m */; };
+		84AD81981C34D53B0037E162 /* CoreAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81871C34D53B0037E162 /* CoreAudioDecoder.m */; };
+		84AD81991C34D53B0037E162 /* CueSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81891C34D53B0037E162 /* CueSheet.m */; };
+		84AD819A1C34D53B0037E162 /* CueSheetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD818B1C34D53B0037E162 /* CueSheetContainer.m */; };
+		84AD819B1C34D53B0037E162 /* CueSheetDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD818D1C34D53B0037E162 /* CueSheetDecoder.m */; };
+		84AD819C1C34D53B0037E162 /* CueSheetTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD818F1C34D53B0037E162 /* CueSheetTrack.m */; };
+		84AD819D1C34D53B0037E162 /* FileSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81911C34D53B0037E162 /* FileSource.m */; };
+		84AD819E1C34D53B0037E162 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81931C34D53B0037E162 /* FlacDecoder.m */; };
+		84AD819F1C34D53B0037E162 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81951C34D53B0037E162 /* HTTPSource.m */; };
+		84AD81A01C34D53B0037E162 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81971C34D53B0037E162 /* M3uContainer.m */; };
 		84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA81BD5FB0F00654090 /* libiconv.tbd */; };
 		84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB41BD64D0600654090 /* NSColor+Components.m */; };
 		84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB61BD64D0600654090 /* NSImage+Utils.m */; };
@@ -25,23 +42,6 @@
 		84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBD1BD64D5200654090 /* JWFileManager.m */; };
 		84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBF1BD64D5200654090 /* JWLrcParser.m */; };
 		84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC11BD64D5200654090 /* JWMediaHelper.m */; };
-		84C36BEA1BD64D6D00654090 /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BC61BD64D6D00654090 /* libFLAC.framework */; };
-		84C36BEB1BD64D6D00654090 /* ORGMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */; };
-		84C36BEC1BD64D6D00654090 /* ORGMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BCB1BD64D6D00654090 /* ORGMConverter.m */; };
-		84C36BED1BD64D6D00654090 /* ORGMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BCD1BD64D6D00654090 /* ORGMEngine.m */; };
-		84C36BEE1BD64D6D00654090 /* ORGMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BCF1BD64D6D00654090 /* ORGMInputUnit.m */; };
-		84C36BEF1BD64D6D00654090 /* ORGMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BD11BD64D6D00654090 /* ORGMOutputUnit.m */; };
-		84C36BF01BD64D6D00654090 /* ORGMPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BD31BD64D6D00654090 /* ORGMPluginManager.m */; };
-		84C36BF11BD64D6D00654090 /* ORGMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BD51BD64D6D00654090 /* ORGMQueues.m */; };
-		84C36BF21BD64D6D00654090 /* CoreAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BD91BD64D6D00654090 /* CoreAudioDecoder.m */; };
-		84C36BF31BD64D6D00654090 /* CueSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BDB1BD64D6D00654090 /* CueSheet.m */; };
-		84C36BF41BD64D6D00654090 /* CueSheetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BDD1BD64D6D00654090 /* CueSheetContainer.m */; };
-		84C36BF51BD64D6D00654090 /* CueSheetDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BDF1BD64D6D00654090 /* CueSheetDecoder.m */; };
-		84C36BF61BD64D6D00654090 /* CueSheetTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE11BD64D6D00654090 /* CueSheetTrack.m */; };
-		84C36BF71BD64D6D00654090 /* FileSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE31BD64D6D00654090 /* FileSource.m */; };
-		84C36BF81BD64D6D00654090 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE51BD64D6D00654090 /* FlacDecoder.m */; };
-		84C36BF91BD64D6D00654090 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE71BD64D6D00654090 /* HTTPSource.m */; };
-		84C36BFA1BD64D6D00654090 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BE91BD64D6D00654090 /* M3uContainer.m */; };
 		84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */; };
 		84FF4E581BE06B84007B9D56 /* JWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E531BE06B84007B9D56 /* JWModel.m */; };
 		84FF4E591BE06B84007B9D56 /* JWTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E551BE06B84007B9D56 /* JWTagInfo.m */; };
@@ -71,6 +71,40 @@
 		8499435C1BCE4BA200823A6B /* MusicInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicInfoViewController.h; sourceTree = "<group>"; };
 		8499435D1BCE4BA200823A6B /* MusicInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicInfoViewController.m; sourceTree = "<group>"; };
 		8499435E1BCE4BA200823A6B /* MusicInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicInfoViewController.xib; sourceTree = "<group>"; };
+		84AD816D1C34D50C0037E162 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libFLAC.framework; path = Extentions/libFLAC.framework; sourceTree = "<group>"; };
+		84AD816F1C34D5310037E162 /* JWAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWAudioUnit.h; path = EasyPlayer/Extentions/JWAudioUnit.h; sourceTree = "<group>"; };
+		84AD81701C34D5310037E162 /* JWAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWAudioUnit.m; path = EasyPlayer/Extentions/JWAudioUnit.m; sourceTree = "<group>"; };
+		84AD81711C34D5310037E162 /* JWMCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMCommonProtocols.h; path = EasyPlayer/Extentions/JWMCommonProtocols.h; sourceTree = "<group>"; };
+		84AD81721C34D5310037E162 /* JWMConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMConverter.h; path = EasyPlayer/Extentions/JWMConverter.h; sourceTree = "<group>"; };
+		84AD81731C34D5310037E162 /* JWMConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMConverter.m; path = EasyPlayer/Extentions/JWMConverter.m; sourceTree = "<group>"; };
+		84AD81741C34D5310037E162 /* JWMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMEngine.h; path = EasyPlayer/Extentions/JWMEngine.h; sourceTree = "<group>"; };
+		84AD81751C34D5310037E162 /* JWMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMEngine.m; path = EasyPlayer/Extentions/JWMEngine.m; sourceTree = "<group>"; };
+		84AD81761C34D5310037E162 /* JWMInputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMInputUnit.h; path = EasyPlayer/Extentions/JWMInputUnit.h; sourceTree = "<group>"; };
+		84AD81771C34D5310037E162 /* JWMInputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMInputUnit.m; path = EasyPlayer/Extentions/JWMInputUnit.m; sourceTree = "<group>"; };
+		84AD81781C34D5310037E162 /* JWMOutputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMOutputUnit.h; path = EasyPlayer/Extentions/JWMOutputUnit.h; sourceTree = "<group>"; };
+		84AD81791C34D5310037E162 /* JWMOutputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMOutputUnit.m; path = EasyPlayer/Extentions/JWMOutputUnit.m; sourceTree = "<group>"; };
+		84AD817A1C34D5310037E162 /* JWMPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMPluginManager.h; path = EasyPlayer/Extentions/JWMPluginManager.h; sourceTree = "<group>"; };
+		84AD817B1C34D5310037E162 /* JWMPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMPluginManager.m; path = EasyPlayer/Extentions/JWMPluginManager.m; sourceTree = "<group>"; };
+		84AD817C1C34D5310037E162 /* JWMQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMQueues.h; path = EasyPlayer/Extentions/JWMQueues.h; sourceTree = "<group>"; };
+		84AD817D1C34D5310037E162 /* JWMQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMQueues.m; path = EasyPlayer/Extentions/JWMQueues.m; sourceTree = "<group>"; };
+		84AD81861C34D53B0037E162 /* CoreAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAudioDecoder.h; sourceTree = "<group>"; };
+		84AD81871C34D53B0037E162 /* CoreAudioDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreAudioDecoder.m; sourceTree = "<group>"; };
+		84AD81881C34D53B0037E162 /* CueSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheet.h; sourceTree = "<group>"; };
+		84AD81891C34D53B0037E162 /* CueSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheet.m; sourceTree = "<group>"; };
+		84AD818A1C34D53B0037E162 /* CueSheetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetContainer.h; sourceTree = "<group>"; };
+		84AD818B1C34D53B0037E162 /* CueSheetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetContainer.m; sourceTree = "<group>"; };
+		84AD818C1C34D53B0037E162 /* CueSheetDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetDecoder.h; sourceTree = "<group>"; };
+		84AD818D1C34D53B0037E162 /* CueSheetDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetDecoder.m; sourceTree = "<group>"; };
+		84AD818E1C34D53B0037E162 /* CueSheetTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetTrack.h; sourceTree = "<group>"; };
+		84AD818F1C34D53B0037E162 /* CueSheetTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetTrack.m; sourceTree = "<group>"; };
+		84AD81901C34D53B0037E162 /* FileSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSource.h; sourceTree = "<group>"; };
+		84AD81911C34D53B0037E162 /* FileSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSource.m; sourceTree = "<group>"; };
+		84AD81921C34D53B0037E162 /* FlacDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlacDecoder.h; sourceTree = "<group>"; };
+		84AD81931C34D53B0037E162 /* FlacDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlacDecoder.m; sourceTree = "<group>"; };
+		84AD81941C34D53B0037E162 /* HTTPSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPSource.h; sourceTree = "<group>"; };
+		84AD81951C34D53B0037E162 /* HTTPSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSource.m; sourceTree = "<group>"; };
+		84AD81961C34D53B0037E162 /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
+		84AD81971C34D53B0037E162 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
 		84C36BA81BD5FB0F00654090 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		84C36BB31BD64D0600654090 /* NSColor+Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+Components.h"; path = "EasyPlayer/Extentions/NSColor+Components.h"; sourceTree = "<group>"; };
 		84C36BB41BD64D0600654090 /* NSColor+Components.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+Components.m"; path = "EasyPlayer/Extentions/NSColor+Components.m"; sourceTree = "<group>"; };
@@ -84,40 +118,6 @@
 		84C36BBF1BD64D5200654090 /* JWLrcParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWLrcParser.m; path = EasyPlayer/Extentions/MusicTools/JWLrcParser.m; sourceTree = "<group>"; };
 		84C36BC01BD64D5200654090 /* JWMediaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWMediaHelper.h; path = EasyPlayer/Extentions/MusicTools/JWMediaHelper.h; sourceTree = "<group>"; };
 		84C36BC11BD64D5200654090 /* JWMediaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMediaHelper.m; path = EasyPlayer/Extentions/MusicTools/JWMediaHelper.m; sourceTree = "<group>"; };
-		84C36BC61BD64D6D00654090 /* libFLAC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libFLAC.framework; path = Extentions/OrigamiEngine/libFLAC.framework; sourceTree = "<group>"; };
-		84C36BC71BD64D6D00654090 /* ORGMAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMAudioUnit.h; sourceTree = "<group>"; };
-		84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMAudioUnit.m; sourceTree = "<group>"; };
-		84C36BC91BD64D6D00654090 /* ORGMCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMCommonProtocols.h; sourceTree = "<group>"; };
-		84C36BCA1BD64D6D00654090 /* ORGMConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMConverter.h; sourceTree = "<group>"; };
-		84C36BCB1BD64D6D00654090 /* ORGMConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMConverter.m; sourceTree = "<group>"; };
-		84C36BCC1BD64D6D00654090 /* ORGMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMEngine.h; sourceTree = "<group>"; };
-		84C36BCD1BD64D6D00654090 /* ORGMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMEngine.m; sourceTree = "<group>"; };
-		84C36BCE1BD64D6D00654090 /* ORGMInputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMInputUnit.h; sourceTree = "<group>"; };
-		84C36BCF1BD64D6D00654090 /* ORGMInputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMInputUnit.m; sourceTree = "<group>"; };
-		84C36BD01BD64D6D00654090 /* ORGMOutputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMOutputUnit.h; sourceTree = "<group>"; };
-		84C36BD11BD64D6D00654090 /* ORGMOutputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMOutputUnit.m; sourceTree = "<group>"; };
-		84C36BD21BD64D6D00654090 /* ORGMPluginManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMPluginManager.h; sourceTree = "<group>"; };
-		84C36BD31BD64D6D00654090 /* ORGMPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMPluginManager.m; sourceTree = "<group>"; };
-		84C36BD41BD64D6D00654090 /* ORGMQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ORGMQueues.h; sourceTree = "<group>"; };
-		84C36BD51BD64D6D00654090 /* ORGMQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ORGMQueues.m; sourceTree = "<group>"; };
-		84C36BD81BD64D6D00654090 /* CoreAudioDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreAudioDecoder.h; sourceTree = "<group>"; };
-		84C36BD91BD64D6D00654090 /* CoreAudioDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreAudioDecoder.m; sourceTree = "<group>"; };
-		84C36BDA1BD64D6D00654090 /* CueSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheet.h; sourceTree = "<group>"; };
-		84C36BDB1BD64D6D00654090 /* CueSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheet.m; sourceTree = "<group>"; };
-		84C36BDC1BD64D6D00654090 /* CueSheetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetContainer.h; sourceTree = "<group>"; };
-		84C36BDD1BD64D6D00654090 /* CueSheetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetContainer.m; sourceTree = "<group>"; };
-		84C36BDE1BD64D6D00654090 /* CueSheetDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetDecoder.h; sourceTree = "<group>"; };
-		84C36BDF1BD64D6D00654090 /* CueSheetDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetDecoder.m; sourceTree = "<group>"; };
-		84C36BE01BD64D6D00654090 /* CueSheetTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetTrack.h; sourceTree = "<group>"; };
-		84C36BE11BD64D6D00654090 /* CueSheetTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CueSheetTrack.m; sourceTree = "<group>"; };
-		84C36BE21BD64D6D00654090 /* FileSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileSource.h; sourceTree = "<group>"; };
-		84C36BE31BD64D6D00654090 /* FileSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileSource.m; sourceTree = "<group>"; };
-		84C36BE41BD64D6D00654090 /* FlacDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlacDecoder.h; sourceTree = "<group>"; };
-		84C36BE51BD64D6D00654090 /* FlacDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlacDecoder.m; sourceTree = "<group>"; };
-		84C36BE61BD64D6D00654090 /* HTTPSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPSource.h; sourceTree = "<group>"; };
-		84C36BE71BD64D6D00654090 /* HTTPSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSource.m; sourceTree = "<group>"; };
-		84C36BE81BD64D6D00654090 /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
-		84C36BE91BD64D6D00654090 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
 		84C36BFC1BD728BC00654090 /* JWNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWNetworkHelper.h; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.h; sourceTree = "<group>"; };
 		84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWNetworkHelper.m; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.m; sourceTree = "<group>"; };
 		84FF4E521BE06B84007B9D56 /* JWModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWModel.h; path = EasyPlayer/Models/JWModel.h; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C36BEA1BD64D6D00654090 /* libFLAC.framework in Frameworks */,
+				84AD816E1C34D50C0037E162 /* libFLAC.framework in Frameworks */,
 				84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */,
 				C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */,
 				C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */,
@@ -217,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				84C36BA81BD5FB0F00654090 /* libiconv.tbd */,
-				84C36BC61BD64D6D00654090 /* libFLAC.framework */,
+				84AD816D1C34D50C0037E162 /* libFLAC.framework */,
 				C43279C71BD116AE005C6BBC /* QuartzCore.framework */,
 				C43279C51BD116A8005C6BBC /* Cocoa.framework */,
 				C43279C31BD116A0005C6BBC /* AVFoundation.framework */,
@@ -245,8 +245,23 @@
 		849943611BCF6B5800823A6B /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				84AD816F1C34D5310037E162 /* JWAudioUnit.h */,
+				84AD81701C34D5310037E162 /* JWAudioUnit.m */,
+				84AD81711C34D5310037E162 /* JWMCommonProtocols.h */,
+				84AD81721C34D5310037E162 /* JWMConverter.h */,
+				84AD81731C34D5310037E162 /* JWMConverter.m */,
+				84AD81741C34D5310037E162 /* JWMEngine.h */,
+				84AD81751C34D5310037E162 /* JWMEngine.m */,
+				84AD81761C34D5310037E162 /* JWMInputUnit.h */,
+				84AD81771C34D5310037E162 /* JWMInputUnit.m */,
+				84AD81781C34D5310037E162 /* JWMOutputUnit.h */,
+				84AD81791C34D5310037E162 /* JWMOutputUnit.m */,
+				84AD817A1C34D5310037E162 /* JWMPluginManager.h */,
+				84AD817B1C34D5310037E162 /* JWMPluginManager.m */,
+				84AD817C1C34D5310037E162 /* JWMQueues.h */,
+				84AD817D1C34D5310037E162 /* JWMQueues.m */,
+				84AD81851C34D53B0037E162 /* Plugins */,
 				849061191BCE349F008B2125 /* MusicTools */,
-				84C36BC51BD64D6D00654090 /* OrigamiEngine */,
 				84C36BB31BD64D0600654090 /* NSColor+Components.h */,
 				84C36BB41BD64D0600654090 /* NSColor+Components.m */,
 				84C36BB51BD64D0600654090 /* NSImage+Utils.h */,
@@ -257,53 +272,30 @@
 			name = Extentions;
 			sourceTree = "<group>";
 		};
-		84C36BC51BD64D6D00654090 /* OrigamiEngine */ = {
+		84AD81851C34D53B0037E162 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				84C36BC71BD64D6D00654090 /* ORGMAudioUnit.h */,
-				84C36BC81BD64D6D00654090 /* ORGMAudioUnit.m */,
-				84C36BC91BD64D6D00654090 /* ORGMCommonProtocols.h */,
-				84C36BCA1BD64D6D00654090 /* ORGMConverter.h */,
-				84C36BCB1BD64D6D00654090 /* ORGMConverter.m */,
-				84C36BCC1BD64D6D00654090 /* ORGMEngine.h */,
-				84C36BCD1BD64D6D00654090 /* ORGMEngine.m */,
-				84C36BCE1BD64D6D00654090 /* ORGMInputUnit.h */,
-				84C36BCF1BD64D6D00654090 /* ORGMInputUnit.m */,
-				84C36BD01BD64D6D00654090 /* ORGMOutputUnit.h */,
-				84C36BD11BD64D6D00654090 /* ORGMOutputUnit.m */,
-				84C36BD21BD64D6D00654090 /* ORGMPluginManager.h */,
-				84C36BD31BD64D6D00654090 /* ORGMPluginManager.m */,
-				84C36BD41BD64D6D00654090 /* ORGMQueues.h */,
-				84C36BD51BD64D6D00654090 /* ORGMQueues.m */,
-				84C36BD71BD64D6D00654090 /* Plugins */,
+				84AD81861C34D53B0037E162 /* CoreAudioDecoder.h */,
+				84AD81871C34D53B0037E162 /* CoreAudioDecoder.m */,
+				84AD81881C34D53B0037E162 /* CueSheet.h */,
+				84AD81891C34D53B0037E162 /* CueSheet.m */,
+				84AD818A1C34D53B0037E162 /* CueSheetContainer.h */,
+				84AD818B1C34D53B0037E162 /* CueSheetContainer.m */,
+				84AD818C1C34D53B0037E162 /* CueSheetDecoder.h */,
+				84AD818D1C34D53B0037E162 /* CueSheetDecoder.m */,
+				84AD818E1C34D53B0037E162 /* CueSheetTrack.h */,
+				84AD818F1C34D53B0037E162 /* CueSheetTrack.m */,
+				84AD81901C34D53B0037E162 /* FileSource.h */,
+				84AD81911C34D53B0037E162 /* FileSource.m */,
+				84AD81921C34D53B0037E162 /* FlacDecoder.h */,
+				84AD81931C34D53B0037E162 /* FlacDecoder.m */,
+				84AD81941C34D53B0037E162 /* HTTPSource.h */,
+				84AD81951C34D53B0037E162 /* HTTPSource.m */,
+				84AD81961C34D53B0037E162 /* M3uContainer.h */,
+				84AD81971C34D53B0037E162 /* M3uContainer.m */,
 			);
-			name = OrigamiEngine;
-			path = EasyPlayer/Extentions/OrigamiEngine;
-			sourceTree = "<group>";
-		};
-		84C36BD71BD64D6D00654090 /* Plugins */ = {
-			isa = PBXGroup;
-			children = (
-				84C36BD81BD64D6D00654090 /* CoreAudioDecoder.h */,
-				84C36BD91BD64D6D00654090 /* CoreAudioDecoder.m */,
-				84C36BDA1BD64D6D00654090 /* CueSheet.h */,
-				84C36BDB1BD64D6D00654090 /* CueSheet.m */,
-				84C36BDC1BD64D6D00654090 /* CueSheetContainer.h */,
-				84C36BDD1BD64D6D00654090 /* CueSheetContainer.m */,
-				84C36BDE1BD64D6D00654090 /* CueSheetDecoder.h */,
-				84C36BDF1BD64D6D00654090 /* CueSheetDecoder.m */,
-				84C36BE01BD64D6D00654090 /* CueSheetTrack.h */,
-				84C36BE11BD64D6D00654090 /* CueSheetTrack.m */,
-				84C36BE21BD64D6D00654090 /* FileSource.h */,
-				84C36BE31BD64D6D00654090 /* FileSource.m */,
-				84C36BE41BD64D6D00654090 /* FlacDecoder.h */,
-				84C36BE51BD64D6D00654090 /* FlacDecoder.m */,
-				84C36BE61BD64D6D00654090 /* HTTPSource.h */,
-				84C36BE71BD64D6D00654090 /* HTTPSource.m */,
-				84C36BE81BD64D6D00654090 /* M3uContainer.h */,
-				84C36BE91BD64D6D00654090 /* M3uContainer.m */,
-			);
-			path = Plugins;
+			name = Plugins;
+			path = EasyPlayer/Extentions/Plugins;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,38 +371,38 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84C36BF71BD64D6D00654090 /* FileSource.m in Sources */,
+				84AD819E1C34D53B0037E162 /* FlacDecoder.m in Sources */,
+				84AD81A01C34D53B0037E162 /* M3uContainer.m in Sources */,
 				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
 				84FF4E581BE06B84007B9D56 /* JWModel.m in Sources */,
-				84C36BF21BD64D6D00654090 /* CoreAudioDecoder.m in Sources */,
-				84C36BF51BD64D6D00654090 /* CueSheetDecoder.m in Sources */,
-				84C36BF61BD64D6D00654090 /* CueSheetTrack.m in Sources */,
-				84C36BFA1BD64D6D00654090 /* M3uContainer.m in Sources */,
-				84C36BEB1BD64D6D00654090 /* ORGMAudioUnit.m in Sources */,
-				84C36BF81BD64D6D00654090 /* FlacDecoder.m in Sources */,
-				84C36BED1BD64D6D00654090 /* ORGMEngine.m in Sources */,
-				84C36BF91BD64D6D00654090 /* HTTPSource.m in Sources */,
 				84FF4E591BE06B84007B9D56 /* JWTagInfo.m in Sources */,
+				84AD81811C34D5310037E162 /* JWMInputUnit.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
+				84AD81831C34D5310037E162 /* JWMPluginManager.m in Sources */,
+				84AD81801C34D5310037E162 /* JWMEngine.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
-				84C36BEF1BD64D6D00654090 /* ORGMOutputUnit.m in Sources */,
-				84C36BF11BD64D6D00654090 /* ORGMQueues.m in Sources */,
 				84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */,
-				84C36BEC1BD64D6D00654090 /* ORGMConverter.m in Sources */,
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
-				84C36BEE1BD64D6D00654090 /* ORGMInputUnit.m in Sources */,
+				84AD81841C34D5310037E162 /* JWMQueues.m in Sources */,
+				84AD819F1C34D53B0037E162 /* HTTPSource.m in Sources */,
+				84AD817F1C34D5310037E162 /* JWMConverter.m in Sources */,
 				84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */,
+				84AD81821C34D5310037E162 /* JWMOutputUnit.m in Sources */,
+				84AD81981C34D53B0037E162 /* CoreAudioDecoder.m in Sources */,
 				84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */,
+				84AD819D1C34D53B0037E162 /* FileSource.m in Sources */,
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
 				84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */,
 				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,
-				84C36BF41BD64D6D00654090 /* CueSheetContainer.m in Sources */,
+				84AD819A1C34D53B0037E162 /* CueSheetContainer.m in Sources */,
 				84FF4E5A1BE06B84007B9D56 /* JWTrack.m in Sources */,
+				84AD819C1C34D53B0037E162 /* CueSheetTrack.m in Sources */,
+				84AD81991C34D53B0037E162 /* CueSheet.m in Sources */,
+				84AD819B1C34D53B0037E162 /* CueSheetDecoder.m in Sources */,
 				84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */,
-				84C36BF31BD64D6D00654090 /* CueSheet.m in Sources */,
+				84AD817E1C34D5310037E162 /* JWAudioUnit.m in Sources */,
 				84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */,
 				84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */,
-				84C36BF01BD64D6D00654090 /* ORGMPluginManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,7 +508,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					"$(PROJECT_DIR)/EasyPlayer/Extentions/OrigamiEngine",
+					"$(PROJECT_DIR)/EasyPlayer/Extentions",
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
@@ -536,7 +528,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					"$(PROJECT_DIR)/EasyPlayer/Extentions/OrigamiEngine",
+					"$(PROJECT_DIR)/EasyPlayer/Extentions",
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";

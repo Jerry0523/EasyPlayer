@@ -1,5 +1,5 @@
 //
-//  PlayerViewController.h
+// HTTPSource.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,32 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
-#import "JWTrack.h"
-#import "JWMEngine.h"
+#import "JWMCommonProtocols.h"
 
-@interface PlayerViewController : NSWindowController
-
-@property (strong, nonatomic) NSArray *items;
-@property (strong, nonatomic) NSArray *filteredItems;
-
-@property (strong, nonatomic) JWMEngine* player;
-@property (strong, nonatomic) JWTrack *currentTrack;
-@property (assign, nonatomic) TrackSortType sortType;
-@property (assign, nonatomic) TrackPlayMode playMode;
-
-@property (weak) IBOutlet NSToolbarItem *playToolbarItem;
-
-@property (strong, nonatomic) NSMutableArray *playedList;
-
-@property (weak) IBOutlet NSSegmentedControl *panelSwitchControl;
-@property (weak) IBOutlet NSSegmentedControl *modeSegmentControl;
-@property (weak) IBOutlet NSSearchField *searchField;
-
-- (BOOL)isPlaying;
-
-- (IBAction)playClicked:(NSToolbarItem*)sender;
-- (IBAction)nextClicked:(id)sender;
-- (IBAction)preClicked:(id)sender;
-
+/**
+ `HTTPSource` is a source plugin that provides support of the `http` url scheme.
+ */
+@interface HTTPSource : NSObject <JWMSource>
 @end

@@ -1,5 +1,5 @@
 //
-//  PlayerViewController.h
+// CueSheetDecoder.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,32 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
-#import "JWTrack.h"
-#import "JWMEngine.h"
+#import "JWMCommonProtocols.h"
 
-@interface PlayerViewController : NSWindowController
-
-@property (strong, nonatomic) NSArray *items;
-@property (strong, nonatomic) NSArray *filteredItems;
-
-@property (strong, nonatomic) JWMEngine* player;
-@property (strong, nonatomic) JWTrack *currentTrack;
-@property (assign, nonatomic) TrackSortType sortType;
-@property (assign, nonatomic) TrackPlayMode playMode;
-
-@property (weak) IBOutlet NSToolbarItem *playToolbarItem;
-
-@property (strong, nonatomic) NSMutableArray *playedList;
-
-@property (weak) IBOutlet NSSegmentedControl *panelSwitchControl;
-@property (weak) IBOutlet NSSegmentedControl *modeSegmentControl;
-@property (weak) IBOutlet NSSearchField *searchField;
-
-- (BOOL)isPlaying;
-
-- (IBAction)playClicked:(NSToolbarItem*)sender;
-- (IBAction)nextClicked:(id)sender;
-- (IBAction)preClicked:(id)sender;
-
+/**
+ `CueSheetDecoder` is a decoder plugin that provides support of the `cue` extension. This decoder provides support for `single-file cue` (multiple tracks within one `flac` file), thus url fragments are used for addressing files within a `cue` sheet. For example, `single_file.cue#3` is a path for the third `flac` track within a `cue` file named `single_file.cue`. Basically, this class is a wrapper for FlacDecoder, it only provides total frame number calculation. If you need to play `multi-file cue` (each track have it's own `flac` file, in this case `cue` is a container) you should parse `cue` file with CueSheetContainer and decode tracks via FlacDecoder.
+ */
+@interface CueSheetDecoder : NSObject <JWMDecoder>
 @end

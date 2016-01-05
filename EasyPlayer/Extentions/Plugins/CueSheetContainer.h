@@ -23,8 +23,6 @@
 
 #import "JWMCommonProtocols.h"
 
-/**
- `CueSheetContainer` is a container decoder plugin that provides support of the `cue` containers.
- */
 @interface CueSheetContainer : NSObject <JWMContainer>
+
 @end

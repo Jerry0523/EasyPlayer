@@ -23,6 +23,11 @@
 
 #import "JWFileManager.h"
 
+#import <Availability.h>
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+#import <MediaPlayer/MediaPlayer.h>
+#endif
+
 @implementation JWFileManager
 
 + (NSString*)getAppRootPath {
@@ -84,6 +89,34 @@
 }
 
 + (NSArray*)getItuensMediaArray {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+    NSMutableArray *mutable = [NSMutableArray array];
+    MPMediaQuery *everything = [[MPMediaQuery alloc] init];
+    NSArray *itemsFromGenericQuery = [everything items];
+    for (MPMediaItem *song in itemsFromGenericQuery) {
+        if (song.mediaType == MPMediaTypeMusic && song.assetURL) {
+            NSMutableDictionary *info = [NSMutableDictionary dictionary];
+            [info setObject:song.assetURL.absoluteString forKey:@"Location"];
+            
+            if (song.title) {
+                [info setObject:song.title forKey:@"Name"];
+            }
+            if (song.artist) {
+                [info setObject:song.artist forKey:@"Artist"];
+            }
+            if (song.albumTitle) {
+                [info setObject:song.albumTitle forKey:@"Album"];
+            }
+            [info setObject:@(song.playbackDuration * 1000) forKey:@"TotalTime"];
+            [info setObject:song forKey:@"userInfo"];
+            
+            JWTrack *track = [[JWTrack alloc] initFromDictionary:info];
+            [mutable addObject:track];
+        }
+    }
+    return mutable;
+#else
+    
     NSMutableArray *mutable = [NSMutableArray array];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
     if(paths.count > 0) {
@@ -104,6 +137,7 @@
         }
     }
     return mutable;
+#endif
 }
 
 + (NSArray*)getLocalMediaArray {

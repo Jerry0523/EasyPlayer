@@ -23,10 +23,9 @@
 
 #import "NSImage+Utils.h"
 
-@implementation NSImage (Utils)
+@implementation JWImage (Utils)
 
-- (NSColor*) mainColor {
-    
+- (JWColor*) mainColor {
     int bitmapInfo = kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedLast;
     CGContextRef context = NULL;
     CGSize thumbSize = self.size;
@@ -42,9 +41,14 @@
                                                      bitmapInfo);
         
         CGRect drawRect = CGRectMake(0, 0, thumbSize.width, thumbSize.height);
-        CGImageRef cgRef = [self CGImageForProposedRect:NULL
-                                                context:nil
+        CGImageRef cgRef;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+        cgRef = self.CGImage;
+#else
+        cgRef = [self CGImageForProposedRect:NULL
+                                           context:nil
                                                   hints:nil];
+#endif
         CGContextDrawImage(context, drawRect, cgRef);
         CGColorSpaceRelease(colorSpace);
     }
@@ -93,10 +97,14 @@
         
     }
     
-    return [NSColor colorWithRed:([MaxColor[0] intValue]/255.0f) green:([MaxColor[1] intValue]/255.0f) blue:([MaxColor[2] intValue]/255.0f) alpha:([MaxColor[3] intValue] * .7 / 255.0f)];
+    return [JWColor colorWithRed:([MaxColor[0] intValue]/255.0f) green:([MaxColor[1] intValue]/255.0f) blue:([MaxColor[2] intValue]/255.0f) alpha:([MaxColor[3] intValue] * .7 / 255.0f)];
 }
 
 - (void) saveAsJPGFileForPath:(NSString*)path {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+    [UIImagePNGRepresentation(self) writeToFile:path atomically:YES];
+#else
+    
     CGImageRef cgRef = [self CGImageForProposedRect:NULL
                                              context:nil
                                                hints:nil];
@@ -106,16 +114,25 @@
     if (path) {
         [jpgData writeToFile:path atomically:YES];
     }
+#endif
 }
 
-- (NSImage*)scaledImageForSize:(CGSize)size {
+- (JWImage*)scaledImageForSize:(CGSize)size {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+    UIGraphicsBeginImageContext(CGSizeMake(size.width, size.height));
+    [self drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    JWImage *resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return resizedImage;
+#else
     CGImageRef cgRef = [self CGImageForProposedRect:NULL
                                             context:nil
                                               hints:nil];
     NSBitmapImageRep *newRep = [[NSBitmapImageRep alloc] initWithCGImage:cgRef];
     [newRep setSize:size];
     NSData *jpgData = [newRep representationUsingType:NSJPEGFileType properties:@{}];
-    return [[NSImage alloc] initWithData:jpgData];
+    return [[JWImage alloc] initWithData:jpgData];
+#endif
 }
 
 @end

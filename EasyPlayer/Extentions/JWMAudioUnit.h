@@ -26,42 +26,18 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "JWMQueues.h"
 
-// default reading chunk size
 #define CHUNK_SIZE 16 * 1024
-// deault buffer size
 #define BUFFER_SIZE 256 * 1024
 
-/**
- Specifies format of the PCM output
- */
-typedef enum : NSUInteger {
+
+typedef NS_ENUM(NSInteger, JWMEngineOutputFormat) {
     JWMOutputFormatDefault,
     JWMOutputFormat24bit
-} JWMEngineOutputFormat;
+};
 
-/**
- Abstract class for playback lifecycle classes.
- */
 @interface JWMAudioUnit : NSObject
 
-/**
- Invokes one processing iteration.
- 
- @discussion You should implement this method in subclass of `JWMAudioUnit`.
- */
 - (void)process;
-
-/**
- Converts audio properties from `NSDictionary` to `ASBD` format.
- 
- @param properties A dictionary object. Supported keys:
-    - double `sampleRate`
-    - int `bitsPerSample`
-    - int `channels`
-    - NSString `endian`
-    - BOOL `unsigned`
- 
- @return A new ASBD struct.
- */
 AudioStreamBasicDescription propertiesToASBD(NSDictionary *properties);
+
 @end

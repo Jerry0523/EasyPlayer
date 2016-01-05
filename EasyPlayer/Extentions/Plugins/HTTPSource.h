@@ -23,8 +23,6 @@
 
 #import "JWMCommonProtocols.h"
 
-/**
- `HTTPSource` is a source plugin that provides support of the `http` url scheme.
- */
 @interface HTTPSource : NSObject <JWMSource>
+
 @end

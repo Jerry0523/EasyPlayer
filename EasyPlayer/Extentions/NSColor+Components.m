@@ -23,7 +23,7 @@
 
 #import "NSColor+Components.h"
 
-@implementation NSColor (Components)
+@implementation JWColor (Components)
 
 - (void)getRGBComponents:(CGFloat[4])result {
     CGColorRef color = [self CGColor];

@@ -21,9 +21,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
+#import "JWHeader.h"
 
-@interface NSColor (Components)
+@interface JWColor (Components)
 
 - (void)getRGBComponents:(CGFloat[4])components;
 - (void)getHSBComponnets:(CGFloat[3])components;

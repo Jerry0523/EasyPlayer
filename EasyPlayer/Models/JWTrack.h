@@ -22,23 +22,22 @@
 // THE SOFTWARE.
 
 #import "JWModel.h"
-#import <Cocoa/Cocoa.h>
 
-typedef enum{
-    TrackSortTypeDefault = 0,
+typedef NS_ENUM(NSInteger, TrackSortType) {
+    TrackSortTypeDefault,
     TrackSortTypeArtist,
     TrackSortTypeAlbum
-} TrackSortType;
+};
 
-typedef enum{
-    TrackPlayModeRandom = 0,
+typedef NS_ENUM(NSInteger, TrackPlayMode) {
+    TrackPlayModeRandom,
     TrackPlayModeSingle
-} TrackPlayMode;
+};
 
-typedef enum{
-    TrackSourceTypeItunes = 0,
+typedef NS_ENUM(NSInteger, TrackSourceType) {
+    TrackSourceTypeItunes,
     TrackSourceTypeLocal
-} TrackSourceType;
+};
 
 @interface JWTrack : JWModel
 
@@ -48,6 +47,7 @@ typedef enum{
 @property (nonatomic, strong) NSString *Location;
 @property (nonatomic, assign) double TotalTime;
 @property (nonatomic, assign) TrackSourceType sourceType;
+@property (nonatomic, strong) id userInfo;
 
 - (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL;
 

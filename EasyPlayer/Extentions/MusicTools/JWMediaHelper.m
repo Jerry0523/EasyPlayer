@@ -40,7 +40,7 @@
             JWTrack *track = [[JWTrack alloc] initFromID3Info:meta url:fileURL];
             track.sourceType = TrackSourceTypeLocal;
             if (meta[@"picture"]) {
-                NSImage *coverImg = [[NSImage alloc] initWithData:meta[@"picture"]];
+                JWImage *coverImg = [[JWImage alloc] initWithData:meta[@"picture"]];
                 NSString *albumPath = [JWFileManager getCoverPath];
                 if (albumPath) {
                     NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
@@ -56,7 +56,7 @@
     }
 }
 
-+ (NSImage*)innerCoverImageForURL:(NSURL*)fileURL {
++ (JWImage*)innerCoverImageForURL:(NSURL*)fileURL {
     AudioFileID audioFile;
     OSStatus theErr = noErr;
     theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
@@ -85,57 +85,9 @@
     CFRelease(albumPic);
     theErr = AudioFileClose (audioFile);
     
-    return [[NSImage alloc] initWithData:imagedata];
+    return [[JWImage alloc] initWithData:imagedata];
 }
 
-//+ (NSDictionary *)id3InfoForURL:(NSURL*)fileURL {
-//    NSString *pathExtension = [[fileURL pathExtension] lowercaseString];
-//    if ([pathExtension isEqualToString:@"flac"]) {
-//        JWMInputUnit *inputUnit = [[JWMInputUnit alloc] init];
-//        if ([inputUnit openWithUrl:fileURL]) {
-//            NSDictionary *meta = [inputUnit metadata];
-//            [inputUnit close];
-//            return meta;
-//        } else {
-//            return nil;
-//        }
-//    }
-//    
-//    AudioFileID audioFile;
-//    OSStatus theErr = noErr;
-//    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
-//                              kAudioFileReadPermission,
-//                              kAudioFileMP3Type,
-//                              &audioFile);
-//    
-//    if (theErr != noErr) {
-//        return nil;
-//    }
-//    
-//    UInt32 dictionarySize = 0;
-//    theErr = AudioFileGetPropertyInfo (audioFile,
-//                                       kAudioFilePropertyInfoDictionary,
-//                                       &dictionarySize,
-//                                       0);
-//    if (theErr != noErr) {
-//        return nil;
-//    }
-//    
-//    CFDictionaryRef dictionary;
-//    theErr = AudioFileGetProperty (audioFile,
-//                                   kAudioFilePropertyInfoDictionary,
-//                                   &dictionarySize,
-//                                   &dictionary);
-//    if (theErr != noErr) {
-//        return nil;
-//    }
-//    
-//    NSDictionary *resultDic = (__bridge NSDictionary *)(dictionary);  //Convert
-//    CFRelease (dictionary);
-//    theErr = AudioFileClose (audioFile);
-//    
-//    return resultDic;
-//}
 
 
 + (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *, NSError *))block {
@@ -162,38 +114,23 @@
                     }
                 }
             }];
-            
-            
-//            [self getSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
-//                if (info) {
-//                    [self downloadLrcInfo:info key:cachedKey onComplete:^(NSString *lrc, NSError *error) {
-//                        if (block) {
-//                            block(lrc, track, error);
-//                        }
-//                    }];
-//                } else {
-//                    if (block) {
-//                        block(nil, track, error);
-//                    }
-//                }
-//            }];
         }
         
     }
 }
 
-+ (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(NSImage*, JWTrack *track, NSError *))block {
++ (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(JWImage*, JWTrack *track, NSError *))block {
     NSString *cachedKey = [track cacheKey];
     NSString *albumPath = [JWFileManager getCoverPath];
     if (albumPath) {
         NSString *destination = [albumPath stringByAppendingPathComponent:cachedKey];
         if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
-            NSImage *image = [[NSImage alloc] initWithContentsOfFile:destination];
+            JWImage *image = [[JWImage alloc] initWithContentsOfFile:destination];
             if (block) {
                 block(image, track, nil);
             }
         } else {
-            NSImage *albumImg = [self innerCoverImageForURL:[track fileURL]];
+            JWImage *albumImg = [self innerCoverImageForURL:[track fileURL]];
             if (albumImg) {
                 if (block) {
                     block(albumImg, track, nil);
@@ -207,7 +144,7 @@
             } else {
                 [self getGeCiMiSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
                     if (info) {
-                        [self downloadGeCiMiAlbumCover:info key:cachedKey onComplete:^(NSImage *image, NSError *error) {
+                        [self downloadGeCiMiAlbumCover:info key:cachedKey onComplete:^(JWImage *image, NSError *error) {
                             if (block) {
                                 block(image, track, error);
                             }
@@ -308,14 +245,15 @@
 //    }
 //}
 
-+ (void)downloadGeCiMiAlbumCover:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSImage*, NSError *))block {
++ (void)downloadGeCiMiAlbumCover:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(JWImage*, NSError *))block {
     if (info.aid) {
         NSString *url = [NSString stringWithFormat:@"http://geci.me/api/cover/%ld", info.aid];
         [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
             if (!error && data && data[@"result"][@"cover"]) {
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     NSURL *imgURL = [NSURL URLWithString:data[@"result"][@"cover"]];
-                    NSImage *image = [[NSImage alloc] initWithContentsOfURL:imgURL];
+                    NSData *data = [NSData dataWithContentsOfURL:imgURL];
+                    JWImage *image = [[JWImage alloc] initWithData:data];
                     if (block) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             block(image, nil);

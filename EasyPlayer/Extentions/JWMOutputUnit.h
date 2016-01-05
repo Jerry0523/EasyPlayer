@@ -22,83 +22,24 @@
 // THE SOFTWARE.
 
 #import "JWMAudioUnit.h"
-
 #import "JWMConverter.h"
 
-/**
- `JWMOutputUnit` is a subclass of JWMAudioUnit for playing converted `PCM` data through the output device. This class gets data from the converter buffer.
- */
 @interface JWMOutputUnit : JWMAudioUnit
 
-/**
- A flag that determines if instance is currently active.
- */
-@property (assign, nonatomic, readonly) BOOL isProcessing;
 
-/**
- Engine output format
- */
+@property (assign, nonatomic, readonly) BOOL isProcessing;
 @property (assign, nonatomic) JWMEngineOutputFormat outputFormat;
 
-/**
- Returns initialized `JWMOutputUnit` object and specifies converter source.
 
- @param converter An converter object used as a data source.
-
- @return An initialized `JWMOutputUnit` object.
- **/
 - (id)initWithConverter:(JWMConverter *)converter;
-
-/**
- Returns supported `PCM` audio format.
-
- @return An `ASBD` struct with supported audio format.
- */
 - (AudioStreamBasicDescription)format;
-
-/**
- Pauses playback throught the output device. Idempotent method.
- */
 - (void)pause;
-
-/**
- Resumes playback throught the output device. Idempotent method.
- */
 - (void)resume;
-
-/**
- Stops playback throught the output device and deallocates unnecessary resources. Idempotent method.
- */
 - (void)stop;
-
-/**
- Converts `frames` number to `seconds` according to the supported format.
-
- @param framesCount `Frames` number to convert to `seconds`.
-
- @return A number of `seconds` for specified number of `frames`.
- */
 - (double)framesToSeconds:(double)framesCount;
-
-/**
- Returns amount of played time in `seconds`.
- */
 - (double)amountPlayed;
-
-/**
- Seeks to the time within playing track.
-
- @param time Time interval offset in `seconds`.
- */
 - (void)seek:(double)time;
-
-/**
- Sets output unit volume. Default value `1`.
-
- @param volume Volume value in `percent`.
- */
 - (void)setVolume:(float)volume;
-
 - (void)setSampleRate:(double)sampleRate;
 
 @end

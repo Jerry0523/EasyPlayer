@@ -24,7 +24,9 @@
 #import "JWMAudioUnit.h"
 
 @interface JWMAudioUnit ()
+
 @property (nonatomic) BOOL isProcessing;
+
 @end
 
 @implementation JWMAudioUnit

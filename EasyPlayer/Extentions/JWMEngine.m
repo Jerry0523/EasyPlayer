@@ -170,8 +170,8 @@
                 [self stop];
             }
             [_converter reinitWithNewInput:_input withDataFlush:flush];
-            [_output seek:0.0]; //to reset amount played
-            [self setCurrentState:JWMEngineStatePlaying]; //trigger delegate method
+            [_output seek:0.0];
+            [self setCurrentState:JWMEngineStatePlaying];
         });
     }
 }

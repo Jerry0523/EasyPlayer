@@ -27,6 +27,11 @@
 #import <CommonCrypto/CommonCryptor.h>
 #import <AudioToolbox/AudioToolbox.h>
 
+#import <Availability.h>
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+#import <MediaPlayer/MediaPlayer.h>
+#endif
+
 @implementation JWTrack
 
 - (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL{
@@ -120,10 +125,16 @@
 }
 
 - (NSURL*)fileURL {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+    MPMediaItem *item = self.userInfo;
+    return [item valueForProperty:MPMediaItemPropertyAssetURL];
+#else
     if(self.Location) {
         return [NSURL URLWithString:self.Location];
     }
     return nil;
+#endif
+   
 }
 
 @end

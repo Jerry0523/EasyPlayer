@@ -22,9 +22,9 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
+#import "JWHeader.h"
 
 @interface JWModel : NSObject<NSCoding>
-
 
 + (NSArray *)arrayFromJSON:(NSArray*)array;
 - (instancetype)initFromDictionary:(NSDictionary*)json;

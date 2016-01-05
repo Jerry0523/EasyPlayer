@@ -24,6 +24,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CueSheetTrack : NSObject
+
 @property (strong, nonatomic, readonly) NSURL *url;
 @property (copy, nonatomic, readonly) NSString *track;
 @property (copy, nonatomic, readonly) NSString *artist;

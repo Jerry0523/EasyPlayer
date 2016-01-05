@@ -35,18 +35,6 @@
 		84AD819E1C34D53B0037E162 /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81931C34D53B0037E162 /* FlacDecoder.m */; };
 		84AD819F1C34D53B0037E162 /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81951C34D53B0037E162 /* HTTPSource.m */; };
 		84AD81A01C34D53B0037E162 /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81971C34D53B0037E162 /* M3uContainer.m */; };
-		84B64BC11C350A2F0094191B /* NVAllpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BA91C350A2F0094191B /* NVAllpassFilter.m */; };
-		84B64BC21C350A2F0094191B /* NVBandpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BAB1C350A2F0094191B /* NVBandpassFilter.m */; };
-		84B64BC31C350A2F0094191B /* NVBandpassQPeakGainFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BAD1C350A2F0094191B /* NVBandpassQPeakGainFilter.m */; };
-		84B64BC41C350A2F0094191B /* NVHighpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BAF1C350A2F0094191B /* NVHighpassFilter.m */; };
-		84B64BC51C350A2F0094191B /* NVHighShelvingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB11C350A2F0094191B /* NVHighShelvingFilter.m */; };
-		84B64BC61C350A2F0094191B /* NVLowpassFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB31C350A2F0094191B /* NVLowpassFilter.m */; };
-		84B64BC71C350A2F0094191B /* NVLowShelvingFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB51C350A2F0094191B /* NVLowShelvingFilter.m */; };
-		84B64BC81C350A2F0094191B /* NVNotchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB71C350A2F0094191B /* NVNotchFilter.m */; };
-		84B64BC91C350A2F0094191B /* NVPeakingEQFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BB91C350A2F0094191B /* NVPeakingEQFilter.m */; };
-		84B64BCA1C350A2F0094191B /* NVDSP.mm in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BBB1C350A2F0094191B /* NVDSP.mm */; };
-		84B64BCB1C350A2F0094191B /* NVClippingDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BBE1C350A2F0094191B /* NVClippingDetection.m */; };
-		84B64BCC1C350A2F0094191B /* NVSoundLevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B64BC01C350A2F0094191B /* NVSoundLevelMeter.m */; };
 		84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 84C36BA81BD5FB0F00654090 /* libiconv.tbd */; };
 		84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB41BD64D0600654090 /* NSColor+Components.m */; };
 		84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB61BD64D0600654090 /* NSImage+Utils.m */; };
@@ -55,6 +43,40 @@
 		84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBF1BD64D5200654090 /* JWLrcParser.m */; };
 		84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC11BD64D5200654090 /* JWMediaHelper.m */; };
 		84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */; };
+		84ED11A11C3A2D7900725CCF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED11A01C3A2D7900725CCF /* main.m */; };
+		84ED11A41C3A2D7900725CCF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED11A31C3A2D7900725CCF /* AppDelegate.m */; };
+		84ED11A71C3A2D7900725CCF /* PlayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED11A61C3A2D7900725CCF /* PlayListViewController.m */; };
+		84ED11AC1C3A2D7900725CCF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84ED11AB1C3A2D7900725CCF /* Assets.xcassets */; };
+		84ED11AF1C3A2D7900725CCF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84ED11AD1C3A2D7900725CCF /* LaunchScreen.storyboard */; };
+		84ED11B51C3A328F00725CCF /* JWMediaHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BC11BD64D5200654090 /* JWMediaHelper.m */; };
+		84ED11B71C3A328F00725CCF /* JWNetworkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */; };
+		84ED11B91C3A328F00725CCF /* JWFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBD1BD64D5200654090 /* JWFileManager.m */; };
+		84ED11BB1C3A328F00725CCF /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BBF1BD64D5200654090 /* JWLrcParser.m */; };
+		84ED11BE1C3A357500725CCF /* NSImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB61BD64D0600654090 /* NSImage+Utils.m */; };
+		84ED11C01C3A3D1700725CCF /* NSColor+Components.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB41BD64D0600654090 /* NSColor+Components.m */; };
+		84ED11C11C3A3D1700725CCF /* NSString+Comparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C36BB81BD64D0600654090 /* NSString+Comparator.m */; };
+		84ED11C21C3A3D7B00725CCF /* JWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E531BE06B84007B9D56 /* JWModel.m */; };
+		84ED11C31C3A3D7B00725CCF /* JWTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E551BE06B84007B9D56 /* JWTagInfo.m */; };
+		84ED11C41C3A3D7B00725CCF /* JWTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E571BE06B84007B9D56 /* JWTrack.m */; };
+		84ED11C51C3A3D7B00725CCF /* JWMAudioUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81701C34D5310037E162 /* JWMAudioUnit.m */; };
+		84ED11C61C3A3D7B00725CCF /* JWMConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81731C34D5310037E162 /* JWMConverter.m */; };
+		84ED11C71C3A3D7B00725CCF /* JWMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81751C34D5310037E162 /* JWMEngine.m */; };
+		84ED11C81C3A3D7B00725CCF /* JWMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81771C34D5310037E162 /* JWMInputUnit.m */; };
+		84ED11C91C3A3D7B00725CCF /* JWMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81791C34D5310037E162 /* JWMOutputUnit.m */; };
+		84ED11CA1C3A3D7B00725CCF /* JWMPluginManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD817B1C34D5310037E162 /* JWMPluginManager.m */; };
+		84ED11CB1C3A3D7B00725CCF /* JWMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD817D1C34D5310037E162 /* JWMQueues.m */; };
+		84ED11CC1C3A3D7B00725CCF /* CoreAudioDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81871C34D53B0037E162 /* CoreAudioDecoder.m */; };
+		84ED11CD1C3A3D7B00725CCF /* CueSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81891C34D53B0037E162 /* CueSheet.m */; };
+		84ED11CE1C3A3D7B00725CCF /* CueSheetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD818B1C34D53B0037E162 /* CueSheetContainer.m */; };
+		84ED11CF1C3A3D7B00725CCF /* CueSheetDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD818D1C34D53B0037E162 /* CueSheetDecoder.m */; };
+		84ED11D01C3A3D7B00725CCF /* CueSheetTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD818F1C34D53B0037E162 /* CueSheetTrack.m */; };
+		84ED11D11C3A3D7B00725CCF /* FileSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81911C34D53B0037E162 /* FileSource.m */; };
+		84ED11D21C3A3D7B00725CCF /* FlacDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81931C34D53B0037E162 /* FlacDecoder.m */; };
+		84ED11D31C3A3D7B00725CCF /* HTTPSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81951C34D53B0037E162 /* HTTPSource.m */; };
+		84ED11D41C3A3D7B00725CCF /* M3uContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AD81971C34D53B0037E162 /* M3uContainer.m */; };
+		84ED12DC1C3A452500725CCF /* libFLACIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED12DB1C3A452500725CCF /* libFLACIOS.framework */; };
+		84ED12E71C3A731400725CCF /* PlayListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED12E51C3A731400725CCF /* PlayListCell.m */; };
+		84ED12EB1C3A78A200725CCF /* PlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ED12E91C3A78A200725CCF /* PlayerViewController.m */; };
 		84FF4E581BE06B84007B9D56 /* JWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E531BE06B84007B9D56 /* JWModel.m */; };
 		84FF4E591BE06B84007B9D56 /* JWTagInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E551BE06B84007B9D56 /* JWTagInfo.m */; };
 		84FF4E5A1BE06B84007B9D56 /* JWTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FF4E571BE06B84007B9D56 /* JWTrack.m */; };
@@ -117,30 +139,6 @@
 		84AD81951C34D53B0037E162 /* HTTPSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPSource.m; sourceTree = "<group>"; };
 		84AD81961C34D53B0037E162 /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
 		84AD81971C34D53B0037E162 /* M3uContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = M3uContainer.m; sourceTree = "<group>"; };
-		84B64BA81C350A2F0094191B /* NVAllpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVAllpassFilter.h; sourceTree = "<group>"; };
-		84B64BA91C350A2F0094191B /* NVAllpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVAllpassFilter.m; sourceTree = "<group>"; };
-		84B64BAA1C350A2F0094191B /* NVBandpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBandpassFilter.h; sourceTree = "<group>"; };
-		84B64BAB1C350A2F0094191B /* NVBandpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBandpassFilter.m; sourceTree = "<group>"; };
-		84B64BAC1C350A2F0094191B /* NVBandpassQPeakGainFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVBandpassQPeakGainFilter.h; sourceTree = "<group>"; };
-		84B64BAD1C350A2F0094191B /* NVBandpassQPeakGainFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVBandpassQPeakGainFilter.m; sourceTree = "<group>"; };
-		84B64BAE1C350A2F0094191B /* NVHighpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVHighpassFilter.h; sourceTree = "<group>"; };
-		84B64BAF1C350A2F0094191B /* NVHighpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVHighpassFilter.m; sourceTree = "<group>"; };
-		84B64BB01C350A2F0094191B /* NVHighShelvingFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVHighShelvingFilter.h; sourceTree = "<group>"; };
-		84B64BB11C350A2F0094191B /* NVHighShelvingFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVHighShelvingFilter.m; sourceTree = "<group>"; };
-		84B64BB21C350A2F0094191B /* NVLowpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVLowpassFilter.h; sourceTree = "<group>"; };
-		84B64BB31C350A2F0094191B /* NVLowpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVLowpassFilter.m; sourceTree = "<group>"; };
-		84B64BB41C350A2F0094191B /* NVLowShelvingFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVLowShelvingFilter.h; sourceTree = "<group>"; };
-		84B64BB51C350A2F0094191B /* NVLowShelvingFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVLowShelvingFilter.m; sourceTree = "<group>"; };
-		84B64BB61C350A2F0094191B /* NVNotchFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVNotchFilter.h; sourceTree = "<group>"; };
-		84B64BB71C350A2F0094191B /* NVNotchFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVNotchFilter.m; sourceTree = "<group>"; };
-		84B64BB81C350A2F0094191B /* NVPeakingEQFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVPeakingEQFilter.h; sourceTree = "<group>"; };
-		84B64BB91C350A2F0094191B /* NVPeakingEQFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVPeakingEQFilter.m; sourceTree = "<group>"; };
-		84B64BBA1C350A2F0094191B /* NVDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVDSP.h; sourceTree = "<group>"; };
-		84B64BBB1C350A2F0094191B /* NVDSP.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NVDSP.mm; sourceTree = "<group>"; };
-		84B64BBD1C350A2F0094191B /* NVClippingDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVClippingDetection.h; sourceTree = "<group>"; };
-		84B64BBE1C350A2F0094191B /* NVClippingDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVClippingDetection.m; sourceTree = "<group>"; };
-		84B64BBF1C350A2F0094191B /* NVSoundLevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NVSoundLevelMeter.h; sourceTree = "<group>"; };
-		84B64BC01C350A2F0094191B /* NVSoundLevelMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NVSoundLevelMeter.m; sourceTree = "<group>"; };
 		84C36BA81BD5FB0F00654090 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		84C36BB31BD64D0600654090 /* NSColor+Components.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSColor+Components.h"; path = "EasyPlayer/Extentions/NSColor+Components.h"; sourceTree = "<group>"; };
 		84C36BB41BD64D0600654090 /* NSColor+Components.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSColor+Components.m"; path = "EasyPlayer/Extentions/NSColor+Components.m"; sourceTree = "<group>"; };
@@ -156,6 +154,21 @@
 		84C36BC11BD64D5200654090 /* JWMediaHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWMediaHelper.m; path = EasyPlayer/Extentions/MusicTools/JWMediaHelper.m; sourceTree = "<group>"; };
 		84C36BFC1BD728BC00654090 /* JWNetworkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWNetworkHelper.h; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.h; sourceTree = "<group>"; };
 		84C36BFD1BD728BC00654090 /* JWNetworkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWNetworkHelper.m; path = EasyPlayer/Extentions/MusicTools/JWNetworkHelper.m; sourceTree = "<group>"; };
+		84ED119D1C3A2D7900725CCF /* EasyPlayerIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyPlayerIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84ED11A01C3A2D7900725CCF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84ED11A21C3A2D7900725CCF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		84ED11A31C3A2D7900725CCF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		84ED11A51C3A2D7900725CCF /* PlayListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayListViewController.h; sourceTree = "<group>"; };
+		84ED11A61C3A2D7900725CCF /* PlayListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayListViewController.m; sourceTree = "<group>"; };
+		84ED11AB1C3A2D7900725CCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84ED11AE1C3A2D7900725CCF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		84ED11B01C3A2D7900725CCF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84ED11BC1C3A331900725CCF /* JWHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWHeader.h; path = EasyPlayer/Extentions/JWHeader.h; sourceTree = "<group>"; };
+		84ED12DB1C3A452500725CCF /* libFLACIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libFLACIOS.framework; path = Extentions/libFLACIOS.framework; sourceTree = "<group>"; };
+		84ED12E41C3A731400725CCF /* PlayListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayListCell.h; sourceTree = "<group>"; };
+		84ED12E51C3A731400725CCF /* PlayListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayListCell.m; sourceTree = "<group>"; };
+		84ED12E81C3A78A200725CCF /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		84ED12E91C3A78A200725CCF /* PlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerViewController.m; sourceTree = "<group>"; };
 		84FF4E521BE06B84007B9D56 /* JWModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWModel.h; path = EasyPlayer/Models/JWModel.h; sourceTree = "<group>"; };
 		84FF4E531BE06B84007B9D56 /* JWModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JWModel.m; path = EasyPlayer/Models/JWModel.m; sourceTree = "<group>"; };
 		84FF4E541BE06B84007B9D56 /* JWTagInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JWTagInfo.h; path = EasyPlayer/Models/JWTagInfo.h; sourceTree = "<group>"; };
@@ -182,6 +195,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84ED119A1C3A2D7900725CCF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84ED12DC1C3A452500725CCF /* libFLACIOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -202,6 +223,7 @@
 			isa = PBXGroup;
 			children = (
 				849060EA1BCCE3F8008B2125 /* EasyPlayer */,
+				84ED119E1C3A2D7900725CCF /* EasyPlayerIOS */,
 				843CC22C1BD4E07400B4CCB8 /* Modals */,
 				849943611BCF6B5800823A6B /* Extentions */,
 				849061011BCCE435008B2125 /* Frameworks */,
@@ -213,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				849060E81BCCE3F8008B2125 /* EasyPlayer.app */,
+				84ED119D1C3A2D7900725CCF /* EasyPlayerIOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -253,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				84C36BA81BD5FB0F00654090 /* libiconv.tbd */,
+				84ED12DB1C3A452500725CCF /* libFLACIOS.framework */,
 				84AD816D1C34D50C0037E162 /* libFLAC.framework */,
 				C43279C71BD116AE005C6BBC /* QuartzCore.framework */,
 				C43279C51BD116A8005C6BBC /* Cocoa.framework */,
@@ -281,6 +305,7 @@
 		849943611BCF6B5800823A6B /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
+				84ED11BC1C3A331900725CCF /* JWHeader.h */,
 				84AD816F1C34D5310037E162 /* JWMAudioUnit.h */,
 				84AD81701C34D5310037E162 /* JWMAudioUnit.m */,
 				84AD81711C34D5310037E162 /* JWMCommonProtocols.h */,
@@ -296,7 +321,6 @@
 				84AD817B1C34D5310037E162 /* JWMPluginManager.m */,
 				84AD817C1C34D5310037E162 /* JWMQueues.h */,
 				84AD817D1C34D5310037E162 /* JWMQueues.m */,
-				84B64BA61C350A2F0094191B /* NVDSP */,
 				84AD81851C34D53B0037E162 /* Plugins */,
 				849061191BCE349F008B2125 /* MusicTools */,
 				84C36BB31BD64D0600654090 /* NSColor+Components.h */,
@@ -324,10 +348,10 @@
 				84AD818F1C34D53B0037E162 /* CueSheetTrack.m */,
 				84AD81901C34D53B0037E162 /* FileSource.h */,
 				84AD81911C34D53B0037E162 /* FileSource.m */,
-				84AD81921C34D53B0037E162 /* FlacDecoder.h */,
-				84AD81931C34D53B0037E162 /* FlacDecoder.m */,
 				84AD81941C34D53B0037E162 /* HTTPSource.h */,
 				84AD81951C34D53B0037E162 /* HTTPSource.m */,
+				84AD81921C34D53B0037E162 /* FlacDecoder.h */,
+				84AD81931C34D53B0037E162 /* FlacDecoder.m */,
 				84AD81961C34D53B0037E162 /* M3uContainer.h */,
 				84AD81971C34D53B0037E162 /* M3uContainer.m */,
 			);
@@ -335,52 +359,31 @@
 			path = EasyPlayer/Extentions/Plugins;
 			sourceTree = "<group>";
 		};
-		84B64BA61C350A2F0094191B /* NVDSP */ = {
+		84ED119E1C3A2D7900725CCF /* EasyPlayerIOS */ = {
 			isa = PBXGroup;
 			children = (
-				84B64BA71C350A2F0094191B /* Filters */,
-				84B64BBA1C350A2F0094191B /* NVDSP.h */,
-				84B64BBB1C350A2F0094191B /* NVDSP.mm */,
-				84B64BBC1C350A2F0094191B /* Utilities */,
+				84ED11A21C3A2D7900725CCF /* AppDelegate.h */,
+				84ED11A31C3A2D7900725CCF /* AppDelegate.m */,
+				84ED12E81C3A78A200725CCF /* PlayerViewController.h */,
+				84ED12E91C3A78A200725CCF /* PlayerViewController.m */,
+				84ED11A51C3A2D7900725CCF /* PlayListViewController.h */,
+				84ED11A61C3A2D7900725CCF /* PlayListViewController.m */,
+				84ED12E41C3A731400725CCF /* PlayListCell.h */,
+				84ED12E51C3A731400725CCF /* PlayListCell.m */,
+				84ED11AB1C3A2D7900725CCF /* Assets.xcassets */,
+				84ED11AD1C3A2D7900725CCF /* LaunchScreen.storyboard */,
+				84ED11B01C3A2D7900725CCF /* Info.plist */,
+				84ED119F1C3A2D7900725CCF /* Supporting Files */,
 			);
-			name = NVDSP;
-			path = EasyPlayer/Extentions/NVDSP;
+			path = EasyPlayerIOS;
 			sourceTree = "<group>";
 		};
-		84B64BA71C350A2F0094191B /* Filters */ = {
+		84ED119F1C3A2D7900725CCF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				84B64BA81C350A2F0094191B /* NVAllpassFilter.h */,
-				84B64BA91C350A2F0094191B /* NVAllpassFilter.m */,
-				84B64BAA1C350A2F0094191B /* NVBandpassFilter.h */,
-				84B64BAB1C350A2F0094191B /* NVBandpassFilter.m */,
-				84B64BAC1C350A2F0094191B /* NVBandpassQPeakGainFilter.h */,
-				84B64BAD1C350A2F0094191B /* NVBandpassQPeakGainFilter.m */,
-				84B64BAE1C350A2F0094191B /* NVHighpassFilter.h */,
-				84B64BAF1C350A2F0094191B /* NVHighpassFilter.m */,
-				84B64BB01C350A2F0094191B /* NVHighShelvingFilter.h */,
-				84B64BB11C350A2F0094191B /* NVHighShelvingFilter.m */,
-				84B64BB21C350A2F0094191B /* NVLowpassFilter.h */,
-				84B64BB31C350A2F0094191B /* NVLowpassFilter.m */,
-				84B64BB41C350A2F0094191B /* NVLowShelvingFilter.h */,
-				84B64BB51C350A2F0094191B /* NVLowShelvingFilter.m */,
-				84B64BB61C350A2F0094191B /* NVNotchFilter.h */,
-				84B64BB71C350A2F0094191B /* NVNotchFilter.m */,
-				84B64BB81C350A2F0094191B /* NVPeakingEQFilter.h */,
-				84B64BB91C350A2F0094191B /* NVPeakingEQFilter.m */,
+				84ED11A01C3A2D7900725CCF /* main.m */,
 			);
-			path = Filters;
-			sourceTree = "<group>";
-		};
-		84B64BBC1C350A2F0094191B /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				84B64BBD1C350A2F0094191B /* NVClippingDetection.h */,
-				84B64BBE1C350A2F0094191B /* NVClippingDetection.m */,
-				84B64BBF1C350A2F0094191B /* NVSoundLevelMeter.h */,
-				84B64BC01C350A2F0094191B /* NVSoundLevelMeter.m */,
-			);
-			path = Utilities;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -403,6 +406,23 @@
 			productReference = 849060E81BCCE3F8008B2125 /* EasyPlayer.app */;
 			productType = "com.apple.product-type.application";
 		};
+		84ED119C1C3A2D7900725CCF /* EasyPlayerIOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84ED11B31C3A2D7900725CCF /* Build configuration list for PBXNativeTarget "EasyPlayerIOS" */;
+			buildPhases = (
+				84ED119A1C3A2D7900725CCF /* Frameworks */,
+				84ED119B1C3A2D7900725CCF /* Resources */,
+				84ED11991C3A2D7900725CCF /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EasyPlayerIOS;
+			productName = EasyPlayerIOS;
+			productReference = 84ED119D1C3A2D7900725CCF /* EasyPlayerIOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -415,6 +435,15 @@
 					849060E71BCCE3F8008B2125 = {
 						CreatedOnToolsVersion = 7.0.1;
 						DevelopmentTeam = F93845W87F;
+					};
+					84ED119C1C3A2D7900725CCF = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = U7RP278R6Z;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -432,6 +461,7 @@
 			projectRoot = "";
 			targets = (
 				849060E71BCCE3F8008B2125 /* EasyPlayer */,
+				84ED119C1C3A2D7900725CCF /* EasyPlayerIOS */,
 			);
 		};
 /* End PBXProject section */
@@ -449,6 +479,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84ED119B1C3A2D7900725CCF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84ED11AF1C3A2D7900725CCF /* LaunchScreen.storyboard in Resources */,
+				84ED11AC1C3A2D7900725CCF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -456,50 +495,76 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84B64BC81C350A2F0094191B /* NVNotchFilter.m in Sources */,
 				84AD819E1C34D53B0037E162 /* FlacDecoder.m in Sources */,
-				84B64BC71C350A2F0094191B /* NVLowShelvingFilter.m in Sources */,
 				84AD81A01C34D53B0037E162 /* M3uContainer.m in Sources */,
 				8499435F1BCE4BA200823A6B /* MusicInfoViewController.m in Sources */,
-				84B64BC21C350A2F0094191B /* NVBandpassFilter.m in Sources */,
 				84FF4E581BE06B84007B9D56 /* JWModel.m in Sources */,
-				84B64BC31C350A2F0094191B /* NVBandpassQPeakGainFilter.m in Sources */,
 				84FF4E591BE06B84007B9D56 /* JWTagInfo.m in Sources */,
 				84AD81811C34D5310037E162 /* JWMInputUnit.m in Sources */,
 				849060F01BCCE3F8008B2125 /* main.m in Sources */,
-				84B64BC11C350A2F0094191B /* NVAllpassFilter.m in Sources */,
-				84B64BC41C350A2F0094191B /* NVHighpassFilter.m in Sources */,
 				84AD81831C34D5310037E162 /* JWMPluginManager.m in Sources */,
 				84AD81801C34D5310037E162 /* JWMEngine.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
 				84C36BC21BD64D5200654090 /* JWFileManager.m in Sources */,
 				849060ED1BCCE3F8008B2125 /* AppDelegate.m in Sources */,
 				84AD81841C34D5310037E162 /* JWMQueues.m in Sources */,
-				84B64BC51C350A2F0094191B /* NVHighShelvingFilter.m in Sources */,
 				84AD819F1C34D53B0037E162 /* HTTPSource.m in Sources */,
-				84B64BC91C350A2F0094191B /* NVPeakingEQFilter.m in Sources */,
 				84AD817F1C34D5310037E162 /* JWMConverter.m in Sources */,
 				84C36BB91BD64D0600654090 /* NSColor+Components.m in Sources */,
 				84AD81821C34D5310037E162 /* JWMOutputUnit.m in Sources */,
 				84AD81981C34D53B0037E162 /* CoreAudioDecoder.m in Sources */,
 				84C36BC41BD64D5200654090 /* JWMediaHelper.m in Sources */,
 				84AD819D1C34D53B0037E162 /* FileSource.m in Sources */,
-				84B64BC61C350A2F0094191B /* NVLowpassFilter.m in Sources */,
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
 				84C36BFE1BD728BC00654090 /* JWNetworkHelper.m in Sources */,
 				849060FF1BCCE425008B2125 /* PlaylistViewController.m in Sources */,
 				84AD819A1C34D53B0037E162 /* CueSheetContainer.m in Sources */,
-				84B64BCA1C350A2F0094191B /* NVDSP.mm in Sources */,
 				84FF4E5A1BE06B84007B9D56 /* JWTrack.m in Sources */,
 				84AD819C1C34D53B0037E162 /* CueSheetTrack.m in Sources */,
-				84B64BCC1C350A2F0094191B /* NVSoundLevelMeter.m in Sources */,
-				84B64BCB1C350A2F0094191B /* NVClippingDetection.m in Sources */,
 				84AD81991C34D53B0037E162 /* CueSheet.m in Sources */,
 				84AD819B1C34D53B0037E162 /* CueSheetDecoder.m in Sources */,
 				84C36BC31BD64D5200654090 /* JWLrcParser.m in Sources */,
 				84AD817E1C34D5310037E162 /* JWMAudioUnit.m in Sources */,
 				84C36BBB1BD64D0600654090 /* NSString+Comparator.m in Sources */,
 				84C36BBA1BD64D0600654090 /* NSImage+Utils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84ED11991C3A2D7900725CCF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84ED11C21C3A3D7B00725CCF /* JWModel.m in Sources */,
+				84ED11C31C3A3D7B00725CCF /* JWTagInfo.m in Sources */,
+				84ED11C41C3A3D7B00725CCF /* JWTrack.m in Sources */,
+				84ED11C51C3A3D7B00725CCF /* JWMAudioUnit.m in Sources */,
+				84ED11C61C3A3D7B00725CCF /* JWMConverter.m in Sources */,
+				84ED11C71C3A3D7B00725CCF /* JWMEngine.m in Sources */,
+				84ED11C81C3A3D7B00725CCF /* JWMInputUnit.m in Sources */,
+				84ED11C91C3A3D7B00725CCF /* JWMOutputUnit.m in Sources */,
+				84ED11CA1C3A3D7B00725CCF /* JWMPluginManager.m in Sources */,
+				84ED11CB1C3A3D7B00725CCF /* JWMQueues.m in Sources */,
+				84ED11CC1C3A3D7B00725CCF /* CoreAudioDecoder.m in Sources */,
+				84ED12E71C3A731400725CCF /* PlayListCell.m in Sources */,
+				84ED11CD1C3A3D7B00725CCF /* CueSheet.m in Sources */,
+				84ED11CE1C3A3D7B00725CCF /* CueSheetContainer.m in Sources */,
+				84ED11CF1C3A3D7B00725CCF /* CueSheetDecoder.m in Sources */,
+				84ED11D01C3A3D7B00725CCF /* CueSheetTrack.m in Sources */,
+				84ED11D11C3A3D7B00725CCF /* FileSource.m in Sources */,
+				84ED11D21C3A3D7B00725CCF /* FlacDecoder.m in Sources */,
+				84ED11D31C3A3D7B00725CCF /* HTTPSource.m in Sources */,
+				84ED11D41C3A3D7B00725CCF /* M3uContainer.m in Sources */,
+				84ED11C01C3A3D1700725CCF /* NSColor+Components.m in Sources */,
+				84ED11C11C3A3D1700725CCF /* NSString+Comparator.m in Sources */,
+				84ED12EB1C3A78A200725CCF /* PlayerViewController.m in Sources */,
+				84ED11BE1C3A357500725CCF /* NSImage+Utils.m in Sources */,
+				84ED11B51C3A328F00725CCF /* JWMediaHelper.m in Sources */,
+				84ED11B71C3A328F00725CCF /* JWNetworkHelper.m in Sources */,
+				84ED11B91C3A328F00725CCF /* JWFileManager.m in Sources */,
+				84ED11BB1C3A328F00725CCF /* JWLrcParser.m in Sources */,
+				84ED11A71C3A2D7900725CCF /* PlayListViewController.m in Sources */,
+				84ED11A41C3A2D7900725CCF /* AppDelegate.m in Sources */,
+				84ED11A11C3A2D7900725CCF /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +577,14 @@
 				849060F41BCCE3F8008B2125 /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		84ED11AD1C3A2D7900725CCF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84ED11AE1C3A2D7900725CCF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -636,6 +709,49 @@
 			};
 			name = Release;
 		};
+		84ED11B11C3A2D7900725CCF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyPlayer/Extentions",
+				);
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = EasyPlayerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayerIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		84ED11B21C3A2D7900725CCF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EasyPlayer/Extentions",
+				);
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = EasyPlayerIOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayerIOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -653,6 +769,15 @@
 			buildConfigurations = (
 				849060FA1BCCE3F8008B2125 /* Debug */,
 				849060FB1BCCE3F8008B2125 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84ED11B31C3A2D7900725CCF /* Build configuration list for PBXNativeTarget "EasyPlayerIOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84ED11B11C3A2D7900725CCF /* Debug */,
+				84ED11B21C3A2D7900725CCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -21,12 +21,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Cocoa/Cocoa.h>
+#import "JWHeader.h"
 
-@interface NSImage (Utils)
+@interface JWImage (Utils)
 
-- (NSColor*) mainColor;
+- (JWColor*) mainColor;
 - (void) saveAsJPGFileForPath:(NSString*)path;
-- (NSImage*)scaledImageForSize:(CGSize)size;
+- (JWImage*)scaledImageForSize:(CGSize)size;
 
 @end

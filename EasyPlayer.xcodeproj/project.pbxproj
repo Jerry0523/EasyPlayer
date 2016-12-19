@@ -84,6 +84,7 @@
 		C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C31BD116A0005C6BBC /* AVFoundation.framework */; };
 		C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C51BD116A8005C6BBC /* Cocoa.framework */; };
 		C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C71BD116AE005C6BBC /* QuartzCore.framework */; };
+		C478F28E1E07B0AE00AF0A64 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C478F28D1E07B0AE00AF0A64 /* AudioUnit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -179,6 +180,7 @@
 		C43279C31BD116A0005C6BBC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C43279C51BD116A8005C6BBC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C43279C71BD116AE005C6BBC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C478F28D1E07B0AE00AF0A64 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C478F28E1E07B0AE00AF0A64 /* AudioUnit.framework in Frameworks */,
 				84AD816E1C34D50C0037E162 /* libFLAC.framework in Frameworks */,
 				84C36BA91BD5FB0F00654090 /* libiconv.tbd in Frameworks */,
 				C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */,
@@ -275,6 +278,7 @@
 		849061011BCCE435008B2125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C478F28D1E07B0AE00AF0A64 /* AudioUnit.framework */,
 				84C36BA81BD5FB0F00654090 /* libiconv.tbd */,
 				84ED12DB1C3A452500725CCF /* libFLACIOS.framework */,
 				84AD816D1C34D50C0037E162 /* libFLAC.framework */,

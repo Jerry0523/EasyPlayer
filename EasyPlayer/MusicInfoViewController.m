@@ -72,25 +72,25 @@
                     self.coverImageView.image = image;
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
                          NSColor *mainColor = [image mainColor];
+                        CGFloat components[3];
+                        [mainColor getHSBComponnets:components];
+                        
+                        CGFloat saturation = components[1];
+                        CGFloat bright = components[2];
+                        
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            CGFloat components[3];
-                            [mainColor getHSBComponnets:components];
-                            
-                            CGFloat saturation = components[1];
-                            CGFloat bright = components[2];
-                            
                             [self refreshLabelsColorByTheme:bright < .5 || saturation > .5];
+                            self.view.layer.backgroundColor = mainColor.CGColor;
                             
-                            CABasicAnimation *anime = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
-                            anime.fromValue = (id)[self.view.layer backgroundColor];
-                            anime.toValue = (__bridge id)(mainColor.CGColor);
-                            anime.duration = 0.5f;
-                            anime.fillMode = kCAFillModeForwards;
-                            anime.removedOnCompletion = NO;
-                            
-                            [self.view.layer addAnimation:anime forKey:nil];
-
+//                            CABasicAnimation *anime = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+//                            anime.fromValue = (id)[self.view.layer backgroundColor];
+//                            anime.toValue = (__bridge id _Nullable)(mainColor.CGColor);
+//                            anime.duration = 1.0f;
+//                            anime.fillMode = kCAFillModeForwards;
+//                            anime.removedOnCompletion = NO;
+//
+//                            [self.view.layer addAnimation:anime forKey:anime.keyPath];
                         });
                     });
                 }

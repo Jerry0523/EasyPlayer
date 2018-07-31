@@ -68,7 +68,7 @@
 	int channels = [[_decoder.properties objectForKey:@"channels"] intValue];
     bytesPerFrame = (bitsPerSample/8) * channels;
 
-    return YES;
+    return bytesPerFrame && channels;
 }
 
 - (void)close {
@@ -95,7 +95,7 @@
         amountInBuffer = (framesRead * bytesPerFrame);
 
         dispatch_sync([JWMQueues lock_queue], ^{
-            [_data appendBytes:inputBuffer length:amountInBuffer];
+            [self.data appendBytes:self->inputBuffer length:amountInBuffer];
         });
     } while (framesRead > 0);
 
@@ -135,8 +135,8 @@
     NSUInteger bytesToRead = MIN(amount, _data.length);
 
     dispatch_sync([JWMQueues lock_queue], ^{
-        memcpy(buffer, _data.bytes, bytesToRead);
-        [_data replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
+        memcpy(buffer, self.data.bytes, bytesToRead);
+        [self.data replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
     });
 
     return bytesToRead;

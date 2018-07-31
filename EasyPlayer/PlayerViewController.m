@@ -66,7 +66,7 @@
     self.player.delegate = self;
     
     self.playedList = [NSMutableArray array];
-    NSMutableArray *mutable = [NSMutableArray arrayWithArray:[JWFileManager getItuensMediaArray]];
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:[JWFileManager getItunesMediaArray]];
     [mutable addObjectsFromArray:[JWFileManager getLocalMediaArray]];
     
     self.items = mutable;

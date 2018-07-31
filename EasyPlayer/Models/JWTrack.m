@@ -30,9 +30,25 @@
 #import <Availability.h>
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <MediaPlayer/MediaPlayer.h>
+#else
+#import <iTunesLibrary/ITLibMediaItem.h>
+#import <iTunesLibrary/ITLibAlbum.h>
+#import <iTunesLibrary/ITLibArtist.h>
 #endif
 
 @implementation JWTrack
+
+- (instancetype)initWithITMediaItem:(ITLibMediaItem *)mediaItem
+{
+    if (self = [super init]) {
+        self.Album = mediaItem.album.title ?: @"";
+        self.Artist = mediaItem.artist.name ?: @"";
+        self.Location = mediaItem.location.absoluteString;
+        self.Name = mediaItem.title;
+        self.TotalTime = mediaItem.totalTime;
+    }
+    return self;
+}
 
 - (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL{
     if (self = [super init]) {
@@ -40,8 +56,6 @@
         NSString *artist = info[@"artist"];
         NSString *title = info[@"title"];
         NSString *file = [fileURL absoluteString];
-        
-        
         
         self.Album = album ? album : @"";
         self.Artist = artist ? artist : @"";

@@ -26,6 +26,9 @@
 #import <Availability.h>
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <MediaPlayer/MediaPlayer.h>
+#else
+#import <iTunesLibrary/ITLibrary.h>
+#import <iTunesLibrary/ITLibMediaItem.h>
 #endif
 
 @implementation JWFileManager
@@ -88,7 +91,7 @@
     return [rootPath stringByAppendingPathComponent:@"EasyPlayerLibrary.plist"];
 }
 
-+ (NSArray*)getItuensMediaArray {
++ (NSArray*)getItunesMediaArray {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
     NSMutableArray *mutable = [NSMutableArray array];
     MPMediaQuery *everything = [[MPMediaQuery alloc] init];
@@ -117,26 +120,20 @@
     return mutable;
 #else
     
-    NSMutableArray *mutable = [NSMutableArray array];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSMusicDirectory, NSUserDomainMask, YES);
-    if(paths.count > 0) {
-        NSString *musicRootPath = paths[0];
-        NSDictionary *iTunesLibrary = [NSDictionary dictionaryWithContentsOfFile:[musicRootPath stringByAppendingPathComponent:@"iTunes/iTunes Music Library.xml"]];
-        if (iTunesLibrary) {
-            NSDictionary *tracks = iTunesLibrary[@"Tracks"];
-            NSArray *keys = tracks.allKeys;
-            for (id key in keys) {
-                JWTrack *track = [[JWTrack alloc] initFromDictionary:tracks[key]];
-                if (track.TotalTime > 30000) {
-                    NSString *pathExtention = [track pathExtention];
-                    if (track.Location && ![pathExtention isEqualToString:@"m4p"] && ![pathExtention isEqualToString:@"mp4"]) {
-                        [mutable addObject:track];
-                    }
-                }
+    NSError * error = nil;
+    ITLibrary* library = [[ITLibrary alloc] initWithAPIVersion:@"1.0" error:&error];
+    NSMutableArray *mItems = [NSMutableArray array];
+    if (library) {
+        NSArray *mediaItems = library.allMediaItems;
+        
+        [mediaItems enumerateObjectsUsingBlock:^(ITLibMediaItem *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.location && !obj.drmProtected && obj.mediaKind == ITLibMediaItemMediaKindSong && obj.totalTime > 30000) {
+                JWTrack *track = [[JWTrack alloc] initWithITMediaItem:obj];
+                [mItems addObject:track];
             }
-        }
+        }];
     }
-    return mutable;
+    return mItems;
 #endif
 }
 

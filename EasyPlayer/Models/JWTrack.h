@@ -23,6 +23,8 @@
 
 #import "JWModel.h"
 
+@class ITLibMediaItem;
+
 typedef NS_ENUM(NSInteger, TrackSortType) {
     TrackSortTypeDefault,
     TrackSortTypeArtist,
@@ -48,6 +50,8 @@ typedef NS_ENUM(NSInteger, TrackSourceType) {
 @property (nonatomic, assign) double TotalTime;
 @property (nonatomic, assign) TrackSourceType sourceType;
 @property (nonatomic, strong) id userInfo;
+
+- (instancetype)initWithITMediaItem:(ITLibMediaItem *)mediaItem;
 
 - (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL;
 

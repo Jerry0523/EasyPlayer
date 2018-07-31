@@ -150,7 +150,7 @@
 - (void)registerDecoder:(Class)class forFileTypes:(NSArray *)fileTypes {
     
     [fileTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [_decoders setObject:class forKey:obj];
+        [self.decoders setObject:class forKey:obj];
     }];
 }
 

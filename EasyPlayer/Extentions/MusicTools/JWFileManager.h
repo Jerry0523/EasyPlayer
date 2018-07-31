@@ -32,7 +32,7 @@
 + (NSString*)getMusicPath;
 + (NSString*)getMusicLibraryFilePath;
 
-+ (NSArray*)getItuensMediaArray;
++ (NSArray*)getItunesMediaArray;
 + (NSArray*)getLocalMediaArray;
 
 + (BOOL)copyTrackToLocalMediaPath:(JWTrack*)track;

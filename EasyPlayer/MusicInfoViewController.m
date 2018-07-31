@@ -68,7 +68,7 @@
         
         [JWMediaHelper getAlbumImageForTrack:trackInfo onComplete:^(NSImage *image, JWTrack *track, NSError *error) {
             if (image && !error) {
-                if (track == _trackInfo) {
+                if (track == self.trackInfo) {
                     self.coverImageView.image = image;
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
                          NSColor *mainColor = [image mainColor];
@@ -99,7 +99,7 @@
         
         [JWMediaHelper getLrcForTrack:trackInfo onComplete:^(NSString *lrc, JWTrack *track, NSError *error) {
             if (lrc && !error) {
-                if (track == _trackInfo) {
+                if (track == self.trackInfo) {
                     JWLrcParser *parser = [[JWLrcParser alloc] initWithLRCString:lrc];
                     self.lrcLines = [parser parse];
                     self.lyricWidthConstraints.constant = 450;

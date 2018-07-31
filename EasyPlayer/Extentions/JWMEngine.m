@@ -75,7 +75,7 @@
 
         self.input = [[JWMInputUnit alloc] init];
 
-        if (![_input openWithUrl:url]) {
+        if (![self.input openWithUrl:url]) {
             self.currentState = JWMEngineStateError;
             self.currentError = [NSError errorWithDomain:kErrorDomain
                                                     code:JWMEngineErrorCodesSourceFailed
@@ -83,18 +83,18 @@
                                                             NSLocalizedString(@"Couldn't open source", nil) }];
             return;
         }
-        [_input addObserver:self forKeyPath:@"endOfInput"
+        [self.input addObserver:self forKeyPath:@"endOfInput"
                     options:NSKeyValueObservingOptionNew
                     context:nil];
 
-        self.converter = [[JWMConverter alloc] initWithInputUnit:_input];
+        self.converter = [[JWMConverter alloc] initWithInputUnit:self.input];
 
-        JWMOutputUnit *output = [[outputUnitClass alloc] initWithConverter:_converter];
-        output.outputFormat = _outputFormat;
+        JWMOutputUnit *output = [[outputUnitClass alloc] initWithConverter:self.converter];
+        output.outputFormat = self.outputFormat;
         self.output = output;
-        [_output setVolume:_volume];
+        [self.output setVolume:self.volume];
 
-        if (![_converter setupWithOutputUnit:_output]) {
+        if (![self.converter setupWithOutputUnit:self.output]) {
             self.currentState = JWMEngineStateError;
             self.currentError = [NSError errorWithDomain:kErrorDomain
                                                     code:JWMEngineErrorCodesConverterFailed

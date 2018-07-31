@@ -71,7 +71,7 @@ const NSTimeInterval readTimeout = 1.0;
         [_urlConnection start];
     } else { //fix nsurlconnection delegate
         dispatch_sync(dispatch_get_main_queue(), ^{
-            [_urlConnection start];
+            [self.urlConnection start];
         });
     }
 
@@ -203,11 +203,11 @@ const NSTimeInterval readTimeout = 1.0;
 
     if (data && _fileHandle) {
         dispatch_async([HTTPSource cachingQueue], ^{
-            @synchronized(_fileHandle) {
-                [_fileHandle seekToFileOffset:_byteCount];
-                [_fileHandle writeData:data];
+            @synchronized(self.fileHandle) {
+                [self.fileHandle seekToFileOffset:self->_byteCount];
+                [self.fileHandle writeData:data];
             }
-            _byteCount += data.length;
+            self->_byteCount += data.length;
         });
     }
 }

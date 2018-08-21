@@ -26,15 +26,17 @@
 #import "JWMInputUnit.h"
 
 @interface JWMOutputUnit () {
-    AudioUnit outputUnit;
-    AURenderCallbackStruct renderCallback;
+    AudioUnit _outputUnit;
+    AURenderCallbackStruct _renderCallback;
 
     AudioStreamBasicDescription _format;
     unsigned long long _amountPlayed;
 }
+
 @property (strong, nonatomic) JWMConverter *converter;
 
 - (NSUInteger)readData:(void *)ptr amount:(NSUInteger)amount;
+
 @end
 
 @implementation JWMOutputUnit
@@ -42,7 +44,7 @@
 - (id)initWithConverter:(JWMConverter *)converter {
     self = [super init];
     if (self) {
-        outputUnit = NULL;
+        _outputUnit = NULL;
         [self setup];
 
         self.converter = converter;
@@ -64,25 +66,25 @@
 - (void)process {
     _isProcessing = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
-        AudioOutputUnitStart(outputUnit);
+        AudioOutputUnitStart(self->_outputUnit);
     });
 }
 
 - (void)pause {
-    AudioOutputUnitStop(outputUnit);
+    AudioOutputUnitStop(_outputUnit);
 }
 
 - (void)resume {
-    AudioOutputUnitStart(outputUnit);
+    AudioOutputUnitStart(_outputUnit);
 }
 
 - (void)stop {
     _isProcessing  = NO;
     self.converter = nil;
-    if (outputUnit) {
-        AudioOutputUnitStop(outputUnit);
-        AudioUnitUninitialize(outputUnit);
-        outputUnit = NULL;
+    if (_outputUnit) {
+        AudioOutputUnitStop(_outputUnit);
+        AudioUnitUninitialize(_outputUnit);
+        _outputUnit = NULL;
     }
 }
 
@@ -99,20 +101,20 @@
 }
 
 - (void)setVolume:(float)volume {
-    AudioUnitSetParameter(outputUnit, kHALOutputParam_Volume, kAudioUnitScope_Global, 0, volume * 0.01f, 0);
+    AudioUnitSetParameter(_outputUnit, kHALOutputParam_Volume, kAudioUnitScope_Global, 0, volume * 0.01f, 0);
 }
 
 - (void)setSampleRate:(double)sampleRate {
     UInt32 size = sizeof(AudioStreamBasicDescription);
     _format.mSampleRate = sampleRate;
-    AudioUnitSetProperty(outputUnit,
+    AudioUnitSetProperty(_outputUnit,
                          kAudioUnitProperty_StreamFormat,
                          kAudioUnitScope_Output,
                          0,
                          &_format,
                          size);
 
-    AudioUnitSetProperty(outputUnit,
+    AudioUnitSetProperty(_outputUnit,
                          kAudioUnitProperty_StreamFormat,
                          kAudioUnitScope_Input,
                          0,
@@ -152,7 +154,7 @@ static OSStatus Sound_Renderer(void *inRefCon,
 }
 
 - (BOOL)setup {
-    if (outputUnit) {
+    if (_outputUnit) {
         [self stop];
     }
 
@@ -174,24 +176,24 @@ static OSStatus Sound_Renderer(void *inRefCon,
         return NO;
     }
 
-    if (AudioComponentInstanceNew(comp, &outputUnit)) {
+    if (AudioComponentInstanceNew(comp, &_outputUnit)) {
         return NO;
     }
 
-    if (AudioUnitInitialize(outputUnit) != noErr)
+    if (AudioUnitInitialize(_outputUnit) != noErr)
         return NO;
 
     AudioStreamBasicDescription deviceFormat;
     UInt32 size = sizeof(AudioStreamBasicDescription);
     Boolean outWritable;
-    AudioUnitGetPropertyInfo(outputUnit,
+    AudioUnitGetPropertyInfo(_outputUnit,
             kAudioUnitProperty_StreamFormat,
             kAudioUnitScope_Output,
             0,
             &size,
             &outWritable);
 
-    err = AudioUnitGetProperty (outputUnit,
+    err = AudioUnitGetProperty (_outputUnit,
             kAudioUnitProperty_StreamFormat,
             kAudioUnitScope_Output,
             0,
@@ -214,24 +216,24 @@ static OSStatus Sound_Renderer(void *inRefCon,
         deviceFormat.mBitsPerChannel = 24;
     }
 
-    AudioUnitSetProperty(outputUnit,
+    AudioUnitSetProperty(_outputUnit,
             kAudioUnitProperty_StreamFormat,
             kAudioUnitScope_Output,
             0,
             &deviceFormat,
             size);
-    AudioUnitSetProperty(outputUnit,
+    AudioUnitSetProperty(_outputUnit,
             kAudioUnitProperty_StreamFormat,
             kAudioUnitScope_Input,
             0,
             &deviceFormat,
             size);
 
-    renderCallback.inputProc = Sound_Renderer;
-    renderCallback.inputProcRefCon = (__bridge void *)(self);
+    _renderCallback.inputProc = Sound_Renderer;
+    _renderCallback.inputProcRefCon = (__bridge void *)(self);
 
-    AudioUnitSetProperty(outputUnit, kAudioUnitProperty_SetRenderCallback,
-            kAudioUnitScope_Input, 0, &renderCallback,
+    AudioUnitSetProperty(_outputUnit, kAudioUnitProperty_SetRenderCallback,
+            kAudioUnitScope_Input, 0, &_renderCallback,
             sizeof(AURenderCallbackStruct));
 
     [self setFormat:&deviceFormat];

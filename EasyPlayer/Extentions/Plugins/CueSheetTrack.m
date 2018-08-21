@@ -24,6 +24,7 @@
 #import "CueSheetTrack.h"
 
 @interface CueSheetTrack ()
+
 @property (strong, nonatomic) NSURL *url;
 @property (copy, nonatomic) NSString *track;
 @property (copy, nonatomic) NSString *artist;
@@ -32,6 +33,7 @@
 @property (copy, nonatomic) NSString *genre;
 @property (copy, nonatomic) NSString *year;
 @property (assign, nonatomic) double time;
+
 @end
 
 @implementation CueSheetTrack

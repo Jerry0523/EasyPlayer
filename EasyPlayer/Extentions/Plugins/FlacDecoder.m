@@ -29,14 +29,14 @@
 #define SAMPLE_blockBuffer_SIZE ((FLAC__MAX_BLOCK_SIZE + SAMPLES_PER_WRITE) * FLAC__MAX_SUPPORTED_CHANNELS * (24/8))
 
 @interface FlacDecoder () {
-    FLAC__StreamDecoder *decoder;
-    void *blockBuffer;
-    int blockBufferFrames;    
+    FLAC__StreamDecoder *_decoder;
+    void *_blockBuffer;
+    int _blockBufferFrames;
 
-    int bitsPerSample;
-    int channels;
-    float frequency;
-    long totalFrames;
+    int _bitsPerSample;
+    int _channels;
+    float _frequency;
+    long _totalFrames;
 }
 
 @property (retain, nonatomic) NSMutableDictionary *metadata;
@@ -65,10 +65,10 @@
 
 - (NSDictionary *)properties {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithInt:channels], @"channels",
-            [NSNumber numberWithInt:bitsPerSample], @"bitsPerSample",
-            [NSNumber numberWithFloat:frequency], @"sampleRate",
-            [NSNumber numberWithDouble:totalFrames], @"totalFrames",
+            [NSNumber numberWithInt:_channels], @"channels",
+            [NSNumber numberWithInt:_bitsPerSample], @"bitsPerSample",
+            [NSNumber numberWithFloat:_frequency], @"sampleRate",
+            [NSNumber numberWithDouble:_totalFrames], @"totalFrames",
             [NSNumber numberWithBool:[source seekable]], @"seekable",
             @"big",@"endian",
             nil];
@@ -80,33 +80,33 @@
 
 - (NSUInteger)readAudio:(void *)buffer frames:(NSUInteger)frames {
 	int framesRead = 0;
-	int bytesPerFrame = (bitsPerSample/8) * channels;
+	int bytesPerFrame = (_bitsPerSample/8) * _channels;
 	while (framesRead < frames) {
-		if (blockBufferFrames == 0) {
-			if (FLAC__stream_decoder_get_state(decoder) == FLAC__STREAM_DECODER_END_OF_STREAM ||
-                FLAC__stream_decoder_get_state(decoder) == FLAC__STREAM_DECODER_SEEK_ERROR) {
+		if (_blockBufferFrames == 0) {
+			if (FLAC__stream_decoder_get_state(_decoder) == FLAC__STREAM_DECODER_END_OF_STREAM ||
+                FLAC__stream_decoder_get_state(_decoder) == FLAC__STREAM_DECODER_SEEK_ERROR) {
 				break;
 			}
             
-			FLAC__stream_decoder_process_single(decoder);
+			FLAC__stream_decoder_process_single(_decoder);
 		}
         
-		NSUInteger framesToRead = blockBufferFrames;
-		if (blockBufferFrames > frames) {
+		NSUInteger framesToRead = _blockBufferFrames;
+		if (_blockBufferFrames > frames) {
 			framesToRead = frames;
 		}
         
 		memcpy(((uint8_t *)buffer) + (framesRead * bytesPerFrame),
-               (uint8_t *)blockBuffer, framesToRead * bytesPerFrame);
+               (uint8_t *)_blockBuffer, framesToRead * bytesPerFrame);
         
 		frames -= framesToRead;
 		framesRead += framesToRead;
-		blockBufferFrames -= framesToRead;
+		_blockBufferFrames -= framesToRead;
 		
-		if (blockBufferFrames > 0) {
-			memmove((uint8_t *)blockBuffer,
-                    ((uint8_t *)blockBuffer) + (framesToRead * bytesPerFrame),
-                    blockBufferFrames * bytesPerFrame);
+		if (_blockBufferFrames > 0) {
+			memmove((uint8_t *)_blockBuffer,
+                    ((uint8_t *)_blockBuffer) + (framesToRead * bytesPerFrame),
+                    _blockBufferFrames * bytesPerFrame);
 		}
 	}
 	
@@ -117,15 +117,15 @@
 	[self setSource:s];
 	
     self.metadata = [NSMutableDictionary dictionary];
-	decoder = FLAC__stream_decoder_new();
-	if (decoder == NULL) {
+	_decoder = FLAC__stream_decoder_new();
+	if (_decoder == NULL) {
 		return NO;
     }
         
-    FLAC__stream_decoder_set_metadata_respond(decoder, FLAC__METADATA_TYPE_VORBIS_COMMENT);
-    FLAC__stream_decoder_set_metadata_respond(decoder, FLAC__METADATA_TYPE_PICTURE);
+    FLAC__stream_decoder_set_metadata_respond(_decoder, FLAC__METADATA_TYPE_VORBIS_COMMENT);
+    FLAC__stream_decoder_set_metadata_respond(_decoder, FLAC__METADATA_TYPE_PICTURE);
     
-	if (FLAC__stream_decoder_init_stream(decoder,
+	if (FLAC__stream_decoder_init_stream(_decoder,
 										 ReadCallback,
 										 ([source seekable] ? SeekCallback : NULL),
 										 ([source seekable] ? TellCallback : NULL),
@@ -139,46 +139,46 @@
 		return NO;
 	}
 	    
-	FLAC__stream_decoder_process_until_end_of_metadata(decoder);    
-	blockBuffer = malloc(SAMPLE_blockBuffer_SIZE);
+	FLAC__stream_decoder_process_until_end_of_metadata(_decoder);
+	_blockBuffer = malloc(SAMPLE_blockBuffer_SIZE);
     
 	return YES;
 }
 
 - (long)seek:(long)sample {
-	FLAC__stream_decoder_seek_absolute(decoder, sample);	
+	FLAC__stream_decoder_seek_absolute(_decoder, sample);
 	return sample;
 }
 
 - (void)close {
-	if (decoder) {
-		FLAC__stream_decoder_finish(decoder);
-		FLAC__stream_decoder_delete(decoder);
+	if (_decoder) {
+		FLAC__stream_decoder_finish(_decoder);
+		FLAC__stream_decoder_delete(_decoder);
 	}
-	if (blockBuffer) {
-		free(blockBuffer);
+	if (_blockBuffer) {
+		free(_blockBuffer);
 	}
 	[source close];
     
-	decoder = NULL;
-	blockBuffer = NULL;
+	_decoder = NULL;
+	_blockBuffer = NULL;
 }
 
 #pragma mark - private
 - (char *)blockBuffer {
-	return blockBuffer;
+	return _blockBuffer;
 }
 
 - (int)blockBufferFrames {
-	return blockBufferFrames;
+	return _blockBufferFrames;
 }
 
 - (void)setBlockBufferFrames:(int)frames {
-	blockBufferFrames = frames;
+	_blockBufferFrames = frames;
 }
 
 - (FLAC__StreamDecoder *)decoder {
-	return decoder;
+	return _decoder;
 }
 
 #pragma mark - flac callbacks
@@ -339,11 +339,11 @@ void MetadataCallback(const FLAC__StreamDecoder *decoder,
     } else if (metadata->type == FLAC__METADATA_TYPE_STREAMINFO) {
         FlacDecoder *flacDecoder = (__bridge FlacDecoder *)client_data;
 
-        flacDecoder->channels = metadata->data.stream_info.channels;
-        flacDecoder->frequency = metadata->data.stream_info.sample_rate;
-        flacDecoder->bitsPerSample = metadata->data.stream_info.bits_per_sample;
+        flacDecoder->_channels = metadata->data.stream_info.channels;
+        flacDecoder->_frequency = metadata->data.stream_info.sample_rate;
+        flacDecoder->_bitsPerSample = metadata->data.stream_info.bits_per_sample;
         
-        flacDecoder->totalFrames = (long)metadata->data.stream_info.total_samples;
+        flacDecoder->_totalFrames = (long)metadata->data.stream_info.total_samples;
     }
 }
 

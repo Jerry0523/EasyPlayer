@@ -50,8 +50,6 @@
     
     if ([tableColumn.identifier isEqualToString:@"name"]) {
         cellView.textField.stringValue = item.Name;
-//        [cellView.imageView setWantsLayer:YES];
-        
         cellView.imageView.layer.masksToBounds = YES;
         cellView.imageView.layer.cornerRadius = CGRectGetWidth(cellView.imageView.bounds) * .5;
         

@@ -35,10 +35,10 @@
 @end
 
 @implementation PlayerViewController {
-    PlaylistViewController *playlistController;
-    MusicInfoViewController *musicInfoController;
-    MusicProgressView *progressView;
-    NSTimer *progressTimer;
+    PlaylistViewController *_playlistController;
+    MusicInfoViewController *_musicInfoController;
+    MusicProgressView *_progressView;
+    NSTimer *_progressTimer;
 }
 
 - (BOOL)isPlaying {
@@ -75,23 +75,23 @@
     
     NSRect rect = ((NSView*)self.window.contentView).bounds;
     
-    musicInfoController = [[MusicInfoViewController alloc] init];
-    [self.window.contentView addSubview:musicInfoController.view];
-    musicInfoController.view.bounds = rect;
-    musicInfoController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    _musicInfoController = [[MusicInfoViewController alloc] init];
+    [self.window.contentView addSubview:_musicInfoController.view];
+    _musicInfoController.view.bounds = rect;
+    _musicInfoController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     
     
-    playlistController = [[PlaylistViewController alloc] init];
-    playlistController.items = self.filteredItems;
-    playlistController.playListDelegate = self;
-    [self.window.contentView addSubview:playlistController.view];
-    playlistController.view.bounds = rect;
-    playlistController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    _playlistController = [[PlaylistViewController alloc] init];
+    _playlistController.items = self.filteredItems;
+    _playlistController.playListDelegate = self;
+    [self.window.contentView addSubview:_playlistController.view];
+    _playlistController.view.bounds = rect;
+    _playlistController.view.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     
     
-    progressView = [[MusicProgressView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(rect) - 2, CGRectGetWidth(rect), 2)];
-    progressView.autoresizingMask = NSViewWidthSizable | NSViewMinYMargin;
-    [self.window.contentView addSubview:progressView];
+    _progressView = [[MusicProgressView alloc] initWithFrame:CGRectMake(0, CGRectGetHeight(rect) - 2, CGRectGetWidth(rect), 2)];
+    _progressView.autoresizingMask = NSViewWidthSizable | NSViewMinYMargin;
+    [self.window.contentView addSubview:_progressView];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     self.sortType = (TrackSortType)[[userDefaults objectForKey:@"JWSortType"] integerValue];
@@ -100,7 +100,7 @@
 }
 
 - (void)switchToPlayListPanel {
-    if(playlistController.view.hidden == NO) {
+    if(_playlistController.view.hidden == NO) {
         return;
     }
     
@@ -112,19 +112,19 @@
     [self.window.toolbar insertItemWithItemIdentifier:@"search" atIndex:7];
     
     
-    playlistController.view.hidden = NO;
-    [playlistController.tableView reloadData];
+    _playlistController.view.hidden = NO;
+    [_playlistController.tableView reloadData];
     if (self.currentTrack) {
         NSInteger selectedRow = [self.filteredItems indexOfObject:self.currentTrack];
-        [playlistController.tableView scrollRowToVisible:selectedRow];
-        [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+        [_playlistController.tableView scrollRowToVisible:selectedRow];
+        [_playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
     }
     
     self.panelSwitchControl.selectedSegment = 0;
 }
 
 - (void)switchToMuscicInfoPanel {
-    if(playlistController.view.hidden == YES) {
+    if(_playlistController.view.hidden == YES) {
         return;
     }
     
@@ -135,7 +135,7 @@
     
     [self.window.toolbar insertItemWithItemIdentifier:@"mode" atIndex:6];
     
-    playlistController.view.hidden = YES;
+    _playlistController.view.hidden = YES;
     self.panelSwitchControl.selectedSegment = 1;
 }
 
@@ -165,21 +165,21 @@
 
 - (void)setCurrentTrack:(JWTrack *)currentTrack {
     dispatch_async(dispatch_get_main_queue(), ^{
-        _currentTrack = currentTrack;
+        self->_currentTrack = currentTrack;
         self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
         [self switchToMuscicInfoPanel];
         
-        if (progressTimer) {
-            [progressTimer invalidate];
-            progressView.progress = 0;
+        if (self->_progressTimer) {
+            [self->_progressTimer invalidate];
+            self->_progressView.progress = 0;
         }
         
-        progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshProgressByTimer) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:progressTimer forMode:NSRunLoopCommonModes];
-        [progressTimer fire];
+        self->_progressTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshProgressByTimer) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:self->_progressTimer forMode:NSRunLoopCommonModes];
+        [self->_progressTimer fire];
         
-        musicInfoController.trackInfo = currentTrack;
-        [playlistController setSelectedIndex:[self.filteredItems indexOfObject:currentTrack]];
+        self->_musicInfoController.trackInfo = currentTrack;
+        [self->_playlistController setSelectedIndex:[self.filteredItems indexOfObject:currentTrack]];
     });
 }
 
@@ -192,23 +192,23 @@
     }
     
     if (totalTime > 0) {
-        progressView.progress = currentTime / totalTime;
+        _progressView.progress = currentTime / totalTime;
     }
-    musicInfoController.currentTimerInteval = currentTime;
+    _musicInfoController.currentTimerInteval = currentTime;
 }
 
 - (void)setFilteredItems:(NSArray *)filteredItems {
     if (_filteredItems != filteredItems) {
         _filteredItems = filteredItems;
-        playlistController.items = filteredItems;
-        [playlistController.tableView reloadData];
+        _playlistController.items = filteredItems;
+        [_playlistController.tableView reloadData];
         
         if (self.currentTrack) {
             NSInteger selectedRow = [self.items indexOfObject:self.currentTrack];
-            playlistController.playListDelegate = nil;
-            [playlistController.tableView scrollRowToVisible:selectedRow];
-            [playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
-            playlistController.playListDelegate = self;
+            _playlistController.playListDelegate = nil;
+            [_playlistController.tableView scrollRowToVisible:selectedRow];
+            [_playlistController.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:selectedRow] byExtendingSelection:NO];
+            _playlistController.playListDelegate = self;
         }
     }
 }
@@ -252,8 +252,8 @@
         [self.player pause];
         self.playToolbarItem.image = [NSImage imageNamed:@"play"];
         [self switchToPlayListPanel];
-        if (progressTimer) {
-            [progressTimer setFireDate:[NSDate distantFuture]];
+        if (_progressTimer) {
+            [_progressTimer setFireDate:[NSDate distantFuture]];
         }
     } else {
         [self switchToMuscicInfoPanel];
@@ -263,7 +263,7 @@
             [self playRandomSong];
         }
         self.playToolbarItem.image = [NSImage imageNamed:@"pause"];
-        [progressTimer setFireDate:[NSDate date]];
+        [_progressTimer setFireDate:[NSDate date]];
     }
 }
 
@@ -278,14 +278,14 @@
     if ([self.playedList count] > 0) {
         id lastTrack = [self.playedList lastObject];
         [self playSongByTrack:lastTrack];
-        [playlistController setSelectedIndex:[self.items indexOfObject:lastTrack]];
+        [_playlistController setSelectedIndex:[self.items indexOfObject:lastTrack]];
     } else {
         [self.player stop];
         self.playToolbarItem.image = [NSImage imageNamed:@"play"];
         [self switchToPlayListPanel];
-        if (progressTimer) {
-            [progressTimer invalidate];
-            progressTimer = nil;
+        if (_progressTimer) {
+            [_progressTimer invalidate];
+            _progressTimer = nil;
         }
     }
 }

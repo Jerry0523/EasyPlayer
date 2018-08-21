@@ -26,7 +26,9 @@
 #import "JWMCommonProtocols.h"
 
 @interface CueSheet ()
+
 @property (copy, nonatomic) NSArray *tracks;
+
 @end
 
 @implementation CueSheet

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -97,10 +97,10 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="1859737E-5DB5-4700-A282-8B90EDE2A48D" explicitItemIdentifier="switch" label="" paletteLabel="Switch" id="38l-NA-bQB">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="63" height="25"/>
-                        <size key="maxSize" width="114" height="30"/>
+                        <size key="minSize" width="63" height="23"/>
+                        <size key="maxSize" width="117" height="30"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="4Cz-en-fuE">
-                            <rect key="frame" x="0.0" y="14" width="113" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="117" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="kMP-NU-uzc">
                                 <font key="font" metaFont="system"/>
@@ -120,10 +120,10 @@
                     </toolbarItem>
                     <toolbarItem implicitItemIdentifier="1730B5E9-0C1F-43AF-B905-0E1748DCDFF1" explicitItemIdentifier="mode" label="" paletteLabel="mode" id="KEv-a6-c4h">
                         <nil key="toolTip"/>
-                        <size key="minSize" width="81" height="24"/>
-                        <size key="maxSize" width="115" height="25"/>
+                        <size key="minSize" width="81" height="23"/>
+                        <size key="maxSize" width="117" height="25"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="Xwl-Ig-yEZ">
-                            <rect key="frame" x="0.0" y="14" width="113" height="25"/>
+                            <rect key="frame" x="0.0" y="14" width="117" height="23"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="rCN-zA-Lk8">
                                 <font key="font" metaFont="system"/>

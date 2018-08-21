@@ -29,11 +29,13 @@
 #import "JWMCommonProtocols.h"
 
 @interface JWMEngine ()
+
 @property (strong, nonatomic) JWMInputUnit *input;
 @property (strong, nonatomic) JWMOutputUnit *output;
 @property (strong, nonatomic) JWMConverter *converter;
 @property (assign, nonatomic) JWMEngineState currentState;
 @property (strong, nonatomic) NSError *currentError;
+
 @end
 
 @implementation JWMEngine
@@ -131,7 +133,7 @@
 
 - (void)stop {
     dispatch_async([JWMQueues processing_queue], ^{
-        [_input removeObserver:self forKeyPath:@"endOfInput"];
+        [self.input removeObserver:self forKeyPath:@"endOfInput"];
         self.output = nil;
         self.input = nil;
         self.converter = nil;
@@ -166,11 +168,11 @@
         [self stop];
     } else {
         dispatch_async([JWMQueues processing_queue], ^{
-            if (![_input openWithUrl:url]) {
+            if (![self.input openWithUrl:url]) {
                 [self stop];
             }
-            [_converter reinitWithNewInput:_input withDataFlush:flush];
-            [_output seek:0.0];
+            [self.converter reinitWithNewInput:self.input withDataFlush:flush];
+            [self.output seek:0.0];
             [self setCurrentState:JWMEngineStatePlaying];
         });
     }
@@ -188,7 +190,7 @@
     if ([keyPath isEqualToString:@"currentState"] &&
         [_delegate respondsToSelector:@selector(engine:didChangeState:)]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_delegate engine:self didChangeState:_currentState];
+            [self.delegate engine:self didChangeState:self.currentState];
         });
     } else if ([keyPath isEqualToString:@"endOfInput"]) {
         NSURL *nextUrl = [_delegate engineExpectsNextUrl:self];
@@ -205,8 +207,8 @@
 
 - (void)setup {
     dispatch_source_set_event_handler([JWMQueues buffering_source], ^{
-        [_input process];
-        [_converter process];
+        [self.input process];
+        [self.converter process];
     });
 }
 

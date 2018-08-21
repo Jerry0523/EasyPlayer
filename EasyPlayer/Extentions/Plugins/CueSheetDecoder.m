@@ -27,10 +27,10 @@
 #import "JWMPluginManager.h"
 
 @interface CueSheetDecoder () {
-	long framePosition;
+	long _framePosition;
     
-	long trackStart;
-	long trackEnd;		
+	long _trackStart;
+	long _trackEnd;
 }
 @property (strong, nonatomic) id<JWMSource> source;
 @property (strong, nonatomic) id<JWMDecoder> decoder;
@@ -51,7 +51,7 @@
 
 - (NSDictionary *)properties {
 	NSMutableDictionary *properties = [[_decoder properties] mutableCopy];
-	[properties setObject:[NSNumber numberWithLong:(trackEnd - trackStart)]
+	[properties setObject:[NSNumber numberWithLong:(_trackEnd - _trackStart)]
                    forKey:@"totalFrames"];
 	return properties;
 }
@@ -74,8 +74,8 @@
 }
 
 - (NSUInteger)readAudio:(void *)buf frames:(NSUInteger)frames {
-	if (framePosition + frames > trackEnd) {
-		frames = trackEnd - framePosition;
+	if (_framePosition + frames > _trackEnd) {
+		frames = _trackEnd - _framePosition;
 	}
     
 	if (!frames) {
@@ -83,7 +83,7 @@
 	}
     
 	NSUInteger n = [_decoder readAudio:buf frames:frames];
-	framePosition += n;
+	_framePosition += n;
 	return n;
 }
 
@@ -113,12 +113,12 @@
 
 			NSDictionary *properties = [_decoder properties];
 			float sampleRate = [[properties objectForKey:@"sampleRate"] floatValue];
-			trackStart = [track time] * sampleRate;
+			_trackStart = [track time] * sampleRate;
 
 			if (nextTrack && [nextTrack.url isEqual:track.url]) {
-				trackEnd = [nextTrack time] * sampleRate;
+				_trackEnd = [nextTrack time] * sampleRate;
 			} else {
-				trackEnd = [[properties objectForKey:@"totalFrames"] doubleValue];
+				_trackEnd = [[properties objectForKey:@"totalFrames"] doubleValue];
 			}
 			[self seek: 0];
 
@@ -130,13 +130,13 @@
 }
 
 - (long)seek:(long)frame {
-	if (frame > trackEnd - trackStart) {
+	if (frame > _trackEnd - _trackStart) {
 		return -1;
 	}
 	
-	frame += trackStart;
-	framePosition = [_decoder seek:frame];
-	return framePosition;
+	frame += _trackStart;
+	_framePosition = [_decoder seek:frame];
+	return _framePosition;
 }
 
 - (void)close {

@@ -33,11 +33,11 @@ const int ID3V1_SIZE = 128;
     AudioFileID     _audioFile;
     ExtAudioFileRef _in;
 
-    int bitrate;
-    int bitsPerSample;
-    int channels;
-    float frequency;
-    long totalFrames;
+    int _bitrate;
+    int _bitsPerSample;
+    int _channels;
+    float _frequency;
+    long _totalFrames;
 }
 @property (strong, nonatomic) NSMutableDictionary *metadata;
 @end
@@ -65,11 +65,11 @@ const int ID3V1_SIZE = 128;
 
 - (NSDictionary *)properties {
     return [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithInt:channels], @"channels",
-            [NSNumber numberWithInt:bitsPerSample], @"bitsPerSample",
-            [NSNumber numberWithInt:bitrate], @"bitrate",
-            [NSNumber numberWithFloat:frequency], @"sampleRate",
-            [NSNumber numberWithLong:totalFrames], @"totalFrames",
+            [NSNumber numberWithInt:_channels], @"channels",
+            [NSNumber numberWithInt:_bitsPerSample], @"bitsPerSample",
+            [NSNumber numberWithInt:_bitrate], @"bitrate",
+            [NSNumber numberWithFloat:_frequency], @"sampleRate",
+            [NSNumber numberWithLong:_totalFrames], @"totalFrames",
             [NSNumber numberWithBool:YES], @"seekable",
             @"big", @"endian",
             nil];
@@ -85,9 +85,9 @@ const int ID3V1_SIZE = 128;
     UInt32 frameCount;
 
     bufferList.mNumberBuffers              = 1;
-    bufferList.mBuffers[0].mNumberChannels = channels;
+    bufferList.mBuffers[0].mNumberChannels = _channels;
     bufferList.mBuffers[0].mData           = buf;
-    bufferList.mBuffers[0].mDataByteSize   = (UInt32)frames * channels * (bitsPerSample/8);
+    bufferList.mBuffers[0].mDataByteSize   = (UInt32)frames * _channels * (_bitsPerSample/8);
 
     frameCount = (UInt32)frames;
     err        = ExtAudioFileRead(_in, &frameCount, &bufferList);
@@ -151,13 +151,13 @@ const int ID3V1_SIZE = 128;
         return NO;
     }
 
-    bitrate       = 0;
-    bitsPerSample = asbd.mBitsPerChannel;
-    channels      = asbd.mChannelsPerFrame;
-    frequency     = asbd.mSampleRate;
+    _bitrate       = 0;
+    _bitsPerSample = asbd.mBitsPerChannel;
+    _channels      = asbd.mChannelsPerFrame;
+    _frequency     = asbd.mSampleRate;
 
-    if(0 == bitsPerSample) {
-        bitsPerSample = 16;
+    if(0 == _bitsPerSample) {
+        _bitsPerSample = 16;
     }
 
     AudioStreamBasicDescription	result;
@@ -166,13 +166,13 @@ const int ID3V1_SIZE = 128;
     result.mFormatID    = kAudioFormatLinearPCM;
     result.mFormatFlags = kAudioFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsBigEndian;
 
-    result.mSampleRate       = frequency;
-    result.mChannelsPerFrame = channels;
-    result.mBitsPerChannel   = bitsPerSample;
+    result.mSampleRate       = _frequency;
+    result.mChannelsPerFrame = _channels;
+    result.mBitsPerChannel   = _bitsPerSample;
 
-    result.mBytesPerPacket  = channels * (bitsPerSample / 8);
+    result.mBytesPerPacket  = _channels * (_bitsPerSample / 8);
     result.mFramesPerPacket = 1;
-    result.mBytesPerFrame   = channels * (bitsPerSample / 8);
+    result.mBytesPerFrame   = _channels * (_bitsPerSample / 8);
 
     err = ExtAudioFileSetProperty(_in, kExtAudioFileProperty_ClientDataFormat,
             sizeof(result), &result);
@@ -195,7 +195,7 @@ const int ID3V1_SIZE = 128;
     Float64 total = 0;
     size = sizeof(total);
     err = AudioFileGetProperty(audioFile, kAudioFilePropertyEstimatedDuration, &size, &total);
-    if(err == noErr) totalFrames = total * frequency;
+    if(err == noErr) _totalFrames = total * _frequency;
 
     return YES;
 }

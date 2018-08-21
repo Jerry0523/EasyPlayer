@@ -36,7 +36,7 @@
                                                      thumbSize.width,
                                                      thumbSize.height,
                                                      8,//bits per component
-                                                     thumbSize.width*4,
+                                                     thumbSize.width * 4,
                                                      colorSpace,
                                                      bitmapInfo);
         
@@ -60,21 +60,17 @@
         return nil;
     }
     
-    NSCountedSet *cls=[NSCountedSet setWithCapacity:thumbSize.width*thumbSize.height];
+    NSCountedSet *cls = [NSCountedSet setWithCapacity:thumbSize.width*thumbSize.height];
     
-    for (int x=0; x<thumbSize.width; x++) {
-        for (int y=0; y<thumbSize.height; y++) {
-            
-            int offset = 4*(x*y);
-            
+    for (int x = 0; x < thumbSize.width; x++) {
+        for (int y = 0; y < thumbSize.height; y++) {
+            int offset = 4 * (x * y);
             int red = data[offset];
-            int green = data[offset+1];
-            int blue = data[offset+2];
-            int alpha =  data[offset+3];
-            
-            NSArray *clr=@[@(red),@(green),@(blue),@(alpha)];
+            int green = data[offset + 1];
+            int blue = data[offset + 2];
+            int alpha =  data[offset + 3];
+            NSArray *clr = @[@(red),@(green),@(blue),@(alpha)];
             [cls addObject:clr];
-            
         }
     }
     
@@ -86,18 +82,17 @@
     NSArray *MaxColor=nil;
     NSUInteger MaxCount=0;
     
-    while ( (curColor = [enumerator nextObject]) != nil )
-    {
+    while ((curColor = [enumerator nextObject]) != nil) {
         NSUInteger tmpCount = [cls countForObject:curColor];
-        
         if ( tmpCount < MaxCount ) continue;
-        
         MaxCount=tmpCount;
         MaxColor=curColor;
-        
     }
     
-    return [JWColor colorWithRed:([MaxColor[0] intValue]/255.0f) green:([MaxColor[1] intValue]/255.0f) blue:([MaxColor[2] intValue]/255.0f) alpha:([MaxColor[3] intValue] * .7 / 255.0f)];
+    return [JWColor colorWithRed:([MaxColor[0] intValue] / 255.0f)
+                           green:([MaxColor[1] intValue] / 255.0f)
+                            blue:([MaxColor[2] intValue] / 255.0f)
+                           alpha:([MaxColor[3] intValue] * .7 / 255.0f)];
 }
 
 - (void) saveAsJPGFileForPath:(NSString*)path {

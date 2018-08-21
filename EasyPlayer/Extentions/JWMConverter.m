@@ -31,8 +31,8 @@
     AudioStreamBasicDescription _outputFormat;
     AudioConverterRef _converter;
 
-    void *callbackBuffer;
-    void *writeBuf;
+    void *_callbackBuffer;
+    void *_writeBuf;
 }
 
 @property (strong, nonatomic) JWMInputUnit *inputUnit;
@@ -49,16 +49,16 @@
 
         self.inputUnit = inputUnit;
         _inputFormat = inputUnit.format;
-
-        writeBuf = malloc(CHUNK_SIZE);
+        _writeBuf = malloc(CHUNK_SIZE);
     }
     return self;
 }
 
 - (void)dealloc {
-    free(callbackBuffer);
-    free(writeBuf);
-//    free(dspBuf);
+    if (_callbackBuffer) {
+        free(_callbackBuffer);
+    }
+    free(_writeBuf);
 }
 
 #pragma mark - public
@@ -68,7 +68,7 @@
     [_outputUnit setSampleRate:_inputFormat.mSampleRate];
 
     _outputFormat = outputUnit.format;
-    callbackBuffer = malloc((CHUNK_SIZE/_outputFormat.mBytesPerFrame) * _inputFormat.mBytesPerPacket);
+    _callbackBuffer = malloc((CHUNK_SIZE/_outputFormat.mBytesPerFrame) * _inputFormat.mBytesPerPacket);
 
     OSStatus stat = AudioConverterNew(&_inputFormat, &_outputFormat, &_converter);
     if (stat != noErr) {
@@ -98,9 +98,9 @@
         if (_convertedData.length >= BUFFER_SIZE) {
             break;
         }
-        amountConverted = [self convert:writeBuf amount:CHUNK_SIZE];
+        amountConverted = [self convert:_writeBuf amount:CHUNK_SIZE];
         dispatch_sync([JWMQueues lock_queue], ^{
-            [_convertedData appendBytes:writeBuf length:amountConverted];
+            [self.convertedData appendBytes:self->_writeBuf length:amountConverted];
         });
     } while (amountConverted > 0);
 
@@ -126,8 +126,8 @@
     NSUInteger bytesToRead = MIN(_convertedData.length, amount);
 
     dispatch_sync([JWMQueues lock_queue], ^{
-        memcpy(buffer, _convertedData.bytes, bytesToRead);
-        [_convertedData replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
+        memcpy(buffer, self.convertedData.bytes, bytesToRead);
+        [self.convertedData replaceBytesInRange:NSMakeRange(0, bytesToRead) withBytes:NULL length:0];
     });
 
     return bytesToRead;
@@ -174,7 +174,7 @@ static OSStatus ACInputProc(AudioConverterRef inAudioConverter,
     NSUInteger amountToWrite;
 
     amountToWrite = [converter.inputUnit shiftBytes:(*ioNumberDataPackets)*(converter->_inputFormat.mBytesPerPacket)
-                                             buffer:converter->callbackBuffer];
+                                             buffer:converter->_callbackBuffer];
 
     if (amountToWrite == 0) {
         ioData->mBuffers[0].mDataByteSize = 0;
@@ -183,7 +183,7 @@ static OSStatus ACInputProc(AudioConverterRef inAudioConverter,
         return 100;
     }
 
-    ioData->mBuffers[0].mData = converter->callbackBuffer;
+    ioData->mBuffers[0].mData = converter->_callbackBuffer;
     ioData->mBuffers[0].mDataByteSize = (UInt32)amountToWrite;
     ioData->mBuffers[0].mNumberChannels = (converter->_inputFormat.mChannelsPerFrame);
     ioData->mNumberBuffers = 1;

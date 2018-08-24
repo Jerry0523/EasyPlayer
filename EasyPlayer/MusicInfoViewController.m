@@ -33,7 +33,8 @@
 @property (weak) IBOutlet NSTableView *lrcTableView;
 @property (weak) IBOutlet NSLayoutConstraint *lyricWidthConstraints;
 
-@property (strong, nonatomic) NSArray *lrcLines;
+@property (strong, nonatomic) NSArray<JWLrcObject *> *lrcLines;
+@property (strong, nonatomic) NSArray<NSString *> *plainLrcLines;
 
 @end
 
@@ -101,7 +102,14 @@
             if (lrc && !error) {
                 if (track == self.trackInfo) {
                     JWLrcParser *parser = [[JWLrcParser alloc] initWithLRCString:lrc];
-                    self.lrcLines = [parser parse];
+                    NSArray *lrcLines = [parser parse];
+                    if (lrcLines.count > 1) {
+                        self.lrcLines = lrcLines;
+                    } else {
+                        self.lrcLines = nil;
+                        self.plainLrcLines = [lrc componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+                    }
+                    
                     self.lyricWidthConstraints.constant = 450;
                     [self.lrcTableView reloadData];
                 }
@@ -129,21 +137,29 @@
 }
 
 #pragma mark - NSTableViewDelegate & NSTableViewDataSource
-
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-    return [self.lrcLines count];
+    if (self.lrcLines) {
+        return self.lrcLines.count;
+    }
+    return self.plainLrcLines.count;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    JWLrcObject *lrcObj = self.lrcLines[row];
-    cellView.textField.stringValue = lrcObj.content;
     
-    NSTimeInterval dieta = self.currentTimerInteval - lrcObj.timeInteval;
-    if (dieta <= 0.5 && dieta >= -0.5 ) {
-        cellView.textField.textColor = [NSColor colorWithRed:245.0 / 255.0 green:100.0 / 255.0 blue:20.0 / 255.0 alpha:1.0];
+    if (self.lrcLines.count > row) {
+        JWLrcObject *lrcObj = self.lrcLines[row];
+        cellView.textField.stringValue = lrcObj.content;
+        
+        NSTimeInterval dieta = self.currentTimerInteval - lrcObj.timeInteval;
+        if (dieta <= 0.5 && dieta >= -0.5 ) {
+            cellView.textField.textColor = [NSColor colorWithRed:245.0 / 255.0 green:100.0 / 255.0 blue:20.0 / 255.0 alpha:1.0];
+        } else {
+            cellView.textField.textColor = [NSColor colorWithWhite:70.0 / 255.0 alpha:1.0];
+        }
     } else {
+        cellView.textField.stringValue = self.plainLrcLines[row];
         cellView.textField.textColor = [NSColor colorWithWhite:70.0 / 255.0 alpha:1.0];
     }
     

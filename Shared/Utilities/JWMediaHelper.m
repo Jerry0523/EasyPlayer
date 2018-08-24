@@ -29,24 +29,37 @@
 
 @implementation JWMediaHelper
 
-+ (void)cacheAlbumImageForTrack:(JWTrack*)track force:(BOOL)force
++ (void)cacheMetaForTrack:(JWTrack*)track force:(BOOL)force
 {
     NSString *albumPath = [JWFileManager getCoverPath];
-    NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
-    if (!force && [[NSFileManager defaultManager] fileExistsAtPath:destination]) {
+    NSString *albumCoverPath = [albumPath stringByAppendingPathComponent:[track cacheKey]];
+    if (!force && [[NSFileManager defaultManager] fileExistsAtPath:albumCoverPath]) {
         return;
     }
     JWMInputUnit *inputUnit = [[JWMInputUnit alloc] init];
     if ([inputUnit openWithUrl:track.fileURL]) {
         NSDictionary *meta = [inputUnit metadata];
         if(meta) {
-            [self cacheAlbumImageForTrack:track meta:meta];
+            [self cacheAlbumCoverForTrack:track meta:meta];
+            [self cacheLrcForTrack:track meta:meta];
         }
         [inputUnit close];
     }
 }
 
-+ (void)cacheAlbumImageForTrack:(JWTrack*)track meta:(NSDictionary*)meta
++ (void)cacheLrcForTrack:(JWTrack*)track meta:meta
+{
+    if (meta[@"lrc"]) {
+        NSString *lrcPath = [JWFileManager getLrcPath];
+        NSString *cacheKey = [track cacheKey];
+        if (lrcPath) {
+            NSString *destination = [lrcPath stringByAppendingPathComponent:cacheKey];
+            [meta[@"lrc"] writeToFile:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
+        }
+    }
+}
+
++ (void)cacheAlbumCoverForTrack:(JWTrack*)track meta:(NSDictionary*)meta
 {
     if (meta[@"picture"]) {
         JWImage *coverImg = [[JWImage alloc] initWithData:meta[@"picture"]];
@@ -68,7 +81,7 @@
             JWTrack *track = [[JWTrack alloc] initFromID3Info:meta url:fileURL];
             track.sourceType = TrackSourceTypeLocal;
             [array addObject:track];
-            [self cacheAlbumImageForTrack:track meta:meta];
+            [self cacheAlbumCoverForTrack:track meta:meta];
         }
         [inputUnit close];
     } else {
@@ -89,7 +102,7 @@
         } else {
             [self getBaiduInfoForTrack:track onComplete:^(NSInteger lrcId, NSError *error) {
                 if (lrcId > 0) {
-                    [self downloadBaiduLrcInfo:lrcId key:cachedKey onComplete:^(NSString *lrc, NSError *error) {
+                    [self downloadBaiduLrcForTrack:track lrcId:lrcId key:cachedKey onComplete:^(NSString *lrc, NSError *error) {
                         if (block) {
                             block(lrc, track, error);
                         }
@@ -179,17 +192,15 @@
     }];
 }
 
-+ (void)downloadBaiduLrcInfo:(NSInteger)lrcId key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
++ (void)downloadBaiduLrcForTrack:(JWTrack*)track lrcId:(NSInteger)lrcId key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
     if (lrcId > 0) {
         NSString *url = [NSString stringWithFormat:@"http://box.zhangmen.baidu.com/bdlrc/%ld/%ld.lrc", lrcId / 100, (long)lrcId];
         [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
             NSString *aString;
             if (!error && rawData) {
                 aString = [[NSString alloc] initWithData:rawData encoding:CFStringConvertEncodingToNSStringEncoding (kCFStringEncodingGB_18030_2000)];
-                NSString *lrcPath = [JWFileManager getLrcPath];
-                if (lrcPath) {
-                    NSString *destination = [lrcPath stringByAppendingPathComponent:key];
-                    [aString writeToFile:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
+                if (aString.length) {
+                    [self cacheLrcForTrack:track meta:@{@"lrc": aString}];
                 }
             }
             if (block) {

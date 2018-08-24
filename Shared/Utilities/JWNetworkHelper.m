@@ -64,21 +64,22 @@
     [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     request.HTTPMethod = @"GET";
     
-    [NSURLConnection sendAsynchronousRequest:request queue:self.completionQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+    NSURLSessionDataTask *task = [[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:self.completionQueue] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         id json;
-        if ([response isKindOfClass:[NSHTTPURLResponse class]] && ((NSHTTPURLResponse*)response).statusCode == 404 && !connectionError) {
-            connectionError = [NSError errorWithDomain:@"" code:404 userInfo:@{}];
+        if ([response isKindOfClass:[NSHTTPURLResponse class]] && ((NSHTTPURLResponse*)response).statusCode == 404 && !error) {
+            error = [NSError errorWithDomain:@"" code:404 userInfo:@{}];
         }
-        if (!connectionError) {
+        if (!error) {
             json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
         }
         
         if (block) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                block(json, connectionError, data);
+                block(json, error, data);
             });
         }
     }];
+    [task resume];
 }
 
 @end

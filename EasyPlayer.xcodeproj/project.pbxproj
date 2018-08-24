@@ -53,8 +53,6 @@
 		C497CD58212FE20500D7F7CF /* JWLrcParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD1F212FE20500D7F7CF /* JWLrcParser.m */; };
 		C497CD59212FE20500D7F7CF /* JWMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD24212FE20500D7F7CF /* JWMOutputUnit.m */; };
 		C497CD5A212FE20500D7F7CF /* JWMOutputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD24212FE20500D7F7CF /* JWMOutputUnit.m */; };
-		C497CD5B212FE20500D7F7CF /* JWMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD25212FE20500D7F7CF /* JWMQueues.m */; };
-		C497CD5C212FE20500D7F7CF /* JWMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD25212FE20500D7F7CF /* JWMQueues.m */; };
 		C497CD5D212FE20500D7F7CF /* JWMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD27212FE20500D7F7CF /* JWMInputUnit.m */; };
 		C497CD5E212FE20500D7F7CF /* JWMInputUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD27212FE20500D7F7CF /* JWMInputUnit.m */; };
 		C497CD5F212FE20500D7F7CF /* JWMEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD29212FE20500D7F7CF /* JWMEngine.m */; };
@@ -85,6 +83,8 @@
 		C497CD8F212FE2BD00D7F7CF /* CueSheetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD79212FE2BD00D7F7CF /* CueSheetContainer.m */; };
 		C497CD93212FE55400D7F7CF /* libFLAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84AD816D1C34D50C0037E162 /* libFLAC.framework */; };
 		C497CD97212FEB6100D7F7CF /* libFLACIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84ED12DB1C3A452500725CCF /* libFLACIOS.framework */; };
+		C497CD9E212FEF0B00D7F7CF /* JWMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD9C212FEF0B00D7F7CF /* JWMQueues.m */; };
+		C497CD9F212FEF0B00D7F7CF /* JWMQueues.m in Sources */ = {isa = PBXBuildFile; fileRef = C497CD9C212FEF0B00D7F7CF /* JWMQueues.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,14 +149,12 @@
 		C497CD21212FE20500D7F7CF /* NSImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+Utils.h"; sourceTree = "<group>"; };
 		C497CD22212FE20500D7F7CF /* JWMediaHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMediaHelper.h; sourceTree = "<group>"; };
 		C497CD24212FE20500D7F7CF /* JWMOutputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWMOutputUnit.m; sourceTree = "<group>"; };
-		C497CD25212FE20500D7F7CF /* JWMQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWMQueues.m; sourceTree = "<group>"; };
 		C497CD26212FE20500D7F7CF /* JWMCommonProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMCommonProtocols.h; sourceTree = "<group>"; };
 		C497CD27212FE20500D7F7CF /* JWMInputUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWMInputUnit.m; sourceTree = "<group>"; };
 		C497CD28212FE20500D7F7CF /* JWMConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMConverter.h; sourceTree = "<group>"; };
 		C497CD29212FE20500D7F7CF /* JWMEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWMEngine.m; sourceTree = "<group>"; };
 		C497CD2A212FE20500D7F7CF /* JWMPluginManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWMPluginManager.m; sourceTree = "<group>"; };
 		C497CD2B212FE20500D7F7CF /* JWMAudioUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWMAudioUnit.m; sourceTree = "<group>"; };
-		C497CD2C212FE20500D7F7CF /* JWMQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMQueues.h; sourceTree = "<group>"; };
 		C497CD2D212FE20500D7F7CF /* JWMOutputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMOutputUnit.h; sourceTree = "<group>"; };
 		C497CD2E212FE20500D7F7CF /* JWMInputUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMInputUnit.h; sourceTree = "<group>"; };
 		C497CD2F212FE20500D7F7CF /* JWMEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMEngine.h; sourceTree = "<group>"; };
@@ -182,6 +180,8 @@
 		C497CD7B212FE2BD00D7F7CF /* M3uContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M3uContainer.h; sourceTree = "<group>"; };
 		C497CD7C212FE2BD00D7F7CF /* CueSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheet.h; sourceTree = "<group>"; };
 		C497CD7D212FE2BD00D7F7CF /* CueSheetTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CueSheetTrack.h; sourceTree = "<group>"; };
+		C497CD9C212FEF0B00D7F7CF /* JWMQueues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JWMQueues.m; sourceTree = "<group>"; };
+		C497CD9D212FEF0B00D7F7CF /* JWMQueues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JWMQueues.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -356,8 +356,8 @@
 			isa = PBXGroup;
 			children = (
 				C497CD26212FE20500D7F7CF /* JWMCommonProtocols.h */,
-				C497CD2C212FE20500D7F7CF /* JWMQueues.h */,
-				C497CD25212FE20500D7F7CF /* JWMQueues.m */,
+				C497CD9D212FEF0B00D7F7CF /* JWMQueues.h */,
+				C497CD9C212FEF0B00D7F7CF /* JWMQueues.m */,
 				C497CD2E212FE20500D7F7CF /* JWMInputUnit.h */,
 				C497CD27212FE20500D7F7CF /* JWMInputUnit.m */,
 				C497CD2F212FE20500D7F7CF /* JWMEngine.h */,
@@ -546,6 +546,7 @@
 				C497CD5F212FE20500D7F7CF /* JWMEngine.m in Sources */,
 				849061071BCCEA85008B2125 /* PlayerViewController.m in Sources */,
 				C497CD84212FE2BD00D7F7CF /* FlacDecoder.m in Sources */,
+				C497CD9E212FEF0B00D7F7CF /* JWMQueues.m in Sources */,
 				C497CD4F212FE20500D7F7CF /* JWFileManager.m in Sources */,
 				C497CD65212FE20500D7F7CF /* JWMConverter.m in Sources */,
 				C497CD4B212FE20500D7F7CF /* JWNetworkHelper.m in Sources */,
@@ -555,7 +556,6 @@
 				849061151BCE099B008B2125 /* MusicProgressView.m in Sources */,
 				C497CD47212FE20500D7F7CF /* JWModel.m in Sources */,
 				C497CD7E212FE2BD00D7F7CF /* FileSource.m in Sources */,
-				C497CD5B212FE20500D7F7CF /* JWMQueues.m in Sources */,
 				C497CD61212FE20500D7F7CF /* JWMPluginManager.m in Sources */,
 				C497CD55212FE20500D7F7CF /* NSString+Comparator.m in Sources */,
 				C497CD8A212FE2BD00D7F7CF /* M3uContainer.m in Sources */,
@@ -584,11 +584,11 @@
 				C497CD85212FE2BD00D7F7CF /* FlacDecoder.m in Sources */,
 				C497CD58212FE20500D7F7CF /* JWLrcParser.m in Sources */,
 				84ED11A71C3A2D7900725CCF /* PlayListViewController.m in Sources */,
+				C497CD9F212FEF0B00D7F7CF /* JWMQueues.m in Sources */,
 				C497CD81212FE2BD00D7F7CF /* HTTPSource.m in Sources */,
 				C497CD83212FE2BD00D7F7CF /* CoreAudioDecoder.m in Sources */,
 				C497CD46212FE20500D7F7CF /* JWTagInfo.m in Sources */,
 				C497CD50212FE20500D7F7CF /* JWFileManager.m in Sources */,
-				C497CD5C212FE20500D7F7CF /* JWMQueues.m in Sources */,
 				C497CD4E212FE20500D7F7CF /* NSImage+Utils.m in Sources */,
 				84ED11A41C3A2D7900725CCF /* AppDelegate.m in Sources */,
 				C497CD4C212FE20500D7F7CF /* JWNetworkHelper.m in Sources */,
@@ -796,6 +796,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayerIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/EasyPlayer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -821,6 +822,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jerry.EasyPlayerIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/EasyPlayer-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;

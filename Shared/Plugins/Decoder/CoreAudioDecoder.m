@@ -229,71 +229,72 @@ const int ID3V1_SIZE = 128;
                                    kAudioFilePropertyAlbumArtwork,
                                    &dataSize,
                                    0);
-    NSData *image;
+    
+    UInt32 propertySize = 0;
+    AudioFileGetPropertyInfo(audioFile,
+                             kAudioFilePropertyID3Tag,
+                             &propertySize,
+                             0);
+    
+    CFDictionaryRef id3Dict = NULL;
+    
+    if (propertySize) {
+        char *rawID3Tag = (char *)malloc(propertySize);
+        err = AudioFileGetProperty(audioFile,
+                                   kAudioFilePropertyID3Tag,
+                                   &propertySize,
+                                   rawID3Tag);
+        if (err != noErr) {
+            free(rawID3Tag);
+        }
+        
+        UInt32 id3TagSize = 0;
+        UInt32 id3TagSizeLength = sizeof(id3TagSize);
+        AudioFormatGetProperty(kAudioFormatProperty_ID3TagSize,
+                               propertySize,
+                               rawID3Tag,
+                               &id3TagSizeLength,
+                               &id3TagSize);
+        
+        
+        AudioFormatGetProperty(kAudioFormatProperty_ID3TagToDictionary,
+                               propertySize,
+                               rawID3Tag,
+                               &id3TagSize,
+                               &id3Dict);
+        free(rawID3Tag);
+    }
+    
+    NSDictionary *tagDict = id3Dict ? [NSDictionary dictionaryWithDictionary:(__bridge NSDictionary *)id3Dict] : nil;
+    if (id3Dict) {
+        CFRelease(id3Dict);
+    }
+    
+    NSData *image = nil;
     if (err == noErr) {
         AudioFileGetProperty(audioFile,
                              kAudioFilePropertyAlbumArtwork,
                              &dataSize,
                              &image);
-        if (image) {
-            [result setObject:image forKey:@"picture"];
-        }
-
-    } else if ((image = [self imageDataFromID3Tag:audioFile])) {
+    }
+    if (!image) {
+        NSDictionary *apicDict = tagDict[@"APIC"] ?: tagDict[@"PIC"];
+        NSString *picKey      = [[apicDict allKeys] lastObject];
+        NSDictionary *picDict = apicDict[picKey];
+        image = picDict[@"data"];
+    }
+    
+    if (image) {
         [result setObject:image forKey:@"picture"];
     }
-
-    return result;
-}
-
-- (NSData *)imageDataFromID3Tag:(AudioFileID)audioFile {
-
-    OSStatus err;
-
-    UInt32 propertySize = 0;
-    AudioFileGetPropertyInfo(audioFile,
-            kAudioFilePropertyID3Tag,
-            &propertySize,
-            0);
-
-    char *rawID3Tag = (char *)malloc(propertySize);
-    err = AudioFileGetProperty(audioFile,
-            kAudioFilePropertyID3Tag,
-            &propertySize,
-            rawID3Tag);
-
-    if (err != noErr) {
-        free(rawID3Tag);
-        return nil;
+    
+    NSDictionary *lrcDict = tagDict[@"USLT"];
+    NSString *lrc = lrcDict.allValues.lastObject[@"text"];
+    if (lrc.length) {
+        [result setObject:lrc forKey:@"lrc"];
     }
-
-    UInt32 id3TagSize = 0;
-    UInt32 id3TagSizeLength = sizeof(id3TagSize);
-    AudioFormatGetProperty(kAudioFormatProperty_ID3TagSize,
-            propertySize,
-            rawID3Tag,
-            &id3TagSizeLength,
-            &id3TagSize);
-
-    CFDictionaryRef id3Dict;
-    AudioFormatGetProperty(kAudioFormatProperty_ID3TagToDictionary,
-            propertySize,
-            rawID3Tag,
-            &id3TagSize,
-            &id3Dict);
-
-    NSDictionary *tagDict = [NSDictionary dictionaryWithDictionary:(__bridge NSDictionary *)id3Dict];
-    free(rawID3Tag);
-    CFRelease(id3Dict);
-
-    NSDictionary *apicDict = tagDict[@"APIC"] ?: tagDict[@"PIC"];
-    if (!apicDict) return nil;
-
-    NSString *picKey      = [[apicDict allKeys] lastObject];
-    NSDictionary *picDict = apicDict[picKey];
-    if (!picDict) return nil;
-
-    return picDict[@"data"];
+    
+    return result;
 }
 
 #pragma mark - callback functions

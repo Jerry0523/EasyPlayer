@@ -100,16 +100,16 @@
     for (MPMediaItem *song in itemsFromGenericQuery) {
         if (song.mediaType == MPMediaTypeMusic && song.assetURL) {
             NSMutableDictionary *info = [NSMutableDictionary dictionary];
-            [info setObject:song.assetURL.absoluteString forKey:@"Location"];
+            [info setObject:song.assetURL.absoluteString forKey:@"location"];
             
             if (song.title) {
-                [info setObject:song.title forKey:@"Name"];
+                [info setObject:song.title forKey:@"name"];
             }
             if (song.artist) {
-                [info setObject:song.artist forKey:@"Artist"];
+                [info setObject:song.artist forKey:@"artist"];
             }
             if (song.albumTitle) {
-                [info setObject:song.albumTitle forKey:@"Album"];
+                [info setObject:song.albumTitle forKey:@"album"];
             }
             [info setObject:@(song.playbackDuration * 1000) forKey:@"TotalTime"];
             [info setObject:song forKey:@"userInfo"];
@@ -131,7 +131,7 @@
             if (obj.location && !obj.drmProtected && obj.mediaKind == ITLibMediaItemMediaKindSong && obj.totalTime > 30000) {
                 JWTrack *track = [[JWTrack alloc] initWithITMediaItem:obj];
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                    [JWMediaHelper cacheAlbumImageForTrack:track force:NO];
+                    [JWMediaHelper cacheMetaForTrack:track force:NO];
                 });
                 [mItems addObject:track];
             }

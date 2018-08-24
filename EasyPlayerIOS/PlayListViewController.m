@@ -47,7 +47,7 @@
     NSMutableArray *sectionItems = [NSMutableArray array];
     NSString *lastKey;
     for (JWTrack *track in rawItems) {
-        NSString *title = track.Name;
+        NSString *title = track.name;
         NSString *firstLetter = [[title substringToIndex:1] uppercaseString];
         if ([firstLetter isEqualToString:lastKey]) {
             [sectionItems addObject:track];
@@ -93,8 +93,8 @@
     JWTrack *track = self.items[indexPath.section][indexPath.row];
     MPMediaItem *info = track.userInfo;
     cell.imageView.image = [info.artwork imageWithSize:CGSizeMake(48, 48)];
-    cell.textLabel.text = track.Name;
-    cell.detailLabel.text = track.Artist;
+    cell.textLabel.text = track.name;
+    cell.detailLabel.text = track.artist;
     
     return cell;
 }

@@ -43,15 +43,20 @@ typedef NS_ENUM(NSInteger, TrackSourceType) {
 
 @interface JWTrack : JWModel
 
-@property (nonatomic, strong) NSString *Name;
-@property (nonatomic, strong) NSString *Artist;
-@property (nonatomic, strong) NSString *Album;
-@property (nonatomic, strong) NSString *Location;
-@property (nonatomic, assign) double TotalTime;
+@property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *artist;
+@property (nonatomic, strong) NSString *album;
+@property (nonatomic, strong) NSString *location;
+@property (nonatomic, assign) double totalTime;
 @property (nonatomic, assign) TrackSourceType sourceType;
 @property (nonatomic, strong) id userInfo;
+@property (nonatomic, strong, readonly) NSURL *fileURL;
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+
+#else
 - (instancetype)initWithITMediaItem:(ITLibMediaItem *)mediaItem;
+#endif
 
 - (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL;
 
@@ -60,9 +65,6 @@ typedef NS_ENUM(NSInteger, TrackSourceType) {
 
 - (BOOL)respondToSearch:(NSString*)search;
 
-- (NSData*)musicData;
 - (NSString*)cacheKey;
-
-- (NSURL*)fileURL;
 
 @end

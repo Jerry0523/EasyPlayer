@@ -21,7 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+#import <Availability.h>
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+#import <libFLACIOS/all.h>
+#else
 #import <libFLAC/all.h>
+#endif
 #import "FlacDecoder.h"
 
 #define SAMPLES_PER_WRITE 512

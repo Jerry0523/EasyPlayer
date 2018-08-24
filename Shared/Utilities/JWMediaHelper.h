@@ -27,8 +27,12 @@
 
 @interface JWMediaHelper : NSObject
 
++ (void)cacheAlbumImageForTrack:(JWTrack*)track force:(BOOL)force;
+
 + (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array;
+
 + (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *track, NSError *))block;
+
 + (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(JWImage*, JWTrack *track, NSError *))block;
 
 @end

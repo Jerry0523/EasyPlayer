@@ -38,17 +38,21 @@
 
 @implementation JWTrack
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+
+#else
 - (instancetype)initWithITMediaItem:(ITLibMediaItem *)mediaItem
 {
     if (self = [super init]) {
-        self.Album = mediaItem.album.title ?: @"";
-        self.Artist = mediaItem.artist.name ?: @"";
-        self.Location = mediaItem.location.absoluteString;
-        self.Name = mediaItem.title;
-        self.TotalTime = mediaItem.totalTime;
+        self.album = mediaItem.album.title ?: @"";
+        self.artist = mediaItem.artist.name ?: @"";
+        self.location = mediaItem.location.absoluteString;
+        self.name = mediaItem.title;
+        self.totalTime = mediaItem.totalTime;
     }
     return self;
 }
+#endif
 
 - (instancetype)initFromID3Info:(NSDictionary*)info url:(NSURL*)fileURL{
     if (self = [super init]) {
@@ -57,40 +61,40 @@
         NSString *title = info[@"title"];
         NSString *file = [fileURL absoluteString];
         
-        self.Album = album ? album : @"";
-        self.Artist = artist ? artist : @"";
-        self.Location = file;
+        self.album = album ? album : @"";
+        self.artist = artist ? artist : @"";
+        self.location = file;
         
         if (!title) {
             NSString *filename = [[file lastPathComponent] stringByDeletingPathExtension];
             filename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            self.Name = filename;
+            self.name = filename;
         } else {
-            self.Name = title;
+            self.name = title;
         }
         
-        self.TotalTime = [info[@"approximate duration in seconds"] doubleValue] * 1000;
+        self.totalTime = [info[@"approximate duration in seconds"] doubleValue] * 1000;
     }
     return self;
 }
 
 - (instancetype)initFromDictionary:(NSDictionary *)json {
     if (self = [super initFromDictionary:json]) {
-        if (!self.Name) {
-            self.Name = @"";
+        if (!self.name) {
+            self.name = @"";
         }
-        if (!self.Artist) {
-            self.Artist = @"";
+        if (!self.artist) {
+            self.artist = @"";
         }
-        if (!self.Album) {
-            self.Album = @"";
+        if (!self.album) {
+            self.album = @"";
         }
     }
     return self;
 }
 
 - (NSString*)pathExtention {
-    NSArray *components = [self.Location componentsSeparatedByString:@"."];
+    NSArray *components = [self.location componentsSeparatedByString:@"."];
     if ([components count] < 2) {
         return nil;
     }
@@ -98,11 +102,11 @@
 }
 
 - (NSInteger)compares:(JWTrack*)track sortType:(TrackSortType)sortType {
-    NSString *key = @"Name";
+    NSString *key = @"name";
     if (sortType == TrackSortTypeArtist) {
-        key = @"Artist";
+        key = @"artist";
     } else if(sortType == TrackSortTypeAlbum) {
-        key = @"Album";
+        key = @"album";
     }
     
     NSString *s0 = [self valueForKey:key];
@@ -112,18 +116,14 @@
 }
 
 - (BOOL)respondToSearch:(NSString *)search {
-    return [[self.Name lowercaseString] rangeOfString:search].location != NSNotFound ||
-        [[self.Album lowercaseString] rangeOfString:search].location != NSNotFound ||
-    [[self.Artist lowercaseString] rangeOfString:search].location != NSNotFound;
-}
-
-- (NSData*)musicData {
-    return [NSData dataWithContentsOfURL:[NSURL URLWithString:self.Location]];
+    return [[self.name lowercaseString] rangeOfString:search].location != NSNotFound ||
+        [[self.album lowercaseString] rangeOfString:search].location != NSNotFound ||
+    [[self.artist lowercaseString] rangeOfString:search].location != NSNotFound;
 }
 
 - (NSString*)cacheKey {
-    NSMutableString *mutable = [NSMutableString stringWithString:_Name];
-    [mutable appendString:_Artist ? _Artist : @"NULL"];
+    NSMutableString *mutable = [NSMutableString stringWithString:_name];
+    [mutable appendString:_artist ? _artist : @"NULL"];
     
     const char *cStr = [mutable UTF8String];
     unsigned char result[16];
@@ -143,8 +143,8 @@
     MPMediaItem *item = self.userInfo;
     return [item valueForProperty:MPMediaItemPropertyAssetURL];
 #else
-    if(self.Location) {
-        return [NSURL URLWithString:self.Location];
+    if(self.location) {
+        return [NSURL URLWithString:self.location];
     }
     return nil;
 #endif

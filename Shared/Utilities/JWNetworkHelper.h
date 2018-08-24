@@ -26,6 +26,7 @@
 @interface JWNetworkHelper : NSObject
 
 + (instancetype)helper;
+
 - (void)sendAsynchronousRequestForURL:(NSString*)url onComplete:(void (^)(id data, NSError *error, NSData *rawData))block;
 
 @end

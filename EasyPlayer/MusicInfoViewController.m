@@ -58,9 +58,9 @@
         [self.lrcTableView reloadData];
         [self.view setNeedsLayout:YES];
         
-        self.nameLabel.stringValue = trackInfo.Name;
-        self.artistLabel.stringValue = trackInfo.Artist;
-        self.albumLabel.stringValue = trackInfo.Album;
+        self.nameLabel.stringValue = trackInfo.name;
+        self.artistLabel.stringValue = trackInfo.artist;
+        self.albumLabel.stringValue = trackInfo.album;
         self.coverImageView.image = [NSImage imageNamed:@"album"];
         [self.view.layer removeAllAnimations];
         self.view.layer.backgroundColor = [NSColor colorWithWhite:236.0 alpha:1.0].CGColor;

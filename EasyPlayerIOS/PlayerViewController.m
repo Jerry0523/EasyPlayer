@@ -22,7 +22,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        rawItems = [JWFileManager getItuensMediaArray];
+        rawItems = [JWFileManager getItunesMediaArray];
         rawItems = [rawItems sortedArrayUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
             return [obj0 compares:obj1 sortType:TrackSortTypeDefault];
         }];

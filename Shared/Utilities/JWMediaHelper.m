@@ -26,69 +26,55 @@
 #import "JWFileManager.h"
 #import "JWNetworkHelper.h"
 #import "JWMInputUnit.h"
-#import <AudioToolbox/AudioToolbox.h>
 
 @implementation JWMediaHelper
+
++ (void)cacheAlbumImageForTrack:(JWTrack*)track force:(BOOL)force
+{
+    NSString *albumPath = [JWFileManager getCoverPath];
+    NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
+    if (!force && [[NSFileManager defaultManager] fileExistsAtPath:destination]) {
+        return;
+    }
+    JWMInputUnit *inputUnit = [[JWMInputUnit alloc] init];
+    if ([inputUnit openWithUrl:track.fileURL]) {
+        NSDictionary *meta = [inputUnit metadata];
+        if(meta) {
+            [self cacheAlbumImageForTrack:track meta:meta];
+        }
+        [inputUnit close];
+    }
+}
+
++ (void)cacheAlbumImageForTrack:(JWTrack*)track meta:(NSDictionary*)meta
+{
+    if (meta[@"picture"]) {
+        JWImage *coverImg = [[JWImage alloc] initWithData:meta[@"picture"]];
+        NSString *albumPath = [JWFileManager getCoverPath];
+        if (albumPath) {
+            NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [coverImg saveAsJPGFileForPath:destination];
+            });
+        }
+    }
+}
 
 + (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array {
     JWMInputUnit *inputUnit = [[JWMInputUnit alloc] init];
     if ([inputUnit openWithUrl:fileURL]) {
         NSDictionary *meta = [inputUnit metadata];
-        [inputUnit close];
-
         if(meta) {
             JWTrack *track = [[JWTrack alloc] initFromID3Info:meta url:fileURL];
             track.sourceType = TrackSourceTypeLocal;
-            if (meta[@"picture"]) {
-                JWImage *coverImg = [[JWImage alloc] initWithData:meta[@"picture"]];
-                NSString *albumPath = [JWFileManager getCoverPath];
-                if (albumPath) {
-                    NSString *destination = [albumPath stringByAppendingPathComponent:[track cacheKey]];
-                    [coverImg saveAsJPGFileForPath:destination];
-                }
-                
-            }
             [array addObject:track];
+            [self cacheAlbumImageForTrack:track meta:meta];
         }
-        
+        [inputUnit close];
     } else {
         return;
     }
 }
-
-+ (JWImage*)innerCoverImageForURL:(NSURL*)fileURL {
-    AudioFileID audioFile;
-    OSStatus theErr = noErr;
-    theErr = AudioFileOpenURL((__bridge CFURLRef)fileURL,
-                              kAudioFileReadPermission,
-                              kAudioFileMP3Type,
-                              &audioFile);
-    
-    if (theErr != noErr) {
-        return nil;
-    }
-    UInt32 picDataSize = 0;
-    theErr = AudioFileGetPropertyInfo (audioFile,
-                                       kAudioFilePropertyInfoDictionary,
-                                       &picDataSize,
-                                       0);
-    if (theErr != noErr) {
-        return nil;
-    }
-    
-    CFDataRef albumPic;
-    theErr = AudioFileGetProperty(audioFile, kAudioFilePropertyAlbumArtwork, &picDataSize, &albumPic);
-    if(theErr != noErr ){
-        return nil;
-    }
-    NSData *imagedata = (__bridge NSData*)albumPic;
-    CFRelease(albumPic);
-    theErr = AudioFileClose (audioFile);
-    
-    return [[JWImage alloc] initWithData:imagedata];
-}
-
-
 
 + (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *, NSError *))block {
     NSString *lrcPath = [JWFileManager getLrcPath];
@@ -130,32 +116,19 @@
                 block(image, track, nil);
             }
         } else {
-            JWImage *albumImg = [self innerCoverImageForURL:[track fileURL]];
-            if (albumImg) {
-                if (block) {
-                    block(albumImg, track, nil);
-                }
-                NSString *albumPath = [JWFileManager getCoverPath];
-                if (albumPath) {
-                    NSString *destination = [albumPath stringByAppendingPathComponent:cachedKey];
-                    [albumImg saveAsJPGFileForPath:destination];
-                }
-                
-            } else {
-                [self getGeCiMiSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
-                    if (info) {
-                        [self downloadGeCiMiAlbumCover:info key:cachedKey onComplete:^(JWImage *image, NSError *error) {
-                            if (block) {
-                                block(image, track, error);
-                            }
-                        }];
-                    } else {
+            [self getGeCiMiSongInfoForTrack:track onComplete:^(JWTagInfo *info, NSError *error) {
+                if (info) {
+                    [self downloadGeCiMiAlbumCover:info key:cachedKey onComplete:^(JWImage *image, NSError *error) {
                         if (block) {
-                            block(nil, track, error);
+                            block(image, track, error);
                         }
+                    }];
+                } else {
+                    if (block) {
+                        block(nil, track, error);
                     }
-                }];
-            }
+                }
+            }];
         }
         
     }
@@ -163,11 +136,11 @@
 
 + (void)getBaiduInfoForTrack:(JWTrack*)track onComplete:(void (^)(NSInteger lrcId, NSError *error))block {
     NSMutableString *url = [NSMutableString stringWithString:@"http://box.zhangmen.baidu.com/x?op=12&count=1&title="];
-    if (track.Name) {
-        [url appendFormat:@"%@$$", track.Name];
+    if (track.name) {
+        [url appendFormat:@"%@$$", track.name];
     }
-    if (track.Artist) {
-        [url appendFormat:@"%@$$$$", track.Artist];
+    if (track.artist) {
+        [url appendFormat:@"%@$$$$", track.artist];
     }
     
     [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
@@ -188,11 +161,11 @@
 
 + (void)getGeCiMiSongInfoForTrack:(JWTrack*)track onComplete:(void (^)(JWTagInfo *info, NSError *error))block {
     NSMutableString *url = [NSMutableString stringWithString:@"http://geci.me/api/lyric"];
-    if (track.Name) {
-        [url appendFormat:@"/%@", track.Name];
+    if (track.name) {
+        [url appendFormat:@"/%@", track.name];
     }
-    if (track.Artist) {
-        [url appendFormat:@"/%@", track.Artist];
+    if (track.artist) {
+        [url appendFormat:@"/%@", track.artist];
     }
     
     [[JWNetworkHelper helper] sendAsynchronousRequestForURL:url onComplete:^(id data, NSError *error, NSData *rawData) {
@@ -225,25 +198,6 @@
         }];
     }
 }
-
-//- (void)downloadLrcInfo:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(NSString*, NSError *))block {
-//    if (info.lrc) {
-//        [self sendAsynchronousRequestForURL:info.lrc onComplete:^(id data, NSError *error, NSData *rawData) {
-//            NSString *aString;
-//            if (!error && rawData) {
-//                aString = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
-//                NSString *lrcPath = [JWFileManager getLrcPath];
-//                if (lrcPath) {
-//                    NSString *destination = [lrcPath stringByAppendingPathComponent:key];
-//                    [aString writeToFile:destination atomically:YES encoding:NSUTF8StringEncoding error:nil];
-//                }
-//            }
-//            if (block) {
-//                block(aString, error);
-//            }
-//        }];
-//    }
-//}
 
 + (void)downloadGeCiMiAlbumCover:(JWTagInfo*)info key:(NSString*)key onComplete:(void (^)(JWImage*, NSError *))block {
     if (info.aid) {

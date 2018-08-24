@@ -29,6 +29,7 @@
 #import "JWMediaHelper.h"
 #import "NSImage+Utils.h"
 
+static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICATION_NAME";
 
 @interface PlayerViewController ()<JWMEngineDelegate, PlaylistViewDelegate>
 
@@ -45,22 +46,8 @@
     return self.player.isPlaying;
 }
 
-- (void)rightMouseUp:(NSEvent *)theEvent {
-
-}
-
 - (void)windowDidLoad {
     [super windowDidLoad];
-    
-    NSMenu *menu = [[NSMenu alloc] initWithTitle:@""];
-    NSMenuItem *list = [[NSMenuItem alloc] initWithTitle:@"List" action:@selector(rightMouseUp:) keyEquivalent:@""];
-    list.state = 1;
-    
-    NSMenuItem *card = [[NSMenuItem alloc] initWithTitle:@"Card" action:@selector(rightMouseUp:) keyEquivalent:@""];
-    [menu addItem:list];
-    [menu addItem:card];
-    
-    [self.panelSwitchControl setMenu:menu forSegment:0];
     
     self.player = [[JWMEngine alloc] init];;
     self.player.delegate = self;
@@ -97,6 +84,25 @@
     self.sortType = (TrackSortType)[[userDefaults objectForKey:@"JWSortType"] integerValue];
     self.playMode = (TrackPlayMode)[[userDefaults objectForKey:@"JWPlayMode"] integerValue];
     self.modeSegmentControl.selectedSegment = self.playMode;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:PLAYLIST_SEARCH_NOTIFICATION_NAME object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSString *searchKey = note.object;
+        if (searchKey.length == 0) {
+            self.filteredItems = self.items;
+        } else {
+            NSString *searchString = searchKey.lowercaseString;
+            NSMutableArray *array = [NSMutableArray array];
+            for (JWTrack *track in self.items) {
+                if ([track respondToSearch:searchString]) {
+                    [array addObject:track];
+                }
+            }
+            [array sortUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
+                return [obj0 compares:obj1 sortType:self.sortType];
+            }];
+            self.filteredItems = array;
+        }
+    }];
 }
 
 - (void)switchToPlayListPanel {
@@ -128,7 +134,7 @@
         return;
     }
     
-    self.window.title = self.currentTrack ? self.currentTrack.Name : @"";
+    self.window.title = self.currentTrack ? self.currentTrack.name : @"";
     
     [self.window.toolbar removeItemAtIndex:7];
     [self.window.toolbar removeItemAtIndex:6];
@@ -157,9 +163,9 @@
     [self.playedList removeObject:track];
     [self.playedList addObject:track];
     
-    self.window.title = track.Name;
+    self.window.title = track.name;
 
-    [self.player playUrl:[track fileURL]];
+    [self.player playUrl:track.fileURL];
     self.currentTrack = track;
 }
 
@@ -185,7 +191,7 @@
 
 - (void)refreshProgressByTimer {
     NSTimeInterval currentTime = self.player.amountPlayed;
-    NSTimeInterval totalTime = self.currentTrack.TotalTime / 1000.0;
+    NSTimeInterval totalTime = self.currentTrack.totalTime / 1000.0;
     
     if (totalTime == 0) {
         totalTime = self.player.trackTime;
@@ -230,21 +236,8 @@
 #pragma mark - IBActions
 
 - (IBAction)searchFieldValueChanged:(NSSearchField *)sender {
-    if ([sender.stringValue length] == 0) {
-        self.filteredItems = self.items;
-    } else {
-        NSString *searchString = [sender.stringValue lowercaseString];
-        NSMutableArray *array = [NSMutableArray array];
-        for (JWTrack *track in self.items) {
-            if ([track respondToSearch:searchString]) {
-                [array addObject:track];
-            }
-        }
-        [array sortUsingComparator:^NSComparisonResult(JWTrack *obj0, JWTrack *obj1) {
-            return [obj0 compares:obj1 sortType:self.sortType];
-        }];
-        self.filteredItems = array;
-    }
+    NSNotification *notification = [[NSNotification alloc] initWithName:PLAYLIST_SEARCH_NOTIFICATION_NAME object:sender.stringValue userInfo:nil];
+    [[NSNotificationQueue defaultQueue] enqueueNotification:notification postingStyle:NSPostWhenIdle coalesceMask:NSNotificationCoalescingOnName | NSNotificationCoalescingOnSender forModes:nil];
 }
 
 - (IBAction)playClicked:(NSToolbarItem*)sender {
@@ -365,7 +358,7 @@
         track = self.items[randomIndex];
     }
     self.currentTrack = track;
-    return [track fileURL];
+    return track.fileURL;
 }
 
 - (void)engine:(JWMEngine *)engine didChangeState:(JWMEngineState)state {

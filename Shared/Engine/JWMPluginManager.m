@@ -28,6 +28,7 @@
 
 #import "CoreAudioDecoder.h"
 #import "CueSheetDecoder.h"
+#import "FlacDecoder.h"
 
 #import "CueSheetContainer.h"
 #import "M3uContainer.h"
@@ -63,16 +64,18 @@
                  
         /* Decoders */
         NSMutableDictionary *decodersDict = [NSMutableDictionary dictionary];
+        self.decoders = decodersDict;
+        
         [[CoreAudioDecoder fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [decodersDict setObject:[CoreAudioDecoder class] forKey:obj];
         }];
         [[CueSheetDecoder fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [decodersDict setObject:[CueSheetDecoder class] forKey:obj];
         }];
-        self.decoders = decodersDict;
+        
+        [self registerDecoder:FlacDecoder.self forFileTypes:@[ @"flac" ]];
         
         Class class;
-        if ((class = NSClassFromString(@"FlacDecoder"))) [self registerDecoder:class forFileTypes:@[ @"flac" ]];
         if ((class = NSClassFromString(@"OpusFileDecoder"))) [self registerDecoder:class forFileTypes:@[ @"opus" ]];
         
         /* Containers */        

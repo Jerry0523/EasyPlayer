@@ -29,6 +29,7 @@
 #else
 #import <iTunesLibrary/ITLibrary.h>
 #import <iTunesLibrary/ITLibMediaItem.h>
+#import "JWMediaHelper.h"
 #endif
 
 @implementation JWFileManager
@@ -129,6 +130,9 @@
         [mediaItems enumerateObjectsUsingBlock:^(ITLibMediaItem *obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.location && !obj.drmProtected && obj.mediaKind == ITLibMediaItemMediaKindSong && obj.totalTime > 30000) {
                 JWTrack *track = [[JWTrack alloc] initWithITMediaItem:obj];
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    [JWMediaHelper cacheAlbumImageForTrack:track force:NO];
+                });
                 [mItems addObject:track];
             }
         }];
@@ -150,9 +154,9 @@
 }
 
 + (BOOL)copyTrackToLocalMediaPath:(JWTrack*)track {
-    NSString *newTrackName = track.Name;
-    NSString *newTrackArtist = track.Artist;
-    NSString *pathExtension = [track fileURL].pathExtension;
+    NSString *newTrackName = track.name;
+    NSString *newTrackArtist = track.artist;
+    NSString *pathExtension = track.fileURL.pathExtension;
     
     NSString *fileName = newTrackName;
     if ([newTrackArtist length]) {
@@ -162,7 +166,7 @@
         fileName = [fileName stringByAppendingFormat:@".%@",pathExtension];
     }
     NSString *finalPath = [[self getMusicPath] stringByAppendingPathComponent:fileName];
-    NSString *sourcePath = [track.Location stringByRemovingPercentEncoding];
+    NSString *sourcePath = [track.location stringByRemovingPercentEncoding];
     if ([sourcePath hasPrefix:@"file://"] ) {
         sourcePath = [sourcePath substringFromIndex:7];
     }
@@ -170,7 +174,7 @@
     [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:finalPath error:&error];
     finalPath = [NSString stringWithFormat:@"file://%@", finalPath];
     finalPath = [finalPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    track.Location = finalPath;
+    track.location = finalPath;
     return error != nil;
 }
 

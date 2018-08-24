@@ -48,17 +48,10 @@
     if (!json) {
         return nil;
     }
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         NSDictionary *values = json;
         NSArray *propertyList = [self getPropertyList];
         [values enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-            if ([key isEqualToString:@"id"]) {
-                NSString *className = NSStringFromClass([self class]);
-                className = [className substringFromIndex:2];
-                className = [className lowercaseString];
-                key = [NSString stringWithFormat:@"%@Id", className];
-            }
             NSMutableString *targetKey = [key mutableCopy];
             if ([targetKey rangeOfString:@" "].location != NSNotFound) {
                 [targetKey replaceOccurrencesOfString:@" " withString:@"" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [targetKey length])];
@@ -67,7 +60,7 @@
                 if ([propertyList containsObject:[NSString stringWithFormat:@"_%@", targetKey]]) {
                     [self setValue:obj forKey:targetKey];
                 } else {
-//                    NSLog(@"Class %@ does't have key %@", NSStringFromClass([self class]), targetKey);
+                    NSLog(@"Class %@ does't have key %@", NSStringFromClass([self class]), targetKey);
                 }
             }
         }];
@@ -94,10 +87,8 @@
 }
 
 #pragma mark - NSCoding
-
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    self = [self init];
-    if (self) {
+    if (self = [self init]) {
         for (NSString *key in [self getPropertyList]) {
             NSObject *value = [aDecoder decodeObjectForKey:key];
             [self setValue:value forKey:key];

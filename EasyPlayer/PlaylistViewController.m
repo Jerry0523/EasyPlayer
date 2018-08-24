@@ -43,33 +43,45 @@
     return [self.items count];
 }
 
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    return @(row);
+}
+
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
     NSTableCellView *cellView = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
     JWTrack *item = self.items[row];
     
     if ([tableColumn.identifier isEqualToString:@"name"]) {
-        cellView.textField.stringValue = item.Name;
+        cellView.textField.stringValue = item.name;
         cellView.imageView.layer.masksToBounds = YES;
         cellView.imageView.layer.cornerRadius = CGRectGetWidth(cellView.imageView.bounds) * .5;
         
         NSString *key = [item cacheKey];
         NSString *albumPath = [JWFileManager getCoverPath];
         if (albumPath) {
-            NSString *destination = [albumPath stringByAppendingPathComponent:key];
-            if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
-                NSImage *image = [[NSImage alloc] initWithContentsOfFile:destination];
-                cellView.imageView.image = image;
-            } else {
-                cellView.imageView.image = [NSImage imageNamed:@"sMusic"];
-            }
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                NSImage *image = nil;
+                NSString *destination = [albumPath stringByAppendingPathComponent:key];
+                if ([[NSFileManager defaultManager] fileExistsAtPath:destination isDirectory:nil]) {
+                    image = [[NSImage alloc] initWithContentsOfFile:destination];
+                } else {
+                    image = [NSImage imageNamed:@"sMusic"];
+                }
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if ([cellView.objectValue integerValue] == row) {
+                        cellView.imageView.image = image;
+                    }
+                });
+            });
         } else {
             cellView.imageView.image = [NSImage imageNamed:@"sMusic"];
         }
     } else if([tableColumn.identifier isEqualToString:@"artist"]) {
-        cellView.textField.stringValue = item.Artist;
+        cellView.textField.stringValue = item.artist;
     } else if([tableColumn.identifier isEqualToString:@"album"]) {
-        cellView.textField.stringValue = item.Album;
+        cellView.textField.stringValue = item.album;
     } else if([tableColumn.identifier isEqualToString:@"source"]) {
         cellView.textField.stringValue = item.sourceType == TrackSourceTypeItunes ? @"iTunes" : @"Local";
     }

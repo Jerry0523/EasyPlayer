@@ -286,7 +286,7 @@ const int ID3V1_SIZE = 128;
     free(rawID3Tag);
     CFRelease(id3Dict);
 
-    NSDictionary *apicDict = tagDict[@"APIC"];
+    NSDictionary *apicDict = tagDict[@"APIC"] ?: tagDict[@"PIC"];
     if (!apicDict) return nil;
 
     NSString *picKey      = [[apicDict allKeys] lastObject];

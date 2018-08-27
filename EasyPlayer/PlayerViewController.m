@@ -26,6 +26,7 @@
 #import "MusicProgressView.h"
 #import "MusicInfoViewController.h"
 #import "JWFileManager.h"
+#import "JWMPluginManager.h"
 #import "JWMediaHelper.h"
 #import "NSImage+Utils.h"
 
@@ -301,9 +302,11 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
 - (IBAction)addButtonClicked:(NSButton *)sender {
     sender.state = 1;
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
-    [openDlg setCanChooseFiles:YES];
-    [openDlg setCanChooseDirectories:NO];
-    [openDlg setAllowsMultipleSelection:YES];
+    openDlg.canChooseFiles = YES;
+    openDlg.canChooseDirectories = NO;
+    openDlg.allowsMultipleSelection = YES;
+    openDlg.allowsOtherFileTypes = NO;
+    openDlg.allowedFileTypes = JWMPluginManager.supportedFileTypes;
     
     NSArray *urlArray;
     
@@ -314,7 +317,13 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
     NSMutableArray *newTracks = [NSMutableArray array];
     
     for (NSURL *url in urlArray) {
-        [JWMediaHelper scanSupportedMediaForFileURL:url into:newTracks];
+        if (![JWMediaHelper scanSupportedMediaForFileURL:url into:newTracks]) {
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.messageText = @"An error occured";
+            alert.informativeText = [NSString stringWithFormat:@"Seems like %@ is not a valid file", url.lastPathComponent];
+            [alert addButtonWithTitle:@"OK"];
+            [alert runModal];
+        }
     }
     
     NSMutableArray *mutable = [NSMutableArray arrayWithArray:self.items];

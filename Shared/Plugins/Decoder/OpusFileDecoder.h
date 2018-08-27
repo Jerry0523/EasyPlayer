@@ -1,5 +1,5 @@
 //
-//  LrcHelper.h
+// OpusFileDecoder.h
 //
 // Copyright (c) 2015 Jerry Wong
 //
@@ -21,18 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
-#import "JWTagInfo.h"
-#import "JWTrack.h"
+#import "JWMCommonProtocols.h"
 
-@interface JWMediaHelper : NSObject
-
-+ (void)cacheMetaForTrack:(JWTrack*)track force:(BOOL)force;
-
-+ (BOOL)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array;
-
-+ (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *track, NSError *))block;
-
-+ (void)getAlbumImageForTrack:(JWTrack*)track onComplete:(void (^)(JWImage*, JWTrack *track, NSError *))block;
+@interface OpusFileDecoder : NSObject <JWMDecoder>
 
 @end

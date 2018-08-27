@@ -26,9 +26,14 @@
 
 @interface JWMPluginManager : NSObject
 
-+ (JWMPluginManager *)sharedManager;
+@property (nonatomic, strong, class, readonly) JWMPluginManager *sharedManager;
+
+@property (nonatomic, copy, class, readonly) NSArray<NSString *> *supportedFileTypes;
+
 - (id<JWMSource>)sourceForURL:(NSURL *)url error:(NSError **)error;
+
 - (id<JWMDecoder>)decoderForSource:(id<JWMSource>)source error:(NSError **)error;
+
 - (NSArray *)urlsForContainerURL:(NSURL *)url error:(NSError **)error;
 
 @end

@@ -73,20 +73,21 @@
     }
 }
 
-+ (void)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array {
++ (BOOL)scanSupportedMediaForFileURL:(NSURL*)fileURL into:(NSMutableArray*)array {
     JWMInputUnit *inputUnit = [[JWMInputUnit alloc] init];
-    if ([inputUnit openWithUrl:fileURL]) {
-        NSDictionary *meta = [inputUnit metadata];
-        if(meta) {
-            JWTrack *track = [[JWTrack alloc] initFromID3Info:meta url:fileURL];
-            track.sourceType = TrackSourceTypeLocal;
-            [array addObject:track];
-            [self cacheAlbumCoverForTrack:track meta:meta];
-        }
+    if (![inputUnit openWithUrl:fileURL]) {
         [inputUnit close];
-    } else {
-        return;
+        return NO;
     }
+    NSDictionary *meta = [inputUnit metadata];
+    if(meta) {
+        JWTrack *track = [[JWTrack alloc] initFromID3Info:meta url:fileURL];
+        track.sourceType = TrackSourceTypeLocal;
+        [array addObject:track];
+        [self cacheAlbumCoverForTrack:track meta:meta];
+    }
+    [inputUnit close];
+    return YES;
 }
 
 + (void)getLrcForTrack:(JWTrack*)track onComplete:(void (^)(NSString*, JWTrack *, NSError *))block {

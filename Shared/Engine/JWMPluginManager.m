@@ -29,19 +29,22 @@
 #import "CoreAudioDecoder.h"
 #import "CueSheetDecoder.h"
 #import "FlacDecoder.h"
+#import "OpusFileDecoder.h"
 
 #import "CueSheetContainer.h"
 #import "M3uContainer.h"
 
 @interface JWMPluginManager ()
+
 @property(strong, nonatomic) NSDictionary *sources;
 @property(strong, nonatomic) NSMutableDictionary *decoders;
 @property(strong, nonatomic) NSDictionary *containers;
+
 @end
 
 @implementation JWMPluginManager
 
-+ (JWMPluginManager *)sharedManager {
++ (instancetype)sharedManager {
     static JWMPluginManager *_sharedManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -49,6 +52,12 @@
     });
     
     return _sharedManager;
+}
+
++ (NSArray<NSString *> *)supportedFileTypes
+{
+    JWMPluginManager *manager = self.sharedManager;
+    return manager.decoders.allKeys;
 }
 
 - (id)init {
@@ -66,17 +75,15 @@
         NSMutableDictionary *decodersDict = [NSMutableDictionary dictionary];
         self.decoders = decodersDict;
         
+        [self registerDecoder:FlacDecoder.self forFileTypes:@[ @"flac" ]];
+        [self registerDecoder:OpusFileDecoder.self forFileTypes:@[ @"opus" ]];
+        
         [[CoreAudioDecoder fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [decodersDict setObject:[CoreAudioDecoder class] forKey:obj];
         }];
         [[CueSheetDecoder fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [decodersDict setObject:[CueSheetDecoder class] forKey:obj];
         }];
-        
-        [self registerDecoder:FlacDecoder.self forFileTypes:@[ @"flac" ]];
-        
-        Class class;
-        if ((class = NSClassFromString(@"OpusFileDecoder"))) [self registerDecoder:class forFileTypes:@[ @"opus" ]];
         
         /* Containers */        
         NSMutableDictionary *containersDict = [NSMutableDictionary dictionary];

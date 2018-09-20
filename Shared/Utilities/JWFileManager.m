@@ -22,6 +22,8 @@
 // THE SOFTWARE.
 
 #import "JWFileManager.h"
+#import <CoreData/CoreData.h>
+#import "EasyPlayer-Swift.h"
 
 #import <Availability.h>
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
@@ -87,11 +89,6 @@
     return nil;
 }
 
-+ (NSString*)getMusicLibraryFilePath {
-    NSString *rootPath = [JWFileManager getAppRootPath];
-    return [rootPath stringByAppendingPathComponent:@"EasyPlayerLibrary.plist"];
-}
-
 + (NSArray*)getItunesMediaArray {
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
     NSMutableArray *mutable = [NSMutableArray array];
@@ -141,16 +138,50 @@
 #endif
 }
 
++ (NSManagedObjectContext *)managedContext {
+    static NSPersistentContainer *_persistentContainer;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+        _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"MediaLibrary" managedObjectModel:model];
+        [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription * description, NSError * error) {
+            NSLog(@"%@",description);
+            NSLog(@"%@",error);
+        }];
+    });
+    return _persistentContainer.viewContext;
+}
+
 + (NSArray*)getLocalMediaArray {
     NSMutableArray *mutable = [NSMutableArray array];
-    NSString *appMusicLibPath = [self getMusicLibraryFilePath];
-    NSArray *localLibArray = [[NSArray alloc] initWithContentsOfFile:appMusicLibPath];
-    if ([localLibArray count] > 0) {
-        for (NSData *data in localLibArray) {
-            [mutable addObject:[[JWTrack alloc] initFromArchiveData:data]];
-        }
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"JWMediaItemEntity"];
+    
+    NSError *error = nil;
+    NSArray *data = [self.managedContext executeFetchRequest:request error:&error];
+    for (JWMediaItemEntity *entity in data) {
+        [mutable addObject:[entity toTrack]];
     }
     return mutable;
+}
+
++ (void)addTrackToMediaLibrary:(JWTrack *)track {
+    
+    JWMediaItemEntity *mediaItem = [NSEntityDescription insertNewObjectForEntityForName:@"JWMediaItemEntity" inManagedObjectContext:self.managedContext];
+    [mediaItem syncWithTrack:track];
+    NSError *error = nil;
+    [self.managedContext save:&error];
+    [self copyTrackToLocalMediaPath:track];
+}
+
++ (void)removeTrackFromMediaLibrary:(JWTrack *)track {
+    NSError *error = nil;
+    JWMediaItemEntity *mediaItem = [self.managedContext existingObjectWithID:track.id error:&error];
+    
+    if (mediaItem && !error) {
+        [self.managedContext deleteObject:mediaItem];
+    }
+    [self.managedContext save:&error];
 }
 
 + (BOOL)copyTrackToLocalMediaPath:(JWTrack*)track {
@@ -173,7 +204,7 @@
     NSError *error;
     [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:finalPath error:&error];
     finalPath = [NSString stringWithFormat:@"file://%@", finalPath];
-    finalPath = [finalPath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    finalPath = [finalPath stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     track.location = finalPath;
     return error != nil;
 }

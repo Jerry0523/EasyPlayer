@@ -303,15 +303,26 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
     sender.state = 1;
     NSOpenPanel* openDlg = [NSOpenPanel openPanel];
     openDlg.canChooseFiles = YES;
-    openDlg.canChooseDirectories = NO;
+    openDlg.canChooseDirectories = YES;
     openDlg.allowsMultipleSelection = YES;
     openDlg.allowsOtherFileTypes = NO;
     openDlg.allowedFileTypes = JWMPluginManager.supportedFileTypes;
     
-    NSArray *urlArray;
+    NSArray<NSURL *> *urlArray;
     
     if ( [openDlg runModal] == NSModalResponseOK) {
         urlArray = [openDlg URLs];
+    }
+    
+    if (urlArray.count == 1 && ![JWMPluginManager.supportedFileTypes containsObject:urlArray.firstObject.pathExtension]) {
+         NSDirectoryEnumerator *dirEnumerator = [NSFileManager.defaultManager enumeratorAtURL:urlArray.firstObject includingPropertiesForKeys:nil options:0 errorHandler:nil];
+        NSMutableArray *mURLArray = [NSMutableArray array];
+        for (NSURL *pathURL in dirEnumerator.allObjects) {
+            if([JWMPluginManager.supportedFileTypes containsObject:pathURL.pathExtension]) {
+                [mURLArray addObject:pathURL];
+            }
+        }
+        urlArray = mURLArray.copy;
     }
     
     NSMutableArray *newTracks = [NSMutableArray array];
@@ -332,18 +343,9 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
     [self setSortType:_sortType];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSString *localLibPath = [JWFileManager getMusicLibraryFilePath];
-        NSArray *oldLocalLibArray = [[NSArray alloc] initWithContentsOfFile:localLibPath];
-        NSMutableArray *newLocalLibArray = [NSMutableArray array];
-        if ([oldLocalLibArray count]) {
-            [newLocalLibArray addObjectsFromArray:oldLocalLibArray];
-        }
         for (JWTrack *newTrack in newTracks) {
-            [JWFileManager copyTrackToLocalMediaPath:newTrack];
-            [newLocalLibArray addObject:[newTrack archivedData]];
+            [JWFileManager addTrackToMediaLibrary:newTrack];
         }
-        
-        [newLocalLibArray writeToFile:localLibPath atomically:YES];
     });
 }
 
@@ -354,6 +356,16 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
 
 - (void)playlistViewController:(PlaylistViewController *)controller didSortByType:(TrackSortType)sortType {
     self.sortType = sortType;
+}
+
+- (void)playlistViewController:(PlaylistViewController *)controller didRemoveTrack:(JWTrack *)track {
+    NSMutableArray *mutable = [NSMutableArray arrayWithArray:self.items];
+    [mutable removeObject:track];
+    self.items = mutable;
+    [self setSortType:_sortType];
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [JWFileManager removeTrackFromMediaLibrary:track];
+    });
 }
 
 #pragma mark - JWMEngineDelegate

@@ -37,8 +37,6 @@
 
 @implementation OpusFileDecoder
 
-@synthesize source;
-
 - (void)dealloc {
     [self close];
 }
@@ -46,7 +44,7 @@
 #pragma mark - ORGMDecoder
 
 + (NSArray *)fileTypes {
-    return [NSArray arrayWithObjects:@"opus", nil];
+    return @[@"opus"];
 }
 
 - (NSDictionary *)properties {
@@ -55,7 +53,7 @@
             [NSNumber numberWithInt:16], @"bitsPerSample",
             [NSNumber numberWithFloat:48000], @"sampleRate",
             [NSNumber numberWithDouble:_totalFrames], @"totalFrames",
-            [NSNumber numberWithBool:[source seekable]], @"seekable",
+            [NSNumber numberWithBool:[_source seekable]], @"seekable",
             @"little", @"endian",
             nil];
 }
@@ -66,16 +64,13 @@
 
 - (NSUInteger)readAudio:(void *)buffer frames:(NSUInteger)frames {
     int samples = op_read_stereo(_decoder, (opus_int16 *)buffer, (int)frames);
-    
     if (samples < 0) return 0;
-    
     return samples;
 }
 
 - (BOOL)open:(id<JWMSource>)s {
-    [self setSource:s];
-    
-    self.metadata = [NSMutableDictionary dictionary];
+    _source = s;
+    _metadata = [NSMutableDictionary dictionary];
     
     OpusFileCallbacks callbacks = {
         ReadCallback,
@@ -85,7 +80,7 @@
     };
     
     int rc;
-    _decoder = op_open_callbacks((__bridge void *)(source), &callbacks, NULL, 0, &rc);
+    _decoder = op_open_callbacks((__bridge void *)(_source), &callbacks, NULL, 0, &rc);
     
     if (rc != 0) return NO;
     
@@ -101,7 +96,7 @@
 
 - (void)close {
     op_free(_decoder);
-    [source close];
+    [_source close];
     _decoder = NULL;
 }
 
@@ -137,7 +132,6 @@
 }
 
 #pragma mark - callback
-
 static int ReadCallback(void *stream, unsigned char *ptr, int nbytes) {
     
     id<JWMSource> source = (__bridge id<JWMSource>)(stream);

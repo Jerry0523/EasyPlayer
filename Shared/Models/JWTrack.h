@@ -22,6 +22,7 @@
 // THE SOFTWARE.
 
 #import "JWModel.h"
+#import <CoreData/CoreData.h>
 
 @class ITLibMediaItem;
 
@@ -49,6 +50,9 @@ typedef NS_ENUM(NSInteger, TrackSourceType) {
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, assign) double totalTime;
 @property (nonatomic, assign) TrackSourceType sourceType;
+
+@property (nonatomic, strong) NSManagedObjectID *id;
+
 @property (nonatomic, strong) id userInfo;
 @property (nonatomic, strong, readonly) NSURL *fileURL;
 

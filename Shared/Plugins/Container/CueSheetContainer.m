@@ -42,7 +42,7 @@
         
         NSString *newFileName = [NSString stringWithFormat:@"%@.cue%@%@",
                                  fileName, singleFileCueSeparator, [track track]];
-        newFileName = [newFileName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        newFileName = [newFileName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         NSURL *formattedUrl = [NSURL URLWithString:newFileName relativeToURL:parentDirectory];
         [tracks addObject:formattedUrl];
     }];

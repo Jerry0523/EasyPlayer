@@ -48,18 +48,8 @@
     return self;
 }
 
-+ (NSString *)URLEncodedString:(NSString*)rawString {
-    NSString *encodedString = (NSString *)
-    CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault,
-                                                              (CFStringRef)rawString,
-                                                              (CFStringRef)@"!$&'()*+,-./:;=?@_~%#[]",
-                                                              NULL,
-                                                              kCFStringEncodingUTF8));
-    return encodedString;
-}
-
 - (void)sendAsynchronousRequestForURL:(NSString*)url onComplete:(void (^)(id data, NSError *error, NSData *rawData))block {
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[JWNetworkHelper URLEncodedString:url]]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet characterSetWithCharactersInString:@"!$&'()*+,-./:;=?@_~%#[]"].invertedSet]]];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"gzip" forHTTPHeaderField:@"Accept-Encoding"];
     request.HTTPMethod = @"GET";

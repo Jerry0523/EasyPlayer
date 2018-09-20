@@ -30,11 +30,11 @@
 + (NSString*)getLrcPath;
 + (NSString*)getCoverPath;
 + (NSString*)getMusicPath;
-+ (NSString*)getMusicLibraryFilePath;
 
 + (NSArray*)getItunesMediaArray;
 + (NSArray*)getLocalMediaArray;
 
-+ (BOOL)copyTrackToLocalMediaPath:(JWTrack*)track;
++ (void)addTrackToMediaLibrary:(JWTrack *)track;
++ (void)removeTrackFromMediaLibrary:(JWTrack *)track;
 
 @end

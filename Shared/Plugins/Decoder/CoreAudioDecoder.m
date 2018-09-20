@@ -39,7 +39,9 @@ const int ID3V1_SIZE = 128;
     float _frequency;
     long _totalFrames;
 }
+
 @property (strong, nonatomic) NSMutableDictionary *metadata;
+
 @end
 
 @implementation CoreAudioDecoder

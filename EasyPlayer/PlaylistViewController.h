@@ -28,12 +28,13 @@
 
 @protocol PlaylistViewDelegate <NSObject>
 
+- (void)playlistViewController:(PlaylistViewController*)controller didRemoveTrack:(JWTrack*)track;
 - (void)playlistViewController:(PlaylistViewController*)controller didSelectTrack:(JWTrack*)track;
 - (void)playlistViewController:(PlaylistViewController *)controller didSortByType:(TrackSortType)sortType;
 
 @end
 
-@interface PlaylistViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource>
+@interface PlaylistViewController : NSViewController<NSTableViewDelegate, NSTableViewDataSource, NSMenuDelegate>
 
 @property (nonatomic, weak) id<PlaylistViewDelegate> playListDelegate;
 @property (nonatomic, strong) NSArray *items;

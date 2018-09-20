@@ -67,7 +67,7 @@
         
         if (!title) {
             NSString *filename = [[file lastPathComponent] stringByDeletingPathExtension];
-            filename = [filename stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            filename = [filename stringByRemovingPercentEncoding];
             self.name = filename;
         } else {
             self.name = title;

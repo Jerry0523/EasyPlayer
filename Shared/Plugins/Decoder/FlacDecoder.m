@@ -45,8 +45,8 @@
     long _totalFrames;
 }
 
-@property (retain, nonatomic) NSMutableDictionary *metadata;
-@property (retain, nonatomic) id<JWMSource> source;
+@property (strong, nonatomic) NSMutableDictionary *metadata;
+@property (strong, nonatomic) id<JWMSource> source;
 @property (assign, nonatomic) BOOL endOfStream;
 
 - (FLAC__StreamDecoder *)decoder;
@@ -57,8 +57,6 @@
 @end
 
 @implementation FlacDecoder
-@synthesize source;
-@synthesize endOfStream;
 
 - (void)dealloc {
     [self close];
@@ -66,7 +64,7 @@
 
 #pragma mark - JWMDecoder
 + (NSArray *)fileTypes {
-	return [NSArray arrayWithObjects:@"flac", nil];
+	return @[@"flac"];
 }
 
 - (NSDictionary *)properties {
@@ -75,7 +73,7 @@
             [NSNumber numberWithInt:_bitsPerSample], @"bitsPerSample",
             [NSNumber numberWithFloat:_frequency], @"sampleRate",
             [NSNumber numberWithDouble:_totalFrames], @"totalFrames",
-            [NSNumber numberWithBool:[source seekable]], @"seekable",
+            [NSNumber numberWithBool:[_source seekable]], @"seekable",
             @"big",@"endian",
             nil];
 }
@@ -133,10 +131,10 @@
     
 	if (FLAC__stream_decoder_init_stream(_decoder,
 										 ReadCallback,
-										 ([source seekable] ? SeekCallback : NULL),
-										 ([source seekable] ? TellCallback : NULL),
-										 ([source seekable] ? LengthCallback : NULL),
-										 ([source seekable] ? EOFCallback : NULL),
+										 ([_source seekable] ? SeekCallback : NULL),
+										 ([_source seekable] ? TellCallback : NULL),
+										 ([_source seekable] ? LengthCallback : NULL),
+										 ([_source seekable] ? EOFCallback : NULL),
 										 WriteCallback,
 										 MetadataCallback,
 										 ErrorCallback,
@@ -164,7 +162,7 @@
 	if (_blockBuffer) {
 		free(_blockBuffer);
 	}
-	[source close];
+	[_source close];
     
 	_decoder = NULL;
 	_blockBuffer = NULL;

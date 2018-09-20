@@ -1,0 +1,6 @@
+framework module libVorbis {
+  umbrella header "libVorbis.h"
+
+  export *
+  module * { export * }
+}

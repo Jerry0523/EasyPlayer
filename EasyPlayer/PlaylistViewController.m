@@ -29,12 +29,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSMenu *menu = [[NSMenu alloc] init];
+    menu.delegate = self;
+    self.tableView.menu = menu;
 }
 
 - (void)setSelectedIndex:(NSUInteger)idx {
     if ([self.items count] > idx) {
         [self.tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:idx] byExtendingSelection:NO];
     }
+}
+
+- (void)removeTrackWithSender:(NSMenuItem *)sender {
+    JWTrack *item = self.items[self.tableView.clickedRow];
+    [self.playListDelegate playlistViewController:self didRemoveTrack:item];
+}
+
+#pragma mark - NSMenuDelegate
+- (void)menuNeedsUpdate:(NSMenu *)menu {
+    [menu removeAllItems];
+    JWTrack *item = self.items[self.tableView.clickedRow];
+    if (item.sourceType == TrackSourceTypeItunes) {
+        return;
+    }
+    
+    [menu addItem:[[NSMenuItem alloc] initWithTitle:@"Remove From Library" action:@selector(removeTrackWithSender:) keyEquivalent:@""]];
 }
 
 #pragma mark - NSTableViewDelegate & NSTableViewDataSource

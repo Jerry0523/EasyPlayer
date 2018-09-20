@@ -30,6 +30,7 @@
 #import "CueSheetDecoder.h"
 #import "FlacDecoder.h"
 #import "OpusFileDecoder.h"
+#import "OggDecoder.h"
 
 #import "CueSheetContainer.h"
 #import "M3uContainer.h"
@@ -75,8 +76,9 @@
         NSMutableDictionary *decodersDict = [NSMutableDictionary dictionary];
         self.decoders = decodersDict;
         
-        [self registerDecoder:FlacDecoder.self forFileTypes:@[ @"flac" ]];
-        [self registerDecoder:OpusFileDecoder.self forFileTypes:@[ @"opus" ]];
+        [self registerDecoder:FlacDecoder.self];
+        [self registerDecoder:OpusFileDecoder.self];
+        [self registerDecoder:OggDecoder.self];
         
         [[CoreAudioDecoder fileTypes] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
             [decodersDict setObject:[CoreAudioDecoder class] forKey:obj];
@@ -157,8 +159,9 @@
 
 #pragma mark - private
 
-- (void)registerDecoder:(Class)class forFileTypes:(NSArray *)fileTypes {
-    
+- (void)registerDecoder:(Class)class {
+    NSParameterAssert([class conformsToProtocol:@protocol(JWMDecoder)]);
+    NSArray *fileTypes = [class fileTypes];
     [fileTypes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         [self.decoders setObject:class forKey:obj];
     }];

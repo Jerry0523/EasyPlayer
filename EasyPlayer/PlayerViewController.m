@@ -30,6 +30,8 @@
 #import "JWMediaHelper.h"
 #import "NSImage+Utils.h"
 
+@import IOKit.audio;
+
 static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICATION_NAME";
 
 @interface PlayerViewController ()<JWMEngineDelegate, PlaylistViewDelegate>
@@ -41,6 +43,9 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
     MusicInfoViewController *_musicInfoController;
     MusicProgressView *_progressView;
     NSTimer *_progressTimer;
+    
+    AudioDeviceID _defaultDevice;
+    AudioObjectPropertyListenerBlock _routeListner;
 }
 
 - (BOOL)isPlaying {
@@ -49,6 +54,8 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
 
 - (void)windowDidLoad {
     [super windowDidLoad];
+    
+    [self addAudioRouteObserver];
     
     self.player = [[JWMEngine alloc] init];;
     self.player.delegate = self;
@@ -104,6 +111,66 @@ static NSString *PLAYLIST_SEARCH_NOTIFICATION_NAME = @"PLAYLIST_SEARCH_NOTIFICAT
             self.filteredItems = array;
         }
     }];
+}
+
+- (void)dealloc {
+    [self removeAudioRouteObserver];
+}
+
+- (void)removeAudioRouteObserver {
+    if (_defaultDevice && _routeListner) {
+        AudioObjectPropertyAddress sourceAddr;
+        sourceAddr.mSelector = kAudioDevicePropertyDataSource;
+        sourceAddr.mScope = kAudioObjectPropertyScopeOutput;
+        sourceAddr.mElement = kAudioObjectPropertyElementMaster;
+        
+        AudioObjectRemovePropertyListenerBlock(_defaultDevice, &sourceAddr, dispatch_get_main_queue(), _routeListner);
+    }
+}
+
+- (void)addAudioRouteObserver {
+    
+    UInt32 defaultSize = sizeof(AudioDeviceID);
+    
+    const AudioObjectPropertyAddress defaultAddr = {
+        kAudioHardwarePropertyDefaultOutputDevice,
+        kAudioObjectPropertyScopeGlobal,
+        kAudioObjectPropertyElementMaster
+    };
+    
+    __block OSStatus status = noErr;
+    status = AudioObjectGetPropertyData(kAudioObjectSystemObject, &defaultAddr, 0 , NULL, &defaultSize, &_defaultDevice);
+    
+    AudioObjectPropertyAddress sourceAddr;
+    sourceAddr.mSelector = kAudioDevicePropertyDataSource;
+    sourceAddr.mScope = kAudioObjectPropertyScopeOutput;
+    sourceAddr.mElement = kAudioObjectPropertyElementMaster;
+    
+    __weak typeof(self) weakSelf = self;
+    
+    _routeListner = ^(UInt32 inNumberAddresses, const AudioObjectPropertyAddress *inAddresses) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        AudioObjectPropertyAddress* pAddr = (AudioObjectPropertyAddress*)inAddresses;
+        for( int i = 0 ;i < inNumberAddresses; i++, pAddr++ ) {
+            if(pAddr->mSelector != kAudioDevicePropertyDataSource) {
+                continue;
+            }
+            int dataSourceId = 0;
+            UInt32 dataSourceIdSize = sizeof(UInt32);
+            status = AudioObjectGetPropertyData(strongSelf ->_defaultDevice, pAddr, 0, NULL, &dataSourceIdSize, &dataSourceId);
+            if(dataSourceId == kIOAudioOutputPortSubTypeInternalSpeaker) {
+                if (strongSelf.player.isPlaying) {
+                    [strongSelf playClicked:strongSelf.playToolbarItem];
+                }
+            } else {
+                if (strongSelf.player.currentState == JWMEngineStatePaused) {
+                    [strongSelf playClicked:strongSelf.playToolbarItem];
+                }
+            }
+        }
+    };
+    
+    status = AudioObjectAddPropertyListenerBlock(_defaultDevice, &sourceAddr, dispatch_get_main_queue(), _routeListner);
 }
 
 - (void)switchToPlayListPanel {

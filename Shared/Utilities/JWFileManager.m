@@ -29,8 +29,7 @@
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <MediaPlayer/MediaPlayer.h>
 #else
-#import <iTunesLibrary/ITLibrary.h>
-#import <iTunesLibrary/ITLibMediaItem.h>
+#import <iTunesLibrary/iTunesLibrary.h>
 #import "JWMediaHelper.h"
 #endif
 

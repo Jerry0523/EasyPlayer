@@ -30,6 +30,7 @@
 		C43279C41BD116A0005C6BBC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C31BD116A0005C6BBC /* AVFoundation.framework */; };
 		C43279C61BD116A8005C6BBC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C51BD116A8005C6BBC /* Cocoa.framework */; };
 		C43279C81BD116AE005C6BBC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C43279C71BD116AE005C6BBC /* QuartzCore.framework */; };
+		C45F10A8215F645A0074C542 /* iTunesLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45F10A6215F2E2B0074C542 /* iTunesLibrary.framework */; };
 		C478F28E1E07B0AE00AF0A64 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C478F28D1E07B0AE00AF0A64 /* AudioUnit.framework */; };
 		C47D851C2153702C00F3C2D5 /* MediaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C47D851A2153702C00F3C2D5 /* MediaLibrary.xcdatamodeld */; };
 		C47D853E2153755600F3C2D5 /* JWMediaItemEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D853C2153755600F3C2D5 /* JWMediaItemEntity+CoreDataClass.swift */; };
@@ -141,6 +142,7 @@
 		C43279C31BD116A0005C6BBC /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C43279C51BD116A8005C6BBC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C43279C71BD116AE005C6BBC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C45F10A6215F2E2B0074C542 /* iTunesLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iTunesLibrary.framework; path = System/Library/Frameworks/iTunesLibrary.framework; sourceTree = SDKROOT; };
 		C478F28D1E07B0AE00AF0A64 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		C47D851B2153702C00F3C2D5 /* MediaLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MediaLibrary.xcdatamodel; sourceTree = "<group>"; };
 		C47D8533215373C400F3C2D5 /* EasyPlayer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyPlayer-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45F10A8215F645A0074C542 /* iTunesLibrary.framework in Frameworks */,
 				C497D40F2133EC0B00D7F7CF /* libVorbis.framework in Frameworks */,
 				C497D2EE2133BD3500D7F7CF /* libOgg.framework in Frameworks */,
 				C497D2EF2133BD3500D7F7CF /* libOpus.framework in Frameworks */,
@@ -297,6 +300,7 @@
 		849061011BCCE435008B2125 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C45F10A6215F2E2B0074C542 /* iTunesLibrary.framework */,
 				C497D40E2133EC0B00D7F7CF /* libVorbis.framework */,
 				C497D2EC2133BD3500D7F7CF /* libOgg.framework */,
 				C497D2ED2133BD3500D7F7CF /* libOpus.framework */,
@@ -796,7 +800,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(PROJECT_DIR)/EasyPlayer/lib",
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;
@@ -820,7 +823,6 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 					"$(PROJECT_DIR)/EasyPlayer/lib",
 				);
 				INFOPLIST_FILE = EasyPlayer/Info.plist;

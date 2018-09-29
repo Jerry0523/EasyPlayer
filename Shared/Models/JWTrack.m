@@ -31,9 +31,7 @@
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <MediaPlayer/MediaPlayer.h>
 #else
-#import <iTunesLibrary/ITLibMediaItem.h>
-#import <iTunesLibrary/ITLibAlbum.h>
-#import <iTunesLibrary/ITLibArtist.h>
+#import <iTunesLibrary/iTunesLibrary.h>
 #endif
 
 @implementation JWTrack
